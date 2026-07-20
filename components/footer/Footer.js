@@ -31,7 +31,7 @@ export default function Footer() {
               src={Slogan}
               height={80}
               width={300}
-              className="w-[240px] object-contain md:w-[280px]"
+              className="w-[240px] mx-auto max-w-full object-contain md:w-[280px]"
             />
           </div>
 

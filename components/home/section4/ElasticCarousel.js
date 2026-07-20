@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+
 import OptimizedImage from "@/components/common/OptimizedImage";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useMemo, useRef } from "react";
@@ -63,9 +65,9 @@ export default function ElasticCarousel({ sliderImages = [] }) {
   return (
     <section
       dir={isAr ? "rtl" : "ltr"}
-      className="second-home-slider w-full overflow-hidden bg-white py-8 sm:py-10 lg:py-14"
+      className="second-home-slider w-full overflow-hidden bg-white py-7 sm:py-9 lg:py-11"
     >
-      <div className="w-full px-3 sm:px-5 lg:px-8 xl:px-12">
+      <div className="mx-auto w-full max-w-[1500px] px-3 sm:px-5 lg:px-8">
         <div className="relative w-full rounded-[26px] bg-white p-1.5 sm:rounded-[34px] sm:p-2">
           <div className="second-home-swiper-frame relative w-full overflow-hidden rounded-[21px] bg-white sm:rounded-[28px]">
             <Swiper
@@ -114,7 +116,7 @@ export default function ElasticCarousel({ sliderImages = [] }) {
                       showSkeleton
                       objectFit="cover"
                       objectPosition="center"
-                      sizes="100vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1535px) 94vw, 1500px"
                       quality={90}
                       wrapperClassName="h-full w-full"
                       className="h-full w-full transition-transform duration-[1000ms] ease-out"
@@ -181,7 +183,11 @@ export default function ElasticCarousel({ sliderImages = [] }) {
           background-color: #ffffff !important;
         }
 
+        /*
+          الموبايل يحافظ على النسبة الأصلية للصورة.
+        */
         .second-home-swiper-frame {
+          width: 100%;
           aspect-ratio: 2048 / 1365;
           min-height: 0;
         }
@@ -224,7 +230,7 @@ export default function ElasticCarousel({ sliderImages = [] }) {
         }
 
         .second-home-swiper .swiper-slide-active img {
-          transform: scale(1.01);
+          transform: scale(1.005);
         }
 
         .second-home-swiper .swiper-pagination {
@@ -269,10 +275,41 @@ export default function ElasticCarousel({ sliderImages = [] }) {
           direction: ltr;
         }
 
+        /*
+          التابلت:
+          ارتفاع محدود بدل زيادة الارتفاع مع العرض.
+        */
+        @media (min-width: 641px) and (max-width: 1023px) {
+          .second-home-swiper-frame {
+            height: clamp(380px, 52vw, 520px);
+            aspect-ratio: auto;
+          }
+        }
+
+        /*
+          الديسكتوب واللابتوب:
+          أقصى ارتفاع 600px.
+        */
+        @media (min-width: 1024px) {
+          .second-home-swiper-frame {
+            height: clamp(470px, 38vw, 600px);
+            aspect-ratio: auto;
+          }
+        }
+
+        /*
+          الشاشات الكبيرة جدًا لا تكبر السلايدر.
+        */
+        @media (min-width: 1600px) {
+          .second-home-swiper-frame {
+            height: 600px;
+          }
+        }
+
         @media (max-width: 640px) {
           .second-home-slider {
-            padding-top: 28px !important;
-            padding-bottom: 28px !important;
+            padding-top: 26px !important;
+            padding-bottom: 26px !important;
           }
 
           .second-home-swiper-frame {
