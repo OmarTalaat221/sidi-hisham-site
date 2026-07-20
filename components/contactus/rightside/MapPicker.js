@@ -25,7 +25,7 @@ export default function SimpleMap({ lat, lng, name, zoom }) {
     <div style={{ height: "60vh", width: "100%", marginTop: "2vh" }}>
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: "AIzaSyCnjKmyclhtT-FiELd8oHie9ze2dlLA9Fk",
+          key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
           language: "en",
         }}
         center={defaultProps.center}
