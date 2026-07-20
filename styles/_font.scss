@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Medium";
+  src: url("/fonts/ArbFONTS-GE-SS-TV-Medium_10.otf");
+}
+@font-face {
+  font-family: "Light";
+  src: url("/fonts/ArbFONTS-GE-SS-TV-Light_10.otf");
+}
+.arVersion p.font-arabicBold.text-3xl.pb-2,.arVersion  p.font-arabicLight.py-2 {
+  text-align: right;
+  width: 100% !important;
+  font-size: 18px;
+}

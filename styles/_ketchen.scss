@@ -1,0 +1,130 @@
+
+
+#__next > div > div:nth-child(3) > div > div > div > div > div.categorydiv {
+  flex-wrap: wrap !important;
+}
+
+.arVersion p.font-arabicBold.text-3xl.pb-2,.arVersion  p.font-arabicLight.py-2 {
+  text-align: right;
+  width: 100% !important;
+  font-size: 18px;
+}
+
+.ketchen {
+  background: url(../public/images/pathHome.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top center;
+  min-height: 100vh;
+  padding-top: 30vh;
+  @media (max-width: 992px) {
+    padding-top: 10vh;
+  }
+  .ketchenCon {
+    position: relative;
+    .ketchenPath {
+      width: 80%;
+      margin-left: 10%;
+      margin-right: 10%;
+      height: auto;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
+    .ketchenIntro {
+      h1 {
+        font-size: 30px;
+        line-height: 40px;
+      }
+      p {
+        font-size: 20px;
+        &.light {
+          font-weight: 200;
+        }
+      }
+    }
+    .seeMore {
+      background-color: #7f0008;
+      color: white;
+      border-radius: 39px;
+      padding: 10px 30px;
+      width: fit-content;
+      cursor: pointer;
+    }
+    .ketchenCount {
+      display: flex;
+      align-items: center;
+      @media (max-width: 992px) {
+        flex-direction: column;
+        &.rev {
+          flex-direction: column-reverse;
+        }
+      }
+      img {
+        width: 150px;
+        object-fit: contain;
+      }
+      .countText {
+        background-color: white;
+      }
+      .countTitle {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .countDes {
+        font-weight: 200;
+      }
+    }
+    .grots,
+    .oil {
+      margin-top: -80px;
+
+      transform: scale(0.2) rotate(-45deg) translateX(-1000px);
+      &.oil {
+        margin-top: 0;
+      }
+    }
+    .ketchenIntro,
+    .count2,
+    .count1,
+    .count3 {
+      opacity: 0;
+      transform: translateY(300px) scale(0.6);
+    }
+    .keba1 {
+      transform: translate(1100.68px, 2385.396px) rotate(15deg) scale(0.9);
+    }
+    .keba2 {
+      transform: translate(1512px, 2598.276px) rotate(-21deg) scale(0.9);
+    }
+    svg {
+      overflow: initial !important;
+    }
+    @media (max-width: 992px) {
+      .grots {
+        margin-top: 10vh;
+      }
+    }
+  }
+}
+.categorydiv {
+  flex-wrap: wrap !important;
+}
+
+// .reciepeDetails img {
+//   height: 120px !important;
+// }
+
+@media (max-width: 600px) {
+  .customSlider_1 .swiper {
+    overflow: hidden !important;
+  }
+}
+
+.sponsorSlider {
+  overflow: hidden !important;
+}

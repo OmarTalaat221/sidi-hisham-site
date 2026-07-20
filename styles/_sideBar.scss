@@ -1,0 +1,216 @@
+.sideBar {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 50;
+
+  @media (max-width: 992px) {
+    bottom: 10px;
+    right: 10px;
+  }
+ 
+  button {
+    height: 45px;
+    margin-bottom: 10px;
+    position: relative;
+    border: none;
+    background-color: transparent;
+    display: block;
+    cursor: pointer;
+
+    &:hover {
+      &::before {
+        width: auto;
+        margin-right: 10px;
+        padding-left: 20px;
+      }
+    }
+
+    .iconbtn {
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 45px;
+      // box-shadow: 0 0 7px rgba($color: #000000, $alpha: 0.15);
+      border-radius: 50%;
+      z-index: 50;
+      position: absolute;
+      right: 1px;
+      top: 0;
+
+      img {
+        width: 60%;
+        height: 60%;
+      }
+    }
+
+    &::before {
+      content: "";
+      transition: 0.5s;
+      width: 44px;
+      height: 45px;
+      text-align: center;
+      border-radius: 25px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // box-shadow: 0 0 7px rgba($color: #000000, $alpha: 0.15);
+      border: 2px solid white;
+      padding-right: 45px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    &.cartBtn {
+      .iconbtn,
+      &En .iconbtn,
+      &Ar .iconbtn {
+        background-color: green;
+      }
+
+      &::before {
+        background-color: green;
+        content: "السلة";
+      }
+      &En::before {
+        background-color: green;
+        content: "Cart";
+      }
+      &Ar::before {
+        background-color: green;
+        content: "السلة";
+      }
+    }
+
+    &.heartBtn {
+      .iconbtn,
+      &En .iconbtn,
+      &Ar .iconbtn {
+        background-color: #d40017;
+      }
+
+      &::before {
+        background-color: #d40017;
+        content: "المفضلة";
+      }
+      &En::before {
+        background-color: #d40017;
+        content: "Favorites";
+      }
+      &Ar::before {
+        background-color: #d40017;
+        content: "المفضلة";
+      }
+    }
+
+    &.productsBtnAr {
+      .iconbtn {
+        background-color: green;
+      }
+
+      &::before {
+        background-color: green;
+        content: "اكتشف المنتجات";
+        white-space: nowrap;
+      }
+    }
+
+    &.productsBtnEn {
+      .iconbtn {
+        background-color: green;
+      }
+
+      &::before {
+        background-color: green;
+        content: "Discover products";
+        white-space: nowrap;
+      }
+    }
+
+    &.whatsappBtnAr {
+      .iconbtn {
+        background-color: green;
+      }
+
+      &::before {
+        background-color: green;
+        content: "واتساب";
+        white-space: nowrap;
+      }
+    }
+
+    &.whatsappBtnEn {
+      .iconbtn {
+        background-color: green;
+      }
+
+      &::before {
+        background-color: green;
+        content: "Whatsapp";
+        white-space: nowrap;
+      }
+    }
+
+    &.catalogBtnEn {
+      .iconbtn {
+        background-color: #d40017;
+      }
+
+      &::before {
+        background-color: #d40017;
+        content: "Download catalog";
+        white-space: nowrap;
+      }
+    }
+
+    &.catalogBtnAr {
+      .iconbtn {
+        background-color: #d40017;
+      }
+
+      &::before {
+        background-color: #d40017;
+        content: "تحميل الكاتلوج";
+        white-space: nowrap;
+      }
+    }
+
+    &.chatBtn {
+      .iconbtn,
+      &En .iconbtn,
+      &Ar .iconbtn {
+        background-color: #530101;
+      }
+
+      &::before {
+        background-color: #530101;
+        content: "محادثة";
+      }
+      &En::before {
+        background-color: #530101;
+        content: "Contact";
+      }
+      &Ar::before {
+        background-color: #530101;
+        content: "محادثة";
+      }
+    }
+    &.whatsappBtn {
+      .iconbtn {
+        background-color: green;
+      }
+
+      &::before {
+        background-color: green;
+        content: "Whatsapp";
+      }
+    }
+  }
+}

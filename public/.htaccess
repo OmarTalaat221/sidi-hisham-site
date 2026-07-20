@@ -1,0 +1,43 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteRule ^_app$ /_app.html [L]
+  RewriteRule ^404$ /404.html [L]
+  RewriteRule ^api/hello$ /api/hello.html [L]
+  RewriteRule ^cart$ /cart.html [L]
+  RewriteRule ^categories$ /categories.html [L]
+  RewriteRule ^categories/product-content/([a-zA-Z0-9_-]+)$ /categories/product-content/[id].html [L]
+  RewriteRule ^categories/product-content/product-details/([a-zA-Z0-9_-]+)$ /categories/product-content/product-details/[id].html [L]
+  RewriteRule ^compare-products$ /compare-products.html [L]
+  RewriteRule ^contact$ /contact.html [L]
+  RewriteRule ^contactus$ /contactus.html [L]
+  RewriteRule ^favori$ /favori.html [L]
+  RewriteRule ^forgot-password$ /forgot-password.html [L]
+  RewriteRule ^job-application$ /job-application.html [L]
+  RewriteRule ^job-application/addCertificate$ /job-application/addCertificate.html [L]
+  RewriteRule ^job-application/addInfo$ /job-application/addInfo.html [L]
+  RewriteRule ^job-application/jobSubmited$ /job-application/jobSubmited.html [L]
+  RewriteRule ^ketchen$ /ketchen.html [L]
+  RewriteRule ^ketchen/recipes/([a-zA-Z0-9_-]+)$ /ketchen/recipes/[id].html [L]
+  RewriteRule ^ketchen/recipes/recipe-details/([a-zA-Z0-9_-]+)$ /ketchen/recipes/recipe-details/[id].html [L]
+  RewriteRule ^login$ /login.html [L]
+  RewriteRule ^news$ /news.html [L]
+  RewriteRule ^news/activityDetails/([a-zA-Z0-9_-]+)$ /news/activityDetails/[id].html [L]
+  RewriteRule ^news/newsDetails/([a-zA-Z0-9_-]+)$ /news/newsDetails/[id].html [L]
+  RewriteRule ^orders$ /orders.html [L]
+  RewriteRule ^orders/orderDetails/([a-zA-Z0-9_-]+)$ /orders/orderDetails/[id].html [L]
+  RewriteRule ^payment$ /payment.html [L]
+  RewriteRule ^payment/addLocation$ /payment/addLocation.html [L]
+  RewriteRule ^payment/checkout$ /payment/checkout.html [L]
+  RewriteRule ^payment/orderSent/([a-zA-Z0-9_-]+)$ /payment/orderSent/[id].html [L]
+  RewriteRule ^payment/otp$ /payment/otp.html [L]
+  RewriteRule ^payment/shiping-address$ /payment/shiping-address.html [L]
+  RewriteRule ^privacy-policy$ /privacy-policy.html [L]
+  RewriteRule ^profil$ /profil.html [L]
+  RewriteRule ^signup$ /signup.html [L]
+  RewriteRule ^whoweare$ /whoweare.html [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ /index.html [L]
+</IfModule>

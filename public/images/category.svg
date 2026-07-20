@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33">
+  <g id="category" transform="translate(-1578 -1535)">
+    <rect id="Rectangle_9941" data-name="Rectangle 9941" width="15" height="15" rx="3" transform="translate(1578 1535)" fill="#007530"/>
+    <rect id="Rectangle_9942" data-name="Rectangle 9942" width="15" height="15" rx="3" transform="translate(1596 1535)" fill="#007530"/>
+    <rect id="Rectangle_9943" data-name="Rectangle 9943" width="15" height="15" rx="3" transform="translate(1596 1553)" fill="#007530"/>
+    <g id="Rectangle_9944" data-name="Rectangle 9944" transform="translate(1578 1553)" fill="#fff" stroke="#007530" stroke-width="3">
+      <rect width="15" height="15" rx="7.5" stroke="none"/>
+      <rect x="1.5" y="1.5" width="12" height="12" rx="6" fill="none"/>
+    </g>
+  </g>
+</svg>

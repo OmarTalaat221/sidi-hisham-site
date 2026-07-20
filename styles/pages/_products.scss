@@ -1,0 +1,111 @@
+.products {
+  padding: 10vh 0 10vh;
+  min-height: 100vh;
+  overflow: hidden;
+  @media (max-width: 992px) {
+    padding: 15vh 0 10vh;
+  }
+  .productsIntro {
+    img {
+      width: 60%;
+      margin: 0 auto;
+      display: block;
+      height: 90vh;
+      object-fit: contain;
+      @media (max-width: 992px) {
+        width: 100%;
+        height: auto;
+        margin-bottom: 5vh;
+        min-height: 50vh;
+      }
+    }
+  }
+  .productsCon {
+    position: relative;
+    .productsPath {
+      width: 100%;
+      position: absolute;
+      top: -50vh;
+      left: 0;
+      height: auto;
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
+    .categoryRow {
+      min-height: 41vh;
+
+      @media (max-width: 992px) {
+        margin-block: 10vh;
+        min-height: auto;
+      }
+    }
+    .productIntro {
+      .categoryInfo {
+        margin-bottom: 50px;
+        display: flex;
+        align-items: flex-start;
+        background-color: white;
+        padding: 15px;
+
+        @media (max-width: 992px) {
+          justify-content: center;
+        }
+        img {
+          width: 80px;
+          margin-inline: 20px;
+          background-color: white;
+          flex-shrink: 0;
+          @media (max-width: 992px) {
+            width: 40px;
+          }
+        }
+        .categoryName {
+          font-size: 25px;
+        }
+        .categoryProducts {
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .seeMore {
+      background-color: #7f0008;
+      color: white;
+      border-radius: 39px;
+      padding: 10px 30px;
+      width: fit-content;
+      cursor: pointer;
+    }
+    .grots,
+    .oil {
+      margin-top: -80px;
+
+      transform: scale(0.2) rotate(-45deg) translateX(-1000px);
+      &.oil {
+        margin-top: 0;
+      }
+    }
+    .imgRight {
+      margin-top: -80px;
+
+      transform: scale(0.2) rotate(45deg) translateX(1000px);
+    }
+    .productIntro {
+      opacity: 1;
+      // transform: translateY(300px) scale(0.6);
+    }
+  }
+}
+
+p.closeOpenSideNav {
+  text-rendering: optimizelegibility;
+  writing-mode: vertical-rl;
+  position: fixed;
+  right: 10px;
+  top: 54%;
+}
+
+.faviconhomecarousal {
+  margin-top: 1rem;
+}

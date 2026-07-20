@@ -1,0 +1,1292 @@
+App 235423 output: info  - Using experimental wasm build of next-swc
+App 235423 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 235423 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 235423 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 237984 output: info  - Using experimental wasm build of next-swc
+App 237984 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 237984 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 237984 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 239679 output: info  - Using experimental wasm build of next-swc
+App 239679 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 239679 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 239679 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 239679 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: wait  - compiling...
+App 239679 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: > Ready on http://localhost:3333
+App 239679 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 239679 output: Critical dependency: the request of a dependency is an expression
+App 239679 output: wait  - compiling / (client and server)...
+App 239679 output: Browserslist: caniuse-lite is outdated. Please run:
+App 239679 output:   npx update-browserslist-db@latest
+App 239679 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 241844 output: info  - Using experimental wasm build of next-swc
+App 241844 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 241844 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 241844 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 245784 output: info  - Using experimental wasm build of next-swc
+App 245784 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 245784 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 245784 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 245784 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: wait  - compiling...
+App 245784 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: > Ready on http://localhost:3333
+App 245784 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 245784 output: Critical dependency: the request of a dependency is an expression
+App 245784 output: wait  - compiling / (client and server)...
+App 245784 output: Browserslist: caniuse-lite is outdated. Please run:
+App 245784 output:   npx update-browserslist-db@latest
+App 245784 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 281125 output: info  - Using experimental wasm build of next-swc
+App 281125 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 281125 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 281125 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 281125 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: wait  - compiling...
+App 281125 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: > Ready on http://localhost:3333
+App 281125 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 281125 output: Critical dependency: the request of a dependency is an expression
+App 281125 output: wait  - compiling / (client and server)...
+App 281125 output: Browserslist: caniuse-lite is outdated. Please run:
+App 281125 output:   npx update-browserslist-db@latest
+App 281125 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 284689 output: info  - Using experimental wasm build of next-swc
+App 284689 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 284689 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 284689 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 284689 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: wait  - compiling...
+App 284689 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: > Ready on http://localhost:3333
+App 284689 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 284689 output: Critical dependency: the request of a dependency is an expression
+App 284689 output: wait  - compiling / (client and server)...
+App 284689 output: Browserslist: caniuse-lite is outdated. Please run:
+App 284689 output:   npx update-browserslist-db@latest
+App 284689 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 288061 output: info  - Using experimental wasm build of next-swc
+App 288061 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 288061 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 288061 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 288061 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: wait  - compiling...
+App 288061 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: > Ready on http://localhost:3333
+App 288061 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 288061 output: Critical dependency: the request of a dependency is an expression
+App 288061 output: wait  - compiling / (client and server)...
+App 288061 output: Browserslist: caniuse-lite is outdated. Please run:
+App 288061 output:   npx update-browserslist-db@latest
+App 288061 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 290498 output: info  - Using experimental wasm build of next-swc
+App 290498 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 290498 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 290498 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 290498 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: wait  - compiling...
+App 290498 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: > Ready on http://localhost:3333
+App 290498 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 290498 output: Critical dependency: the request of a dependency is an expression
+App 290498 output: wait  - compiling / (client and server)...
+App 290498 output: Browserslist: caniuse-lite is outdated. Please run:
+App 290498 output:   npx update-browserslist-db@latest
+App 290498 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 295331 output: info  - Using experimental wasm build of next-swc
+App 295331 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 295331 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 295331 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 295331 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: wait  - compiling...
+App 295331 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: > Ready on http://localhost:3333
+App 295331 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 295331 output: Critical dependency: the request of a dependency is an expression
+App 295331 output: wait  - compiling /_error (client and server)...
+App 295331 output: wait  - compiling / (client and server)...
+App 295331 output: Browserslist: caniuse-lite is outdated. Please run:
+App 295331 output:   npx update-browserslist-db@latest
+App 295331 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 298524 output: info  - Using experimental wasm build of next-swc
+App 298524 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 298524 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 298524 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 298524 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: wait  - compiling...
+App 298524 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: > Ready on http://localhost:3333
+App 298524 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 298524 output: Critical dependency: the request of a dependency is an expression
+App 298524 output: wait  - compiling / (client and server)...
+App 298524 output: Browserslist: caniuse-lite is outdated. Please run:
+App 298524 output:   npx update-browserslist-db@latest
+App 298524 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 340313 output: info  - Using experimental wasm build of next-swc
+App 340313 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 340313 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 340313 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 340313 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: wait  - compiling...
+App 340313 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: > Ready on http://localhost:3333
+App 340313 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 340313 output: Critical dependency: the request of a dependency is an expression
+App 340313 output: wait  - compiling / (client and server)...
+App 340313 output: Browserslist: caniuse-lite is outdated. Please run:
+App 340313 output:   npx update-browserslist-db@latest
+App 340313 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 344573 output: info  - Using experimental wasm build of next-swc
+App 344573 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 344573 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 344573 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 350731 output: info  - Using experimental wasm build of next-swc
+App 350731 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 350731 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 350731 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 350731 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: wait  - compiling...
+App 350731 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: > Ready on http://localhost:3333
+App 350731 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: wait  - compiling /_error (client and server)...
+App 350731 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 350731 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 350731 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 350731 output: Critical dependency: the request of a dependency is an expression
+App 350731 output: wait  - compiling / (client and server)...
+App 350731 output: Browserslist: caniuse-lite is outdated. Please run:
+App 350731 output:   npx update-browserslist-db@latest
+App 350731 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 373542 output: info  - Using experimental wasm build of next-swc
+App 373542 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 373542 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 373542 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 373542 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: wait  - compiling...
+App 373542 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: > Ready on http://localhost:3333
+App 373542 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 373542 output: Critical dependency: the request of a dependency is an expression
+App 373542 output: wait  - compiling / (client and server)...
+App 373542 output: Browserslist: caniuse-lite is outdated. Please run:
+App 373542 output:   npx update-browserslist-db@latest
+App 373542 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 385698 output: info  - Using experimental wasm build of next-swc
+App 385698 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 385698 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 385698 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 385698 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: wait  - compiling...
+App 385698 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: > Ready on http://localhost:3333
+App 385698 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 385698 output: Critical dependency: the request of a dependency is an expression
+App 385698 output: wait  - compiling / (client and server)...
+App 385698 output: Browserslist: caniuse-lite is outdated. Please run:
+App 385698 output:   npx update-browserslist-db@latest
+App 385698 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 388714 output: info  - Using experimental wasm build of next-swc
+App 388714 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 388714 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 388714 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 388714 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: wait  - compiling...
+App 388714 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: > Ready on http://localhost:3333
+App 388714 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 388714 output: Critical dependency: the request of a dependency is an expression
+App 388714 output: wait  - compiling / (client and server)...
+App 388714 output: wait  - compiling /_error (client and server)...
+App 388714 output: Browserslist: caniuse-lite is outdated. Please run:
+App 388714 output:   npx update-browserslist-db@latest
+App 388714 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 390804 output: info  - Using experimental wasm build of next-swc
+App 390804 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 390804 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 390804 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 390804 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: wait  - compiling...
+App 390804 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: > Ready on http://localhost:3333
+App 390804 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 390804 output: Critical dependency: the request of a dependency is an expression
+App 390804 output: wait  - compiling / (client and server)...
+App 390804 output: Browserslist: caniuse-lite is outdated. Please run:
+App 390804 output:   npx update-browserslist-db@latest
+App 390804 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 393788 output: info  - Using experimental wasm build of next-swc
+App 393788 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 393788 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 393788 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 393788 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: wait  - compiling...
+App 393788 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: > Ready on http://localhost:3333
+App 393788 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: wait  - compiling /_error (client and server)...
+App 393788 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 393788 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 393788 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 393788 output: Critical dependency: the request of a dependency is an expression
+App 393788 output: wait  - compiling / (client and server)...
+App 393788 output: Browserslist: caniuse-lite is outdated. Please run:
+App 393788 output:   npx update-browserslist-db@latest
+App 393788 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 421981 output: info  - Using experimental wasm build of next-swc
+App 421981 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 421981 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 421981 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 421981 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: wait  - compiling...
+App 421981 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: > Ready on http://localhost:3333
+App 421981 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: wait  - compiling /_error (client and server)...
+App 421981 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 421981 output: Critical dependency: the request of a dependency is an expression
+App 421981 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 421981 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 428686 output: info  - Using experimental wasm build of next-swc
+App 428686 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 428686 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 428686 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 428686 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: wait  - compiling...
+App 428686 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: > Ready on http://localhost:3333
+App 428686 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 428686 output: Critical dependency: the request of a dependency is an expression
+App 428686 output: wait  - compiling / (client and server)...
+App 428686 output: Browserslist: caniuse-lite is outdated. Please run:
+App 428686 output:   npx update-browserslist-db@latest
+App 428686 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 430654 output: info  - Using experimental wasm build of next-swc
+App 430654 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 430654 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 430654 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 430654 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: wait  - compiling...
+App 430654 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: > Ready on http://localhost:3333
+App 430654 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 430654 output: Critical dependency: the request of a dependency is an expression
+App 430654 output: wait  - compiling / (client and server)...
+App 430654 output: Browserslist: caniuse-lite is outdated. Please run:
+App 430654 output:   npx update-browserslist-db@latest
+App 430654 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 432409 output: info  - Using experimental wasm build of next-swc
+App 432409 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 432409 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 432409 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 432409 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: wait  - compiling...
+App 432409 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: > Ready on http://localhost:3333
+App 432409 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 432409 output: Critical dependency: the request of a dependency is an expression
+App 432409 output: wait  - compiling / (client and server)...
+App 432409 output: Browserslist: caniuse-lite is outdated. Please run:
+App 432409 output:   npx update-browserslist-db@latest
+App 432409 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 451557 output: info  - Using experimental wasm build of next-swc
+App 451557 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 451557 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 451557 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 31189 output: info  - Using experimental wasm build of next-swc
+App 31189 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 31189 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 31189 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 31189 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: wait  - compiling...
+App 31189 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: > Ready on http://localhost:3333
+App 31189 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 31189 output: Critical dependency: the request of a dependency is an expression
+App 31189 output: wait  - compiling / (client and server)...
+App 31189 output: Browserslist: caniuse-lite is outdated. Please run:
+App 31189 output:   npx update-browserslist-db@latest
+App 31189 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 32752 output: info  - Using experimental wasm build of next-swc
+App 32752 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 32752 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 32752 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 32752 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: wait  - compiling...
+App 32752 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: > Ready on http://localhost:3333
+App 32752 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 32752 output: Critical dependency: the request of a dependency is an expression
+App 32752 output: wait  - compiling / (client and server)...
+App 32752 output: Browserslist: caniuse-lite is outdated. Please run:
+App 32752 output:   npx update-browserslist-db@latest
+App 32752 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 34141 output: info  - Using experimental wasm build of next-swc
+App 34141 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 34141 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 34141 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 34141 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: wait  - compiling...
+App 34141 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: > Ready on http://localhost:3333
+App 34141 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 34141 output: Critical dependency: the request of a dependency is an expression
+App 34141 output: wait  - compiling / (client and server)...
+App 34141 output: Browserslist: caniuse-lite is outdated. Please run:
+App 34141 output:   npx update-browserslist-db@latest
+App 34141 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 36688 output: info  - Using experimental wasm build of next-swc
+App 36688 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 36688 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 36688 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 36688 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: wait  - compiling...
+App 36688 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: > Ready on http://localhost:3333
+App 36688 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: wait  - compiling /_error (client and server)...
+App 36688 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 36688 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 36688 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 36688 output: Critical dependency: the request of a dependency is an expression
+App 36688 output: wait  - compiling / (client and server)...
+App 36688 output: Browserslist: caniuse-lite is outdated. Please run:
+App 36688 output:   npx update-browserslist-db@latest
+App 36688 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 43125 output: info  - Using experimental wasm build of next-swc
+App 43125 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 43125 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 43125 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 43125 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 43125 output: Critical dependency: the request of a dependency is an expression
+App 43125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 43125 output: Critical dependency: the request of a dependency is an expression
+App 43125 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 43125 output: Critical dependency: the request of a dependency is an expression
+App 43125 output: wait  - compiling...
+App 47901 output: info  - Using experimental wasm build of next-swc
+App 47901 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 47901 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 47901 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 51777 output: info  - Using experimental wasm build of next-swc
+App 51777 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 51777 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 51777 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 51777 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: wait  - compiling...
+App 51777 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: > Ready on http://localhost:3333
+App 51777 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 51777 output: Critical dependency: the request of a dependency is an expression
+App 51777 output: wait  - compiling / (client and server)...
+App 51777 output: Browserslist: caniuse-lite is outdated. Please run:
+App 51777 output:   npx update-browserslist-db@latest
+App 51777 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 52730 output: info  - Using experimental wasm build of next-swc
+App 52730 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 52730 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 52730 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 52730 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: wait  - compiling...
+App 52730 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: > Ready on http://localhost:3333
+App 52730 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: wait  - compiling /_error (client and server)...
+App 52730 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 52730 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 52730 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 52730 output: Critical dependency: the request of a dependency is an expression
+App 52730 output: wait  - compiling / (client and server)...
+App 52730 output: Browserslist: caniuse-lite is outdated. Please run:
+App 52730 output:   npx update-browserslist-db@latest
+App 52730 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 64384 output: info  - Using experimental wasm build of next-swc
+App 64384 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 64384 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 64384 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 64384 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: wait  - compiling...
+App 64384 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: > Ready on http://localhost:3333
+App 64384 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 64384 output: Critical dependency: the request of a dependency is an expression
+App 64384 output: wait  - compiling / (client and server)...
+App 64384 output: Browserslist: caniuse-lite is outdated. Please run:
+App 64384 output:   npx update-browserslist-db@latest
+App 64384 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 72086 output: info  - Using experimental wasm build of next-swc
+App 72086 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 72086 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 72086 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 72086 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: wait  - compiling...
+App 72086 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: > Ready on http://localhost:3333
+App 72086 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: wait  - compiling /_error (client and server)...
+App 72086 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 72086 output: Critical dependency: the request of a dependency is an expression
+App 72086 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 72086 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 102255 output: info  - Using experimental wasm build of next-swc
+App 102255 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 102255 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 102255 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 102255 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: wait  - compiling...
+App 102255 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: > Ready on http://localhost:3333
+App 102255 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 102255 output: Critical dependency: the request of a dependency is an expression
+App 102255 output: wait  - compiling / (client and server)...
+App 102255 output: Browserslist: caniuse-lite is outdated. Please run:
+App 102255 output:   npx update-browserslist-db@latest
+App 102255 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 103595 output: info  - Using experimental wasm build of next-swc
+App 103595 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 103595 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 103595 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 103595 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: wait  - compiling...
+App 103595 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: > Ready on http://localhost:3333
+App 103595 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: wait  - compiling /_error (client and server)...
+App 103595 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 103595 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 103595 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 103595 output: Critical dependency: the request of a dependency is an expression
+App 103595 output: wait  - compiling /categories (client and server)...
+App 103595 output: Browserslist: caniuse-lite is outdated. Please run:
+App 103595 output:   npx update-browserslist-db@latest
+App 103595 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 149249 output: info  - Using experimental wasm build of next-swc
+App 149249 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 149249 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 149249 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 150565 output: info  - Using experimental wasm build of next-swc
+App 150565 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 150565 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 150565 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 150565 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: wait  - compiling...
+App 150565 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: > Ready on http://localhost:3333
+App 150565 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 150565 output: Critical dependency: the request of a dependency is an expression
+App 150565 output: wait  - compiling / (client and server)...
+App 150565 output: wait  - compiling /_error (client and server)...
+App 150565 output: Browserslist: caniuse-lite is outdated. Please run:
+App 150565 output:   npx update-browserslist-db@latest
+App 150565 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 151431 output: info  - Using experimental wasm build of next-swc
+App 151431 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 151431 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 151431 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 151431 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: wait  - compiling...
+App 151431 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: > Ready on http://localhost:3333
+App 151431 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 151431 output: Critical dependency: the request of a dependency is an expression
+App 151431 output: wait  - compiling /_error (client and server)...
+App 151431 output: wait  - compiling / (client and server)...
+App 151431 output: Browserslist: caniuse-lite is outdated. Please run:
+App 151431 output:   npx update-browserslist-db@latest
+App 151431 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 152698 output: info  - Using experimental wasm build of next-swc
+App 152698 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 152698 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 152698 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 152698 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: wait  - compiling...
+App 152698 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: > Ready on http://localhost:3333
+App 152698 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 152698 output: Critical dependency: the request of a dependency is an expression
+App 152698 output: wait  - compiling / (client and server)...
+App 152698 output: Browserslist: caniuse-lite is outdated. Please run:
+App 152698 output:   npx update-browserslist-db@latest
+App 152698 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 154167 output: info  - Using experimental wasm build of next-swc
+App 154167 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 154167 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 154167 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 154167 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: wait  - compiling...
+App 154167 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: > Ready on http://localhost:3333
+App 154167 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 154167 output: Critical dependency: the request of a dependency is an expression
+App 154167 output: wait  - compiling / (client and server)...
+App 154167 output: wait  - compiling /categories (client and server)...
+App 154167 output: wait  - compiling /_error (client and server)...
+App 154167 output: Browserslist: caniuse-lite is outdated. Please run:
+App 154167 output:   npx update-browserslist-db@latest
+App 154167 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 155459 output: info  - Using experimental wasm build of next-swc
+App 155459 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 155459 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 155459 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 155459 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: wait  - compiling...
+App 155459 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: > Ready on http://localhost:3333
+App 155459 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 155459 output: Critical dependency: the request of a dependency is an expression
+App 155459 output: wait  - compiling / (client and server)...
+App 155459 output: Browserslist: caniuse-lite is outdated. Please run:
+App 155459 output:   npx update-browserslist-db@latest
+App 155459 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 182815 output: info  - Using experimental wasm build of next-swc
+App 182815 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 182815 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 182815 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 190683 output: info  - Using experimental wasm build of next-swc
+App 190683 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 190683 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 190683 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 190683 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: wait  - compiling...
+App 190683 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: > Ready on http://localhost:3333
+App 190683 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: wait  - compiling /_error (client and server)...
+App 190683 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 190683 output: Critical dependency: the request of a dependency is an expression
+App 190683 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 190683 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 198348 output: info  - Using experimental wasm build of next-swc
+App 198348 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 198348 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 198348 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 198348 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: wait  - compiling...
+App 198348 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: > Ready on http://localhost:3333
+App 198348 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 198348 output: Critical dependency: the request of a dependency is an expression
+App 198348 output: wait  - compiling / (client and server)...
+App 198348 output: Browserslist: caniuse-lite is outdated. Please run:
+App 198348 output:   npx update-browserslist-db@latest
+App 198348 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 199723 output: info  - Using experimental wasm build of next-swc
+App 199723 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 199723 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 199723 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 199723 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: wait  - compiling...
+App 199723 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: > Ready on http://localhost:3333
+App 199723 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: wait  - compiling /_error (client and server)...
+App 199723 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 199723 output: Critical dependency: the request of a dependency is an expression
+App 199723 output: redux-persist failed to create sync storage. falling back to noop storage.
+App 199723 output: The object notation for `createSlice.extraReducers` is deprecated, and will be removed in RTK 2.0. Please use the 'builder callback' notation instead: https://redux-toolkit.js.org/api/createSlice
+App 204032 output: info  - Using experimental wasm build of next-swc
+App 204032 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 204032 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 204032 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 204032 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: wait  - compiling...
+App 204032 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: > Ready on http://localhost:3333
+App 204032 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 204032 output: Critical dependency: the request of a dependency is an expression
+App 204032 output: wait  - compiling / (client and server)...
+App 204032 output: Browserslist: caniuse-lite is outdated. Please run:
+App 204032 output:   npx update-browserslist-db@latest
+App 204032 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 205410 output: info  - Using experimental wasm build of next-swc
+App 205410 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 205410 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 205410 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 205410 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: wait  - compiling...
+App 205410 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: > Ready on http://localhost:3333
+App 205410 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 205410 output: Critical dependency: the request of a dependency is an expression
+App 205410 output: wait  - compiling / (client and server)...
+App 205410 output: Browserslist: caniuse-lite is outdated. Please run:
+App 205410 output:   npx update-browserslist-db@latest
+App 205410 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 207040 output: info  - Using experimental wasm build of next-swc
+App 207040 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 207040 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 207040 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 207040 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: wait  - compiling...
+App 207040 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: > Ready on http://localhost:3333
+App 207040 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 207040 output: Critical dependency: the request of a dependency is an expression
+App 207040 output: wait  - compiling / (client and server)...
+App 207040 output: Browserslist: caniuse-lite is outdated. Please run:
+App 207040 output:   npx update-browserslist-db@latest
+App 207040 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+App 210898 output: info  - Using experimental wasm build of next-swc
+App 210898 output: warn  - Attempted to load @next/swc-linux-x64-gnu, but it was not installed
+App 210898 output: warn  - Attempted to load @next/swc-linux-x64-gnux32, but it was not installed
+App 210898 output: warn  - Attempted to load @next/swc-linux-x64-musl, but it was not installed
+App 210898 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: wait  - compiling...
+App 210898 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: > Ready on http://localhost:3333
+App 210898 output: warn  - ./node_modules/next-i18next/dist/commonjs/serverSideTranslations.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: ./node_modules/i18next-fs-backend/cjs/readFile.js
+App 210898 output: Critical dependency: the request of a dependency is an expression
+App 210898 output: wait  - compiling / (client and server)...
+App 210898 output: Browserslist: caniuse-lite is outdated. Please run:
+App 210898 output:   npx update-browserslist-db@latest
+App 210898 output:   Why you should do it regularly: https://github.com/browserslist/update-db#readme

@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.sedihisham.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /build/
+
+# Allow important pages
+Allow: /
+Allow: /news/
+Allow: /products/
+Allow: /categories/
+Allow: /contact/
+Allow: /about/
+Allow: /kitchen/

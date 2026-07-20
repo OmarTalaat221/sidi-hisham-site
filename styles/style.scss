@@ -1,0 +1,67 @@
+@import "color.scss";
+@import "font";
+
+// @import "fonts.scss";
+* {
+  direction  : rtl;
+  text-align : right;
+  font-family: "Medium";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $white;
+  // width: 100vw;
+  // overflow: hidden
+
+  @import "pages/_kentchenPage";
+}
+
+@media(max-width:500px){
+
+  .sponsorSlider .swiper-wrapper {
+    max-width: 100% !important;
+  }
+
+  .sponsorSlider .swiper-wrapper .swiper-slide{
+    width: 100% !important;
+  }
+  
+  .sponsorSlider .swiper-wrapper .swiper-slide {
+    max-width: 100%  !important;
+  }  
+}
+.rec.rec-carousel button { 
+  position: absolute;
+  z-index : 75534232123;
+}
+
+.rec.rec-arrow {
+  border-radius   : 50%;
+  color           : #d40017;
+  background-color: white;
+}
+
+.rec.rec-carousel button:last-child {
+  // right  : 20px !important;
+  z-index: 232123;
+}
+
+.rec.rec-carousel button:first-child {
+  // left   : 20px !important;
+  z-index: 32123;
+}
+
+
+
+nav {
+  z-index: 23243421312 !important;
+}
+
+.sponsorSlider.w-full .swiper-wrapper {
+  justify-content: center !important;
+  display: flex;
+}
