@@ -203,7 +203,7 @@ const VideoImagesSlider = () => {
             role="dialog"
             aria-modal="true"
             aria-label={isAr ? "عرض صورة المعرض" : "Gallery image viewer"}
-            className="gallery-portal-viewer fixed inset-0 z-[10000000000000000000000000000000]"
+            className="gallery-portal-viewer fixed inset-0 z-[1000000000]"
             onClick={closeImage}
           >
             <div className="absolute inset-0 bg-black/90 backdrop-blur-[3px]" />
