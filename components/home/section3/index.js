@@ -18,9 +18,10 @@ export default function Tabs() {
   const tabs = isAr ? tabsAr : tabsEn;
 
   const [activeTab, setActiveTab] = useState(0);
+
   const [pillStyle, setPillStyle] = useState({
     width: 0,
-    transform: "translate3d(0,0,0)",
+    transform: "translate3d(0, 0, 0)",
   });
 
   const tabsContainerRef = useRef(null);
@@ -31,46 +32,71 @@ export default function Tabs() {
   const [specialOfferProducts, setSpecialOfferProducts] = useState([]);
 
   useEffect(() => {
+    let isCancelled = false;
+
     const fetchData = async () => {
       try {
         const prodRes = await axios.get(
           "https://api.sedihisham.com/products/allProducts",
         );
-        setProducts(prodRes?.data || []);
+
+        if (!isCancelled) {
+          setProducts(Array.isArray(prodRes?.data) ? prodRes.data : []);
+        }
 
         const bestRes = await axios.get(
           "https://api.sedihisham.com/products/allProducts/bestsold",
         );
-        setBestSold(bestRes?.data || []);
+
+        if (!isCancelled) {
+          setBestSold(Array.isArray(bestRes?.data) ? bestRes.data : []);
+        }
 
         const offersRes = await axios.get(
           "https://api.sedihisham.com/products/allProducts/offersproduct",
         );
+
+        const offerItems = Array.isArray(offersRes?.data) ? offersRes.data : [];
+
         const offersData = await Promise.all(
-          offersRes.data.map(async (item) => {
+          offerItems.map(async (item) => {
             const result = await axios.get(
               `https://api.sedihisham.com/products/${item.id}`,
             );
-            return result.data;
+
+            return result?.data;
           }),
         );
-        setSpecialOfferProducts(offersData || []);
-      } catch (error) {
-        console.error("Error fetching products:", error);
+
+        if (!isCancelled) {
+          setSpecialOfferProducts(offersData.filter(Boolean));
+        }
+      } catch {
+        if (!isCancelled) {
+          setProducts([]);
+          setBestSold([]);
+          setSpecialOfferProducts([]);
+        }
       }
     };
+
     fetchData();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
-  // حساب موضع الـ Pill - Hardware accelerated
   const updatePillPosition = useCallback(() => {
-    const activeTabEl = tabRefs.current[activeTab];
-    const container = tabsContainerRef.current;
-    if (!activeTabEl || !container) return;
+    const activeTabElement = tabRefs.current[activeTab];
+    const tabsContainer = tabsContainerRef.current;
 
-    const containerRect = container.getBoundingClientRect();
-    const tabRect = activeTabEl.getBoundingClientRect();
+    if (!activeTabElement || !tabsContainer) {
+      return;
+    }
 
+    const containerRect = tabsContainer.getBoundingClientRect();
+    const tabRect = activeTabElement.getBoundingClientRect();
     const offsetLeft = tabRect.left - containerRect.left;
 
     setPillStyle({
@@ -79,64 +105,128 @@ export default function Tabs() {
     });
   }, [activeTab]);
 
-  // نستخدم useLayoutEffect عشان يحصل الحساب قبل الـ paint
   useLayoutEffect(() => {
     updatePillPosition();
   }, [updatePillPosition, isAr]);
 
-  // إعادة الحساب لو الشاشة اتغير حجمها
   useEffect(() => {
-    let rafId;
-    const handleResize = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updatePillPosition);
+    const container = tabsContainerRef.current;
+
+    if (!container) {
+      return undefined;
+    }
+
+    let animationFrameId;
+
+    const requestPositionUpdate = () => {
+      cancelAnimationFrame(animationFrameId);
+
+      animationFrameId = requestAnimationFrame(() => {
+        updatePillPosition();
+      });
     };
 
-    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("resize", requestPositionUpdate, {
+      passive: true,
+    });
+
+    let resizeObserver;
+
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(requestPositionUpdate);
+
+      resizeObserver.observe(container);
+
+      tabRefs.current.forEach((tabElement) => {
+        if (tabElement) {
+          resizeObserver.observe(tabElement);
+        }
+      });
+    }
+
+    requestPositionUpdate();
+
     return () => {
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", requestPositionUpdate);
+      resizeObserver?.disconnect();
+      cancelAnimationFrame(animationFrameId);
     };
-  }, [updatePillPosition]);
+  }, [updatePillPosition, isAr]);
 
   const getActiveData = () => {
-    if (activeTab === 0) return products;
-    if (activeTab === 1) return bestSold;
-    if (activeTab === 2) return specialOfferProducts;
+    if (activeTab === 0) {
+      return products;
+    }
+
+    if (activeTab === 1) {
+      return bestSold;
+    }
+
+    if (activeTab === 2) {
+      return specialOfferProducts;
+    }
+
     return [];
   };
 
   return (
-    <div className="w-full relative z-30 py-6 md:py-8 px-2 sm:px-4">
-      <div className="flex flex-col items-center justify-center mb-6 md:mb-8">
+    <section
+      className="relative z-30 w-full px-2 py-6 sm:px-4 md:py-8"
+      dir={isAr ? "rtl" : "ltr"}
+    >
+      <div className="mb-6 flex flex-col items-center justify-center md:mb-8">
         <div
           ref={tabsContainerRef}
-          dir={isAr ? "rtl" : "ltr"}
-          className="relative flex items-center p-1.5 bg-white border border-gray-100 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.04)] w-fit max-w-full"
+          role="tablist"
+          aria-label={isAr ? "أقسام المنتجات" : "Product sections"}
+          className="
+            relative flex max-w-full items-center rounded-full
+            border border-gray-100 bg-white p-1.5
+            shadow-[0_8px_20px_rgba(0,0,0,0.05)]
+          "
         >
-          {/* Pill Indicator - Hardware Accelerated */}
           <div
             aria-hidden="true"
-            className="absolute top-1.5 bottom-1.5 bg-primary rounded-full shadow-md will-change-transform"
+            className="
+              absolute bottom-1.5 left-0 top-1.5
+              rounded-full bg-primary
+              shadow-[0_5px_14px_rgba(212,0,23,0.25)]
+              will-change-transform
+            "
             style={{
               width: `${pillStyle.width}px`,
               transform: pillStyle.transform,
               transition:
                 "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
-              left: 0,
             }}
           />
 
           {tabs.map((tab, index) => {
             const isActive = activeTab === index;
+
             return (
               <button
-                key={index}
-                ref={(el) => (tabRefs.current[index] = el)}
+                key={tab}
+                ref={(element) => {
+                  tabRefs.current[index] = element;
+                }}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActiveTab(index)}
-                className={`relative px-5 sm:px-8 md:px-10 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-sm md:text-base font-arabicMedium whitespace-nowrap z-10 transition-colors duration-300 ${
-                  isActive ? "text-white" : "text-gray-500 hover:text-gray-900"
-                }`}
+                className={`
+                  relative z-10 whitespace-nowrap rounded-full
+                  px-3 py-2 text-[11px] font-arabicMedium
+                  transition-colors duration-300
+                  min-[360px]:px-4 min-[360px]:text-xs
+                  sm:px-8 sm:py-2.5 sm:text-sm
+                  md:px-10 md:py-3 md:text-base
+                  ${
+                    isActive
+                      ? "text-white"
+                      : "text-gray-500 hover:text-gray-900"
+                  }
+                `}
               >
                 {tab}
               </button>
@@ -145,8 +235,8 @@ export default function Tabs() {
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto">
-        <div className="w-full animate-fade-in" key={activeTab}>
+      <div className="mx-auto max-w-[1440px]">
+        <div key={activeTab} className="animate-fade-in w-full">
           <Carousel products={getActiveData()} />
         </div>
       </div>
@@ -157,16 +247,23 @@ export default function Tabs() {
             opacity: 0;
             transform: translate3d(0, 10px, 0);
           }
+
           to {
             opacity: 1;
             transform: translate3d(0, 0, 0);
           }
         }
+
         .animate-fade-in {
           animation: fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-          will-change: transform, opacity;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-fade-in {
+            animation: none;
+          }
         }
       `}</style>
-    </div>
+    </section>
   );
 }

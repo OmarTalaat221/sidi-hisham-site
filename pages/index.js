@@ -1,13 +1,21 @@
 import SEO from "@/components/SEO";
 import axios from "axios";
-import { Suspense, lazy, useCallback, useEffect, useState } from "react";
+import {
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Slider from "../components/home/Slider";
 import Tabss from "../components/home/section3";
 import SponsorSection from "../components/home/section5";
 import { setConversions } from "../redux/languageSlice";
-import { useWidth } from "../util/useWidth.ts";
 
-const Slider = lazy(() => import("../components/home/Slider"));
+const DEFAULT_HERO_IMAGE =
+  "https://api.sedihisham.com/uploads/category/images/ketchupcopy3b609725-f787-4dc9-8501-5df31cbd57bc.webp";
 
 const ElasticCarousel = lazy(
   () => import("../components/home/section4/ElasticCarousel"),
@@ -21,57 +29,111 @@ const VideoImagesSlider = lazy(
 
 const SponsorSlider = lazy(() => import("../components/home/SponsorSlider"));
 
-export default function Home({ type }) {
+function getApiImageUrl(path) {
+  if (!path || typeof path !== "string") {
+    return "";
+  }
+
+  const normalizedPath = path.trim();
+
+  if (!normalizedPath) {
+    return "";
+  }
+
+  if (
+    normalizedPath.startsWith("http://") ||
+    normalizedPath.startsWith("https://")
+  ) {
+    return normalizedPath;
+  }
+
+  return `https://api.sedihisham.com/${normalizedPath.replace(/^\/+/, "")}`;
+}
+
+export default function Home({ initialSliderImages = [] }) {
   const dispatch = useDispatch();
 
-  const getCurrencyConversions = useCallback(async () => {
-    await axios
-      .get("https://api.sedihisham.com/currencies/findall")
-      .then((response) => {
-        dispatch(setConversions(response?.data));
-      });
-  }, [dispatch]);
+  const { local } = useSelector((state) => state.language);
 
-  const [sliderImages, setSliderImages] = useState([]);
-
-  const getSliderImages = useCallback(async () => {
-    await axios
-      .get("https://api.sedihisham.com/pages/getall/home")
-      .then((response) => {
-        setSliderImages(response?.data);
-      });
-  }, []);
+  const [sliderImages, setSliderImages] = useState(
+    Array.isArray(initialSliderImages) ? initialSliderImages : [],
+  );
 
   const [news, setNews] = useState([]);
-
-  const getNews = useCallback(async () => {
-    await axios
-      .get("https://api.sedihisham.com/news/findall")
-      .then((response) => {
-        setNews(response?.data);
-      });
-  }, []);
-
   const [activities, setActivities] = useState([]);
 
+  const getCurrencyConversions = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/currencies/findall",
+      );
+
+      dispatch(
+        setConversions(Array.isArray(response?.data) ? response.data : []),
+      );
+    } catch {
+      dispatch(setConversions([]));
+    }
+  }, [dispatch]);
+
+  const getSliderImages = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/pages/getall/home",
+      );
+
+      if (Array.isArray(response?.data)) {
+        setSliderImages(response.data);
+      }
+    } catch {
+      // نحافظ على بيانات البناء الموجودة بدل حذف الصورة المعروضة.
+    }
+  }, []);
+
+  const getNews = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/news/findall",
+      );
+
+      setNews(Array.isArray(response?.data) ? response.data : []);
+    } catch {
+      setNews([]);
+    }
+  }, []);
+
   const getActivities = useCallback(async () => {
-    await axios
-      .get("https://api.sedihisham.com/activities/findall")
-      .then((response) => {
-        setActivities(response?.data);
-      });
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/activities/findall",
+      );
+
+      setActivities(Array.isArray(response?.data) ? response.data : []);
+    } catch {
+      setActivities([]);
+    }
   }, []);
 
   useEffect(() => {
-    getNews();
     getSliderImages();
+    getNews();
     getCurrencyConversions();
     getActivities();
-  }, [getNews, getSliderImages, getCurrencyConversions, getActivities]);
+  }, [getSliderImages, getNews, getCurrencyConversions, getActivities]);
 
-  const { isMobile } = useWidth();
+  const firstHeroImage = useMemo(() => {
+    const firstMainSliderImage = sliderImages.find(
+      (item) =>
+        item?.categoryImage === "home_page_main_slider" &&
+        item?.externalLink === false &&
+        typeof item?.path_image === "string" &&
+        item.path_image.trim() !== "",
+    );
 
-  const { local } = useSelector((state) => state.language);
+    return (
+      getApiImageUrl(firstMainSliderImage?.path_image) || DEFAULT_HERO_IMAGE
+    );
+  }, [sliderImages]);
 
   return (
     <div className="w-full overflow-hidden bg-white">
@@ -84,11 +146,7 @@ export default function Home({ type }) {
 
       <h1 className="sr-only">سيدي هشام - شركة العقاد للصناعة والتجارة</h1>
 
-      <Suspense
-        fallback={<div className="h-screen animate-pulse bg-gray-100" />}
-      >
-        <Slider sliderImages={sliderImages} />
-      </Suspense>
+      <Slider sliderImages={sliderImages} initialHeroImage={firstHeroImage} />
 
       <div className="faviconhomecarousal pattern-section pattern-section-wheat relative z-[60] mt-8 md:mt-12">
         <Tabss />
@@ -100,7 +158,6 @@ export default function Home({ type }) {
         </Suspense>
       </div>
 
-      {/* معرض الصور والفيديو — باترن القمح */}
       <section
         dir={local === "ar" ? "rtl" : "ltr"}
         className="pattern-section pattern-section-wheat relative mt-10 w-full overflow-hidden bg-white md:mt-12"
@@ -124,7 +181,6 @@ export default function Home({ type }) {
         </div>
       </section>
 
-      {/* الأخبار والفعاليات — باترن البهارات */}
       <section
         dir={local === "ar" ? "rtl" : "ltr"}
         className="pattern-section pattern-section-spices relative w-full overflow-hidden bg-white"
@@ -167,7 +223,7 @@ export default function Home({ type }) {
           padding: 0 !important;
           border: 0 !important;
           border-radius: 0 !important;
-          // background-color: #ffffff !important;
+          background-color: #ffffff !important;
         }
 
         .pattern-section::before {
@@ -219,4 +275,27 @@ export default function Home({ type }) {
       `}</style>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const response = await axios.get(
+      "https://api.sedihisham.com/pages/getall/home",
+      {
+        timeout: 15000,
+      },
+    );
+
+    return {
+      props: {
+        initialSliderImages: Array.isArray(response?.data) ? response.data : [],
+      },
+    };
+  } catch {
+    return {
+      props: {
+        initialSliderImages: [],
+      },
+    };
+  }
 }

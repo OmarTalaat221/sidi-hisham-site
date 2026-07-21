@@ -21,42 +21,55 @@ export default function ProductCard({
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
+
   const { local, conversion } = useSelector((state) => state.language);
+  const { favorites } = useSelector((state) => state.favorites);
+  const { cart } = useSelector((state) => state.cart);
+
   const isAr = local === "ar";
 
   const [quantity, setQuantity] = useState(1);
   const [src, setSrc] = useState(product_image || "/images/eim.png");
+  const [rate, setRate] = useState(1);
 
   useEffect(() => {
     setSrc(product_image || "/images/eim.png");
   }, [product_image]);
 
-  const { favorites } = useSelector((state) => state.favorites);
   const isFavorized = favorites?.some((item) => item.product_id === product_id);
 
-  const { cart } = useSelector((state) => state.cart);
   const isAdded = cart?.some((item) => item.product_id === product_id);
 
-  const [rate, setRate] = useState(1);
   useEffect(() => {
     if (currency !== "SYP" && conversion?.length) {
-      const conv = conversion.find((c) => c.to_currency === currency);
-      if (conv) setRate(conv.rate);
-    } else {
-      setRate(1);
+      const selectedConversion = conversion.find(
+        (item) => item.to_currency === currency,
+      );
+
+      setRate(selectedConversion ? Number(selectedConversion.rate) || 1 : 1);
+      return;
     }
+
+    setRate(1);
   }, [currency, conversion]);
 
   const finalPrice = useMemo(() => {
-    let price = product?.price || 0;
+    let price = Number(product?.price) || 0;
+
     if (percentage) {
-      price = price - (percentage * price) / 100;
+      price -= (Number(percentage) * price) / 100;
     }
-    return (Math.round(price * rate * 100) / 100).toFixed(2);
+
+    const convertedPrice = price * rate;
+
+    return (Math.round((convertedPrice + Number.EPSILON) * 100) / 100).toFixed(
+      2,
+    );
   }, [product?.price, percentage, rate]);
 
-  const handleFavorite = (e) => {
-    e.stopPropagation();
+  const handleFavorite = (event) => {
+    event.stopPropagation();
+
     dispatch(
       addTofavorites({
         product_id: product.id,
@@ -73,88 +86,164 @@ export default function ProductCard({
     );
   };
 
-  const handleCart = (e) => {
-    e.stopPropagation();
+  const handleCart = (event) => {
+    event.stopPropagation();
+
     if (isAdded) {
       dispatch(removeItem(product_id));
-    } else {
-      dispatch(
-        addToCart({
-          product_id: product.id,
-          product_name: product.product_translations,
-          price: finalPrice,
-          order_number: quantity,
-          product_image: product.product_images?.length
-            ? product.product_images[0]?.image_url
-            : "",
-          feature_names: [""],
-          points: product.points,
-          discount: percentage ? (percentage * product.price) / 100 : 0,
-        }),
-      );
+      return;
     }
+
+    dispatch(
+      addToCart({
+        product_id: product.id,
+        product_name: product.product_translations,
+        price: finalPrice,
+        order_number: quantity,
+        product_image: product.product_images?.length
+          ? product.product_images[0]?.image_url
+          : "",
+        feature_names: [""],
+        points: product.points,
+        discount: percentage ? (percentage * product.price) / 100 : 0,
+      }),
+    );
   };
 
+  const handleDecreaseQuantity = (event) => {
+    event.stopPropagation();
+
+    setQuantity((currentQuantity) =>
+      currentQuantity > 1 ? currentQuantity - 1 : 1,
+    );
+  };
+
+  const handleIncreaseQuantity = (event) => {
+    event.stopPropagation();
+
+    setQuantity((currentQuantity) => currentQuantity + 1);
+  };
+
+  const productAlt =
+    typeof product_name === "string" && product_name.trim()
+      ? product_name
+      : isAr
+        ? "صورة المنتج"
+        : "Product image";
+
   return (
-    <div
+    <article
+      dir={isAr ? "rtl" : "ltr"}
       onClick={() =>
         router.push(`/categories/product-content/product-details/${product_id}`)
       }
-      className="group relative flex flex-col w-full h-[400px] bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-1.5 cursor-pointer overflow-hidden border border-gray-50"
+      className="
+        product-card relative flex h-[400px] w-full
+        cursor-pointer flex-col overflow-hidden
+        rounded-2xl border border-[rgba(117,0,11,0.08)]
+        bg-white
+        shadow-[0_8px_24px_rgba(0,0,0,0.10)]
+        transition-[transform,box-shadow,border-color]
+        duration-300
+        hover:-translate-y-1
+        hover:border-[rgba(212,0,23,0.16)]
+        hover:shadow-[0_15px_35px_rgba(0,0,0,0.15)]
+      "
     >
-      <div className="relative w-full h-[200px] bg-gray-50/50 flex items-center justify-center p-4">
-        <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-105">
+      <div
+        className="
+          relative flex h-[200px] w-full
+          items-center justify-center overflow-hidden
+          bg-white p-4
+        "
+      >
+        <div
+          className="
+            product-card-image relative h-full w-full
+            transition-transform duration-500 ease-out
+          "
+        >
           <Image
             src={src}
-            alt={typeof product_name === "string" ? product_name : "Product"}
+            alt={productAlt}
             layout="fill"
             objectFit="contain"
+            sizes="(max-width: 639px) 78vw, (max-width: 767px) 260px, 280px"
+            draggable={false}
             onError={() => setSrc("/images/eim.png")}
           />
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 p-4 justify-between bg-white z-10">
-        <div>
+      <div className="relative z-10 flex flex-1 flex-col justify-between bg-white p-4">
+        <div className="text-start">
           <h3
-            className="font-arabicBold text-gray-800 text-base md:text-lg line-clamp-1 mb-1"
-            title={product_name}
+            className="
+              mb-1 line-clamp-1 text-base
+              font-arabicBold text-gray-800
+              md:text-lg
+            "
+            title={typeof product_name === "string" ? product_name : ""}
           >
             {product_name}
           </h3>
-          <div className="text-gray-500 text-xs md:text-sm font-arabicLight line-clamp-2 leading-relaxed min-h-[40px]">
+
+          <div
+            className="
+              min-h-[40px] line-clamp-2
+              text-xs leading-relaxed text-gray-500
+              font-arabicLight md:text-sm
+            "
+          >
             {desc}
           </div>
         </div>
 
         <div className="mt-4">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-baseline gap-1 text-primary">
-              <span className="text-lg md:text-xl font-bold">{finalPrice}</span>
-              <span className="text-xs font-arabicMedium font-bold">
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <div className="flex min-w-0 items-baseline gap-1 text-primary">
+              <span className="text-lg font-bold md:text-xl">{finalPrice}</span>
+
+              <span className="text-xs font-bold font-arabicMedium">
                 {currency}
               </span>
             </div>
 
-            <div className="flex items-center bg-gray-50 rounded-full border border-gray-100 px-2 py-0.5">
+            <div
+              className="
+                flex shrink-0 items-center rounded-full
+                border border-gray-100 bg-gray-50
+                px-2 py-0.5
+              "
+            >
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (quantity > 1) setQuantity(quantity - 1);
-                }}
-                className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary transition-colors text-lg"
+                type="button"
+                aria-label={isAr ? "تقليل الكمية" : "Decrease quantity"}
+                onClick={handleDecreaseQuantity}
+                className="
+                  flex h-6 w-6 items-center justify-center
+                  text-lg text-gray-500
+                  transition-colors hover:text-primary
+                  focus:outline-none focus-visible:text-primary
+                "
               >
                 -
               </button>
+
               <span className="w-6 text-center text-sm font-arabicMedium">
                 {quantity}
               </span>
+
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setQuantity(quantity + 1);
-                }}
-                className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary transition-colors text-lg"
+                type="button"
+                aria-label={isAr ? "زيادة الكمية" : "Increase quantity"}
+                onClick={handleIncreaseQuantity}
+                className="
+                  flex h-6 w-6 items-center justify-center
+                  text-lg text-gray-500
+                  transition-colors hover:text-primary
+                  focus:outline-none focus-visible:text-primary
+                "
               >
                 +
               </button>
@@ -163,14 +252,24 @@ export default function ProductCard({
 
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={handleCart}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-arabicMedium transition-all duration-300 ${
-                isAdded
-                  ? "bg-red-50 text-primary border border-red-100"
-                  : "bg-primary text-white hover:bg-red-800 shadow-md hover:shadow-lg shadow-red-500/20"
-              }`}
+              className={`
+                flex flex-1 items-center justify-center
+                gap-2 rounded-xl py-2.5
+                text-sm font-arabicMedium
+                transition-all duration-300
+                focus:outline-none focus-visible:ring-2
+                focus-visible:ring-primary focus-visible:ring-offset-2
+                ${
+                  isAdded
+                    ? "border border-red-100 bg-red-50 text-primary hover:bg-red-100"
+                    : "bg-primary text-white shadow-[0_5px_14px_rgba(212,0,23,0.22)] hover:bg-[#B80014]"
+                }
+              `}
             >
-              <ShoppingCartIcon className="w-4 h-4" />
+              <ShoppingCartIcon className="h-4 w-4 shrink-0" />
+
               <span>
                 {isAdded
                   ? isAr
@@ -183,18 +282,61 @@ export default function ProductCard({
             </button>
 
             <button
+              type="button"
+              aria-label={
+                isFavorized
+                  ? isAr
+                    ? "إزالة من المفضلة"
+                    : "Remove from favorites"
+                  : isAr
+                    ? "إضافة إلى المفضلة"
+                    : "Add to favorites"
+              }
               onClick={handleFavorite}
-              className="w-10 h-10 flex items-center justify-center shrink-0 rounded-xl bg-gray-50 border border-gray-100 text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all duration-300"
+              className="
+                flex h-10 w-10 shrink-0 items-center
+                justify-center rounded-xl
+                border border-gray-100 bg-gray-50
+                text-gray-400
+                transition-all duration-300
+                hover:border-red-100 hover:bg-red-50
+                hover:text-red-500
+                focus:outline-none focus-visible:ring-2
+                focus-visible:ring-primary focus-visible:ring-offset-2
+              "
             >
               {isFavorized ? (
-                <HeartSolid className="w-5 h-5 text-red-500" />
+                <HeartSolid className="h-5 w-5 text-red-500" />
               ) : (
-                <HeartOutline className="w-5 h-5" />
+                <HeartOutline className="h-5 w-5" />
               )}
             </button>
           </div>
         </div>
       </div>
-    </div>
+
+      <style jsx>{`
+        .product-card:hover .product-card-image {
+          transform: scale(1.05);
+        }
+
+        @media (hover: none) {
+          .product-card:hover .product-card-image {
+            transform: none;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .product-card,
+          .product-card-image {
+            transition: none;
+          }
+
+          .product-card:hover .product-card-image {
+            transform: none;
+          }
+        }
+      `}</style>
+    </article>
   );
 }

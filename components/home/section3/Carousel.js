@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import axios from "axios";
 import parse from "html-react-parser";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateTotals } from "../../../redux/cartSlice";
 import ProductCard from "./ProductCard";
@@ -9,82 +9,172 @@ import ProductCard from "./ProductCard";
 const Carousel = ({ products }) => {
   const carouselRef = useRef(null);
   const dispatch = useDispatch();
+
   const { cart } = useSelector((state) => state.cart);
   const { local, currency } = useSelector((state) => state.language);
+
   const isAr = local === "ar";
 
   const [percentage, setPercentage] = useState(0);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const sortedProducts = useMemo(() => {
+    if (!Array.isArray(products)) {
+      return [];
+    }
+
+    return products
+      .slice()
+      .sort(
+        (firstProduct, secondProduct) =>
+          new Date(secondProduct.createdAt).getTime() -
+          new Date(firstProduct.createdAt).getTime(),
+      );
+  }, [products]);
 
   useEffect(() => {
     dispatch(calculateTotals());
   }, [cart, dispatch]);
 
   useEffect(() => {
+    let isCancelled = false;
+
     const getOffers = async () => {
+      if (!Array.isArray(products) || products.length === 0) {
+        setPercentage(0);
+        return;
+      }
+
       try {
         const response = await axios.get(
           "https://api.sedihisham.com/offers/alloffers",
         );
-        if (response.data && products?.length) {
-          response.data.forEach((item) => {
-            item.Categories?.forEach((subItem) => {
-              const hasOffer = products.some(
-                (p) => p.category_id === subItem.id,
-              );
-              if (hasOffer) setPercentage(item.percentage);
-            });
+
+        const offers = Array.isArray(response?.data) ? response.data : [];
+
+        let matchedPercentage = 0;
+
+        offers.forEach((offer) => {
+          offer.Categories?.forEach((category) => {
+            const hasMatchingProduct = products.some(
+              (product) => product.category_id === category.id,
+            );
+
+            if (hasMatchingProduct) {
+              matchedPercentage = offer.percentage;
+            }
           });
+        });
+
+        if (!isCancelled) {
+          setPercentage(matchedPercentage);
         }
-      } catch (error) {
-        console.error(error);
+      } catch {
+        if (!isCancelled) {
+          setPercentage(0);
+        }
       }
     };
+
     getOffers();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [products]);
 
-  // Check scroll position for enabling/disabling buttons
-  const checkScrollButtons = () => {
-    if (!carouselRef.current) return;
-    const el = carouselRef.current;
-    const scrollLeft = Math.abs(el.scrollLeft); // Math.abs عشان RTL بيرجع سالب
-    const maxScroll = el.scrollWidth - el.clientWidth;
+  const checkScrollButtons = useCallback(() => {
+    const carouselElement = carouselRef.current;
 
-    setCanScrollPrev(scrollLeft > 5);
-    setCanScrollNext(scrollLeft < maxScroll - 5);
-  };
+    if (!carouselElement) {
+      return;
+    }
+
+    const maxScroll = carouselElement.scrollWidth - carouselElement.clientWidth;
+
+    if (maxScroll <= 5) {
+      setCanScrollPrev(false);
+      setCanScrollNext(false);
+      return;
+    }
+
+    const currentScrollLeft = carouselElement.scrollLeft;
+
+    let normalizedScrollPosition;
+
+    if (!isAr) {
+      normalizedScrollPosition = currentScrollLeft;
+    } else if (currentScrollLeft < 0) {
+      normalizedScrollPosition = Math.abs(currentScrollLeft);
+    } else {
+      normalizedScrollPosition = maxScroll - currentScrollLeft;
+    }
+
+    setCanScrollPrev(normalizedScrollPosition > 5);
+    setCanScrollNext(normalizedScrollPosition < maxScroll - 5);
+  }, [isAr]);
 
   useEffect(() => {
-    checkScrollButtons();
-    const el = carouselRef.current;
-    if (!el) return;
+    const carouselElement = carouselRef.current;
 
-    el.addEventListener("scroll", checkScrollButtons, { passive: true });
-    return () => el.removeEventListener("scroll", checkScrollButtons);
-  }, [products]);
+    if (!carouselElement) {
+      return undefined;
+    }
 
-  // Universal scroll - يعتمد على اتجاه visual مش على الـ scrollLeft
+    let animationFrameId;
+
+    const requestButtonUpdate = () => {
+      cancelAnimationFrame(animationFrameId);
+
+      animationFrameId = requestAnimationFrame(() => {
+        checkScrollButtons();
+      });
+    };
+
+    carouselElement.addEventListener("scroll", requestButtonUpdate, {
+      passive: true,
+    });
+
+    let resizeObserver;
+
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(requestButtonUpdate);
+      resizeObserver.observe(carouselElement);
+    }
+
+    requestButtonUpdate();
+
+    return () => {
+      carouselElement.removeEventListener("scroll", requestButtonUpdate);
+      resizeObserver?.disconnect();
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [checkScrollButtons, sortedProducts.length]);
+
   const scrollByAmount = (direction) => {
-    if (!carouselRef.current) return;
-    const el = carouselRef.current;
-    const scrollAmount = el.offsetWidth * 0.7;
+    const carouselElement = carouselRef.current;
 
-    // في RTL, scrollBy مع قيمة موجبة بيتحرك لليسار (visually forward)
-    // في LTR, scrollBy مع قيمة موجبة بيتحرك لليمين (visually forward)
-    // فبنستخدم "next" و "prev" بمعناهم البصري
-    const delta = direction === "next" ? scrollAmount : -scrollAmount;
+    if (!carouselElement) {
+      return;
+    }
 
-    el.scrollBy({
-      left: isAr ? -delta : delta,
+    const scrollAmount = Math.max(carouselElement.clientWidth * 0.72, 240);
+
+    const visualDirection = direction === "next" ? 1 : -1;
+
+    carouselElement.scrollBy({
+      left: isAr
+        ? -scrollAmount * visualDirection
+        : scrollAmount * visualDirection,
       behavior: "smooth",
     });
   };
 
-  if (!products || products.length === 0) {
+  if (sortedProducts.length === 0) {
     return (
-      <div className="flex justify-center items-center py-16">
-        <p className="text-gray-400 font-arabicMedium text-lg">
+      <div className="flex items-center justify-center py-16">
+        <p className="text-lg font-arabicMedium text-gray-400">
           {isAr ? "لا توجد منتجات متاحة حالياً" : "No products available"}
         </p>
       </div>
@@ -92,36 +182,68 @@ const Carousel = ({ products }) => {
   }
 
   return (
-    <div className="relative group w-full px-2 md:px-6">
-      {/* زرار "السابق" - يمين في العربي، شمال في الانجليزي */}
+    <div className="relative w-full px-3 sm:px-5 md:px-8">
       <button
+        type="button"
         onClick={() => scrollByAmount("prev")}
         disabled={!canScrollPrev}
-        aria-label={isAr ? "التالي" : "Previous"}
-        className={`absolute top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/95 backdrop-blur border border-gray-100 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.1)] text-primary transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-primary hover:text-white disabled:opacity-0 disabled:cursor-not-allowed ${
-          isAr ? "right-0 md:right-2" : "left-0 md:left-2"
-        }`}
+        aria-label={isAr ? "المنتجات السابقة" : "Previous products"}
+        className={`
+          absolute top-1/2 z-40 flex h-10 w-10
+          -translate-y-1/2 items-center justify-center
+          rounded-full border border-gray-100
+          bg-white/95 text-primary
+          opacity-100 shadow-[0_5px_18px_rgba(0,0,0,0.14)]
+          backdrop-blur-sm
+          transition-all duration-300
+          hover:scale-105 hover:border-primary
+          hover:bg-primary hover:text-white
+          focus:outline-none focus-visible:ring-2
+          focus-visible:ring-primary focus-visible:ring-offset-2
+          disabled:pointer-events-none disabled:opacity-0
+          md:h-12 md:w-12
+          ${isAr ? "right-0 md:right-2" : "left-0 md:left-2"}
+        `}
       >
         {isAr ? (
-          <ChevronRightIcon className="w-5 h-5 md:w-6 md:h-6" />
+          <ChevronRightIcon className="h-5 w-5 md:h-6 md:w-6" />
         ) : (
-          <ChevronLeftIcon className="w-5 h-5 md:w-6 md:h-6" />
+          <ChevronLeftIcon className="h-5 w-5 md:h-6 md:w-6" />
         )}
       </button>
 
-      {/* الحاوية القابلة للسحب - dir يتحكم في الاتجاه تلقائيًا */}
       <div
         ref={carouselRef}
         dir={isAr ? "rtl" : "ltr"}
-        className="flex overflow-x-auto gap-4 md:gap-6 pb-10 pt-4 px-2 scroll-smooth snap-x snap-mandatory no-scrollbar"
+        className="
+          no-scrollbar flex snap-x snap-mandatory
+          gap-4 overflow-x-auto px-2 pb-10 pt-4
+          scroll-smooth md:gap-6
+        "
       >
-        {products
-          .slice()
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-          .map((product, index) => (
+        {sortedProducts.map((product, index) => {
+          const selectedTranslation =
+            product?.product_translations?.find(
+              (item) =>
+                (item.locale || item.local || "").toLowerCase() ===
+                local?.toLowerCase(),
+            ) || product?.product_translations?.[0];
+
+          const productDescription = parse(
+            String(selectedTranslation?.description || ""),
+          );
+
+          const productName =
+            selectedTranslation?.nameProduct || product?.name || "";
+
+          return (
             <div
               key={product.id || index}
-              className="snap-start shrink-0 w-[240px] sm:w-[260px] md:w-[280px]"
+              className="
+                w-[78vw] min-w-[240px] max-w-[280px]
+                shrink-0 snap-start
+                sm:w-[260px] md:w-[280px]
+              "
             >
               <ProductCard
                 currency={currency}
@@ -133,45 +255,40 @@ const Carousel = ({ products }) => {
                     : null
                 }
                 product_id={product.id}
-                desc={parse(
-                  String(
-                    product?.product_translations?.find(
-                      (item) =>
-                        (item.locale || item.local || "").toLowerCase() ===
-                        local?.toLowerCase(),
-                    )?.description ||
-                      product?.product_translations?.[0]?.description ||
-                      "",
-                  ),
-                )}
-                product_name={
-                  product.product_translations?.find(
-                    (item) =>
-                      (item.locale || item.local || "").toLowerCase() ===
-                      local?.toLowerCase(),
-                  )?.nameProduct ||
-                  product?.product_translations?.[0]?.nameProduct ||
-                  product?.name ||
-                  ""
-                }
+                desc={productDescription}
+                product_name={productName}
               />
             </div>
-          ))}
+          );
+        })}
       </div>
 
-      {/* زرار "التالي" - شمال في العربي، يمين في الانجليزي */}
       <button
+        type="button"
         onClick={() => scrollByAmount("next")}
         disabled={!canScrollNext}
-        aria-label={isAr ? "السابق" : "Next"}
-        className={`absolute top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/95 backdrop-blur border border-gray-100 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.1)] text-primary transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 hover:bg-primary hover:text-white disabled:opacity-0 disabled:cursor-not-allowed ${
-          isAr ? "left-0 md:left-2" : "right-0 md:right-2"
-        }`}
+        aria-label={isAr ? "المنتجات التالية" : "Next products"}
+        className={`
+          absolute top-1/2 z-40 flex h-10 w-10
+          -translate-y-1/2 items-center justify-center
+          rounded-full border border-gray-100
+          bg-white/95 text-primary
+          opacity-100 shadow-[0_5px_18px_rgba(0,0,0,0.14)]
+          backdrop-blur-sm
+          transition-all duration-300
+          hover:scale-105 hover:border-primary
+          hover:bg-primary hover:text-white
+          focus:outline-none focus-visible:ring-2
+          focus-visible:ring-primary focus-visible:ring-offset-2
+          disabled:pointer-events-none disabled:opacity-0
+          md:h-12 md:w-12
+          ${isAr ? "left-0 md:left-2" : "right-0 md:right-2"}
+        `}
       >
         {isAr ? (
-          <ChevronLeftIcon className="w-5 h-5 md:w-6 md:h-6" />
+          <ChevronLeftIcon className="h-5 w-5 md:h-6 md:w-6" />
         ) : (
-          <ChevronRightIcon className="w-5 h-5 md:w-6 md:h-6" />
+          <ChevronRightIcon className="h-5 w-5 md:h-6 md:w-6" />
         )}
       </button>
 
@@ -179,6 +296,7 @@ const Carousel = ({ products }) => {
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
+
         .no-scrollbar {
           scrollbar-width: none;
           -ms-overflow-style: none;

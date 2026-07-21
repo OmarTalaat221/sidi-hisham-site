@@ -1,10 +1,33 @@
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Carousel, { consts } from "react-elastic-carousel";
 import { useSelector } from "react-redux";
 import Slogan from "../../public/images/slogen.png";
+
+const DEFAULT_HERO_IMAGE =
+  "https://api.sedihisham.com/uploads/category/images/ketchupcopy3b609725-f787-4dc9-8501-5df31cbd57bc.webp";
+
+function getApiImageUrl(path) {
+  if (!path || typeof path !== "string") {
+    return "";
+  }
+
+  const normalizedPath = path.trim();
+
+  if (!normalizedPath) {
+    return "";
+  }
+
+  if (
+    normalizedPath.startsWith("http://") ||
+    normalizedPath.startsWith("https://")
+  ) {
+    return normalizedPath;
+  }
+
+  return `https://api.sedihisham.com/${normalizedPath.replace(/^\/+/, "")}`;
+}
 
 function SlideImage({ src, alt, priority }) {
   const [loaded, setLoaded] = useState(false);
@@ -15,7 +38,9 @@ function SlideImage({ src, alt, priority }) {
     setErrored(false);
   }, [src]);
 
-  if (!src || errored) return null;
+  if (!src || errored) {
+    return null;
+  }
 
   return (
     <Image
@@ -25,62 +50,49 @@ function SlideImage({ src, alt, priority }) {
       objectFit="cover"
       objectPosition="center center"
       priority={priority}
-      quality={90}
+      loading={priority ? "eager" : "lazy"}
       sizes="100vw"
+      unoptimized
+      draggable={false}
       onLoadingComplete={() => setLoaded(true)}
       onError={() => setErrored(true)}
-      className={`hero-slider-image transition-opacity duration-700 ${
+      className={`hero-slider-image transition-opacity duration-500 ease-out ${
         loaded ? "opacity-100" : "opacity-0"
       }`}
     />
   );
 }
 
-export default function Slider({ sliderImages = [] }) {
+export default function Slider({
+  sliderImages = [],
+  initialHeroImage = DEFAULT_HERO_IMAGE,
+}) {
   const { local } = useSelector((state) => state.language);
 
   const isAr = local === "ar";
 
-  const [fallbackImages, setFallbackImages] = useState([]);
-  const [isFetching, setIsFetching] = useState(
-    !Array.isArray(sliderImages) || sliderImages.length === 0,
-  );
-
   const carouselRef = useRef(null);
   const loopTimeoutRef = useRef(null);
 
-  useEffect(() => {
-    if (Array.isArray(sliderImages) && sliderImages.length > 0) {
-      setIsFetching(false);
-      return undefined;
+  const slides = useMemo(() => {
+    if (!Array.isArray(sliderImages)) {
+      return [];
     }
 
-    let mounted = true;
-
-    const getSliderImages = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.sedihisham.com/pages/getall/home",
-        );
-
-        if (mounted) {
-          setFallbackImages(Array.isArray(response?.data) ? response.data : []);
-        }
-      } catch (error) {
-        console.error("Failed to load slider images:", error);
-      } finally {
-        if (mounted) {
-          setIsFetching(false);
-        }
-      }
-    };
-
-    getSliderImages();
-
-    return () => {
-      mounted = false;
-    };
+    return sliderImages.filter(
+      (item) =>
+        item?.categoryImage === "home_page_main_slider" &&
+        item?.externalLink === false &&
+        typeof item?.path_image === "string" &&
+        item.path_image.trim() !== "",
+    );
   }, [sliderImages]);
+
+  const firstSlideSrc = useMemo(() => {
+    const firstSlideImage = getApiImageUrl(slides[0]?.path_image);
+
+    return firstSlideImage || initialHeroImage || DEFAULT_HERO_IMAGE;
+  }, [slides, initialHeroImage]);
 
   useEffect(() => {
     return () => {
@@ -90,27 +102,35 @@ export default function Slider({ sliderImages = [] }) {
     };
   }, []);
 
-  const slides = useMemo(() => {
-    const source =
-      Array.isArray(sliderImages) && sliderImages.length > 0
-        ? sliderImages
-        : fallbackImages;
+  useEffect(() => {
+    if (typeof window === "undefined" || slides.length <= 1) {
+      return undefined;
+    }
 
-    return source.filter(
-      (item) =>
-        item?.categoryImage === "home_page_main_slider" &&
-        item?.externalLink === false &&
-        typeof item?.path_image === "string" &&
-        item.path_image.trim() !== "",
-    );
-  }, [sliderImages, fallbackImages]);
+    const preloadImages = slides.slice(1).map((item) => {
+      const imageSrc = getApiImageUrl(item.path_image);
+      const preloadImage = new window.Image();
+
+      preloadImage.src = imageSrc;
+
+      return preloadImage;
+    });
+
+    return () => {
+      preloadImages.forEach((preloadImage) => {
+        preloadImage.src = "";
+      });
+    };
+  }, [slides]);
 
   const hasSlides = slides.length > 0;
   const showControls = slides.length > 1;
 
   const handleNextEnd = useCallback(
     ({ index }) => {
-      if (!showControls || index !== slides.length - 1) return;
+      if (!showControls || index !== slides.length - 1) {
+        return;
+      }
 
       if (loopTimeoutRef.current) {
         clearTimeout(loopTimeoutRef.current);
@@ -149,11 +169,24 @@ export default function Slider({ sliderImages = [] }) {
           onClick={onClick}
           disabled={isEdge}
           aria-label={ariaLabel}
-          className={`group absolute top-1/2 z-30 hidden -translate-y-1/2 md:flex ${arrowPosition} ${
-            isEdge ? "cursor-not-allowed opacity-40" : ""
-          }`}
+          className={`
+            absolute top-1/2 z-30 hidden
+            -translate-y-1/2 md:flex
+            ${arrowPosition}
+            ${isEdge ? "cursor-not-allowed opacity-40" : ""}
+          `}
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white hover:text-primary md:h-11 md:w-11">
+          <span
+            className="
+              flex h-10 w-10 items-center justify-center
+              rounded-full border border-white/20
+              bg-white/10 text-white
+              backdrop-blur-md
+              transition-all duration-300
+              hover:bg-white hover:text-primary
+              md:h-11 md:w-11
+            "
+          >
             {arrowIcon}
           </span>
         </button>
@@ -164,7 +197,9 @@ export default function Slider({ sliderImages = [] }) {
 
   const renderPagination = useCallback(
     ({ pages, activePage, onClick }) => {
-      if (!showControls) return null;
+      if (!showControls) {
+        return null;
+      }
 
       return (
         <div className="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-4 md:bottom-8">
@@ -192,10 +227,16 @@ export default function Slider({ sliderImages = [] }) {
   );
 
   return (
-    <section className="hero-responsive relative w-full overflow-hidden bg-neutral-900">
-      <div className="absolute inset-0 bg-neutral-900" />
-
-      {hasSlides && !isFetching && (
+    <section
+      className="hero-responsive relative w-full overflow-hidden bg-white"
+      style={{
+        backgroundImage: firstSlideSrc ? `url("${firstSlideSrc}")` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {hasSlides && (
         <Carousel
           ref={carouselRef}
           renderArrow={showControls ? renderArrow : () => null}
@@ -212,14 +253,20 @@ export default function Slider({ sliderImages = [] }) {
           className="h-full w-full"
         >
           {slides.map((item, index) => {
-            const normalizedPath = item.path_image.replace(/^\/+/, "");
-
-            const imageSrc = `https://api.sedihisham.com/${normalizedPath}`;
+            const imageSrc = getApiImageUrl(item.path_image);
 
             return (
               <div
                 key={item.id || `${item.path_image}-${index}`}
-                className="hero-slide-height relative w-full overflow-hidden bg-neutral-900"
+                className="hero-slide-height relative w-full overflow-hidden bg-white"
+                style={{
+                  backgroundImage: imageSrc
+                    ? `url("${imageSrc}")`
+                    : `url("${firstSlideSrc}")`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center center",
+                  backgroundRepeat: "no-repeat",
+                }}
               >
                 <SlideImage
                   src={imageSrc}
@@ -231,9 +278,13 @@ export default function Slider({ sliderImages = [] }) {
                   priority={index === 0}
                 />
 
-                <div className="absolute inset-0 bg-black/30" />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-black/30"
+                />
 
                 <div
+                  aria-hidden="true"
                   className="absolute inset-0"
                   style={{
                     background: `radial-gradient(
@@ -257,7 +308,9 @@ export default function Slider({ sliderImages = [] }) {
           <div className="hero-content-stack flex w-full max-w-[650px] flex-col items-start justify-start text-start">
             <div
               className="animate-reveal-up opacity-0"
-              style={{ animationDelay: "0.2s" }}
+              style={{
+                animationDelay: "0.2s",
+              }}
             >
               <div className="mb-3 inline-flex items-center justify-start gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 shadow-lg backdrop-blur-md sm:mb-4 md:mb-6 md:gap-3 md:px-4 md:py-2">
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFD62D] shadow-[0_0_8px_#FFD62D]" />
@@ -270,7 +323,9 @@ export default function Slider({ sliderImages = [] }) {
 
             <div
               className="animate-reveal-up relative w-[180px] opacity-0 drop-shadow-2xl sm:w-[230px] md:w-[420px] lg:w-[480px]"
-              style={{ animationDelay: "0.4s" }}
+              style={{
+                animationDelay: "0.4s",
+              }}
             >
               <Image
                 src={Slogan}
@@ -280,13 +335,22 @@ export default function Slider({ sliderImages = [] }) {
             </div>
 
             <div
-              className="animate-stretch-width mt-3 h-[3px] rounded-full bg-[#FFD62D] opacity-0 shadow-[0_0_20px_rgba(255,214,45,0.5)] sm:mt-4 md:mt-6"
-              style={{ animationDelay: "0.6s" }}
-            />
+              aria-hidden="true"
+              className="mt-3 h-[3px] w-[80px] overflow-hidden rounded-full sm:mt-4 md:mt-6"
+            >
+              <div
+                className="hero-line-draw h-full w-full rounded-full bg-[#FFD62D] opacity-0 shadow-[0_0_20px_rgba(255,214,45,0.5)]"
+                style={{
+                  animationDelay: "0.6s",
+                }}
+              />
+            </div>
 
             <p
               className="animate-reveal-up mt-3 w-full max-w-[500px] text-start font-arabicLight text-[11px] leading-relaxed text-white/90 opacity-0 sm:text-xs md:mt-6 md:text-lg"
-              style={{ animationDelay: "0.7s" }}
+              style={{
+                animationDelay: "0.7s",
+              }}
             >
               {isAr
                 ? "اختيارات يومية بجودة ثابتة وطعم يعتمد عليه."
@@ -295,7 +359,9 @@ export default function Slider({ sliderImages = [] }) {
 
             <div
               className="animate-reveal-up pointer-events-auto mt-4 flex justify-start opacity-0 sm:mt-5 md:mt-10"
-              style={{ animationDelay: "0.9s" }}
+              style={{
+                animationDelay: "0.9s",
+              }}
             >
               <Link href="/categories">
                 <div className="group relative flex cursor-pointer items-center justify-start gap-3 rounded-full bg-white px-5 py-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.2)] transition-all hover:scale-105 active:scale-95 md:gap-4 md:px-7 md:py-3.5">
@@ -332,15 +398,15 @@ export default function Slider({ sliderImages = [] }) {
           }
         }
 
-        @keyframes stretchWidth {
+        @keyframes drawLineLeftToRight {
           from {
-            width: 0;
             opacity: 0;
+            transform: scaleX(0);
           }
 
           to {
-            width: 80px;
             opacity: 1;
+            transform: scaleX(1);
           }
         }
 
@@ -348,14 +414,18 @@ export default function Slider({ sliderImages = [] }) {
           animation: revealUp 0.9s cubic-bezier(0.2, 1, 0.3, 1) forwards;
         }
 
-        .animate-stretch-width {
-          animation: stretchWidth 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        .hero-line-draw {
+          transform: scaleX(0);
+          transform-origin: left center;
+          animation: drawLineLeftToRight 1.2s cubic-bezier(0.2, 1, 0.3, 1)
+            forwards;
         }
 
         .hero-responsive {
           height: 62.5vw;
           min-height: 0;
           max-height: 100vh;
+          background-color: #ffffff;
         }
 
         .hero-slide-height {
@@ -385,6 +455,7 @@ export default function Slider({ sliderImages = [] }) {
         .hero-responsive .rec-carousel-item > div {
           height: 100% !important;
           min-height: 0 !important;
+          background: transparent !important;
         }
 
         .hero-responsive .rec-slider-container {
@@ -485,6 +556,19 @@ export default function Slider({ sliderImages = [] }) {
 
           .hero-content-stack {
             padding-inline-start: 108px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-reveal-up,
+          .hero-line-draw {
+            animation: none;
+            opacity: 1;
+            transform: none;
+          }
+
+          .hero-slider-image {
+            transition: none;
           }
         }
       `}</style>
