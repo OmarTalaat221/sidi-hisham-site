@@ -25,6 +25,7 @@ import UserIconDropDown from "../dropdowns/user_icon/UserIconDropDown";
 
 function MobileNav({ open, setOpen }) {
   const router = useRouter();
+
   const { local } = useSelector((state) => state.language);
 
   const isAr = local === "ar";
@@ -115,7 +116,13 @@ function MobileNav({ open, setOpen }) {
           >
             <Dialog.Panel
               style={{ insetInlineStart: 0 }}
-              className="absolute top-0 flex h-full w-[88%] max-w-[390px] flex-col overflow-hidden bg-gradient-to-b from-[#7B0815] via-[#A9091D] to-[#57050D] shadow-[0_0_80px_rgba(0,0,0,0.5)]"
+              className="
+                absolute top-0 flex h-full
+                w-[88%] max-w-[390px]
+                flex-col overflow-hidden
+                bg-primary
+                shadow-[0_0_80px_rgba(0,0,0,0.5)]
+              "
             >
               <div className="border-b border-white/10 p-4">
                 <div className="flex items-center justify-between gap-3 rounded-3xl border border-white/15 bg-white/10 p-3 backdrop-blur-md">
@@ -139,7 +146,17 @@ function MobileNav({ open, setOpen }) {
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label={isAr ? "إغلاق القائمة" : "Close menu"}
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:rotate-90 hover:border-[#FFD62D]/70 hover:bg-white/20 hover:text-[#FFD62D]"
+                    className="
+                      flex h-11 w-11 shrink-0
+                      items-center justify-center
+                      rounded-full border border-white/20
+                      bg-white/10 text-white
+                      transition duration-300
+                      hover:rotate-90
+                      hover:border-[#FFD62D]/70
+                      hover:bg-white/20
+                      hover:text-[#FFD62D]
+                    "
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -171,7 +188,7 @@ function MobileNav({ open, setOpen }) {
                         onClick={() => setOpen(false)}
                         className={`group relative z-10 flex w-full cursor-pointer items-center justify-start gap-3 rounded-2xl border p-3 text-start transition duration-300 ${
                           active
-                            ? "border-[#FFD62D]/35 bg-[#FFD62D]/12 shadow-[0_10px_25px_rgba(0,0,0,0.12)]"
+                            ? "border-[#FFD62D]/35 bg-[#FFD62D]/10 shadow-[0_10px_25px_rgba(0,0,0,0.12)]"
                             : "border-transparent hover:border-white/15 hover:bg-white/10"
                         }`}
                       >
@@ -205,7 +222,7 @@ function MobileNav({ open, setOpen }) {
                         <span
                           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition duration-300 ${
                             active
-                              ? "bg-[#FFD62D] text-[#790914]"
+                              ? "bg-[#FFD62D] text-primary"
                               : "bg-white/5 text-white/45 group-hover:bg-white/15 group-hover:text-[#FFD62D]"
                           }`}
                         >
@@ -232,8 +249,101 @@ function MobileNav({ open, setOpen }) {
   );
 }
 
+function MobileHeaderBar({
+  isAr,
+  open,
+  setOpen,
+  variant = "static",
+  priorityLogo = false,
+}) {
+  const isStatic = variant === "static";
+
+  return (
+    <div
+      dir="ltr"
+      className={`pointer-events-auto relative mx-auto grid transform-gpu grid-cols-[1fr_auto_1fr] items-center border bg-[#7C1422] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isStatic
+          ? `
+            h-[78px] w-full max-w-none
+            rounded-none
+            border-x-0 border-t-0 border-b-white/15
+            px-3
+            shadow-[0_12px_35px_rgba(0,0,0,0.28)]
+          `
+          : `
+            mt-2 h-[62px]
+            w-[calc(100%-16px)]
+            rounded-full
+            border-white/15
+            px-2
+            shadow-[0_16px_40px_rgba(0,0,0,0.3)]
+            backdrop-blur-xl
+          `
+      }`}
+    >
+      <div className="flex min-w-0 items-center justify-start gap-1">
+        <MenuIconDropDown />
+
+        <UserIconDropDown />
+      </div>
+
+      <Link
+        href="/"
+        aria-label={isAr ? "الرئيسية" : "Home"}
+        className={`relative mx-1 transition-all duration-500 ${
+          isStatic ? "h-12 w-[84px]" : "h-10 w-[66px]"
+        }`}
+      >
+        <OptimizedImage
+          alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham logo"}
+          src={logo}
+          fill
+          priority={priorityLogo}
+          showSkeleton={false}
+          objectFit="contain"
+          sizes={isStatic ? "84px" : "66px"}
+        />
+      </Link>
+
+      <div className="flex min-w-0 items-center justify-end gap-1">
+        <SearchIconDropDown />
+
+        <CartDropDown />
+
+        <button
+          type="button"
+          aria-label={
+            open
+              ? isAr
+                ? "إغلاق القائمة"
+                : "Close menu"
+              : isAr
+                ? "فتح القائمة"
+                : "Open menu"
+          }
+          aria-expanded={open}
+          onClick={() => setOpen(true)}
+          className="
+            flex h-10 w-10 shrink-0
+            items-center justify-center
+            rounded-full border border-white/25
+            bg-white/10 text-white
+            shadow-[0_8px_24px_rgba(0,0,0,0.22)]
+            transition-all duration-300
+            hover:border-[#FFD62D]/60
+            hover:text-[#FFD62D]
+          "
+        >
+          <Menu className="h-5 w-5" strokeWidth={2} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function NavbarM() {
   const router = useRouter();
+
   const { local } = useSelector((state) => state.language);
 
   const [open, setOpen] = useState(false);
@@ -247,65 +357,37 @@ export default function NavbarM() {
   }, [router.asPath]);
 
   return (
-    <nav className="pointer-events-none fixed inset-x-0 top-0 z-[120] md:hidden">
-      <MobileNav open={open} setOpen={setOpen} />
+    <>
+      {/* الهيدر الأساسي: كامل عرض الموبايل */}
+      <div className="relative z-[110] h-[78px] w-full md:hidden">
+        <MobileNav open={open} setOpen={setOpen} />
 
-      <div
-        dir="ltr"
-        className={`pointer-events-auto relative mx-auto grid transform-gpu grid-cols-[1fr_auto_1fr] items-center border transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          scrolled
-            ? "mt-2 h-[62px] w-[calc(100%-16px)] rounded-full border-white/15 bg-gradient-to-r from-[#4D0610]/95 via-[#930A1C]/95 to-[#4D0610]/95 px-2 shadow-[0_16px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl"
-            : "mt-0 h-[78px] w-full rounded-none border-x-0 border-t-0 border-b-white/15 bg-[linear-gradient(180deg,rgba(53,2,11,0.95)_0%,rgba(85,5,18,0.84)_100%)] px-3 shadow-[0_12px_35px_rgba(0,0,0,0.28)] backdrop-blur-xl"
-        }`}
-      >
-        <div className="flex min-w-0 items-center justify-start gap-1">
-          <MenuIconDropDown />
-
-          <UserIconDropDown />
-        </div>
-
-        <Link
-          href="/"
-          aria-label={isAr ? "الرئيسية" : "Home"}
-          className={`relative mx-1 transition-all duration-500 ${
-            scrolled ? "h-10 w-[66px]" : "h-12 w-[84px]"
-          }`}
-        >
-          <OptimizedImage
-            alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham logo"}
-            src={logo}
-            fill
-            priority
-            showSkeleton={false}
-            objectFit="contain"
-            sizes={scrolled ? "66px" : "84px"}
-          />
-        </Link>
-
-        <div className="flex min-w-0 items-center justify-end gap-1">
-          <SearchIconDropDown />
-
-          <CartDropDown />
-
-          <button
-            type="button"
-            aria-label={
-              open
-                ? isAr
-                  ? "إغلاق القائمة"
-                  : "Close menu"
-                : isAr
-                  ? "فتح القائمة"
-                  : "Open menu"
-            }
-            aria-expanded={open}
-            onClick={() => setOpen(true)}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/25 bg-[#500711]/75 text-white shadow-[0_8px_24px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-all duration-300 hover:border-[#FFD62D]/60 hover:text-[#FFD62D]"
-          >
-            <Menu className="h-5 w-5" strokeWidth={2} />
-          </button>
-        </div>
+        <MobileHeaderBar
+          isAr={isAr}
+          open={open}
+          setOpen={setOpen}
+          variant="static"
+          priorityLogo
+        />
       </div>
-    </nav>
+
+      {/* الهيدر الثابت: صغير ودائري */}
+      <nav
+        aria-hidden={!scrolled}
+        className={`fixed inset-x-0 top-0 z-[120] transform-gpu transition-[transform,opacity,visibility] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+          scrolled
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-[130%] opacity-0"
+        } ${scrolled ? "pointer-events-auto" : "pointer-events-none"}`}
+      >
+        <MobileHeaderBar
+          isAr={isAr}
+          open={open}
+          setOpen={setOpen}
+          variant="fixed"
+          priorityLogo={false}
+        />
+      </nav>
+    </>
   );
 }

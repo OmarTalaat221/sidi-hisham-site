@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const nextConfig = {
   reactStrictMode: true,
 
-  output: isProduction ? "export" : undefined,
+  // output: isProduction ? "export" : undefined,
 
   trailingSlash: true,
 

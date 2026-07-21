@@ -8,12 +8,15 @@ import SideNav from "../sideNav";
 
 export default function Layout({ children }) {
   const router = useRouter();
+
   const { local } = useSelector((state) => state.language);
 
   const isAr = local === "ar";
 
   useEffect(() => {
-    if (!document?.body) return;
+    if (!document?.body) {
+      return undefined;
+    }
 
     document.body.classList.toggle("arVersion", isAr);
 

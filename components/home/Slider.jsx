@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Carousel, { consts } from "react-elastic-carousel";
 import { useSelector } from "react-redux";
 import Slogan from "../../public/images/slogen.png";
 
 const DEFAULT_HERO_IMAGE =
   "https://api.sedihisham.com/uploads/category/images/ketchupcopy3b609725-f787-4dc9-8501-5df31cbd57bc.webp";
+
+const AUTOPLAY_DELAY = 4500;
+const TRANSITION_DURATION = 800;
 
 function getApiImageUrl(path) {
   if (!path || typeof path !== "string") {
@@ -29,275 +31,293 @@ function getApiImageUrl(path) {
   return `https://api.sedihisham.com/${normalizedPath.replace(/^\/+/, "")}`;
 }
 
-function SlideImage({ src, alt, priority }) {
-  const [loaded, setLoaded] = useState(false);
-  const [errored, setErrored] = useState(false);
+function HeroSlide({ item, index, isAr, shouldAnimate, layerClassName }) {
+  const [hasError, setHasError] = useState(false);
+
+  const imageSrc = getApiImageUrl(item?.path_image);
 
   useEffect(() => {
-    setLoaded(false);
-    setErrored(false);
-  }, [src]);
+    setHasError(false);
+  }, [imageSrc]);
 
-  if (!src || errored) {
+  if (!imageSrc || hasError) {
     return null;
   }
 
+  const priority = index === 0;
+
   return (
-    <Image
-      src={src}
-      alt={alt}
-      layout="fill"
-      objectFit="cover"
-      objectPosition="center center"
-      priority={priority}
-      loading={priority ? "eager" : "lazy"}
-      sizes="100vw"
-      unoptimized
-      draggable={false}
-      onLoadingComplete={() => setLoaded(true)}
-      onError={() => setErrored(true)}
-      className={`hero-slider-image transition-opacity duration-500 ease-out ${
-        loaded ? "opacity-100" : "opacity-0"
+    <div
+      className={`absolute inset-0 overflow-hidden ${layerClassName} ${
+        shouldAnimate ? "hero-slide-fade-in" : ""
       }`}
-    />
+    >
+      <Image
+        src={imageSrc}
+        alt={
+          isAr
+            ? `منتجات سيدي هشام - الشريحة ${index + 1}`
+            : `Sedi Hisham products - slide ${index + 1}`
+        }
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center center"
+        priority={priority}
+        loading={priority ? undefined : "eager"}
+        quality={82}
+        sizes="100vw"
+        draggable={false}
+        onError={() => setHasError(true)}
+        className="hero-slider-image"
+      />
+
+      <div aria-hidden="true" className="absolute inset-0 bg-black/30" />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(
+            circle at ${isAr ? "80%" : "20%"} 50%,
+            transparent 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          )`,
+        }}
+      />
+    </div>
   );
 }
 
-export default function Slider({
-  sliderImages = [],
-  initialHeroImage = DEFAULT_HERO_IMAGE,
-}) {
+export default function Slider({ sliderImages = [] }) {
   const { local } = useSelector((state) => state.language);
 
   const isAr = local === "ar";
 
-  const carouselRef = useRef(null);
-  const loopTimeoutRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const [previousIndex, setPreviousIndex] = useState(null);
+
+  const activeIndexRef = useRef(0);
+  const transitionTimeoutRef = useRef(null);
+  const autoplayIntervalRef = useRef(null);
 
   const slides = useMemo(() => {
-    if (!Array.isArray(sliderImages)) {
-      return [];
+    const filteredSlides = Array.isArray(sliderImages)
+      ? sliderImages.filter(
+          (item) =>
+            item?.categoryImage === "home_page_main_slider" &&
+            item?.externalLink === false &&
+            typeof item?.path_image === "string" &&
+            item.path_image.trim() !== "",
+        )
+      : [];
+
+    if (filteredSlides.length > 0) {
+      return filteredSlides;
     }
 
-    return sliderImages.filter(
-      (item) =>
-        item?.categoryImage === "home_page_main_slider" &&
-        item?.externalLink === false &&
-        typeof item?.path_image === "string" &&
-        item.path_image.trim() !== "",
-    );
+    return [
+      {
+        id: "default-hero-image",
+        path_image: DEFAULT_HERO_IMAGE,
+        categoryImage: "home_page_main_slider",
+        externalLink: false,
+      },
+    ];
   }, [sliderImages]);
 
-  const firstSlideSrc = useMemo(() => {
-    const firstSlideImage = getApiImageUrl(slides[0]?.path_image);
-
-    return firstSlideImage || initialHeroImage || DEFAULT_HERO_IMAGE;
-  }, [slides, initialHeroImage]);
-
-  useEffect(() => {
-    return () => {
-      if (loopTimeoutRef.current) {
-        clearTimeout(loopTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || slides.length <= 1) {
-      return undefined;
-    }
-
-    const preloadImages = slides.slice(1).map((item) => {
-      const imageSrc = getApiImageUrl(item.path_image);
-      const preloadImage = new window.Image();
-
-      preloadImage.src = imageSrc;
-
-      return preloadImage;
-    });
-
-    return () => {
-      preloadImages.forEach((preloadImage) => {
-        preloadImage.src = "";
-      });
-    };
-  }, [slides]);
-
-  const hasSlides = slides.length > 0;
   const showControls = slides.length > 1;
 
-  const handleNextEnd = useCallback(
-    ({ index }) => {
-      if (!showControls || index !== slides.length - 1) {
+  const goToSlide = useCallback(
+    (requestedIndex) => {
+      if (slides.length <= 1) {
         return;
       }
 
-      if (loopTimeoutRef.current) {
-        clearTimeout(loopTimeoutRef.current);
+      const currentIndex = activeIndexRef.current;
+
+      const normalizedIndex =
+        ((requestedIndex % slides.length) + slides.length) % slides.length;
+
+      if (normalizedIndex === currentIndex) {
+        return;
       }
 
-      loopTimeoutRef.current = setTimeout(() => {
-        carouselRef.current?.goTo(0);
-      }, 4500);
+      window.clearTimeout(transitionTimeoutRef.current);
+
+      setPreviousIndex(currentIndex);
+
+      activeIndexRef.current = normalizedIndex;
+
+      setActiveIndex(normalizedIndex);
+
+      transitionTimeoutRef.current = window.setTimeout(() => {
+        setPreviousIndex(null);
+      }, TRANSITION_DURATION);
     },
-    [showControls, slides.length],
+    [slides.length],
   );
 
-  const renderArrow = useCallback(
-    ({ type, onClick, isEdge }) => {
-      const isPreviousType = type === consts.PREV;
+  const goToNextSlide = useCallback(() => {
+    goToSlide(activeIndexRef.current + 1);
+  }, [goToSlide]);
 
-      const isPhysicalLeft = isAr ? !isPreviousType : isPreviousType;
+  const goToPreviousSlide = useCallback(() => {
+    goToSlide(activeIndexRef.current - 1);
+  }, [goToSlide]);
 
-      const arrowPosition = isPhysicalLeft
-        ? "left-3 sm:left-4 md:left-5 xl:left-8"
-        : "right-3 sm:right-4 md:right-5 xl:right-8";
+  useEffect(() => {
+    if (activeIndexRef.current >= slides.length) {
+      activeIndexRef.current = 0;
+      setActiveIndex(0);
+      setPreviousIndex(null);
+    }
+  }, [slides.length]);
 
-      const arrowIcon = isPhysicalLeft ? "←" : "→";
+  useEffect(() => {
+    if (!showControls) {
+      return undefined;
+    }
 
-      const ariaLabel = isPreviousType
-        ? isAr
-          ? "الشريحة السابقة"
-          : "Previous slide"
-        : isAr
-          ? "الشريحة التالية"
-          : "Next slide";
-
-      return (
-        <button
-          type="button"
-          onClick={onClick}
-          disabled={isEdge}
-          aria-label={ariaLabel}
-          className={`
-            absolute top-1/2 z-30 hidden
-            -translate-y-1/2 md:flex
-            ${arrowPosition}
-            ${isEdge ? "cursor-not-allowed opacity-40" : ""}
-          `}
-        >
-          <span
-            className="
-              flex h-10 w-10 items-center justify-center
-              rounded-full border border-white/20
-              bg-white/10 text-white
-              backdrop-blur-md
-              transition-all duration-300
-              hover:bg-white hover:text-primary
-              md:h-11 md:w-11
-            "
-          >
-            {arrowIcon}
-          </span>
-        </button>
-      );
-    },
-    [isAr],
-  );
-
-  const renderPagination = useCallback(
-    ({ pages, activePage, onClick }) => {
-      if (!showControls) {
-        return null;
+    autoplayIntervalRef.current = window.setInterval(() => {
+      if (!document.hidden) {
+        goToNextSlide();
       }
+    }, AUTOPLAY_DELAY);
 
-      return (
-        <div className="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-4 md:bottom-8">
-          {pages.map((page) => (
-            <button
-              key={page}
-              type="button"
-              onClick={() => onClick(page)}
-              aria-label={
-                isAr
-                  ? `الانتقال إلى الشريحة ${page + 1}`
-                  : `Go to slide ${page + 1}`
-              }
-              className={`h-[3px] rounded-full transition-all duration-500 ${
-                activePage === page
-                  ? "w-8 bg-[#FFD62D] shadow-[0_0_10px_#FFD62D] md:w-10"
-                  : "w-4 bg-white/30 md:w-5"
-              }`}
-            />
-          ))}
-        </div>
-      );
-    },
-    [isAr, showControls],
-  );
+    return () => {
+      window.clearInterval(autoplayIntervalRef.current);
+    };
+  }, [goToNextSlide, showControls]);
+
+  useEffect(() => {
+    if (!showControls || typeof window === "undefined") {
+      return undefined;
+    }
+
+    let preloadTimeoutId;
+    let preloadImage;
+
+    const preloadNextImage = () => {
+      preloadTimeoutId = window.setTimeout(() => {
+        const nextIndex = (activeIndexRef.current + 1) % slides.length;
+
+        const nextImageSrc = getApiImageUrl(slides[nextIndex]?.path_image);
+
+        if (nextImageSrc) {
+          preloadImage = new window.Image();
+
+          preloadImage.decoding = "async";
+          preloadImage.src = nextImageSrc;
+        }
+      }, 800);
+    };
+
+    if (document.readyState === "complete") {
+      preloadNextImage();
+    } else {
+      window.addEventListener("load", preloadNextImage, {
+        once: true,
+      });
+    }
+
+    return () => {
+      window.removeEventListener("load", preloadNextImage);
+
+      window.clearTimeout(preloadTimeoutId);
+
+      if (preloadImage) {
+        preloadImage.src = "";
+      }
+    };
+  }, [activeIndex, showControls, slides]);
+
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(transitionTimeoutRef.current);
+
+      window.clearInterval(autoplayIntervalRef.current);
+    };
+  }, []);
+
+  const activeSlide = slides[activeIndex];
+
+  const previousSlide = previousIndex !== null ? slides[previousIndex] : null;
 
   return (
     <section
       className="hero-responsive relative w-full overflow-hidden bg-white"
-      style={{
-        backgroundImage: firstSlideSrc ? `url("${firstSlideSrc}")` : "none",
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
-      }}
+      aria-roledescription="carousel"
+      aria-label={
+        isAr ? "سلايدر منتجات سيدي هشام" : "Sedi Hisham products slider"
+      }
     >
-      {hasSlides && (
-        <Carousel
-          ref={carouselRef}
-          renderArrow={showControls ? renderArrow : () => null}
-          renderPagination={renderPagination}
-          enableAutoPlay={showControls}
-          autoPlaySpeed={4500}
-          transitionMs={800}
-          itemsToShow={1}
-          onNextEnd={handleNextEnd}
-          enableMouseSwipe={false}
-          isRTL={isAr}
-          showArrows={showControls}
-          pagination={showControls}
-          className="h-full w-full"
-        >
-          {slides.map((item, index) => {
-            const imageSrc = getApiImageUrl(item.path_image);
+      <div className="absolute inset-0 bg-white">
+        {previousSlide && (
+          <HeroSlide
+            item={previousSlide}
+            index={previousIndex}
+            isAr={isAr}
+            shouldAnimate={false}
+            layerClassName="z-0 opacity-100"
+          />
+        )}
 
-            return (
-              <div
-                key={item.id || `${item.path_image}-${index}`}
-                className="hero-slide-height relative w-full overflow-hidden bg-white"
-                style={{
-                  backgroundImage: imageSrc
-                    ? `url("${imageSrc}")`
-                    : `url("${firstSlideSrc}")`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center center",
-                  backgroundRepeat: "no-repeat",
-                }}
-              >
-                <SlideImage
-                  src={imageSrc}
-                  alt={
-                    isAr
-                      ? `منتجات سيدي هشام - الشريحة ${index + 1}`
-                      : `Sedi Hisham products - slide ${index + 1}`
-                  }
-                  priority={index === 0}
-                />
+        <HeroSlide
+          key={`active-slide-${activeIndex}`}
+          item={activeSlide}
+          index={activeIndex}
+          isAr={isAr}
+          shouldAnimate={previousIndex !== null}
+          layerClassName="z-10 opacity-100"
+        />
+      </div>
 
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-black/30"
-                />
+      {showControls && (
+        <>
+          <button
+            type="button"
+            onClick={goToPreviousSlide}
+            aria-label={isAr ? "الشريحة السابقة" : "Previous slide"}
+            className={`absolute top-1/2 z-30 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition-colors duration-300 hover:bg-white hover:text-primary md:flex ${
+              isAr ? "right-5 xl:right-8" : "left-5 xl:left-8"
+            }`}
+          >
+            {isAr ? "→" : "←"}
+          </button>
 
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0"
-                  style={{
-                    background: `radial-gradient(
-                      circle at ${isAr ? "80%" : "20%"} 50%,
-                      transparent 0%,
-                      rgba(0, 0, 0, 0.5) 100%
-                    )`,
-                  }}
-                />
-              </div>
-            );
-          })}
-        </Carousel>
+          <button
+            type="button"
+            onClick={goToNextSlide}
+            aria-label={isAr ? "الشريحة التالية" : "Next slide"}
+            className={`absolute top-1/2 z-30 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition-colors duration-300 hover:bg-white hover:text-primary md:flex ${
+              isAr ? "left-5 xl:left-8" : "right-5 xl:right-8"
+            }`}
+          >
+            {isAr ? "←" : "→"}
+          </button>
+
+          <div className="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-4 md:bottom-8">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.id || `${slide.path_image}-${index}`}
+                type="button"
+                onClick={() => goToSlide(index)}
+                aria-label={
+                  isAr
+                    ? `الانتقال إلى الشريحة ${index + 1}`
+                    : `Go to slide ${index + 1}`
+                }
+                aria-current={activeIndex === index ? "true" : undefined}
+                className={`h-[3px] rounded-full transition-[width,background-color] duration-300 ${
+                  activeIndex === index
+                    ? "w-8 bg-[#FFD62D] md:w-10"
+                    : "w-4 bg-white/40 md:w-5"
+                }`}
+              />
+            ))}
+          </div>
+        </>
       )}
 
       <div className="hero-content-layer pointer-events-none absolute inset-0 z-20 flex items-center">
@@ -312,8 +332,8 @@ export default function Slider({
                 animationDelay: "0.2s",
               }}
             >
-              <div className="mb-3 inline-flex items-center justify-start gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 shadow-lg backdrop-blur-md sm:mb-4 md:mb-6 md:gap-3 md:px-4 md:py-2">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFD62D] shadow-[0_0_8px_#FFD62D]" />
+              <div className="mb-3 inline-flex items-center justify-start gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-md sm:mb-4 md:mb-6 md:gap-3 md:px-4 md:py-2">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFD62D]" />
 
                 <span className="text-start font-arabicMedium text-[9px] uppercase tracking-widest text-white md:text-[11px]">
                   {isAr ? "منتجات بروح عصرية" : "Modern Quality Products"}
@@ -322,7 +342,7 @@ export default function Slider({
             </div>
 
             <div
-              className="animate-reveal-up relative w-[180px] opacity-0 drop-shadow-2xl sm:w-[230px] md:w-[420px] lg:w-[480px]"
+              className="animate-reveal-up relative w-[180px] opacity-0 sm:w-[230px] md:w-[420px] lg:w-[480px]"
               style={{
                 animationDelay: "0.4s",
               }}
@@ -330,7 +350,6 @@ export default function Slider({
               <Image
                 src={Slogan}
                 alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham Slogan"}
-                priority
               />
             </div>
 
@@ -339,7 +358,7 @@ export default function Slider({
               className="mt-3 h-[3px] w-[80px] overflow-hidden rounded-full sm:mt-4 md:mt-6"
             >
               <div
-                className="hero-line-draw h-full w-full rounded-full bg-[#FFD62D] opacity-0 shadow-[0_0_20px_rgba(255,214,45,0.5)]"
+                className="hero-line-draw h-full w-full rounded-full bg-[#FFD62D] opacity-0"
                 style={{
                   animationDelay: "0.6s",
                 }}
@@ -364,7 +383,7 @@ export default function Slider({
               }}
             >
               <Link href="/categories">
-                <div className="group relative flex cursor-pointer items-center justify-start gap-3 rounded-full bg-white px-5 py-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.2)] transition-all hover:scale-105 active:scale-95 md:gap-4 md:px-7 md:py-3.5">
+                <div className="group relative flex cursor-pointer items-center justify-start gap-3 rounded-full bg-white px-5 py-2.5 transition-transform duration-300 hover:scale-105 active:scale-95 md:gap-4 md:px-7 md:py-3.5">
                   <span className="whitespace-nowrap text-start font-arabicMedium text-xs text-primary sm:text-sm md:text-base">
                     {isAr ? "اكتشف المنتجات" : "Explore Products"}
                   </span>
@@ -386,10 +405,20 @@ export default function Slider({
       </div>
 
       <style jsx global>{`
+        @keyframes heroSlideFadeIn {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+
         @keyframes revealUp {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(24px);
           }
 
           to {
@@ -410,27 +439,27 @@ export default function Slider({
           }
         }
 
+        .hero-slide-fade-in {
+          animation: heroSlideFadeIn ${TRANSITION_DURATION}ms ease-in-out
+            forwards;
+        }
+
         .animate-reveal-up {
-          animation: revealUp 0.9s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+          animation: revealUp 0.75s cubic-bezier(0.2, 1, 0.3, 1) forwards;
         }
 
         .hero-line-draw {
           transform: scaleX(0);
           transform-origin: left center;
-          animation: drawLineLeftToRight 1.2s cubic-bezier(0.2, 1, 0.3, 1)
+          animation: drawLineLeftToRight 1s cubic-bezier(0.2, 1, 0.3, 1)
             forwards;
         }
 
         .hero-responsive {
           height: 62.5vw;
           min-height: 0;
-          max-height: 100vh;
-          background-color: #ffffff;
-        }
-
-        .hero-slide-height {
-          height: 100%;
-          min-height: 0;
+          max-height: calc(100vh - 94px);
+          contain: layout paint;
         }
 
         .hero-content-layer {
@@ -445,27 +474,6 @@ export default function Slider({
         .hero-slider-image {
           object-fit: cover !important;
           object-position: center center !important;
-        }
-
-        .hero-responsive .rec-carousel-wrapper,
-        .hero-responsive .rec-carousel,
-        .hero-responsive .rec-slider-container,
-        .hero-responsive .rec-slider,
-        .hero-responsive .rec-carousel-item,
-        .hero-responsive .rec-carousel-item > div {
-          height: 100% !important;
-          min-height: 0 !important;
-          background: transparent !important;
-        }
-
-        .hero-responsive .rec-slider-container {
-          margin: 0 !important;
-        }
-
-        .hero-responsive .rec-carousel-item:focus {
-          outline: none !important;
-          box-shadow: none !important;
-          background: transparent !important;
         }
 
         @media (max-width: 374px) {
@@ -560,15 +568,12 @@ export default function Slider({
         }
 
         @media (prefers-reduced-motion: reduce) {
+          .hero-slide-fade-in,
           .animate-reveal-up,
           .hero-line-draw {
             animation: none;
             opacity: 1;
             transform: none;
-          }
-
-          .hero-slider-image {
-            transition: none;
           }
         }
       `}</style>

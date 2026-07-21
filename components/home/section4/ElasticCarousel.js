@@ -67,8 +67,8 @@ export default function ElasticCarousel({ sliderImages = [] }) {
       dir={isAr ? "rtl" : "ltr"}
       className="second-home-slider w-full overflow-hidden bg-white py-7 sm:py-9 lg:py-11"
     >
-      <div className="mx-auto w-full max-w-[1500px] px-3 sm:px-5 lg:px-8">
-        <div className="relative w-full rounded-[26px] bg-white p-1.5 sm:rounded-[34px] sm:p-2">
+      <div className="mx-auto w-full max-w-[1440px] px-3 sm:px-5 lg:px-8">
+        <div className="relative w-full rounded-[26px] bg-white sm:rounded-[34px] sm:p-2">
           <div className="second-home-swiper-frame relative w-full overflow-hidden rounded-[21px] bg-white sm:rounded-[28px]">
             <Swiper
               key={isAr ? "second-slider-ar" : "second-slider-en"}

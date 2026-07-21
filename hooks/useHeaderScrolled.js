@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const SCROLL_THRESHOLD = 48;
+const SCROLL_THRESHOLD = 96;
 
 let currentValue = false;
 let isListening = false;
@@ -9,7 +9,9 @@ let animationFrame = null;
 const subscribers = new Set();
 
 function readScrollState() {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") {
+    return false;
+  }
 
   return window.scrollY > SCROLL_THRESHOLD;
 }
@@ -17,7 +19,9 @@ function readScrollState() {
 function notifySubscribers() {
   const nextValue = readScrollState();
 
-  if (nextValue === currentValue) return;
+  if (nextValue === currentValue) {
+    return;
+  }
 
   currentValue = nextValue;
 
@@ -27,7 +31,9 @@ function notifySubscribers() {
 }
 
 function handleScroll() {
-  if (animationFrame !== null) return;
+  if (animationFrame !== null) {
+    return;
+  }
 
   animationFrame = window.requestAnimationFrame(() => {
     animationFrame = null;
@@ -36,7 +42,9 @@ function handleScroll() {
 }
 
 function startListening() {
-  if (typeof window === "undefined" || isListening) return;
+  if (typeof window === "undefined" || isListening) {
+    return;
+  }
 
   currentValue = readScrollState();
 

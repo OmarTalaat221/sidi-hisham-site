@@ -39,14 +39,15 @@ const NewsCarousel = ({ news = [], activities = [], type }) => {
       dir={isRTL ? "rtl" : "ltr"}
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="mb-8 text-start sm:mb-10">
-          <h2 className="news-section-heading relative inline-block pb-3 text-start font-arabicMedium text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">
+        <div className="mb-8 text-center sm:mb-10">
+          <h2 className="news-section-heading relative inline-block text-center font-arabicMedium text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">
             {isRTL
               ? "أخبار وفعاليات سيدي هشام"
               : "Sidi Hisham News & Activities"}
           </h2>
+          <span className="mt-3 h-[3px] w-14 rounded-full bg-[#D40017]" />
 
-          <p className="mt-4 max-w-2xl text-start font-arabicLight text-sm leading-7 text-gray-500 sm:text-base">
+          <p className="mt-4 max-w-2xl mx-auto text-center font-arabicLight text-sm leading-7 text-gray-500 sm:text-base">
             {isRTL
               ? "تابع أحدث أخبار وفعاليات سيدي هشام وتعرّف على كل جديد."
               : "Follow the latest Sidi Hisham news, activities, and updates."}
@@ -143,17 +144,6 @@ const NewsCarousel = ({ news = [], activities = [], type }) => {
       </div>
 
       <style jsx global>{`
-        .news-section-heading::after {
-          position: absolute;
-          bottom: 0;
-          inset-inline-start: 0;
-          width: 64px;
-          height: 3px;
-          border-radius: 9999px;
-          background: #d40017;
-          content: "";
-        }
-
         .news-carousel-section .carousel-card {
           width: 100% !important;
           min-width: 0 !important;

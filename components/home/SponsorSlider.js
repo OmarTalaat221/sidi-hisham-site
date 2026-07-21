@@ -33,7 +33,9 @@ function SponsorSlider() {
           "https://api.sedihisham.com/pages/getall/home",
         );
 
-        if (!isMounted) return;
+        if (!isMounted) {
+          return;
+        }
 
         const slideImages = Array.isArray(response?.data)
           ? response.data.filter(
@@ -45,9 +47,7 @@ function SponsorSlider() {
           : [];
 
         setSliderImages(slideImages);
-      } catch (error) {
-        console.error("Error fetching slider images:", error);
-
+      } catch {
         if (isMounted) {
           setSliderImages([]);
         }
@@ -69,7 +69,12 @@ function SponsorSlider() {
     const sectionElement = sectionRef.current;
 
     if (!sectionElement || hasEnteredView) {
-      return;
+      return undefined;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      setHasEnteredView(true);
+      return undefined;
     }
 
     const observer = new IntersectionObserver(
@@ -94,7 +99,7 @@ function SponsorSlider() {
 
   useEffect(() => {
     if (!hasEnteredView || sliderImages.length === 0 || revealFinished) {
-      return;
+      return undefined;
     }
 
     const revealTimer = setTimeout(() => {
@@ -153,6 +158,13 @@ function SponsorSlider() {
     [],
   );
 
+  /*
+   * أكبر عدد ظاهر في التصميم هو 5 كروت.
+   * عند وجود 5 كروت أو أقل نوقف Loop حتى يستطيع
+   * Swiper وضع الكروت في منتصف المساحة المتاحة.
+   */
+  const shouldLoop = sliderImages.length > 5;
+
   return (
     <section
       ref={sectionRef}
@@ -160,7 +172,7 @@ function SponsorSlider() {
       className="sponsor-slider-section w-full overflow-hidden bg-white py-3"
     >
       {isLoading ? (
-        <div className="grid w-full grid-cols-1 gap-4 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid w-full grid-cols-1 justify-center gap-4 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
@@ -184,8 +196,9 @@ function SponsorSlider() {
           slidesPerView={1}
           spaceBetween={14}
           speed={5200}
-          loop={sliderImages.length > 1}
-          loopAdditionalSlides={sliderImages.length}
+          centerInsufficientSlides
+          loop={shouldLoop}
+          loopAdditionalSlides={shouldLoop ? sliderImages.length : 0}
           autoplay={
             sliderImages.length > 1
               ? {
@@ -196,7 +209,7 @@ function SponsorSlider() {
                 }
               : false
           }
-          allowTouchMove
+          allowTouchMove={sliderImages.length > 1}
           grabCursor={sliderImages.length > 1}
           watchOverflow
           observer

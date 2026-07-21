@@ -1,53 +1,108 @@
 import SEO from "@/components/SEO";
 import axios from "axios";
-import {
-  Suspense,
-  lazy,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "../components/home/Slider";
-import Tabss from "../components/home/section3";
 import SponsorSection from "../components/home/section5";
 import { setConversions } from "../redux/languageSlice";
 
-const DEFAULT_HERO_IMAGE =
-  "https://api.sedihisham.com/uploads/category/images/ketchupcopy3b609725-f787-4dc9-8501-5df31cbd57bc.webp";
+const Tabss = dynamic(() => import("../components/home/section3"), {
+  ssr: false,
+  loading: () => <div className="h-[430px] w-full bg-white" />,
+});
 
-const ElasticCarousel = lazy(
+const ElasticCarousel = dynamic(
   () => import("../components/home/section4/ElasticCarousel"),
+  {
+    ssr: false,
+    loading: () => <div className="h-[420px] w-full bg-white" />,
+  },
 );
 
-const NewsCarousel = lazy(() => import("../components/news/NewsCarousel"));
+const NewsCarousel = dynamic(() => import("../components/news/NewsCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-[420px] w-full bg-white" />,
+});
 
-const VideoImagesSlider = lazy(
+const VideoImagesSlider = dynamic(
   () => import("../components/home/VideoImagesSlider"),
+  {
+    ssr: false,
+    loading: () => <div className="h-[360px] w-full bg-white" />,
+  },
 );
 
-const SponsorSlider = lazy(() => import("../components/home/SponsorSlider"));
+const SponsorSlider = dynamic(
+  () => import("../components/home/SponsorSlider"),
+  {
+    ssr: false,
+    loading: () => <div className="h-40 w-full bg-white" />,
+  },
+);
 
-function getApiImageUrl(path) {
-  if (!path || typeof path !== "string") {
-    return "";
+function filterHomeSliderImages(data) {
+  if (!Array.isArray(data)) {
+    return [];
   }
 
-  const normalizedPath = path.trim();
+  return data.filter(
+    (item) =>
+      item?.categoryImage === "home_page_main_slider" ||
+      item?.categoryImage === "home_page_second_slider",
+  );
+}
 
-  if (!normalizedPath) {
-    return "";
-  }
+function DeferredSection({
+  children,
+  minHeight = "300px",
+  rootMargin = "500px 0px",
+}) {
+  const sectionRef = useRef(null);
+  const [shouldRender, setShouldRender] = useState(false);
 
-  if (
-    normalizedPath.startsWith("http://") ||
-    normalizedPath.startsWith("https://")
-  ) {
-    return normalizedPath;
-  }
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
 
-  return `https://api.sedihisham.com/${normalizedPath.replace(/^\/+/, "")}`;
+    if (!sectionElement || shouldRender) {
+      return undefined;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      setShouldRender(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin,
+      },
+    );
+
+    observer.observe(sectionElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [rootMargin, shouldRender]);
+
+  return (
+    <div
+      ref={sectionRef}
+      style={{
+        minHeight: shouldRender ? undefined : minHeight,
+      }}
+    >
+      {shouldRender ? children : null}
+    </div>
+  );
 }
 
 export default function Home({ initialSliderImages = [] }) {
@@ -82,11 +137,13 @@ export default function Home({ initialSliderImages = [] }) {
         "https://api.sedihisham.com/pages/getall/home",
       );
 
-      if (Array.isArray(response?.data)) {
-        setSliderImages(response.data);
+      const filteredImages = filterHomeSliderImages(response?.data);
+
+      if (filteredImages.length > 0) {
+        setSliderImages(filteredImages);
       }
     } catch {
-      // نحافظ على بيانات البناء الموجودة بدل حذف الصورة المعروضة.
+      return;
     }
   }, []);
 
@@ -115,28 +172,50 @@ export default function Home({ initialSliderImages = [] }) {
   }, []);
 
   useEffect(() => {
-    getSliderImages();
-    getNews();
     getCurrencyConversions();
-    getActivities();
-  }, [getSliderImages, getNews, getCurrencyConversions, getActivities]);
+  }, [getCurrencyConversions]);
 
-  const firstHeroImage = useMemo(() => {
-    const firstMainSliderImage = sliderImages.find(
-      (item) =>
-        item?.categoryImage === "home_page_main_slider" &&
-        item?.externalLink === false &&
-        typeof item?.path_image === "string" &&
-        item.path_image.trim() !== "",
-    );
+  useEffect(() => {
+    if (initialSliderImages.length === 0) {
+      getSliderImages();
+    }
+  }, [getSliderImages, initialSliderImages.length]);
 
-    return (
-      getApiImageUrl(firstMainSliderImage?.path_image) || DEFAULT_HERO_IMAGE
-    );
-  }, [sliderImages]);
+  useEffect(() => {
+    let timeoutId;
+
+    const loadSecondaryData = () => {
+      timeoutId = window.setTimeout(() => {
+        getNews();
+        getActivities();
+
+        if (initialSliderImages.length > 0) {
+          getSliderImages();
+        }
+      }, 1200);
+    };
+
+    if (document.readyState === "complete") {
+      loadSecondaryData();
+    } else {
+      window.addEventListener("load", loadSecondaryData, {
+        once: true,
+      });
+    }
+
+    return () => {
+      window.removeEventListener("load", loadSecondaryData);
+      window.clearTimeout(timeoutId);
+    };
+  }, [getNews, getActivities, getSliderImages, initialSliderImages.length]);
 
   return (
     <div className="w-full overflow-hidden bg-white">
+      <Head>
+        <link rel="preconnect" href="https://api.sedihisham.com" />
+        <link rel="dns-prefetch" href="https://api.sedihisham.com" />
+      </Head>
+
       <SEO
         title="سيدي هشام - شركة العقاد للصناعة والتجارة"
         description="شركة العقاد للصناعة والتجارة هي شركة رائدة في مجال صناعة الغذائيات حيث توفر علاماتنا التجارية سيدي هشام منتجات موثوقة يتم استخدامها في ملايين غرف المعيشة والمطابخ"
@@ -146,24 +225,30 @@ export default function Home({ initialSliderImages = [] }) {
 
       <h1 className="sr-only">سيدي هشام - شركة العقاد للصناعة والتجارة</h1>
 
-      <Slider sliderImages={sliderImages} initialHeroImage={firstHeroImage} />
+      <Slider sliderImages={sliderImages} />
 
-      <div className="faviconhomecarousal pattern-section pattern-section-wheat relative z-[60] mt-8 md:mt-12">
-        <Tabss />
-      </div>
+      <section className="faviconhomecarousal pattern-section pattern-section-wheat relative z-[60] mt-8 w-full md:mt-12">
+        <div className="home-content-shell">
+          <DeferredSection minHeight="430px" rootMargin="350px 0px">
+            <Tabss />
+          </DeferredSection>
+        </div>
+      </section>
 
-      <div className="mt-8 md:mt-12">
-        <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100" />}>
-          <ElasticCarousel sliderImages={sliderImages} />
-        </Suspense>
-      </div>
+      <section className="mt-8 w-full bg-white md:mt-12">
+        <div className="home-content-shell">
+          <DeferredSection minHeight="420px" rootMargin="500px 0px">
+            <ElasticCarousel sliderImages={sliderImages} />
+          </DeferredSection>
+        </div>
+      </section>
 
       <section
         dir={local === "ar" ? "rtl" : "ltr"}
         className="pattern-section pattern-section-wheat relative mt-10 w-full overflow-hidden bg-white md:mt-12"
       >
-        <div className="relative z-10 mx-auto w-full max-w-[1380px] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
-          <div className="mb-6 flex w-full flex-col items-start justify-start text-start">
+        <div className="home-content-shell relative z-10 py-10 sm:py-12 lg:py-14">
+          <div className="mb-6 flex w-full flex-col items-center justify-center text-center md:mb-8">
             <h2 className="font-arabicBold text-xl tracking-wide text-gray-900 sm:text-2xl">
               {local === "ar"
                 ? "معرض الصور والفيديو"
@@ -174,7 +259,9 @@ export default function Home({ initialSliderImages = [] }) {
           </div>
 
           <Suspense
-            fallback={<div className="h-64 animate-pulse bg-gray-100/70" />}
+            fallback={
+              <div className="h-[360px] w-full animate-pulse bg-gray-100/70" />
+            }
           >
             <VideoImagesSlider />
           </Suspense>
@@ -185,40 +272,46 @@ export default function Home({ initialSliderImages = [] }) {
         dir={local === "ar" ? "rtl" : "ltr"}
         className="pattern-section pattern-section-spices relative w-full overflow-hidden bg-white"
       >
-        <div className="relative z-10 mx-auto w-full max-w-[1380px] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
-          <Suspense
-            fallback={
-              <div className="h-[420px] animate-pulse bg-gray-100/70" />
-            }
-          >
+        <div className="home-content-shell relative z-10 py-10 sm:py-12 lg:py-14">
+          <DeferredSection minHeight="420px" rootMargin="650px 0px">
             <NewsCarousel
               type="homepage"
               news={[...news]}
               activities={activities}
             />
-          </Suspense>
+          </DeferredSection>
         </div>
       </section>
 
-      <div className="mx-auto mb-8 mt-10 w-full max-w-[1380px] px-4 sm:px-6 md:mb-12 md:mt-12 lg:px-8">
-        <SponsorSection
-          title={local === "ar" ? "العلامات التجارية" : "Trademarks"}
-          desc={
-            local === "ar"
-              ? "بمفردنا لا نستطيع فعل الكثير ؛ معًا يمكننا أن نفعل الكثير"
-              : "On our own we can do little; Together we can do a lot"
-          }
-        />
+      <section className="w-full bg-white">
+        <div className="home-content-shell mb-8 mt-10 md:mb-12 md:mt-12">
+          <SponsorSection
+            title={local === "ar" ? "العلامات التجارية" : "Trademarks"}
+            desc={
+              local === "ar"
+                ? "بمفردنا لا نستطيع فعل الكثير ؛ معًا يمكننا أن نفعل الكثير"
+                : "On our own we can do little; Together we can do a lot"
+            }
+          />
 
-        <Suspense fallback={<div className="h-32 animate-pulse bg-gray-100" />}>
-          <SponsorSlider />
-        </Suspense>
-      </div>
+          <DeferredSection minHeight="160px" rootMargin="700px 0px">
+            <SponsorSlider />
+          </DeferredSection>
+        </div>
+      </section>
 
       <style jsx global>{`
+        .home-content-shell {
+          width: calc(100% - 24px);
+          max-width: 1380px;
+          margin-inline: auto;
+          padding-inline: 12px;
+        }
+
         .pattern-section {
           position: relative;
           isolation: isolate;
+          width: 100%;
           margin-inline: 0 !important;
           padding: 0 !important;
           border: 0 !important;
@@ -246,22 +339,48 @@ export default function Home({ initialSliderImages = [] }) {
           background-image: url("/images/sedi-hisham-spices-pattern-transparent.webp");
         }
 
-        .pattern-section-spices .news-carousel-section {
+        .home-content-shell .second-home-slider > div {
+          width: 100% !important;
+          max-width: none !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
+        }
+
+        .home-content-shell .gallery-slider-container {
+          width: 100% !important;
+          max-width: none !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
+        }
+
+        .home-content-shell .news-carousel-section {
           width: 100% !important;
           max-width: none !important;
           margin: 0 !important;
-          padding: 0 !important;
+          padding-inline: 0 !important;
           background: transparent !important;
         }
 
-        .pattern-section-spices .news-carousel-section > div {
+        .home-content-shell .news-carousel-section > div {
           width: 100% !important;
           max-width: none !important;
-          margin: 0 !important;
-          padding: 0 !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
+        }
+
+        .home-content-shell .sponsor-slider-section {
+          width: 100% !important;
+          max-width: none !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
         }
 
         @media (max-width: 639px) {
+          .home-content-shell {
+            width: calc(100% - 16px);
+            padding-inline: 8px;
+          }
+
           .pattern-section::before {
             background-size: 420px 420px;
           }
@@ -288,7 +407,7 @@ export async function getStaticProps() {
 
     return {
       props: {
-        initialSliderImages: Array.isArray(response?.data) ? response.data : [],
+        initialSliderImages: filterHomeSliderImages(response?.data),
       },
     };
   } catch {
