@@ -1,4 +1,3 @@
-import OptimizedImage from "@/components/common/OptimizedImage";
 import useHeaderScrolled from "@/hooks/useHeaderScrolled";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -13,6 +12,7 @@ import {
   Package,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useMemo, useState } from "react";
@@ -90,7 +90,7 @@ function MobileNav({ open, setOpen }) {
         as="div"
         dir={isAr ? "rtl" : "ltr"}
         className="relative z-[10000000000]"
-        onClose={setOpen}
+        onClose={() => setOpen(false)}
       >
         <Transition.Child
           as={Fragment}
@@ -116,29 +116,22 @@ function MobileNav({ open, setOpen }) {
           >
             <Dialog.Panel
               style={{ insetInlineStart: 0 }}
-              className="
-                absolute top-0 flex h-full
-                w-[88%] max-w-[390px]
-                flex-col overflow-hidden
-                bg-primary
-                shadow-[0_0_80px_rgba(0,0,0,0.5)]
-              "
+              className="absolute top-0 flex h-full w-[88%] max-w-[390px] flex-col overflow-hidden bg-[#7C1422] shadow-[0_0_80px_rgba(0,0,0,0.5)]"
             >
               <div className="border-b border-white/10 p-4">
                 <div className="flex items-center justify-between gap-3 rounded-3xl border border-white/15 bg-white/10 p-3 backdrop-blur-md">
                   <Link
                     href="/"
                     onClick={() => setOpen(false)}
-                    className="relative h-14 w-28"
+                    className="relative block h-14 w-28"
                   >
-                    <OptimizedImage
+                    <Image
                       alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham logo"}
                       src={logo}
                       fill
-                      priority
-                      showSkeleton={false}
-                      objectFit="contain"
                       sizes="112px"
+                      className="object-contain"
+                      draggable={false}
                     />
                   </Link>
 
@@ -146,17 +139,7 @@ function MobileNav({ open, setOpen }) {
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label={isAr ? "إغلاق القائمة" : "Close menu"}
-                    className="
-                      flex h-11 w-11 shrink-0
-                      items-center justify-center
-                      rounded-full border border-white/20
-                      bg-white/10 text-white
-                      transition duration-300
-                      hover:rotate-90
-                      hover:border-[#FFD62D]/70
-                      hover:bg-white/20
-                      hover:text-[#FFD62D]
-                    "
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition duration-300 hover:rotate-90 hover:border-[#FFD62D]/70 hover:bg-white/20 hover:text-[#FFD62D]"
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -205,7 +188,7 @@ function MobileNav({ open, setOpen }) {
                           />
                         </span>
 
-                        <span className="min-w-0 flex-1 text-start">
+                        <div className="min-w-0 flex-1 text-start">
                           <span
                             className={`block font-arabicMedium text-[15px] transition ${
                               active ? "text-[#FFD62D]" : "text-white"
@@ -217,12 +200,12 @@ function MobileNav({ open, setOpen }) {
                           <span className="mt-1 block font-arabicLight text-xs text-white/50 transition group-hover:text-white/65">
                             {item.description}
                           </span>
-                        </span>
+                        </div>
 
                         <span
                           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition duration-300 ${
                             active
-                              ? "bg-[#FFD62D] text-primary"
+                              ? "bg-[#FFD62D] text-[#7C1422]"
                               : "bg-white/5 text-white/45 group-hover:bg-white/15 group-hover:text-[#FFD62D]"
                           }`}
                         >
@@ -263,22 +246,8 @@ function MobileHeaderBar({
       dir="ltr"
       className={`pointer-events-auto relative mx-auto grid transform-gpu grid-cols-[1fr_auto_1fr] items-center border bg-[#7C1422] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isStatic
-          ? `
-            h-[78px] w-full max-w-none
-            rounded-none
-            border-x-0 border-t-0 border-b-white/15
-            px-3
-            shadow-[0_12px_35px_rgba(0,0,0,0.28)]
-          `
-          : `
-            mt-2 h-[62px]
-            w-[calc(100%-16px)]
-            rounded-full
-            border-white/15
-            px-2
-            shadow-[0_16px_40px_rgba(0,0,0,0.3)]
-            backdrop-blur-xl
-          `
+          ? "h-[78px] w-full max-w-none rounded-none border-x-0 border-t-0 border-b-white/15 px-3 shadow-[0_12px_35px_rgba(0,0,0,0.28)]"
+          : "mt-2 h-[62px] w-[calc(100%-16px)] rounded-full border-white/15 px-2 shadow-[0_16px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl"
       }`}
     >
       <div className="flex min-w-0 items-center justify-start gap-1">
@@ -290,18 +259,18 @@ function MobileHeaderBar({
       <Link
         href="/"
         aria-label={isAr ? "الرئيسية" : "Home"}
-        className={`relative mx-1 transition-all duration-500 ${
+        className={`relative mx-1 block transition-all duration-500 ${
           isStatic ? "h-12 w-[84px]" : "h-10 w-[66px]"
         }`}
       >
-        <OptimizedImage
+        <Image
           alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham logo"}
           src={logo}
           fill
           priority={priorityLogo}
-          showSkeleton={false}
-          objectFit="contain"
           sizes={isStatic ? "84px" : "66px"}
+          className="object-contain"
+          draggable={false}
         />
       </Link>
 
@@ -323,16 +292,7 @@ function MobileHeaderBar({
           }
           aria-expanded={open}
           onClick={() => setOpen(true)}
-          className="
-            flex h-10 w-10 shrink-0
-            items-center justify-center
-            rounded-full border border-white/25
-            bg-white/10 text-white
-            shadow-[0_8px_24px_rgba(0,0,0,0.22)]
-            transition-all duration-300
-            hover:border-[#FFD62D]/60
-            hover:text-[#FFD62D]
-          "
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white shadow-[0_8px_24px_rgba(0,0,0,0.22)] transition-all duration-300 hover:border-[#FFD62D]/60 hover:text-[#FFD62D]"
         >
           <Menu className="h-5 w-5" strokeWidth={2} />
         </button>
@@ -347,10 +307,15 @@ export default function NavbarM() {
   const { local } = useSelector((state) => state.language);
 
   const [open, setOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   const scrolled = useHeaderScrolled();
 
   const isAr = local === "ar";
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -358,7 +323,6 @@ export default function NavbarM() {
 
   return (
     <>
-      {/* الهيدر الأساسي: كامل عرض الموبايل */}
       <div className="relative z-[110] h-[78px] w-full md:hidden">
         <MobileNav open={open} setOpen={setOpen} />
 
@@ -371,23 +335,24 @@ export default function NavbarM() {
         />
       </div>
 
-      {/* الهيدر الثابت: صغير ودائري */}
-      <nav
-        aria-hidden={!scrolled}
-        className={`fixed inset-x-0 top-0 z-[120] transform-gpu transition-[transform,opacity,visibility] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
-          scrolled
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-[130%] opacity-0"
-        } ${scrolled ? "pointer-events-auto" : "pointer-events-none"}`}
-      >
-        <MobileHeaderBar
-          isAr={isAr}
-          open={open}
-          setOpen={setOpen}
-          variant="fixed"
-          priorityLogo={false}
-        />
-      </nav>
+      {hydrated && (
+        <nav
+          aria-hidden={!scrolled}
+          className={`fixed inset-x-0 top-0 z-[120] transform-gpu transition-[transform,opacity,visibility] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+            scrolled
+              ? "visible translate-y-0 opacity-100"
+              : "invisible -translate-y-[130%] opacity-0"
+          } ${scrolled ? "pointer-events-auto" : "pointer-events-none"}`}
+        >
+          <MobileHeaderBar
+            isAr={isAr}
+            open={open}
+            setOpen={setOpen}
+            variant="fixed"
+            priorityLogo={false}
+          />
+        </nav>
+      )}
     </>
   );
 }

@@ -53,7 +53,12 @@ function SideNavButton({
 
   const selectedAccent = accentClasses[accent] || accentClasses.burgundy;
 
-  const badgeValue = Number.isFinite(Number(badge)) ? Number(badge) : 0;
+  const numericBadge = Number(badge);
+
+  const badgeValue =
+    Number.isFinite(numericBadge) && numericBadge > 0
+      ? Math.floor(numericBadge)
+      : 0;
 
   const content = (
     <>
@@ -67,10 +72,10 @@ function SideNavButton({
         {label}
       </span>
 
-      <span
-        className={`glass-icon-btn relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/50 bg-white/20 transition-all duration-300 group-hover:-translate-y-0.5 sm:h-12 sm:w-12 lg:h-[54px] lg:w-[54px] ${selectedAccent.icon} ${selectedAccent.hover} ${selectedAccent.glow}`}
+      <div
+        className={`glass-icon-btn relative flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/50 bg-white/20 transition-all duration-300 group-hover:-translate-y-0.5 sm:h-12 sm:w-12 lg:h-[54px] lg:w-[54px] ${selectedAccent.icon} ${selectedAccent.hover} ${selectedAccent.glow}`}
       >
-        <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/50 to-transparent opacity-70" />
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/50 to-transparent opacity-70 rounded-2xl" />
 
         <Icon
           className="relative z-10 h-[22px] w-[22px] sm:h-6 sm:w-6"
@@ -86,7 +91,7 @@ function SideNavButton({
             {badgeValue > 99 ? "99+" : badgeValue}
           </span>
         )}
-      </span>
+      </div>
     </>
   );
 
@@ -130,18 +135,25 @@ const SideNav = () => {
   const router = useRouter();
 
   const { local } = useSelector((state) => state.language);
-
   const { cart } = useSelector((state) => state.cart);
-
   const { favorites } = useSelector((state) => state.favorites);
 
   const isRTL = local === "ar";
 
   const [sliderImages, setSliderImages] = useState([]);
-
   const [open, setOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   const hasUserChangedStateRef = useRef(false);
+
+  /*
+   * مهم للـHydration:
+   * السيرفر وأول Client Render سيستخدمان نفس القيم.
+   * بعد اكتمال Hydration فقط نظهر Badges السلة والمفضلة.
+   */
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -155,9 +167,7 @@ const SideNav = () => {
         }
 
         setSliderImages(Array.isArray(response?.data) ? response.data : []);
-      } catch (error) {
-        console.error("Error fetching side navigation data:", error);
-
+      } catch {
         if (isMounted) {
           setSliderImages([]);
         }
@@ -188,10 +198,18 @@ const SideNav = () => {
       }
     };
 
-    desktopMedia.addEventListener("change", handleBreakpointChange);
+    if (desktopMedia.addEventListener) {
+      desktopMedia.addEventListener("change", handleBreakpointChange);
+    } else {
+      desktopMedia.addListener(handleBreakpointChange);
+    }
 
     return () => {
-      desktopMedia.removeEventListener("change", handleBreakpointChange);
+      if (desktopMedia.removeEventListener) {
+        desktopMedia.removeEventListener("change", handleBreakpointChange);
+      } else {
+        desktopMedia.removeListener(handleBreakpointChange);
+      }
     };
   }, []);
 
@@ -238,6 +256,16 @@ const SideNav = () => {
 
   const favoritesCount = Array.isArray(favorites) ? favorites.length : 0;
 
+  /*
+   * قبل Hydration تظل القيم صفرًا حتى يطابق أول Render
+   * في المتصفح HTML الناتج من السيرفر.
+   */
+  const visibleCartCount = hydrated ? cartCount : 0;
+
+  const visibleFavoritesCount = hydrated ? favoritesCount : 0;
+
+  const totalVisibleCount = visibleCartCount + visibleFavoritesCount;
+
   const isContactPage = router.pathname === "/contact";
 
   const closeOnMobile = () => {
@@ -275,7 +303,7 @@ const SideNav = () => {
       label: isRTL ? "سلة التسوق" : "Shopping cart",
       Icon: IoCartOutline,
       accent: "green",
-      badge: cartCount,
+      badge: visibleCartCount,
     },
     {
       key: "favorites",
@@ -283,7 +311,7 @@ const SideNav = () => {
       label: isRTL ? "المفضلة" : "Favorites",
       Icon: IoHeartOutline,
       accent: "red",
-      badge: favoritesCount,
+      badge: visibleFavoritesCount,
     },
     isContactPage
       ? {
@@ -316,11 +344,12 @@ const SideNav = () => {
           aria-hidden={!open}
           className={`side-navigation-menu relative mb-2 flex max-h-[calc(100svh-110px)] flex-col-reverse items-center gap-2 overflow-visible rounded-[24px] border border-white/40 bg-white/15 p-2 transition-all duration-300 sm:mb-3 sm:gap-2.5 sm:p-2.5 ${
             open
-              ? "translate-y-0 scale-100 opacity-100 pointer-events-auto"
-              : "translate-y-4 scale-95 opacity-0 pointer-events-none"
+              ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+              : "pointer-events-none translate-y-4 scale-95 opacity-0"
           }`}
         >
           <span className="pointer-events-none absolute inset-x-0 top-0 h-[40%] rounded-t-[24px] bg-gradient-to-b from-white/40 to-transparent" />
+
           <span className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-white/30" />
 
           {navItems
@@ -356,13 +385,10 @@ const SideNav = () => {
                 : "Open quick links"
           }
           aria-expanded={open}
-          className="side-navigation-toggle group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/50 bg-primary/80 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD62D] sm:h-[54px] sm:w-[54px]"
+          className="side-navigation-toggle group relative flex h-12 w-12 items-center justify-center rounded-2xl border border-white/50 bg-primary/80 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD62D] sm:h-[54px] sm:w-[54px]"
         >
-          <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/50 to-transparent" />
-
-          <span
-            className={`absolute inset-[5px] rounded-[13px] border border-white/30 transition-colors duration-300 group-hover:border-white/50`}
-          />
+          <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/50 to-transparent rounded-2xl" />
+          <span className="absolute inset-[5px] rounded-[13px] border border-white/30 transition-colors duration-300 group-hover:border-white/50" />
 
           {open ? (
             <IoChevronDown
@@ -376,11 +402,9 @@ const SideNav = () => {
             />
           )}
 
-          {(cartCount > 0 || favoritesCount > 0) && !open && (
+          {totalVisibleCount > 0 && !open && (
             <span className="absolute -top-1 -end-1 z-20 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-white/90 bg-[#D40017] px-1 font-sans text-[10px] font-bold leading-none text-white">
-              {cartCount + favoritesCount > 99
-                ? "99+"
-                : cartCount + favoritesCount}
+              {totalVisibleCount > 99 ? "99+" : totalVisibleCount}
             </span>
           )}
         </button>
@@ -404,6 +428,7 @@ const SideNav = () => {
             0 8px 20px -8px rgba(0, 0, 0, 0.15),
             inset 0 1px 0 rgba(255, 255, 255, 0.6),
             inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+          transform-origin: bottom center;
         }
 
         .side-navigation-toggle {
@@ -426,10 +451,6 @@ const SideNav = () => {
           box-shadow:
             0 10px 30px -8px rgba(62, 0, 7, 0.2),
             inset 0 1px 0 rgba(255, 255, 255, 0.6);
-        }
-
-        .side-navigation-menu {
-          transform-origin: bottom center;
         }
 
         .side-navigation-item {
