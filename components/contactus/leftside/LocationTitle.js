@@ -1,12 +1,26 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { LocationMarkerIcon } from "@heroicons/react/solid";
+import { LocationMarkerIcon as LocationMarkerOutline } from "@heroicons/react/outline";
 
-export default function LocationTitle({ name,branchId,local }) {
-  const { branchID } = useSelector((state) => state.branch);
+export default function LocationTitle({ name, isSelected, local }) {
+  const isAr = local === "ar";
+
   return (
-    <div className={`pb-1 ${branchId === branchID ? "text-green-500" :"text-gray-600"} cursor-pointer font-arabicMedium
-       ${local === "ar"?"text-end mr-8":"text-start ml-5"} tracking-tight opacity-70  text-sm font-medium mb-2`}>
-      <p>{name}</p>
+    <div className={`flex items-center gap-2.5 ${isAr ? "flex-row-reverse text-right" : "flex-row text-left"}`}>
+      <div className={`shrink-0 p-1.5 rounded-lg transition-colors ${
+        isSelected ? "bg-[#7c1422] text-white" : "bg-gray-200/60 text-gray-500 group-hover:text-[#7c1422] group-hover:bg-red-100/60"
+      }`}>
+        {isSelected ? (
+          <LocationMarkerIcon className="w-4 h-4" />
+        ) : (
+          <LocationMarkerOutline className="w-4 h-4" />
+        )}
+      </div>
+      <span className={`text-sm font-semibold truncate ${
+        isSelected ? "text-[#7c1422] font-arabicBold font-bold" : "text-gray-700 font-arabicMedium"
+      }`}>
+        {name}
+      </span>
     </div>
   );
 }

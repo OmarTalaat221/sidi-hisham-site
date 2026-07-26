@@ -77,7 +77,7 @@ export default function OptimizedImage({
   const resolvedWidth = width || staticWidth;
   const resolvedHeight = height || staticHeight;
 
-  const shouldFill = fill || !resolvedWidth || !resolvedHeight;
+  const shouldFill = fill || props.layout === "fill" || !resolvedWidth || !resolvedHeight;
   const isSvg = sourceValue.toLowerCase().endsWith(".svg");
 
   const handleLoad = (event) => {

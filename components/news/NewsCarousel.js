@@ -1,3 +1,4 @@
+import Link from "next/link";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import { useWidth } from "../../util/useWidth";
@@ -88,12 +89,12 @@ const NewsCarousel = ({ news = [], activities = [], type }) => {
                 </div>
 
                 <div className="mt-8 flex justify-center sm:mt-10">
-                  <a
+                  <Link
                     href="/news"
                     className="inline-flex min-h-[46px] min-w-[140px] items-center justify-center rounded-xl bg-[#D40017] px-7 py-2.5 text-center font-arabicMedium text-sm text-white shadow-[0_10px_25px_rgba(212,0,23,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B60014] hover:shadow-[0_14px_30px_rgba(212,0,23,0.25)]"
                   >
                     {isRTL ? "المزيد" : "More"}
-                  </a>
+                  </Link>
                 </div>
               </>
             ) : (

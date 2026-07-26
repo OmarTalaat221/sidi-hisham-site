@@ -40,10 +40,24 @@ export default function FormTwo() {
   //List of countries
   const [countries, setCountries] = useState([]);
   const getCountries = async () => {
-    await axios.get("https://laravel-world.com/api/countries").then((res) => {
-      setCountries(res.data.data);
-      // console.log("res.data :"+JSON.stringify(res.data.data))
-    });
+    try {
+      const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,translations");
+      if (res.data && Array.isArray(res.data)) {
+        const formatted = res.data
+          .map((c) => ({
+            name: c.translations?.ara?.common || c.name?.common || "",
+            name_ar: c.translations?.ara?.common || c.name?.common || "",
+            name_en: c.name?.common || "",
+          }))
+          .filter((c) => c.name && c.name.toLowerCase() !== "israel")
+          .sort((a, b) => a.name.localeCompare(b.name, "ar"));
+        if (formatted.length > 0) {
+          setCountries(formatted);
+        }
+      }
+    } catch (error) {
+      console.warn("Could not fetch external countries list, using built-in fallback.");
+    }
   };
 
   useEffect(() => {
@@ -132,149 +146,139 @@ export default function FormTwo() {
   const { local } = useSelector((state) => state.language);
 
   return (
-    <div>
-      <div>
+    <div className="w-full max-w-3xl mx-auto px-4 sm:px-6">
+      {/* Steps Indicator */}
+      <div className="mb-6">
         <StepsProgress stepNumber={2} />
       </div>
-      <form
-        onSubmit={onSubmit}
-        className="md:w-[40%] flex flex-col mx-5  md:mx-[30%]  mb-5 justify-center space-x-2 "
-      >
+
+      <form onSubmit={onSubmit} className="space-y-5">
         <FormTitle
           local={local}
-          text={local === "ar" ? "معلومات اساسية" : "Basic information"}
+          text={local === "ar" ? "المعلومات الإضافية" : "Additional Information"}
         />
-        <div className="flex mx-3">
-          <div className=" flex-[50%] ">
-            <SelectCountry
-              local={local}
-              labelText={local === "ar" ? "الجنسية" : "Nationality"}
-              name="nationalty"
-              isTrue={false}
-              value={values.nationalty}
-              handleChange={handleChange}
-              list={countries.filter((country) => country.name !== "Israel")}
-            />
-          </div>
-          <div
-            className={`flex  flex-[50%] ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <SampleInput
-              label={local === "ar" ? "مكان الولادة" : "Birth place"}
-              local={local}
-              name="birth_place"
-              value={values.birth_place}
-              handleChange={handleChange}
-              inputType="text"
-            />
-          </div>
+
+        {/* Nationality & Birth Place */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <SelectCountry
+            local={local}
+            labelText={local === "ar" ? "الجنسية" : "Nationality"}
+            name="nationalty"
+            isTrue={false}
+            value={values.nationalty}
+            handleChange={handleChange}
+            list={countries.filter((country) => country.name !== "Israel")}
+          />
+
+          <SampleInput
+            label={local === "ar" ? "مكان الولادة" : "Birth Place"}
+            local={local}
+            name="birth_place"
+            value={values.birth_place}
+            handleChange={handleChange}
+            inputType="text"
+            placeholder={local === "ar" ? "مكان الولادة" : "Birth place"}
+          />
         </div>
-        <div className="flex mt-2">
-          <div
-            className={`flex  flex-[50%] ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <InputWithIcon
-              label={local === "ar" ? "الهاتف الارضي" : "Phone number"}
-              local={local}
-              Icon={HomeIcon}
-              name="phone_number"
-              value={values.phone_number}
-              handleChange={handleChange}
-              // placeholder="+212678490389"
-              inputType="tel"
-            />
-          </div>{" "}
-          <div
-            className={`flex  flex-[50%] ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <SampleInput
-              value={values.national_id}
-              handleChange={handleChange}
-              // placeholder="رقم البطاقة الشخصية"
-              inputType="text"
-              label={local === "ar" ? "رقم البطاقة الشخصية" : "Card number"}
-              name="national_id"
-            />
-          </div>
+
+        {/* Phone & Card Number */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputWithIcon
+            label={local === "ar" ? "الهاتف الأرضي/المحمول" : "Phone Number"}
+            local={local}
+            Icon={HomeIcon}
+            name="phone_number"
+            value={values.phone_number}
+            handleChange={handleChange}
+            placeholder={local === "ar" ? "+212678490389" : "+212678490389"}
+            inputType="tel"
+          />
+
+          <SampleInput
+            value={values.national_id}
+            handleChange={handleChange}
+            inputType="text"
+            label={local === "ar" ? "رقم البطاقة الشخصية" : "National ID / Card Number"}
+            name="national_id"
+            local={local}
+            placeholder={local === "ar" ? "رقم البطاقة" : "Card number"}
+          />
         </div>
-        <div className="mt-2">
+
+        {/* Address */}
+        <div>
           <InputWithIcon
             label={local === "ar" ? "العنوان" : "Address"}
             value={values.address}
             handleChange={handleChange}
-            // placeholder="العنوان"
             inputType="text"
             local={local}
             name="address"
             Icon={OfficeBuildingIcon}
+            placeholder={local === "ar" ? "أدخل العنوان الكامل" : "Enter your full address"}
           />
         </div>
 
-        <div className="mx-3 mt-2">
-          <label
-            className={`block mb-3 mx-3 tracking-tight ${
-              local === "ar" ? "text-end" : "text-start"
-            } text-[13px] font-medium text-gray-600`}
-          >
-            {local === "ar" ? " ملاحظات" : "Notes"}
-          </label>
-          <div className="mr-[14px]">
-            {" "}
+        {/* Notes & CV Upload */}
+        <div className="space-y-4 pt-2">
+          <div className="space-y-1.5">
+            <label
+              className={`block text-xs sm:text-sm font-arabicBold font-bold text-slate-200 ${
+                local === "ar" ? "text-right" : "text-left"
+              }`}
+            >
+              {local === "ar" ? "ملاحظات إضافية" : "Additional Notes"}
+            </label>
             <textarea
               name="notes"
               rows="3"
-              id="2"
-              className="block  text-end p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-              // placeholder="ملاحظات"
+              className={`w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500 transition-all duration-200 text-slate-100 placeholder:text-slate-500 resize-none ${
+                local === "ar" ? "text-right" : "text-left"
+              }`}
+              placeholder={local === "ar" ? "أي ملاحظات إضافية..." : "Any additional notes..."}
               value={values.notes}
               onChange={handleChange}
-              type="text"
-            ></textarea>
+            />
+          </div>
+
+          {/* CV Upload */}
+          <div className="space-y-1.5">
             <label
-              className={`block mt-2 tracking-tight ${
-                local === "ar" ? "text-end" : "text-start"
-              } text-[13px] font-medium text-gray-600 `}
+              className={`block text-xs sm:text-sm font-arabicBold font-bold text-slate-200 ${
+                local === "ar" ? "text-right" : "text-left"
+              }`}
             >
-              <span
-                className={
-                  local === "ar" ? "text-red-500 " : "text-red-500 hidden"
-                }
-              >
-                *
-              </span>{" "}
-              {local === "ar" ? "السيرة الذاتية" : "Curriculum Vitae"}
+              <span className="text-red-500 font-bold me-1">*</span>
+              {local === "ar" ? "السيرة الذاتية (ملف PDF)" : "Curriculum Vitae (PDF File)"}
             </label>
-            <div className="flex space-x-3 mt-2">
-              <div className=" w-10 h-10 mt-0.5 rounded-md bg-green-500 flex justify-center items-center">
-                <ArrowUpIcon width={26} height={26} color="white" />
-              </div>{" "}
+
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex justify-center items-center flex-shrink-0 shadow-md">
+                <ArrowUpIcon className="w-6 h-6 text-white" />
+              </div>
               <input
                 type="file"
-                // name="cv_url"
                 onClick={(e) => (e.target.value = null)}
                 onChange={uploadHandler}
                 accept={"application/pdf"}
-                className=" text-end rounded-lg bg-gray-50 border text-gray-600 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2  "
-                // placeholder="الاسم الكامل"
+                className="w-full px-3 py-2.5 text-sm bg-slate-950/80 border border-slate-700/80 rounded-xl text-slate-300 focus:outline-none focus:border-red-500 cursor-pointer file:me-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-950 file:text-red-300 hover:file:bg-red-900"
               />
             </div>
-            {message && (
-              <div
-                className="text-red-600 my-2 flex justify-center items-center"
-                role="alert"
-              >
-                {message}
-              </div>
-            )}
-            <div className="my-2">
-              <Button type="submit" text="اكمل الطلب" />
+          </div>
+
+          {/* Error Message */}
+          {message && (
+            <div
+              className="bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm p-3.5 rounded-xl text-center font-arabicMedium shadow-sm"
+              role="alert"
+            >
+              {message}
             </div>
+          )}
+
+          {/* Submit Button */}
+          <div className="pt-2">
+            <Button type="submit" text={local === "ar" ? "أكمل الطلب" : "Complete Application"} />
           </div>
         </div>
       </form>

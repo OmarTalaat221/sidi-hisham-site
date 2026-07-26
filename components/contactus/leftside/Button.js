@@ -1,13 +1,15 @@
 import React from "react";
+import { MailIcon } from "@heroicons/react/outline";
 
-export default function Button({ text, bgColor, onClick }) {
+export default function Button({ text, onClick }) {
   return (
-    <div
+    <button
+      type="button"
       onClick={onClick}
-      className={`rounded-md
-        cursor-pointer font-arabicMedium text-sm  h-6 py-5 tracking-wide hover:opacity-100 opacity-80 text-white flex justify-center items-center  px-6 bg-${bgColor}`}
+      className="w-full relative group overflow-hidden rounded-xl bg-gradient-to-r from-[#b11d30] to-[#7c1422] hover:from-[#7c1422] hover:to-[#b11d30] text-white font-arabicBold text-sm py-3.5 px-6 shadow-md shadow-[#7c1422]/20 hover:shadow-lg hover:shadow-[#7c1422]/30 active:scale-[0.99] transition-all duration-200 flex justify-center items-center gap-2 cursor-pointer border border-[#7c1422]/30"
     >
-      {text}
-    </div>
+      <MailIcon className="w-5 h-5 text-red-100 group-hover:scale-110 transition-transform duration-200" />
+      <span className="tracking-wide">{text}</span>
+    </button>
   );
 }

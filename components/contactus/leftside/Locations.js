@@ -6,32 +6,46 @@ import LocationTitle from "./LocationTitle";
 export default function Locations({ locations, local, setZoom }) {
   const dispatch = useDispatch();
   const { branchID } = useSelector((state) => state.branch);
+  const isAr = local === "ar";
+
   return (
-    <div className="mx-8 bg-gray-100 px-6 rounded-xl">
-      <p
-        className={`w-[80%] mx-[10%] text-[15px] ${
-          local === "ar" ? "text-end" : "text-start"
-        } font-medium tracking-tight  text-red-500 pt-3`}
+    <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-100 shadow-sm">
+      {/* Section Title */}
+      <h3
+        className={`text-sm font-bold tracking-wide uppercase text-[#7c1422] mb-3 px-2 ${
+          isAr ? "text-right font-arabicBold" : "text-left"
+        }`}
       >
-        {local === "ar" ? "العناوين" : "Address"}
-      </p>
-      {/* on Click : Set branch id to redux */}
-      <div className="mt-4 pb-2 scrollbar-corner-rounded-md scrollbar-thumb-rounded-xl scrollbar-thumb-[#007530] scrollbar-thin scrollbar-track-gray-100">
-        {locations?.map((branch, index) => (
-          <div
-            onClick={() => {
-              dispatch(setBranchId(branch.id));
-              setZoom(16);
-            }}
-            key={index}
-          >
-            <LocationTitle
-              local={local}
-              branchId={branch.id}
-              name={branch.name}
-            />
-          </div>
-        ))}
+        {isAr ? "الفروع والعناوين" : "Branches & Addresses"}
+      </h3>
+
+      {/* Branches List Container with Custom Scrollbar */}
+      <div className="max-h-[350px] overflow-y-auto pr-1 space-y-2 scrollbar-thin scrollbar-thumb-[#7c1422] scrollbar-track-gray-50 scrollbar-thumb-rounded-full">
+        {locations?.map((branch, index) => {
+          const isSelected = branchID === branch.id;
+
+          return (
+            <div
+              key={branch.id || index}
+              onClick={() => {
+                dispatch(setBranchId(branch.id));
+                setZoom(16);
+              }}
+              className={`cursor-pointer transition-all duration-200 rounded-xl p-2.5 border ${
+                isSelected
+                  ? "bg-red-50/80 border-[#7c1422] shadow-sm"
+                  : "bg-gray-50/50 border-transparent hover:bg-gray-100 hover:border-gray-200"
+              }`}
+            >
+              <LocationTitle
+                local={local}
+                branchId={branch.id}
+                name={branch.name}
+                isSelected={isSelected}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

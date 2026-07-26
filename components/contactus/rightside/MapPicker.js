@@ -2,7 +2,7 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 
 const Marker = (props) => {
-  const { color, name, id } = props;
+  const { color, name } = props;
   return (
     <div
       className="marker"
@@ -41,7 +41,7 @@ export default function SimpleMap({ lat, lng, name, zoom }) {
           gestureHandling: 'cooperative'
         }}
       >
-        <Marker lat={lat} lng={lng} name={name} color="green" />
+        <Marker lat={lat} lng={lng} name={name} color="#7c1422" />
       </GoogleMapReact>
     </div>
   );

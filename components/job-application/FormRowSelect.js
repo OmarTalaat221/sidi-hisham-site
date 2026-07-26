@@ -1,4 +1,5 @@
-import { HomeIcon, ChevronDownIcon } from "@heroicons/react/outline";
+import React from "react";
+import { ChevronDownIcon } from "@heroicons/react/outline";
 
 const FormRowSelect = ({
   labelText,
@@ -9,32 +10,40 @@ const FormRowSelect = ({
   isTrue,
   local
 }) => {
+  const isRTL = local === "ar";
   return (
-    <div className="">
-      <label className={`mb-2 tracking-tight text-end text-[13px] font-medium text-gray-600 flex ${local === "ar"?"justify-end":"justify-start"}`}>
-        <span className={local === "ar"?"text-red-500 ":"text-red-500 hidden"}>*</span> {labelText || name}
+    <div className="w-full space-y-1.5">
+      <label className={`block text-xs sm:text-sm font-arabicBold font-bold text-slate-200 ${isRTL ? "text-right" : "text-left"}`}>
+        <span className="text-red-500 font-bold me-1">*</span> {labelText || name}
       </label>
-      <div className="mt-3.5 font-bold px-5 absolute">
-        <ChevronDownIcon width={18} height={18} />
+      <div className="relative flex items-center bg-slate-950/80 border border-slate-700/80 rounded-xl overflow-hidden focus-within:border-red-500/80 focus-within:ring-2 focus-within:ring-red-500/20 transition-all duration-200 shadow-sm">
+        <select
+          name={name}
+          value={value || ""}
+          onChange={handleChange}
+          className={`w-full bg-transparent text-slate-100 text-sm font-arabicMedium px-4 py-3 outline-none appearance-none cursor-pointer ${
+            isRTL ? "text-right" : "text-left"
+          }`}
+        >
+          <option value="" disabled className="bg-slate-900 text-slate-400">
+            {isRTL ? "-- اختر --" : "-- Select --"}
+          </option>
+          {list?.map((itemValue, index) => {
+            return (
+              <option
+                key={index}
+                value={isTrue ? itemValue.id : itemValue}
+                className="bg-slate-900 text-slate-100 font-medium py-1"
+              >
+                {isTrue ? (isRTL ? itemValue.name_ar : (itemValue.name_en || itemValue.name_ar)) : itemValue}
+              </option>
+            );
+          })}
+        </select>
+        <div className={`pointer-events-none absolute ${isRTL ? "left-3" : "right-3"} text-slate-400`}>
+          <ChevronDownIcon className="w-5 h-5" />
+        </div>
       </div>
-      <select
-        name={name}
-        value={value}
-        onChange={handleChange}
-        className="rounded-none text-end px-6  rounded-l-lg bg-gray-50 border text-gray-600 focus:ring-blue-500 appearance-none focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  "
-      >
-        {list?.map((itemValue, index) => {
-          return (
-            <option
-              key={index}
-              value={isTrue ? itemValue.id : itemValue}
-              className="font-medium"
-            >
-              {isTrue ? itemValue.name_ar : itemValue}
-            </option>
-          );
-        })}
-      </select>
     </div>
   );
 };

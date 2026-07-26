@@ -261,209 +261,183 @@ export default function FormThree() {
 
   const { local } = useSelector((state) => state.language);
   return (
-    <form onSubmit={onSubmit}>
-      <StepsProgress stepNumber={3} />
-      <div className="md:w-[40%] flex flex-col mx-5  md:mx-[30%]  mb-5 justify-center space-x-2 ">
+    <form onSubmit={onSubmit} className="w-full max-w-3xl mx-auto px-4 sm:px-6">
+      <div className="mb-6">
+        <StepsProgress stepNumber={3} />
+      </div>
+
+      <div className="space-y-5">
         <FormTitle
           local={local}
-          text={local === "ar" ? "الشهادات " : "Certificates"}
+          text={local === "ar" ? "الشهادات المؤهلية" : "Certificates & Qualifications"}
         />
-        <div className="flex mx-3">
-          <div
-            className={`flex  flex-[50%] ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <SampleInput
-              local={local}
-              name="name"
-              label={local === "ar" ? "الشهادة" : "Certificate"}
-              value={certificates.name}
-              handleChange={handleCertificateChange}
-              placeholder="الشهادة"
-              inputType="text"
-            />
-          </div>
-          <div
-            className={`flex mx-3 flex-[50%] ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <SampleInput
-              local={local}
-              label={
-                local === "ar" ? "مصدر الشهادة" : "Source of the certificate"
-              }
-              name="src"
-              value={certificates.src}
-              handleChange={handleCertificateChange}
-              placeholder="مصدر الشهادة"
-              inputType="text"
-            />
-          </div>
+
+        {/* Certificate Name & Source */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <SampleInput
+            local={local}
+            name="name"
+            label={local === "ar" ? "اسم الشهادة" : "Certificate Name"}
+            value={certificates.name}
+            handleChange={handleCertificateChange}
+            placeholder={local === "ar" ? "الشهادة" : "Certificate name"}
+            inputType="text"
+          />
+
+          <SampleInput
+            local={local}
+            label={local === "ar" ? "مصدر الشهادة" : "Source / University"}
+            name="src"
+            value={certificates.src}
+            handleChange={handleCertificateChange}
+            placeholder={local === "ar" ? "مصدر الشهادة" : "Source of certificate"}
+            inputType="text"
+          />
         </div>
-        <div className="flex">
-          <div
-            className={`flex flex-[50%] ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <SampleInput
-              local={local}
-              label={local === "ar" ? "مدة الدراسة" : "Study duration"}
-              name="duration_study"
-              value={certificates.duration_study}
-              handleChange={handleCertificateChange}
-              placeholder="10"
-              inputType="number"
-            />
-          </div>
-          <div
-            className={`flex mx-3  flex-[50%] ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <SampleInput
-              local={local}
-              label={local === "ar" ? "التخصص" : "Specialty"}
-              value={certificates.field}
-              name="field"
-              handleChange={handleCertificateChange}
-              placeholder="التخصص"
-              inputType="text"
-            />
-          </div>
-        </div>{" "}
-        <div className="flex">
-          <div
-            className={`flex flex-[50%] pr-3 ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <div
-              className="rounded-md font-arabicMedium 
-  cursor-pointer text-sm w-[80%] mx-[10%] mt-7  h-5 py-5 tracking-wide hover:opacity-100 opacity-80 text-white flex justify-center items-center  px-6 bg-[#007530]"
-              onClick={addCertificate}
-            >
-              {local === "ar" ? "اضافة الشهادة" : "Add certificate"}
-            </div>
-          </div>
-          <div
-            className={`flex flex-[50%] pr-3 ${
-              local === "ar" ? "justify-end" : "justify-start"
-            }`}
-          >
-            <SampleInput
-              local={local}
-              label={local === "ar" ? "سنة التخرج" : "Graduation Year"}
-              name="graduate_year"
-              value={certificates.graduate_year}
-              handleChange={handleCertificateChange}
-              placeholder="سنة التخرج"
-              inputType="date"
-            />
-          </div>
+
+        {/* Study Duration, Specialty & Graduation Year */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+          <SampleInput
+            local={local}
+            label={local === "ar" ? "مدة الدراسة (سنوات)" : "Study Duration (Years)"}
+            name="duration_study"
+            value={certificates.duration_study}
+            handleChange={handleCertificateChange}
+            placeholder="4"
+            inputType="number"
+          />
+
+          <SampleInput
+            local={local}
+            label={local === "ar" ? "التخصص" : "Specialty"}
+            value={certificates.field}
+            name="field"
+            handleChange={handleCertificateChange}
+            placeholder={local === "ar" ? "التخصص" : "Specialty"}
+            inputType="text"
+          />
+
+          <SampleInput
+            local={local}
+            label={local === "ar" ? "سنة التخرج" : "Graduation Year"}
+            name="graduate_year"
+            value={certificates.graduate_year}
+            handleChange={handleCertificateChange}
+            placeholder={local === "ar" ? "سنة التخرج" : "Graduation Year"}
+            inputType="date"
+          />
         </div>
-        <FormTitle
-          local={local}
-          text={local === "ar" ? "الاسئلة " : "Questions"}
-        />
-        <div className="px-3 space-y-2">
-          {job?.questions.map((question, index) => (
-            <div key={index}>
-              <label className="block my-2 tracking-tight text-end text-[13px] font-medium text-[#007530] ">
-                {question.text}
-              </label>
-              <input
-                type="text"
-                // name="answer"
-                className=" text-end rounded-lg bg-gray-50 border text-gray-600 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 "
-                onChange={(event) => handleFormChange(event, question.text)}
-                // value={question.answer}
-              />
-            </div>
-          ))}
-          {job?.multiple_choices.map((question, index) => (
-            <div key={index}>
-              <label className="block mb-2 tracking-tight text-end text-[13px] font-medium text-[#007530] ">
-                {question.text}
-              </label>
-              <select
-                // name={name}
-                // value={value}
-                onChange={(event) => handleFormChange(event, question.text)}
-                className="rounded-none text-end px-6  rounded-l-lg bg-gray-50 border text-gray-600 focus:ring-blue-500 appearance-none focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  "
-              >
-                {/* <option>Select an option</option> */}
-                {question.choices?.map((itemValue, index) => {
-                  return (
-                    <option
-                      key={index}
-                      // value={itemValue.text}
-                      className="font-medium"
-                    >
+
+        {/* Add Certificate Button */}
+        <div className="pt-2 flex justify-end">
+          <button
+            type="button"
+            className="px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-arabicBold text-xs sm:text-sm rounded-xl shadow-md transition-all duration-200 cursor-pointer flex items-center gap-2"
+            onClick={addCertificate}
+          >
+            <span>+</span>
+            <span>{local === "ar" ? "إضافة الشهادة" : "Add Certificate"}</span>
+          </button>
+        </div>
+
+        {/* Dynamic Job Questions */}
+        {(job?.questions?.length > 0 || job?.multiple_choices?.length > 0 || job?.multiple_question_multi?.length > 0) && (
+          <div className="pt-4 space-y-4">
+            <FormTitle
+              local={local}
+              text={local === "ar" ? "أسئلة الوظيفة" : "Job Questions"}
+            />
+
+            {/* Simple Text Questions */}
+            {job?.questions?.map((question, index) => (
+              <div key={index} className="space-y-1.5">
+                <label className={`block text-xs sm:text-sm font-arabicBold font-bold text-slate-200 ${local === "ar" ? "text-right" : "text-left"}`}>
+                  {question.text}
+                </label>
+                <input
+                  type="text"
+                  className={`w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500 transition-all duration-200 text-slate-100 placeholder:text-slate-500 ${
+                    local === "ar" ? "text-right" : "text-left"
+                  }`}
+                  onChange={(event) => handleFormChange(event, question.text)}
+                  placeholder={local === "ar" ? "أدخل الإجابة..." : "Enter your answer..."}
+                />
+              </div>
+            ))}
+
+            {/* Multiple Choice Single Questions */}
+            {job?.multiple_choices?.map((question, index) => (
+              <div key={index} className="space-y-1.5">
+                <label className={`block text-xs sm:text-sm font-arabicBold font-bold text-slate-200 ${local === "ar" ? "text-right" : "text-left"}`}>
+                  {question.text}
+                </label>
+                <select
+                  onChange={(event) => handleFormChange(event, question.text)}
+                  className={`w-full bg-slate-950/80 border border-slate-700/80 text-slate-100 text-sm font-arabicMedium px-4 py-3 rounded-xl outline-none cursor-pointer ${
+                    local === "ar" ? "text-right" : "text-left"
+                  }`}
+                >
+                  <option value="" className="bg-slate-900 text-slate-400">
+                    {local === "ar" ? "-- اختر إجابة --" : "-- Select Option --"}
+                  </option>
+                  {question.choices?.map((itemValue, i) => (
+                    <option key={i} value={itemValue.text} className="bg-slate-900 text-slate-100">
                       {itemValue.text}
                     </option>
-                  );
-                })}
-              </select>
-            </div>
-          ))}
-          {job?.multiple_question_multi.map((question, index1) => (
-            <div key={index1}>
-              <label className="block mb-2 tracking-tight text-end text-[13px] font-medium text-[#007530] ">
-                {question.text}
-              </label>
-              {question?.fields.map((field, i2) => (
-                <div key={i2} className="  text-end">
-                  {" "}
-                  <label className="text-[14px]">{field.text}</label>
-                  {field?.choices.map((choice, i) => {
-                    return (
-                      <div
-                        className="flex space-x-1 justify-end text-[14px]"
-                        key={i}
-                      >
-                        <label>{choice.text}</label>
-                        <input
-                          type="radio"
-                          id={i}
-                          name={field.text}
-                          value={choice.text}
-                          onChange={(event) => {
-                            handleFormChange(event, field.text);
-                            console.log(
-                              radioanswers[field.text] === choice.text
-                            );
-                          }}
-                          // checked={radioanswers[field.text] === choice.text}
-                          className="w-4 h-4 mt-[5px]  accent-red-700 bg-gray-100 border-gray-300 focus:ring-red-500 "
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+                  ))}
+                </select>
+              </div>
+            ))}
+
+            {/* Multiple Question Multi */}
+            {job?.multiple_question_multi?.map((question, index1) => (
+              <div key={index1} className="space-y-2 p-3 bg-slate-950/40 border border-slate-800 rounded-xl">
+                <label className={`block text-xs sm:text-sm font-arabicBold font-bold text-red-400 ${local === "ar" ? "text-right" : "text-left"}`}>
+                  {question.text}
+                </label>
+                {question?.fields?.map((field, i2) => (
+                  <div key={i2} className="space-y-1.5 pt-2">
+                    <label className={`block text-xs font-semibold text-slate-300 ${local === "ar" ? "text-right" : "text-left"}`}>
+                      {field.text}
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {field?.choices?.map((choice, i) => (
+                        <label
+                          key={i}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 text-xs cursor-pointer hover:border-red-500/50"
+                        >
+                          <input
+                            type="radio"
+                            id={i}
+                            name={field.text}
+                            value={choice.text}
+                            onChange={(event) => handleFormChange(event, field.text)}
+                            className="w-3.5 h-3.5 accent-red-600 focus:ring-red-500 bg-slate-900 border-slate-700 cursor-pointer"
+                          />
+                          <span>{choice.text}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Validation Error Message */}
         {message && (
           <div
-            className="text-red-600 my-2 flex justify-center items-center"
+            className="bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm p-3.5 rounded-xl text-center font-arabicMedium shadow-sm"
             role="alert"
           >
             {message}
           </div>
         )}
-        <div className="my-2">
-          <button
-            type="submit"
-            className="rounded-md font-arabicMedium
-  cursor-pointer text-sm w-full my-4  h-6 py-6 tracking-wide hover:opacity-100 opacity-80 text-white flex justify-center items-center  px-6 bg-[#007530]"
-            // onClick={() => router.push("/job-application/jobSubmited")}
-          >
-            {local === "ar" ? " ارسل الطلب " : "Post job application"}
-          </button>
+
+        {/* Submit Application Button */}
+        <div className="pt-4">
+          <Button type="submit" text={local === "ar" ? "إرسال طلب التوظيف" : "Submit Application"} />
         </div>
       </div>
     </form>

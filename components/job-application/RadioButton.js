@@ -7,24 +7,30 @@ export default function RadioButton({
   value,
   isChecked,
   handleChange,
-  local
+  local,
+  text
 }) {
+  const isRTL = local === "ar";
+  const displayLabel = label || text;
   return (
-    <div>
-      <div className={`flex items-center ${local === "ar"?"justify-end":"justify-start"} mb-3`}>
-        <label className={` text-xs order-2 -mt-1   font-normal text-gray-900 ${local === "ar" ? "mr-2 text-end":"ml-2 text-start"}`}>
-          {label}
-        </label>
-        <input
-          id={id}
-          type="radio"
-          value={value}
-          onChange={handleChange}
-          checked={isChecked}
-          name={name}
-          className="w-4 h-4 accent-red-700 bg-gray-100 border-gray-300 focus:ring-red-500 "
-        />
-      </div>
-    </div>
+    <label
+      htmlFor={id}
+      className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-red-500/50 cursor-pointer transition-all duration-200 ${
+        isChecked ? "border-red-500/80 bg-red-950/30 text-white" : "text-slate-300"
+      }`}
+    >
+      <input
+        id={id}
+        type="radio"
+        value={value}
+        onChange={handleChange}
+        checked={isChecked}
+        name={name}
+        className="w-4 h-4 accent-red-600 focus:ring-red-500 bg-slate-900 border-slate-700 cursor-pointer"
+      />
+      <span className={`text-xs sm:text-sm font-arabicMedium ${isRTL ? "text-right" : "text-left"}`}>
+        {displayLabel}
+      </span>
+    </label>
   );
 }
