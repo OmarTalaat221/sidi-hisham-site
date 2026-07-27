@@ -152,7 +152,9 @@ export default function ProductCard({
             transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
             box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
           will-change: transform;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+          box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.15),
+            0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .product-card-image {
@@ -170,7 +172,9 @@ export default function ProductCard({
         @media (hover: hover) and (pointer: fine) {
           .product-card-wrapper:hover .product-card {
             transform: translate3d(0, -4px, 0);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.14);
+            box-shadow:
+              0 20px 40px rgba(0, 0, 0, 0.2),
+              0 8px 16px rgba(0, 0, 0, 0.15);
           }
 
           .product-card-wrapper:hover .product-card-image {
@@ -185,7 +189,9 @@ export default function ProductCard({
         @media (hover: none) {
           .product-card-wrapper:hover .product-card {
             transform: none;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            box-shadow:
+              0 10px 25px rgba(0, 0, 0, 0.08),
+              0 4px 10px rgba(0, 0, 0, 0.05);
           }
 
           .product-card-wrapper:hover .product-card-image {

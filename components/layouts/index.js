@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Footer from "../footer/Footer";
 import Mobilena from "../mobileNav";
 import NavBar from "../navbar/NavBar";
+import SideNav from "../sideNav";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function Layout({ children }) {
 
       <Mobilena />
 
-      {/* <SideNav /> */}
+      <SideNav />
 
       <main>{children}</main>
 

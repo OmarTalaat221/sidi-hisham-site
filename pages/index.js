@@ -235,7 +235,7 @@ export default function Home({ initialSliderImages = [] }) {
         </div>
       </section>
 
-      <section className="mt-8 w-full bg-white md:mt-12">
+      <section className="pt-8 w-full pattern-section pattern-section-wheat md:pt-12">
         <div className="home-content-shell">
           <DeferredSection minHeight="420px" rootMargin="500px 0px">
             <ElasticCarousel sliderImages={sliderImages} />
@@ -326,7 +326,7 @@ export default function Home({ initialSliderImages = [] }) {
           background-repeat: repeat;
           background-position: center top;
           background-size: 560px 560px;
-          opacity: 0.36;
+          opacity: 0.2;
           pointer-events: none;
           content: "";
         }

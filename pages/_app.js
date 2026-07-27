@@ -1,5 +1,6 @@
 import "../styles/globals.scss";
 // import "antd/dist/antd.css";
+import { El_Messiri } from "next/font/google";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -17,7 +18,13 @@ import "../styles/_sideBar.scss";
 import "../styles/pages/_products.scss";
 import Layout from "./../components/layouts/index";
 
-function MyApp({ Component, pageProps, router }) {
+const elMessiri = El_Messiri({
+  subsets: ["arabic", "latin"],
+  display: "swap",
+  variable: "--font-el-messiri",
+});
+
+function MyApp({ Component, pageProps }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -25,21 +32,26 @@ function MyApp({ Component, pageProps, router }) {
   }, []);
 
   const content = (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <div className={elMessiri.variable}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </div>
   );
 
   return (
     <ErrorBoundary>
       <Provider store={store}>
         <SEO />
+
         {!isMounted ? (
           content
         ) : (
           <PersistGate loading={null} persistor={persistor}>
             <ClearStorage />
+
             <PerformanceMonitor />
+
             {content}
           </PersistGate>
         )}

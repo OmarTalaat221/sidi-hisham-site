@@ -17,7 +17,11 @@ export default function ActivityCard({
       return "/images/eim.png";
     }
 
-    if (src.startsWith("http://") || src.startsWith("https://")) {
+    if (
+      src.startsWith("http://") ||
+      src.startsWith("https://") ||
+      src.startsWith("/images/")
+    ) {
       return src;
     }
 
@@ -25,52 +29,163 @@ export default function ActivityCard({
   }
 
   return (
-    <div
+    <article
       dir={isRTL ? "rtl" : "ltr"}
-      className="carousel-card activity-card news-card group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-[22px] border border-gray-100 bg-white shadow-[0_10px_35px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D40017]/20 hover:shadow-[0_18px_48px_rgba(0,0,0,0.13)]"
+      className="activity-card group relative isolate flex h-full min-h-[490px] w-full min-w-0 flex-col overflow-hidden rounded-[22px] border border-gray-100 bg-white"
     >
+      <span
+        aria-hidden="true"
+        className="activity-card-gold-border pointer-events-none absolute inset-0 z-20 rounded-[22px] border-2 border-[#FFD62D] opacity-0"
+      />
+
       <div className="news-card-media relative h-[220px] w-full shrink-0 overflow-hidden rounded-t-[22px] bg-gray-100">
         <SEOImage
-          width={900}
-          height={560}
+          fill
+          sizes="(max-width: 560px) 100vw, (max-width: 1024px) 50vw, 25vw"
           loader={GraphCMSImageLoader}
-          src={image}
+          src={image || "/images/eim.png"}
           alt={isRTL ? "صورة نشاط سيدي هشام" : "Sidi Hisham activity image"}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out"
+          className="activity-card-image"
+          objectFit="cover"
+          objectPosition="center"
         />
-
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
-
-        {/* <span className="absolute bottom-0 start-0 h-[3px] w-0 bg-[#FFD62D] transition-all duration-500 group-hover:w-full" /> */}
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col p-4 sm:p-5">
-        <div className="flex min-h-0 flex-1 flex-col gap-3">
-          <Title local={local} text={title} size="[18px]" />
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col p-4 sm:p-5">
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div className="activity-card-title-wrapper">
+            <Title local={local} text={title} size="[18px]" />
+          </div>
 
           {subTitle && (
-            <div className="text-start font-arabicMedium text-sm leading-6 text-[#007530]">
+            <div className="mt-3 text-start font-arabicMedium text-sm leading-6 text-primary">
               {subTitle}
             </div>
           )}
 
-          <div className="news-card-description line-clamp-3 text-start font-arabicLight text-sm leading-7 text-gray-600">
-            {description}
-          </div>
+          <p
+            className="activity-card-description mt-3 text-start font-arabicLight text-sm leading-7 text-gray-600"
+            title={description || ""}
+          >
+            {description || ""}
+          </p>
         </div>
 
         <Link
           href={`/news/activityDetails/${id}`}
-          className="mt-5 block w-full"
+          className="activity-card-cta mt-5 inline-flex min-h-[44px] w-full shrink-0 items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-center font-arabicMedium text-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          aria-label={isRTL ? "عرض تفاصيل الفعالية" : "View activity details"}
         >
-          <button
-            type="button"
-            className="min-h-[44px] w-full rounded-xl bg-[#D40017] px-5 py-2.5 font-arabicMedium text-sm text-white transition-all duration-300 hover:bg-[#B60014] active:scale-[0.98]"
-          >
-            {isRTL ? "التفاصيل" : "Details"}
-          </button>
+          {isRTL ? "التفاصيل" : "Details"}
         </Link>
       </div>
-    </div>
+
+      <style jsx global>{`
+        .activity-card {
+          box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.08),
+            0 4px 10px rgba(0, 0, 0, 0.05);
+          transition:
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .activity-card-gold-border {
+          transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .activity-card-image {
+          transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        }
+
+        .activity-card-cta {
+          transition:
+            background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .activity-card-title-wrapper {
+          min-width: 0;
+          min-height: 3.5rem;
+          max-height: 3.5rem;
+          overflow: hidden;
+        }
+
+        .activity-card-title-wrapper > * {
+          display: -webkit-box !important;
+          overflow: hidden !important;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          margin: 0 !important;
+          text-align: start !important;
+          overflow-wrap: anywhere;
+        }
+
+        .activity-card-description {
+          display: -webkit-box;
+          width: 100%;
+          height: 5.25rem;
+          min-height: 5.25rem;
+          max-height: 5.25rem;
+          overflow: hidden;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          white-space: normal;
+          word-break: normal;
+          overflow-wrap: anywhere;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+          .activity-card:hover {
+            transform: translate3d(0, -4px, 0);
+            box-shadow:
+              0 20px 40px rgba(0, 0, 0, 0.14),
+              0 8px 16px rgba(0, 0, 0, 0.07);
+          }
+
+          .activity-card:hover .activity-card-gold-border {
+            opacity: 1;
+          }
+
+          .activity-card:hover .activity-card-image {
+            transform: scale(1.045);
+          }
+
+          .activity-card:hover .activity-card-cta {
+            background-color: #b80014 !important;
+          }
+        }
+
+        @media (hover: none) {
+          .activity-card:hover {
+            transform: none;
+          }
+        }
+
+        @media (max-width: 559px) {
+          .activity-card {
+            min-height: 470px;
+          }
+
+          .news-card-media {
+            height: 210px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .activity-card,
+          .activity-card-image,
+          .activity-card-cta,
+          .activity-card-gold-border {
+            transition: none !important;
+          }
+
+          .activity-card:hover,
+          .activity-card:hover .activity-card-image {
+            transform: none !important;
+          }
+        }
+      `}</style>
+    </article>
   );
 }

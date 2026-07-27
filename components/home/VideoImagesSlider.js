@@ -203,7 +203,8 @@ const VideoImagesSlider = () => {
             role="dialog"
             aria-modal="true"
             aria-label={isAr ? "عرض صورة المعرض" : "Gallery image viewer"}
-            className="gallery-portal-viewer fixed inset-0 z-[1000000000]"
+            className="gallery-portal-viewer fixed inset-0"
+            style={{ zIndex: 2147483647 }}
             onClick={closeImage}
           >
             <div className="absolute inset-0 bg-black/90 backdrop-blur-[3px]" />
@@ -271,7 +272,6 @@ const VideoImagesSlider = () => {
                   relative w-full max-w-[1400px]
                   h-[min(84vh,920px)]
                   overflow-hidden rounded-2xl
-                
                 "
               >
                 <Image
@@ -375,23 +375,27 @@ const VideoImagesSlider = () => {
           breakpoints={{
             0: {
               slidesPerView: 1.3,
-              spaceBetween: 15,
+              spaceBetween: 24,
+            },
+            480: {
+              slidesPerView: 1.6,
+              spaceBetween: 28,
             },
             640: {
               slidesPerView: 2.2,
-              spaceBetween: 20,
+              spaceBetween: 32,
             },
             768: {
               slidesPerView: 3,
-              spaceBetween: 25,
+              spaceBetween: 40,
             },
             1024: {
               slidesPerView: 3.5,
-              spaceBetween: 30,
+              spaceBetween: 48,
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 35,
+              spaceBetween: 56,
             },
           }}
           className="gallery-swiper !py-10"
@@ -412,7 +416,7 @@ const VideoImagesSlider = () => {
                 className="
                   gallery-image-card
                   group/card relative block
-                  aspect-[4/5] w-full
+                  aspect-square w-full
                   cursor-zoom-in overflow-hidden
                   rounded-2xl border border-black/5
                   bg-white
@@ -558,6 +562,19 @@ const VideoImagesSlider = () => {
           .gallery-swiper {
             width: 100%;
             overflow: hidden;
+            padding-inline: 8px;
+          }
+
+          @media (min-width: 640px) {
+            .gallery-swiper {
+              padding-inline: 12px;
+            }
+          }
+
+          @media (min-width: 1024px) {
+            .gallery-swiper {
+              padding-inline: 16px;
+            }
           }
 
           .gallery-swiper .swiper-wrapper {
@@ -584,6 +601,12 @@ const VideoImagesSlider = () => {
             z-index: 3;
             opacity: 0.75;
             transform: scale(0.92);
+          }
+
+          /* ═══ Portal Viewer — Highest possible z-index ═══ */
+          .gallery-portal-viewer {
+            z-index: 2147483647 !important;
+            isolation: isolate;
           }
 
           @media (hover: none) {
