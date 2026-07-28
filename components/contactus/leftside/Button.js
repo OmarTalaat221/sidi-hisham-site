@@ -1,13 +1,17 @@
-import React from "react";
-
-export default function Button({ text, bgColor, onClick }) {
+export default function Button({
+  text,
+  onClick,
+  disabled = false,
+  className = "",
+}) {
   return (
-    <div
+    <button
+      type="button"
       onClick={onClick}
-      className={`rounded-md
-        cursor-pointer font-arabicMedium text-sm  h-6 py-5 tracking-wide hover:opacity-100 opacity-80 text-white flex justify-center items-center  px-6 bg-${bgColor}`}
+      disabled={disabled}
+      className={`flex h-[52px] w-full items-center justify-center rounded-xl bg-primary px-6 text-[14px] font-bold text-white transition-colors duration-200 hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50 ${className}`}
     >
       {text}
-    </div>
+    </button>
   );
 }

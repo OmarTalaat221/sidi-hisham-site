@@ -16,7 +16,6 @@ import { useRouter } from "next/router";
 import { Fragment, memo, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import logo from "../../public/images/logo.png";
-import CartDropDown from "../dropdowns/cart/CartDropDown";
 import MenuIconDropDown from "../dropdowns/menu/MenuIconDropDown";
 import SearchIconDropDown from "../dropdowns/search/SearchIconDropDown";
 import UserIconDropDown from "../dropdowns/user_icon/UserIconDropDown";
@@ -197,15 +196,7 @@ function MobileNav({ open, onClose, isAr, currentPath }) {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
               >
-                <div className="absolute inset-0 bg-[linear-gradient(155deg,#8D0016_0%,#70000E_45%,#470006_100%)]" />
-
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(255,214,45,0.14),transparent_38%)] rtl:bg-[radial-gradient(circle_at_85%_0%,rgba(255,214,45,0.14),transparent_38%)]" />
-
                 <div className="absolute inset-0 opacity-[0.04] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_23px,#ffffff_24px,transparent_25px)]" />
-
-                <div className="absolute inset-y-0 start-0 w-px bg-gradient-to-b from-transparent via-[#FFD62D]/55 to-transparent" />
-
-                <div className="absolute bottom-[-120px] start-[-80px] h-[260px] w-[260px] rounded-full bg-[#FFD62D]/[0.035] blur-[2px]" />
               </div>
 
               <div className="relative z-10 px-4 pb-3 pt-4">
@@ -280,9 +271,9 @@ function MobileNav({ open, onClose, isAr, currentPath }) {
                 <div className="h-px bg-gradient-to-r from-transparent via-white/25 to-white/25" />
 
                 <div className="mt-4 flex items-center gap-3">
-                  <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#FFD62D]/30 bg-[#FFD62D]/[0.07]">
+                  {/* <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#FFD62D]/30 bg-[#FFD62D]/[0.07]">
                     <span className="h-[7px] w-[7px] rotate-45 rounded-[1px] bg-[#FFD62D] shadow-[0_0_8px_rgba(255,214,45,0.6)]" />
-                  </span>
+                  </span> */}
 
                   <p className="text-start text-[11px] leading-5 text-white/45">
                     {isAr
@@ -384,7 +375,7 @@ function MobileHeaderBar({
       <div className="relative z-20 flex min-w-0 items-center justify-end gap-0.5">
         <SearchIconDropDown />
 
-        <CartDropDown />
+        {/* <CartDropDown /> */}
 
         <button
           type="button"

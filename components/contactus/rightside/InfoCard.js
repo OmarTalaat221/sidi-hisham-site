@@ -1,15 +1,32 @@
-import React from "react";
-
-export default function InfoCard({ Icon, title, desc }) {
+export default function InfoCard({
+  Icon,
+  title,
+  desc,
+  loading = false,
+  emptyText = "Not available",
+}) {
   return (
-    <div className="flex md:flex-row space-y-2 flex-col md:justify-end">
-      <div className="flex justify-center items-center md:items-center ">
-        <Icon className="w-7 h-7 text-[#007530] hover:animate-bounce" />
+    <article className="flex min-h-[108px] items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 transition-colors duration-200 hover:border-primary/30 sm:gap-4 sm:p-5">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/5 text-primary">
+        <Icon className="h-5 w-5" strokeWidth={1.8} />
+      </span>
+
+      <div className="min-w-0 text-start">
+        <p className="text-[11px] font-semibold text-slate-400 sm:text-xs">
+          {title}
+        </p>
+
+        {loading ? (
+          <div className="mt-2 h-4 w-24 animate-pulse rounded bg-slate-100" />
+        ) : (
+          <p
+            dir="ltr"
+            className="mt-1 break-words text-[13px] font-bold leading-6 text-primary sm:text-sm !text-end"
+          >
+            {desc || emptyText}
+          </p>
+        )}
       </div>
-      <div className="flex flex-col md:flex-[70%] md:mx-4">
-        <p className="text-[#007530] text-xs font-arabicMedium md:text-sm">{title}</p>
-        <p className="text-xs font-medium">{desc}</p>
-      </div>
-    </div>
+    </article>
   );
 }

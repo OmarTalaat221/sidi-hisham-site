@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import logo from "../../public/images/logo.png";
-import CartDropDown from "../dropdowns/cart/CartDropDown";
 import MenuIconDropDown from "../dropdowns/menu/MenuIconDropDown";
 import SearchIconDropDown from "../dropdowns/search/SearchIconDropDown";
 import UserIconDropDown from "../dropdowns/user_icon/UserIconDropDown";
@@ -461,7 +460,7 @@ function DesktopHeaderBar({
       }}
       className={`pointer-events-auto relative isolate transform-gpu overflow-visible border-[#FFD62D]/40 ${
         isFixed
-          ? "mx-auto mt-2 h-[64px] w-[calc(100%_-_20px)] max-w-[1480px] rounded-[19px] border px-3 shadow-[0_18px_45px_rgba(34,0,5,0.34)] lg:px-5"
+          ? "mx-auto mt-2 h-[64px] w-[calc(100%_-_20px)] max-w-[1380px] rounded-[19px] border px-3 shadow-[0_18px_45px_rgba(34,0,5,0.34)] lg:px-5"
           : "h-[82px] w-full rounded-none border-x-0 border-t-0 border-b px-5 shadow-[0_12px_30px_rgba(34,0,5,0.24)] lg:px-8 xl:px-12"
       }`}
     >
@@ -519,7 +518,7 @@ function DesktopHeaderBar({
         >
           <SearchIconDropDown />
 
-          <CartDropDown />
+          {/* <CartDropDown /> */}
         </div>
       </div>
 

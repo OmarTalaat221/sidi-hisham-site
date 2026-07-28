@@ -383,7 +383,7 @@ export default function Tabs() {
           >
             <div
               aria-hidden="true"
-              className="absolute bottom-1.5 top-1.5 left-0 rounded-full bg-[#7C1422] will-change-transform"
+              className="absolute bottom-1.5 top-1.5 left-0 rounded-full bg-primary will-change-transform"
               style={{
                 width: `${pillStyle.width}px`,
                 transform: pillStyle.transform,

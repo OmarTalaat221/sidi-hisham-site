@@ -104,7 +104,7 @@ function GalleryViewer({ viewer, images, isAr, onClose, onSelect }) {
             loader={GraphCMSImageLoader}
             fill
             showSkeleton
-            objectFit="cover"
+            objectFit="contain"
             objectPosition="center"
             sizes="96vw"
             quality={92}

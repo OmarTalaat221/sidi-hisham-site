@@ -32,11 +32,13 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   const content = (
-    <div className={elMessiri.variable}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </div>
+    <>
+      <div className={elMessiri.variable}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </div>
+    </>
   );
 
   return (
