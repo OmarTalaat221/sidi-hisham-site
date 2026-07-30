@@ -1,0 +1,137 @@
+.styledBackground {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.footer {
+  position: relative;
+  background-color: transparent;
+}
+
+.wave {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  margin-bottom: -1px;
+  line-height: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(124, 20, 34, 0) 0%,
+    rgba(160, 17, 35, 0.025) 52%,
+    rgba(124, 20, 34, 0.08) 100%
+  );
+}
+
+.waves {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 122px;
+  min-height: 100px;
+  max-height: 132px;
+}
+
+.waveLayer {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.waveLayerOne {
+  fill: rgba(212, 0, 23, 0.22);
+}
+
+.waveLayerTwo {
+  fill: rgba(160, 17, 35, 0.42);
+}
+
+.waveLayerThree {
+  fill: rgba(124, 20, 34, 0.98);
+}
+
+.parallax > use {
+  animation: moveWave 12s ease-in-out infinite alternate;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 11s;
+}
+
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 14s;
+}
+
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 18s;
+}
+
+@keyframes moveWave {
+  0% {
+    transform: translate3d(-24px, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, 2px, 0);
+  }
+
+  100% {
+    transform: translate3d(24px, 0, 0);
+  }
+}
+
+.motionNone .parallax > use {
+  animation: none !important;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 767px) {
+  .waves {
+    height: 94px;
+    min-height: 94px;
+    max-height: 94px;
+  }
+
+  .parallax > use:nth-child(1) {
+    animation-duration: 10s;
+  }
+
+  .parallax > use:nth-child(2) {
+    animation-duration: 13s;
+  }
+
+  .parallax > use:nth-child(3) {
+    animation-duration: 16s;
+  }
+
+  @keyframes moveWave {
+    0% {
+      transform: translate3d(-16px, 0, 0);
+    }
+
+    50% {
+      transform: translate3d(0, 2px, 0);
+    }
+
+    100% {
+      transform: translate3d(16px, 0, 0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax > use {
+    animation: none !important;
+    transform: translate3d(0, 0, 0);
+  }
+}

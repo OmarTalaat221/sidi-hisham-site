@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   IoBagHandleOutline,
-  IoCartOutline,
   IoChatbubbleEllipsesOutline,
   IoChevronDown,
   IoChevronUp,
@@ -297,14 +296,14 @@ const SideNav = () => {
       Icon: IoBagHandleOutline,
       accent: "green",
     },
-    {
-      key: "cart",
-      href: "/cart",
-      label: isRTL ? "سلة التسوق" : "Shopping cart",
-      Icon: IoCartOutline,
-      accent: "green",
-      badge: visibleCartCount,
-    },
+    // {
+    //   key: "cart",
+    //   href: "/cart",
+    //   label: isRTL ? "سلة التسوق" : "Shopping cart",
+    //   Icon: IoCartOutline,
+    //   accent: "green",
+    //   badge: visibleCartCount,
+    // },
     {
       key: "favorites",
       href: "/favori",

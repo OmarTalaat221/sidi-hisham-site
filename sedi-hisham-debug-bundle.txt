@@ -1,0 +1,4958 @@
+﻿SEDI HISHAM DEBUG BUNDLE
+Generated: 2026-07-28 11:17:35
+Project: D:\CampCode\Sedi_hisham_website
+
+
+
+============================================================
+SYSTEM AND PROJECT INFORMATION
+============================================================
+
+PowerShell: 5.1.26100.8875
+Project path: D:\CampCode\Sedi_hisham_website
+
+Node:
+v24.11.0
+
+NPM:
+11.6.2
+
+
+
+============================================================
+GIT STATUS
+============================================================
+
+?? sedi-hisham-debug-bundle.txt
+
+
+
+============================================================
+ROOT DIRECTORY
+============================================================
+
+
+Mode   LastWriteTime         Length Name      
+----   -------------         ------ ----      
+d--h-- 7/28/2026 11:17:36 AM        .git      
+d----- 7/28/2026 10:03:02 AM        .next     
+d----- 8/30/2025 11:00:23 AM        components
+d----- 7/20/2026 12:30:15 PM        hooks     
+d----- 7/20/2026 4:07:47 PM         node_mo...
+d----- 5/19/2024 11:39:22 PM        pages     
+d----- 7/22/2026 4:31:15 PM         public    
+d----- 5/19/2024 7:02:18 PM         RCS       
+d----- 5/14/2024 2:11:51 AM         redux     
+d----- 7/22/2026 4:40:37 PM         scripts   
+d----- 5/14/2024 2:11:51 AM         sedi-hi...
+d----- 5/14/2024 2:11:51 AM         services  
+d----- 7/18/2026 1:00:41 PM         styles    
+d----- 5/14/2024 2:11:51 AM         tmp       
+d----- 5/14/2024 2:11:51 AM         util      
+-a---- 1/3/2024 9:55:09 PM   132    .env      
+-a---- 7/21/2026 10:57:47 AM 73     .env.local
+-a---- 1/3/2024 10:24:19 PM  110    .env.pr...
+-a---- 9/7/2025 2:53:29 PM   229    .eslint...
+-a---- 7/21/2026 11:32:08 AM 153    .gitignore
+-a---- 1/17/2024 7:09:19 PM  319    app.js    
+-a---- 8/30/2025 12:18:23 PM 4564   ASYNCST...
+-a---- 8/30/2025 12:49:10 PM 5074   BUILD_E...
+-a---- 8/30/2025 12:01:42 PM 7112   BUILD_S...
+-a---- 8/30/2025 12:01:42 PM 4377   BUILD_T...
+-a---- 8/30/2025 12:51:04 PM 4464   IMPLEME...
+-a---- 8/30/2025 12:49:10 PM 3603   IMPORT_...
+-a---- 8/30/2025 12:47:48 PM 483    jsconfi...
+-a---- 7/21/2026 11:36:02 AM 1746   next.co...
+-a---- 7/27/2026 10:34:44 AM 506291 package...
+-a---- 7/27/2026 10:34:44 AM 2675   package...
+-a---- 7/12/2023 8:46:04 PM  103327 passo.log 
+-a---- 10/7/2023 7:33:08 PM  47551  passwo.log
+-a---- 8/30/2025 12:50:04 PM 8418   PERFORM...
+-a---- 1/30/2023 1:45:34 AM  88     postcss...
+-a---- 1/30/2023 1:45:34 AM  1615   README.md 
+-a---- 7/28/2026 11:17:36 AM 702    sedi-hi...
+-a---- 8/30/2025 12:13:53 PM 7206   SEO_BUL...
+-a---- 8/30/2025 11:02:56 AM 6577   SEO_OPT...
+-a---- 8/30/2025 12:10:25 PM 2071   SEO_OPT...
+-a---- 8/30/2025 12:13:41 PM 6820   SEO_OPT...
+-a---- 1/30/2023 1:45:34 AM  1000   server.js 
+-a---- 8/31/2025 3:17:17 PM  406    start-w...
+-a---- 7/20/2026 5:06:33 PM  897    tailwin...
+-a---- 8/31/2025 4:42:05 PM  6179   TROUBLE...
+-a---- 7/27/2026 10:34:44 AM 297024 yarn.lock 
+
+
+
+
+
+============================================================
+COMPONENTS TREE
+============================================================
+
+Folder PATH listing for volume New Volume
+Volume serial number is 000002A4 C4A5:6B8E
+D:\CAMPCODE\SEDI_HISHAM_WEBSITE\COMPONENTS
+|   SEO.js
+|   
++---alert
+|       Button.js
+|       JobApplicationSent.js
+|       OrderSent.js
+|       
++---cart
+|       BreadCrumb.js
+|       Button.js
+|       Product.js
+|       TotalPriceCard.js
+|       
++---categories
+|       BreadCrumb.js
+|       Category.js
+|       CategoryB.js
+|       index.js
+|       
++---common
+|       BottomBg.jsx
+|       ClearStorage.js
+|       ErrorBoundary.js
+|       LazyComponent.js
+|       OptimizedImage.js
+|       PageBanner.jsx
+|       PerformanceMonitor.js
+|       SEOImage.js
+|       
++---compare_products
+|       AddToCard.js
+|       ColomunData.js
+|       Table.js
+|       
++---contact-form
+|       SampleInput.js
+|       
++---contactus
+|   |   BreadCrumb.js
+|   |   
+|   +---leftside
+|   |       BreadCrumb.js
+|   |       Button.js
+|   |       Contact.js
+|   |       Locations.js
+|   |       LocationTitle.js
+|   |       ShareCard.js
+|   |       
+|   \---rightside
+|           InfoCard.js
+|           MapPicker.js
+|           
++---dropdowns
+|   +---cart
+|   |       CartDropDown.js
+|   |       
+|   +---menu
+|   |       CurrencyMenuOption.js
+|   |       LanguageMenu.js
+|   |       MenuIconDropDown.js
+|   |       MenuOption.js
+|   |       
+|   +---search
+|   |       Product.js
+|   |       SearchIconDropDown.js
+|   |       
+|   +---sort
+|   |       SortProducts.js
+|   |       
+|   \---user_icon
+|           DropDownOption.js
+|           UserIconDropDown.js
+|           
++---favori
+|       BreadCrumb.js
+|       FavoritesCarousel.js
+|       
++---footer
+|       Footer.js
+|       SocialMediaIcon.js
+|       
++---forgotPassword
+|       index.js
+|       
++---home
+|   |   companies.js
+|   |   FloatingButton.js
+|   |   FloatingButtonMessage.js
+|   |   mockData.js
+|   |   ProductsSlider.js
+|   |   Slider.jsx
+|   |   SponsorSlider.js
+|   |   VideoImagesSlider.js
+|   |   
+|   +---section1
+|   |       Button.js
+|   |       index.js
+|   |       
+|   +---section2
+|   |       index.js
+|   |       NumberOne.js
+|   |       NumbertThree.js
+|   |       NumberTwo.js
+|   |       
+|   +---section3
+|   |       AddToCart.js
+|   |       Carousel.js
+|   |       CarouselCateg.js
+|   |       index.js
+|   |       ProductCard.js
+|   |       ProductCardCate.js
+|   |       ProductCardFavori.js
+|   |       
+|   +---section4
+|   |       ElasticCarousel.js
+|   |       index.js
+|   |       
+|   \---section5
+|           index.js
+|           
++---job-application
+|   |   Button.js
+|   |   FormOne.js
+|   |   FormRowRadio.js
+|   |   FormRowSelect.js
+|   |   FormTitle.js
+|   |   FormTwo.js
+|   |   InputWithIcon.js
+|   |   RadioButton.js
+|   |   SampleInput.js
+|   |   SelectCountry.js
+|   |   StepsProgress.js
+|   |   
+|   \---formThree
+|           AddCertificate.js
+|           FormThree.js
+|           SkillChoiceRow.js
+|           
++---kentchen
+|       index.js
+|       
++---kitchen
+|       BreadCrumb.js
+|       Cook.js
+|       Data.json
+|       mockData.js
+|       RecipeCard.js
+|       RecipeCarousel.js
+|       RecipeSlider.js
+|       Title.js
+|       
++---layouts
+|       index.js
+|       
++---login
+|       index.js
+|       
++---mobileNav
+|       HeaderOption.js
+|       index.js
+|       
++---navbar
+|       HeaderButton.js
+|       HeaderOption.js
+|       NavBar.js
+|       
++---news
+|       ActivitiesCarousel.js
+|       ActivityCard.js
+|       BreadCrumb.js
+|       Data.json
+|       NewsCard.js
+|       NewsCarousel.js
+|       NewsComponent.js
+|       NewsDetailsCarousel.js
+|       richTextPreview.js
+|       Tabs.js
+|       Title.js
+|       
++---orders
+|       BreadCrumb.js
+|       orderColumns.js
+|       OrderContent.js
+|       orderData.js
+|       OrderInfo.js
+|       Orders.js
+|       Title.js
+|       
++---payment
+|   |   AddLocation.js
+|   |   ControlSteps.js
+|   |   FormRow.js
+|   |   Step.js
+|   |   
+|   +---leftside
+|   |       CartContent.js
+|   |       DiscountVoucher.js
+|   |       PriceRow.js
+|   |       Product.js
+|   |       TitleCard.js
+|   |       
+|   +---payment_step
+|   |       BankTransfer.js
+|   |       DebitCard.js
+|   |       InfoRow.js
+|   |       PayByPoints.js
+|   |       PaymentTypeTitle.js
+|   |       Title.js
+|   |       
+|   \---shipping-address
+|           Address.js
+|           AddressLeftTitle.js
+|           AddressRightTitle.js
+|           ChooseShipping.js
+|           index.js
+|           
++---privacy-policy
+|       Desc.js
+|       index.js
+|       SubTitle.js
+|       Title.js
+|       
++---product
+|       AboutProduct.js
+|       AddToCard.js
+|       AvailableChoice.js
+|       BreadCrumb.js
+|       Detail.js
+|       MyGallery.js
+|       Price.js
+|       ProductHeader.js
+|       
++---profile
+|       BreadCrumb.js
+|       CheckBoxItem.js
+|       FormRowWithIcon.js
+|       
++---sideNav
+|       index.js
+|       
++---signup
+|       FormRow.js
+|       FormRowPassword.js
+|       NumInput.js
+|       Otp.js
+|       SignUp.js
+|       
+\---whoweare
+        CapturesSlider.js
+        CertificatesSlider.js
+        
+
+
+
+============================================================
+PAGES TREE
+============================================================
+
+Folder PATH listing for volume New Volume
+Volume serial number is 000002B0 C4A5:6B8E
+D:\CAMPCODE\SEDI_HISHAM_WEBSITE\PAGES
+|   index.js
+|   payment.rar
+|   _app.js
+|   
++---api
+|       hello.js
+|       
++---cart
+|       index.js
+|       
++---categories
+|   |   index.js
+|   |   
+|   \---product-content
+|       |   [id].js
+|       |   
+|       \---product-details
+|               [id].js
+|               
++---compare-products
+|       index.js
+|       
++---contact
+|       index.js
+|       
++---contactus
+|       index.js
+|       
++---favori
+|       index.js
+|       
++---forgot-password
+|       index.js
+|       
++---job-application
+|       addCertificate.js
+|       addInfo.js
+|       index.js
+|       jobSubmited.js
+|       
++---ketchen
+|   |   index.js
+|   |   
+|   \---recipes
+|       |   [id].js
+|       |   
+|       \---recipe-details
+|               [id].js
+|               
++---login
+|       index.js
+|       
++---news
+|   |   index.js
+|   |   
+|   +---activityDetails
+|   |       [id].js
+|   |       
+|   \---newsDetails
+|           [id].js
+|           
++---orders
+|   |   index.js
+|   |   
+|   \---orderDetails
+|           [id].js
+|           
++---payment
+|   |   addLocation.js
+|   |   checkout.js
+|   |   index.js
+|   |   otp.js
+|   |   shiping-address.js
+|   |   
+|   \---orderSent
+|           [id].js
+|           
++---privacy-policy
+|       index.js
+|       
++---profil
+|       index.js
+|       
++---signup
+|       index.js
+|       
+\---whoweare
+        index.js
+        
+
+
+
+============================================================
+REDUX TREE
+============================================================
+
+Folder PATH listing for volume New Volume
+Volume serial number is 0000023E C4A5:6B8E
+D:\CAMPCODE\SEDI_HISHAM_WEBSITE\REDUX
+    auth.js
+    branchSlice.js
+    cartSlice.js
+    favoritesSlice.js
+    jobApplicationSlice.js
+    languageSlice.js
+    message.js
+    store.js
+    
+No subfolders exist 
+
+
+
+
+============================================================
+STORE TREE
+============================================================
+
+[store folder not found]
+
+
+
+============================================================
+STATE MANAGEMENT PACKAGES
+============================================================
+
+sedi-hishem@0.1.0 D:\CampCode\Sedi_hisham_website
+ظ¤£ظ¤ظ¤ @reduxjs/toolkit@2.0.1
+ظ¤£ظ¤ظ¤ next@14.0.4
+ظ¤£ظ¤ظ¤ react-dom@18.2.0
+ظ¤£ظ¤ظ¤ react-redux@9.0.4
+ظ¤£ظ¤ظ¤ react@18.2.0
+ظ¤¤ظ¤ظ¤ redux-persist@6.0.0
+
+
+
+
+============================================================
+IMPORTANT FILE CONTENTS
+============================================================
+
+
+
+============================================================
+FILE: .\pages\_app.js
+============================================================
+
+import "../styles/globals.scss";
+// import "antd/dist/antd.css";
+import { El_Messiri } from "next/font/google";
+import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import ClearStorage from "../components/common/ClearStorage";
+import ErrorBoundary from "../components/common/ErrorBoundary";
+import PerformanceMonitor from "../components/common/PerformanceMonitor";
+import SEO from "../components/SEO";
+import { persistor, store } from "../redux/store";
+import "../styles/_homepage.scss";
+import "../styles/_ketchen.scss";
+import "../styles/_sideBar.scss";
+import "../styles/pages/_products.scss";
+import Layout from "./../components/layouts/index";
+
+const elMessiri = El_Messiri({
+  subsets: ["arabic", "latin"],
+  display: "swap",
+  variable: "--font-el-messiri",
+});
+
+function MyApp({ Component, pageProps }) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const content = (
+    <>
+      <div className={elMessiri.variable}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </div>
+    </>
+  );
+
+  return (
+    <ErrorBoundary>
+      <Provider store={store}>
+        <SEO />
+
+        {!isMounted ? (
+          content
+        ) : (
+          <PersistGate loading={null} persistor={persistor}>
+            <ClearStorage />
+
+            <PerformanceMonitor />
+
+            {content}
+          </PersistGate>
+        )}
+      </Provider>
+    </ErrorBoundary>
+  );
+}
+
+export default MyApp;
+
+
+
+============================================================
+FILE: .\pages\index.js
+============================================================
+
+import SEO from "@/components/SEO";
+import axios from "axios";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Slider from "../components/home/Slider";
+import SponsorSection from "../components/home/section5";
+import { setConversions } from "../redux/languageSlice";
+
+const Tabss = dynamic(() => import("../components/home/section3"), {
+  ssr: false,
+  loading: () => <div className="h-[430px] w-full bg-white" />,
+});
+
+const ElasticCarousel = dynamic(
+  () => import("../components/home/section4/ElasticCarousel"),
+  {
+    ssr: false,
+    loading: () => <div className="h-[420px] w-full bg-white" />,
+  },
+);
+
+const NewsCarousel = dynamic(() => import("../components/news/NewsCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-[420px] w-full bg-white" />,
+});
+
+const VideoImagesSlider = dynamic(
+  () => import("../components/home/VideoImagesSlider"),
+  {
+    ssr: false,
+    loading: () => <div className="h-[360px] w-full bg-white" />,
+  },
+);
+
+const SponsorSlider = dynamic(
+  () => import("../components/home/SponsorSlider"),
+  {
+    ssr: false,
+    loading: () => <div className="h-40 w-full bg-white" />,
+  },
+);
+
+function filterHomeSliderImages(data) {
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  return data.filter(
+    (item) =>
+      item?.categoryImage === "home_page_main_slider" ||
+      item?.categoryImage === "home_page_second_slider",
+  );
+}
+
+function DeferredSection({
+  children,
+  minHeight = "300px",
+  rootMargin = "500px 0px",
+}) {
+  const sectionRef = useRef(null);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+
+    if (!sectionElement || shouldRender) {
+      return undefined;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      setShouldRender(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin,
+      },
+    );
+
+    observer.observe(sectionElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [rootMargin, shouldRender]);
+
+  return (
+    <div
+      ref={sectionRef}
+      style={{
+        minHeight: shouldRender ? undefined : minHeight,
+      }}
+    >
+      {shouldRender ? children : null}
+    </div>
+  );
+}
+
+export default function Home({ initialSliderImages = [] }) {
+  const dispatch = useDispatch();
+
+  const { local } = useSelector((state) => state.language);
+
+  const [sliderImages, setSliderImages] = useState(
+    Array.isArray(initialSliderImages) ? initialSliderImages : [],
+  );
+
+  const [news, setNews] = useState([]);
+  const [activities, setActivities] = useState([]);
+
+  const getCurrencyConversions = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/currencies/findall",
+      );
+
+      dispatch(
+        setConversions(Array.isArray(response?.data) ? response.data : []),
+      );
+    } catch {
+      dispatch(setConversions([]));
+    }
+  }, [dispatch]);
+
+  const getSliderImages = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/pages/getall/home",
+      );
+
+      const filteredImages = filterHomeSliderImages(response?.data);
+
+      if (filteredImages.length > 0) {
+        setSliderImages(filteredImages);
+      }
+    } catch {
+      return;
+    }
+  }, []);
+
+  const getNews = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/news/findall",
+      );
+
+      setNews(Array.isArray(response?.data) ? response.data : []);
+    } catch {
+      setNews([]);
+    }
+  }, []);
+
+  const getActivities = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://api.sedihisham.com/activities/findall",
+      );
+
+      setActivities(Array.isArray(response?.data) ? response.data : []);
+    } catch {
+      setActivities([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    getCurrencyConversions();
+  }, [getCurrencyConversions]);
+
+  useEffect(() => {
+    if (initialSliderImages.length === 0) {
+      getSliderImages();
+    }
+  }, [getSliderImages, initialSliderImages.length]);
+
+  useEffect(() => {
+    let timeoutId;
+
+    const loadSecondaryData = () => {
+      timeoutId = window.setTimeout(() => {
+        getNews();
+        getActivities();
+
+        if (initialSliderImages.length > 0) {
+          getSliderImages();
+        }
+      }, 1200);
+    };
+
+    if (document.readyState === "complete") {
+      loadSecondaryData();
+    } else {
+      window.addEventListener("load", loadSecondaryData, {
+        once: true,
+      });
+    }
+
+    return () => {
+      window.removeEventListener("load", loadSecondaryData);
+      window.clearTimeout(timeoutId);
+    };
+  }, [getNews, getActivities, getSliderImages, initialSliderImages.length]);
+
+  return (
+    <div className="w-full overflow-hidden bg-white">
+      <Head>
+        <link rel="preconnect" href="https://api.sedihisham.com" />
+        <link rel="dns-prefetch" href="https://api.sedihisham.com" />
+      </Head>
+
+      <SEO
+        title="ط³ظٹط¯ظٹ ظ‡ط´ط§ظ… - ط´ط±ظƒط© ط§ظ„ط¹ظ‚ط§ط¯ ظ„ظ„طµظ†ط§ط¹ط© ظˆط§ظ„طھط¬ط§ط±ط©"
+        description="ط´ط±ظƒط© ط§ظ„ط¹ظ‚ط§ط¯ ظ„ظ„طµظ†ط§ط¹ط© ظˆط§ظ„طھط¬ط§ط±ط© ظ‡ظٹ ط´ط±ظƒط© ط±ط§ط¦ط¯ط© ظپظٹ ظ…ط¬ط§ظ„ طµظ†ط§ط¹ط© ط§ظ„ط؛ط°ط§ط¦ظٹط§طھ ط­ظٹط« طھظˆظپط± ط¹ظ„ط§ظ…ط§طھظ†ط§ ط§ظ„طھط¬ط§ط±ظٹط© ط³ظٹط¯ظٹ ظ‡ط´ط§ظ… ظ…ظ†طھط¬ط§طھ ظ…ظˆط«ظˆظ‚ط© ظٹطھظ… ط§ط³طھط®ط¯ط§ظ…ظ‡ط§ ظپظٹ ظ…ظ„ط§ظٹظٹظ† ط؛ط±ظپ ط§ظ„ظ…ط¹ظٹط´ط© ظˆط§ظ„ظ…ط·ط§ط¨ط®"
+        keywords="ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…, ط´ط±ظƒط© ط§ظ„ط¹ظ‚ط§ط¯, طµظ†ط§ط¹ط© ط؛ط°ط§ط¦ظٹط§طھ, ظ…ظ†طھط¬ط§طھ ظ…ظˆط«ظˆظ‚ط©, ظ…ط·ط§ط¨ط®, ط؛ط±ظپ ظ…ط¹ظٹط´ط©, ط؛ط°ط§ط¦ظٹط§طھ, طµظ†ط§ط¹ط©"
+        image="https://www.sedihisham.com/images/logo.png"
+      />
+
+      <h1 className="sr-only">ط³ظٹط¯ظٹ ظ‡ط´ط§ظ… - ط´ط±ظƒط© ط§ظ„ط¹ظ‚ط§ط¯ ظ„ظ„طµظ†ط§ط¹ط© ظˆط§ظ„طھط¬ط§ط±ط©</h1>
+
+      <Slider sliderImages={sliderImages} />
+
+      <section className="faviconhomecarousal pattern-section pattern-section-wheat relative z-[60] mt-8 w-full md:mt-12">
+        <div className="home-content-shell">
+          <DeferredSection minHeight="430px" rootMargin="350px 0px">
+            <Tabss />
+          </DeferredSection>
+        </div>
+      </section>
+
+      <section className="pt-8 w-full pattern-section pattern-section-wheat md:pt-12">
+        <div className="home-content-shell">
+          <DeferredSection minHeight="420px" rootMargin="500px 0px">
+            <ElasticCarousel sliderImages={sliderImages} />
+          </DeferredSection>
+        </div>
+      </section>
+
+      <section
+        dir={local === "ar" ? "rtl" : "ltr"}
+        className="pattern-section pattern-section-wheat relative mt-10 w-full overflow-hidden bg-white md:mt-12"
+      >
+        <div className="home-content-shell relative z-10 py-10 sm:py-12 lg:py-14">
+          <div className="mb-6 flex w-full flex-col items-center justify-center text-center md:mb-8">
+            <h2 className="font-arabicBold text-xl tracking-wide text-gray-900 sm:text-2xl">
+              {local === "ar"
+                ? "ظ…ط¹ط±ط¶ ط§ظ„طµظˆط± ظˆط§ظ„ظپظٹط¯ظٹظˆ"
+                : "Photo and video gallery"}
+            </h2>
+
+            <span className="mt-3 h-[3px] w-14 rounded-full bg-[#D40017]" />
+          </div>
+
+          <Suspense
+            fallback={
+              <div className="h-[360px] w-full animate-pulse bg-gray-100/70" />
+            }
+          >
+            <VideoImagesSlider />
+          </Suspense>
+        </div>
+      </section>
+
+      <section
+        dir={local === "ar" ? "rtl" : "ltr"}
+        className="pattern-section pattern-section-spices relative w-full overflow-hidden bg-white"
+      >
+        <div className="home-content-shell relative z-10 py-10 sm:py-12 lg:py-14">
+          <DeferredSection minHeight="420px" rootMargin="650px 0px">
+            <NewsCarousel
+              type="homepage"
+              news={[...news]}
+              activities={activities}
+            />
+          </DeferredSection>
+        </div>
+      </section>
+
+      <section className="w-full bg-white">
+        <div className="home-content-shell mb-8 mt-10 md:mb-12 md:mt-12">
+          <SponsorSection
+            title={local === "ar" ? "ط§ظ„ط¹ظ„ط§ظ…ط§طھ ط§ظ„طھط¬ط§ط±ظٹط©" : "Trademarks"}
+            desc={
+              local === "ar"
+                ? "ط¨ظ…ظپط±ط¯ظ†ط§ ظ„ط§ ظ†ط³طھط·ظٹط¹ ظپط¹ظ„ ط§ظ„ظƒط«ظٹط± ط› ظ…ط¹ظ‹ط§ ظٹظ…ظƒظ†ظ†ط§ ط£ظ† ظ†ظپط¹ظ„ ط§ظ„ظƒط«ظٹط±"
+                : "On our own we can do little; Together we can do a lot"
+            }
+          />
+
+          <DeferredSection minHeight="160px" rootMargin="700px 0px">
+            <SponsorSlider />
+          </DeferredSection>
+        </div>
+      </section>
+
+      <style jsx global>{`
+        .home-content-shell {
+          width: calc(100% - 24px);
+          max-width: 1380px;
+          margin-inline: auto;
+          padding-inline: 12px;
+        }
+
+        .pattern-section {
+          position: relative;
+          isolation: isolate;
+          width: 100%;
+          margin-inline: 0 !important;
+          padding: 0 !important;
+          border: 0 !important;
+          border-radius: 0 !important;
+          background-color: #ffffff !important;
+        }
+
+        .pattern-section::before {
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background-repeat: repeat;
+          background-position: center top;
+          background-size: 560px 560px;
+          opacity: 0.2;
+          pointer-events: none;
+          content: "";
+        }
+
+        .pattern-section-wheat::before {
+          background-image: url("/images/sedi-hisham-wheat-pattern-transparent.webp");
+        }
+
+        .pattern-section-spices::before {
+          background-image: url("/images/sedi-hisham-spices-pattern-transparent.webp");
+        }
+
+        .home-content-shell .second-home-slider > div {
+          width: 100% !important;
+          max-width: none !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
+        }
+
+        .home-content-shell .gallery-slider-container {
+          width: 100% !important;
+          max-width: none !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
+        }
+
+        .home-content-shell .news-carousel-section {
+          width: 100% !important;
+          max-width: none !important;
+          margin: 0 !important;
+          padding-inline: 0 !important;
+          background: transparent !important;
+        }
+
+        .home-content-shell .news-carousel-section > div {
+          width: 100% !important;
+          max-width: none !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
+        }
+
+        .home-content-shell .sponsor-slider-section {
+          width: 100% !important;
+          max-width: none !important;
+          margin-inline: 0 !important;
+          padding-inline: 0 !important;
+        }
+
+        @media (max-width: 639px) {
+          .home-content-shell {
+            width: calc(100% - 16px);
+            padding-inline: 8px;
+          }
+
+          .pattern-section::before {
+            background-size: 420px 420px;
+          }
+        }
+
+        @media (min-width: 1400px) {
+          .pattern-section::before {
+            background-size: 620px 620px;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+export async function getStaticProps() {
+  try {
+    const response = await axios.get(
+      "https://api.sedihisham.com/pages/getall/home",
+      {
+        timeout: 15000,
+      },
+    );
+
+    return {
+      props: {
+        initialSliderImages: filterHomeSliderImages(response?.data),
+      },
+    };
+  } catch {
+    return {
+      props: {
+        initialSliderImages: [],
+      },
+    };
+  }
+}
+
+
+
+============================================================
+FILE: .\components\layouts\index.js
+============================================================
+
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import Footer from "../footer/Footer";
+import Mobilena from "../mobileNav";
+import NavBar from "../navbar/NavBar";
+import SideNav from "../sideNav";
+
+export default function Layout({ children }) {
+  const router = useRouter();
+
+  const { local } = useSelector((state) => state.language);
+
+  const isAr = local === "ar";
+
+  useEffect(() => {
+    if (!document?.body) {
+      return undefined;
+    }
+
+    document.body.classList.toggle("arVersion", isAr);
+
+    return () => {
+      document.body.classList.remove("arVersion");
+    };
+  }, [isAr]);
+
+  return (
+    <div
+      dir={isAr ? "rtl" : "ltr"}
+      className={local === "en" ? "font-english" : "font-arabic"}
+    >
+      <NavBar />
+
+      <Mobilena />
+
+      <SideNav />
+
+      <main>{children}</main>
+
+      {!router.pathname.startsWith("/cart") && <Footer />}
+    </div>
+  );
+}
+
+
+
+============================================================
+FILE: .\components\navbar\NavBar.js
+============================================================
+
+import useHeaderScrolled from "@/hooks/useHeaderScrolled";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import logo from "../../public/images/logo.png";
+import MenuIconDropDown from "../dropdowns/menu/MenuIconDropDown";
+import SearchIconDropDown from "../dropdowns/search/SearchIconDropDown";
+import UserIconDropDown from "../dropdowns/user_icon/UserIconDropDown";
+import HeaderOption from "./HeaderOption";
+
+const LEFT_NAV_ITEMS = [
+  {
+    href: "/job-application",
+    ar: "ط´ط§ط±ظƒظ†ط§ ط§ظ„ظ†ط¬ط§ط­",
+    en: "Join us",
+  },
+  {
+    href: "/contactus",
+    ar: "ط§طھطµظ„ ط¨ظ†ط§",
+    en: "Contact us",
+  },
+  {
+    href: "/whoweare",
+    ar: "ظ…ظ† ظ†ط­ظ†",
+    en: "About us",
+  },
+];
+
+const RIGHT_NAV_ITEMS = [
+  {
+    href: "/categories",
+    ar: "ط§ظ„ظ…ظ†طھط¬ط§طھ",
+    en: "Products",
+  },
+  {
+    href: "/ketchen",
+    ar: "ط§ظ„ظ…ط·ط¨ط®",
+    en: "Kitchen",
+  },
+  {
+    href: "/news",
+    ar: "ط§ظ„ط£ط®ط¨ط§ط±",
+    en: "News",
+  },
+];
+
+const ALL_NAV_ITEMS = [...LEFT_NAV_ITEMS, ...RIGHT_NAV_ITEMS];
+
+function normalizePath(asPath = "/") {
+  const path = asPath.split(/[?#]/)[0];
+
+  return path || "/";
+}
+
+function isPathActive(currentPath, href) {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+
+function getElementOffsetLeft(element, parent) {
+  if (!element || !parent) {
+    return 0;
+  }
+
+  let currentElement = element;
+  let offsetLeft = 0;
+
+  while (currentElement && currentElement !== parent) {
+    offsetLeft += currentElement.offsetLeft;
+    currentElement = currentElement.offsetParent;
+  }
+
+  if (currentElement === parent) {
+    return offsetLeft;
+  }
+
+  const parentRect = parent.getBoundingClientRect();
+
+  const elementRect = element.getBoundingClientRect();
+
+  return elementRect.left - parentRect.left;
+}
+
+function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
+  const navigationRef = useRef(null);
+  const linkRefs = useRef(new Map());
+
+  const isFixed = variant === "fixed";
+
+  const [indicator, setIndicator] = useState({
+    x: 0,
+    width: 0,
+    visible: false,
+  });
+
+  const activeItem = ALL_NAV_ITEMS.find((item) =>
+    isPathActive(currentPath, item.href),
+  );
+
+  const activeHref = activeItem?.href;
+
+  const setLinkRef = useCallback((href, node) => {
+    if (node) {
+      linkRefs.current.set(href, node);
+
+      return;
+    }
+
+    linkRefs.current.delete(href);
+  }, []);
+
+  const measureIndicator = useCallback(() => {
+    const navigation = navigationRef.current;
+
+    const activeLink = activeHref ? linkRefs.current.get(activeHref) : null;
+
+    if (!navigation || !activeLink) {
+      setIndicator((current) => {
+        if (!current.visible) {
+          return current;
+        }
+
+        return {
+          ...current,
+          visible: false,
+        };
+      });
+
+      return;
+    }
+
+    const nextIndicator = {
+      x: Math.round(getElementOffsetLeft(activeLink, navigation)),
+      width: Math.round(activeLink.offsetWidth),
+      visible: true,
+    };
+
+    setIndicator((current) => {
+      const unchanged =
+        current.x === nextIndicator.x &&
+        current.width === nextIndicator.width &&
+        current.visible === nextIndicator.visible;
+
+      return unchanged ? current : nextIndicator;
+    });
+  }, [activeHref]);
+
+  useEffect(() => {
+    if (!visible) {
+      setIndicator((current) => {
+        if (!current.visible) {
+          return current;
+        }
+
+        return {
+          ...current,
+          visible: false,
+        };
+      });
+
+      return undefined;
+    }
+
+    let firstFrame = null;
+    let secondFrame = null;
+    let settleTimer = null;
+    let resizeObserver = null;
+    let cancelled = false;
+
+    const scheduleMeasure = () => {
+      if (firstFrame !== null) {
+        cancelAnimationFrame(firstFrame);
+      }
+
+      if (secondFrame !== null) {
+        cancelAnimationFrame(secondFrame);
+      }
+
+      firstFrame = requestAnimationFrame(() => {
+        secondFrame = requestAnimationFrame(measureIndicator);
+      });
+    };
+
+    scheduleMeasure();
+
+    settleTimer = window.setTimeout(measureIndicator, isFixed ? 560 : 120);
+
+    if ("ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(scheduleMeasure);
+
+      if (navigationRef.current) {
+        resizeObserver.observe(navigationRef.current);
+      }
+
+      const activeLink = activeHref ? linkRefs.current.get(activeHref) : null;
+
+      if (activeLink) {
+        resizeObserver.observe(activeLink);
+      }
+    }
+
+    window.addEventListener("resize", scheduleMeasure, {
+      passive: true,
+    });
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (!cancelled) {
+          scheduleMeasure();
+        }
+      });
+    }
+
+    return () => {
+      cancelled = true;
+
+      resizeObserver?.disconnect();
+
+      window.removeEventListener("resize", scheduleMeasure);
+
+      if (settleTimer !== null) {
+        window.clearTimeout(settleTimer);
+      }
+
+      if (firstFrame !== null) {
+        cancelAnimationFrame(firstFrame);
+      }
+
+      if (secondFrame !== null) {
+        cancelAnimationFrame(secondFrame);
+      }
+    };
+  }, [activeHref, isAr, isFixed, measureIndicator, variant, visible]);
+
+  return (
+    <div
+      ref={navigationRef}
+      dir="ltr"
+      className={`relative grid h-full min-w-0 items-center transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isFixed
+          ? "grid-cols-[minmax(0,1fr)_120px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_136px_minmax(0,1fr)]"
+          : "grid-cols-[minmax(0,1fr)_138px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_158px_minmax(0,1fr)]"
+      }`}
+    >
+      <nav
+        dir={isAr ? "rtl" : "ltr"}
+        aria-label={isAr ? "ط±ظˆط§ط¨ط· ظ…ط¹ظ„ظˆظ…ط§طھ ط§ظ„ط´ط±ظƒط©" : "Company information"}
+        className={`flex min-w-0 items-center justify-center ${
+          isFixed ? "gap-0.5 lg:gap-2 xl:gap-4" : "gap-1 lg:gap-4 xl:gap-7"
+        }`}
+      >
+        {LEFT_NAV_ITEMS.map((item) => {
+          const isActive = isPathActive(currentPath, item.href);
+
+          return (
+            <HeaderOption
+              key={`${variant}-${item.href}`}
+              ref={(node) => setLinkRef(item.href, node)}
+              href={item.href}
+              text={isAr ? item.ar : item.en}
+              isAr={isAr}
+              isActive={isActive}
+              scrolled={isFixed}
+            />
+          );
+        })}
+      </nav>
+
+      <div aria-hidden="true" />
+
+      <nav
+        dir={isAr ? "rtl" : "ltr"}
+        aria-label={isAr ? "ط±ظˆط§ط¨ط· ط£ظ‚ط³ط§ظ… ط§ظ„ظ…ظˆظ‚ط¹" : "Website sections"}
+        className={`flex min-w-0 items-center justify-center ${
+          isFixed ? "gap-0.5 lg:gap-2 xl:gap-4" : "gap-1 lg:gap-4 xl:gap-7"
+        }`}
+      >
+        {RIGHT_NAV_ITEMS.map((item) => {
+          const isActive = isPathActive(currentPath, item.href);
+
+          return (
+            <HeaderOption
+              key={`${variant}-${item.href}`}
+              ref={(node) => setLinkRef(item.href, node)}
+              href={item.href}
+              text={isAr ? item.ar : item.en}
+              isAr={isAr}
+              isActive={isActive}
+              scrolled={isFixed}
+            />
+          );
+        })}
+      </nav>
+
+      <span
+        aria-hidden="true"
+        style={{
+          width: `${indicator.width}px`,
+          transform: `translate3d(${indicator.x}px, 0, 0)`,
+        }}
+        className={`pointer-events-none absolute left-0 z-20 will-change-[transform,width] transition-[transform,width,opacity,bottom] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isFixed ? "bottom-[5px]" : "bottom-[7px]"
+        } ${indicator.visible ? "opacity-100" : "opacity-0"}`}
+      >
+        <span className="absolute bottom-0 left-[14%] right-[14%] h-[2px] rounded-full bg-[#FFD62D] shadow-[0_0_10px_rgba(255,214,45,0.75)]" />
+
+        <span className="absolute bottom-[-2px] left-1/2 h-[6px] w-[6px] -translate-x-1/2 rotate-45 rounded-[1px] bg-[#FFD62D] shadow-[0_0_12px_rgba(255,214,45,0.95)]" />
+      </span>
+    </div>
+  );
+}
+
+function BrandCrest({ isAr, isHome, variant, priorityLogo = false }) {
+  const isFixed = variant === "fixed";
+
+  return (
+    <Link
+      href="/"
+      aria-label={isAr ? "ط§ظ„ط±ط¦ظٹط³ظٹط©" : "Home"}
+      aria-current={isHome ? "page" : undefined}
+      className={`group pointer-events-auto absolute left-1/2 z-40 -translate-x-1/2 transform-gpu ${
+        isFixed
+          ? "top-[calc(50%+8px)] h-[92px] w-[108px] -translate-y-1/2"
+          : "top-0 h-[118px] w-[138px] lg:w-[146px]"
+      }`}
+    >
+      <span
+        className={`absolute inset-0 overflow-hidden border-[#FFD62D] bg-[linear-gradient(180deg,#8E0013_0%,#65000C_48%,#410006_100%)] transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-0.5 ${
+          isFixed
+            ? "rounded-b-[46px] rounded-t-[14px] border shadow-[0_15px_32px_rgba(30,0,4,0.42),0_0_20px_rgba(255,214,45,0.22)]"
+            : "rounded-b-[59px] border-x border-b shadow-[0_19px_38px_rgba(30,0,4,0.36)]"
+        } ${
+          isHome
+            ? "shadow-[0_18px_38px_rgba(30,0,4,0.4),0_0_21px_rgba(255,214,45,0.25)]"
+            : ""
+        }`}
+      >
+        <span className="absolute inset-[6px] rounded-[inherit] border border-white/10" />
+
+        <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_5%,rgba(255,255,255,0.18),transparent_44%)]" />
+
+        <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D]/80 to-transparent" />
+      </span>
+
+      <span
+        className={`absolute left-1/2 z-10 -translate-x-1/2 ${
+          isFixed
+            ? "top-[10px] h-[65px] w-[94px]"
+            : "top-[12px] h-[80px] w-[120px] lg:w-[128px]"
+        }`}
+      >
+        <Image
+          alt={isAr ? "ط´ط¹ط§ط± ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…" : "Sedi Hisham logo"}
+          src={logo}
+          fill
+          priority={priorityLogo}
+          sizes={isFixed ? "94px" : "(min-width: 1024px) 128px, 120px"}
+          className="object-contain drop-shadow-[0_6px_10px_rgba(0,0,0,0.3)]"
+          draggable={false}
+        />
+      </span>
+    </Link>
+  );
+}
+
+function DecorativeWave() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[34px] translate-y-full overflow-hidden"
+    >
+      <svg
+        viewBox="0 0 1440 34"
+        preserveAspectRatio="none"
+        className="h-full w-full"
+      >
+        <defs>
+          <linearGradient id="staticHeaderWaveFill" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#560007" />
+
+            <stop offset="50%" stopColor="#7C1422" />
+
+            <stop offset="100%" stopColor="#560007" />
+          </linearGradient>
+
+          <linearGradient id="staticHeaderWaveLine" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#FFD62D" stopOpacity="0" />
+
+            <stop offset="18%" stopColor="#FFD62D" stopOpacity="0.7" />
+
+            <stop offset="50%" stopColor="#FFD62D" />
+
+            <stop offset="82%" stopColor="#FFD62D" stopOpacity="0.7" />
+
+            <stop offset="100%" stopColor="#FFD62D" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        <path
+          d="
+            M0 0
+            H390
+            C425 0 433 10 468 10
+            H610
+            C660 10 671 32 720 32
+            C769 32 780 10 830 10
+            H972
+            C1007 10 1015 0 1050 0
+            H1440
+            V0
+            H0
+            Z
+          "
+          fill="url(#staticHeaderWaveFill)"
+        />
+
+        <path
+          d="
+            M0 0
+            H390
+            C425 0 433 10 468 10
+            H610
+            C660 10 671 32 720 32
+            C769 32 780 10 830 10
+            H972
+            C1007 10 1015 0 1050 0
+            H1440
+          "
+          fill="none"
+          stroke="url(#staticHeaderWaveLine)"
+          strokeWidth="1.4"
+          vectorEffect="non-scaling-stroke"
+          className="sedi-static-wave-line"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function DesktopHeaderBar({
+  isAr,
+  currentPath,
+  variant,
+  visible = true,
+  priorityLogo = false,
+}) {
+  const isFixed = variant === "fixed";
+  const isHome = currentPath === "/";
+
+  return (
+    <div
+      dir="ltr"
+      style={{
+        fontFamily: "var(--font-el-messiri)",
+      }}
+      className={`pointer-events-auto relative isolate transform-gpu overflow-visible border-[#FFD62D]/40 ${
+        isFixed
+          ? "mx-auto mt-2 h-[64px] w-[calc(100%_-_20px)] max-w-[1380px] rounded-[19px] border px-3 shadow-[0_18px_45px_rgba(34,0,5,0.34)] lg:px-5"
+          : "h-[82px] w-full rounded-none border-x-0 border-t-0 border-b px-5 shadow-[0_12px_30px_rgba(34,0,5,0.24)] lg:px-8 xl:px-12"
+      }`}
+    >
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 overflow-hidden ${
+          isFixed ? "rounded-[18px]" : "rounded-none"
+        }`}
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(112deg,#4A0006_0%,#72000D_22%,#980019_50%,#72000D_78%,#4A0006_100%)]" />
+
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(255,214,45,0.19),transparent_44%)]" />
+
+        <div className="absolute inset-0 opacity-[0.052] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_24px,#ffffff_25px,transparent_26px)]" />
+
+        {!isFixed && (
+          <div className="sedi-static-header-sheen absolute inset-y-0 -left-[35%] w-[24%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+        )}
+
+        <div className="absolute left-1/2 top-0 h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+
+        <div
+          className={`absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent ${
+            isFixed ? "opacity-90" : "opacity-0"
+          }`}
+        />
+      </div>
+
+      {!isFixed && <DecorativeWave />}
+
+      <div className="relative z-10 grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center">
+        <div
+          aria-label={isAr ? "ط§ظ„ظ‚ط§ط¦ظ…ط© ظˆط§ظ„ط­ط³ط§ط¨" : "Menu and account"}
+          className={`relative z-30 flex shrink-0 items-center justify-start ${
+            isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
+          }`}
+        >
+          <MenuIconDropDown />
+
+          <UserIconDropDown />
+        </div>
+
+        <DesktopNavigation
+          isAr={isAr}
+          currentPath={currentPath}
+          variant={variant}
+          visible={visible}
+        />
+
+        <div
+          aria-label={isAr ? "ط§ظ„ط¨ط­ط« ظˆط³ظ„ط© ط§ظ„طھط³ظˆظ‚" : "Search and cart"}
+          className={`relative z-30 flex shrink-0 items-center justify-end ${
+            isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
+          }`}
+        >
+          <SearchIconDropDown />
+
+          {/* <CartDropDown /> */}
+        </div>
+      </div>
+
+      <BrandCrest
+        isAr={isAr}
+        isHome={isHome}
+        variant={variant}
+        priorityLogo={priorityLogo}
+      />
+
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute left-1/2 z-30 -translate-x-1/2 rounded-full bg-[#FFD62D] blur-[11px] ${
+          isFixed
+            ? "-bottom-[21px] h-2 w-16 opacity-35"
+            : "-bottom-[33px] h-2 w-20 opacity-50"
+        }`}
+      />
+    </div>
+  );
+}
+
+export default function NavBar() {
+  const router = useRouter();
+
+  const { local } = useSelector((state) => state.language);
+
+  const scrolled = useHeaderScrolled();
+
+  const [hydrated, setHydrated] = useState(false);
+
+  const isAr = local === "ar";
+
+  const currentPath = normalizePath(router.asPath);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  return (
+    <>
+      <header className="navbar sedi-static-header-enter relative z-[110] hidden w-full md:block">
+        <DesktopHeaderBar
+          isAr={isAr}
+          currentPath={currentPath}
+          variant="static"
+          visible
+          priorityLogo
+        />
+      </header>
+
+      {hydrated && (
+        <header
+          aria-hidden={!scrolled}
+          className={`navbar fixed inset-x-0 top-0 z-[120] hidden transform-gpu transition-[transform,opacity,visibility,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:block ${
+            scrolled
+              ? "visible translate-y-0 scale-100 opacity-100 blur-0"
+              : "invisible -translate-y-[125%] scale-[0.97] opacity-0 blur-sm"
+          } ${scrolled ? "pointer-events-auto" : "pointer-events-none"}`}
+        >
+          <DesktopHeaderBar
+            isAr={isAr}
+            currentPath={currentPath}
+            variant="fixed"
+            visible={scrolled}
+            priorityLogo={false}
+          />
+        </header>
+      )}
+
+      <style jsx global>{`
+        @keyframes sediStaticHeaderEnter {
+          from {
+            opacity: 0;
+            transform: translate3d(0, -28px, 0);
+          }
+
+          to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+
+        @keyframes sediStaticHeaderSheen {
+          0% {
+            transform: translate3d(0, 0, 0) skewX(-20deg);
+            opacity: 0;
+          }
+
+          18% {
+            opacity: 1;
+          }
+
+          65%,
+          100% {
+            transform: translate3d(680%, 0, 0) skewX(-20deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes sediStaticWaveDraw {
+          from {
+            stroke-dasharray: 2200;
+            stroke-dashoffset: 2200;
+          }
+
+          to {
+            stroke-dasharray: 2200;
+            stroke-dashoffset: 0;
+          }
+        }
+
+        .sedi-static-header-enter {
+          animation: sediStaticHeaderEnter 750ms cubic-bezier(0.22, 1, 0.36, 1)
+            both;
+        }
+
+        .sedi-static-header-sheen {
+          animation: sediStaticHeaderSheen 1650ms 420ms
+            cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .sedi-static-wave-line {
+          animation: sediStaticWaveDraw 1250ms 170ms
+            cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .sedi-static-header-enter,
+          .sedi-static-header-sheen,
+          .sedi-static-wave-line {
+            animation: none !important;
+            opacity: 1 !important;
+          }
+        }
+      `}</style>
+    </>
+  );
+}
+
+
+
+============================================================
+FILE: .\components\mobileNav\index.js
+============================================================
+
+import useHeaderScrolled from "@/hooks/useHeaderScrolled";
+import { Dialog, Transition } from "@headlessui/react";
+import {
+  Briefcase,
+  ChefHat,
+  Headphones,
+  Info,
+  Menu,
+  Newspaper,
+  Package,
+  X,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Fragment, memo, useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import logo from "../../public/images/logo.png";
+import MenuIconDropDown from "../dropdowns/menu/MenuIconDropDown";
+import SearchIconDropDown from "../dropdowns/search/SearchIconDropDown";
+import UserIconDropDown from "../dropdowns/user_icon/UserIconDropDown";
+
+const NAV_ITEMS = [
+  {
+    href: "/job-application",
+    ar: "ط´ط§ط±ظƒظ†ط§ ط§ظ„ظ†ط¬ط§ط­",
+    en: "Join us",
+    Icon: Briefcase,
+  },
+  {
+    href: "/contactus",
+    ar: "ط§طھطµظ„ ط¨ظ†ط§",
+    en: "Contact us",
+    Icon: Headphones,
+  },
+  {
+    href: "/whoweare",
+    ar: "ظ…ظ† ظ†ط­ظ†",
+    en: "About us",
+    Icon: Info,
+  },
+  {
+    href: "/categories",
+    ar: "ط§ظ„ظ…ظ†طھط¬ط§طھ",
+    en: "Products",
+    Icon: Package,
+  },
+  {
+    href: "/ketchen",
+    ar: "ط§ظ„ظ…ط·ط¨ط®",
+    en: "Kitchen",
+    Icon: ChefHat,
+  },
+  {
+    href: "/news",
+    ar: "ط§ظ„ط£ط®ط¨ط§ط±",
+    en: "News",
+    Icon: Newspaper,
+  },
+];
+
+function normalizePath(asPath = "/") {
+  const path = asPath.split(/[?#]/)[0];
+
+  return path || "/";
+}
+
+function isPathActive(currentPath, href) {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+
+const MobileMenuItem = memo(function MobileMenuItem({
+  item,
+  isAr,
+  isActive,
+  index,
+  onNavigate,
+}) {
+  const Icon = item.Icon;
+
+  return (
+    <Link
+      href={item.href}
+      onClick={onNavigate}
+      aria-current={isActive ? "page" : undefined}
+      style={{
+        animationDelay: `${100 + index * 55}ms`,
+        "--mobile-item-enter-x": isAr ? "14px" : "-14px",
+      }}
+      className={`mobile-sidebar-item group relative flex min-h-[58px] w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-2.5 text-start transition-[border-color,background-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.985] ${
+        isActive
+          ? "border-[#FFD62D]/30 bg-[#FFD62D]/10 shadow-[0_9px_25px_rgba(38,0,6,0.14)]"
+          : "border-transparent hover:border-white/10 hover:bg-white/[0.065]"
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className={`absolute inset-y-3 w-[3px] rounded-full bg-[#FFD62D] shadow-[0_0_10px_rgba(255,214,45,0.65)] transition-[transform,opacity] duration-300 ${
+          isAr ? "right-0" : "left-0"
+        } ${
+          isActive
+            ? "scale-y-100 opacity-100"
+            : "scale-y-0 opacity-0 group-hover:scale-y-75 group-hover:opacity-50"
+        }`}
+      />
+
+      <span
+        className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-[border-color,background-color,color,transform] duration-300 group-hover:-translate-y-[1px] ${
+          isActive
+            ? "border-[#FFD62D]/45 bg-[#FFD62D]/10 text-[#FFD62D]"
+            : "border-white/10 bg-white/[0.06] text-white/80 group-hover:border-[#FFD62D]/25 group-hover:text-[#FFD62D]"
+        }`}
+      >
+        <Icon
+          aria-hidden="true"
+          className="h-[19px] w-[19px]"
+          strokeWidth={1.8}
+        />
+
+        {isActive && (
+          <span className="pointer-events-none absolute inset-[-3px] rounded-[14px] border border-[#FFD62D]/10" />
+        )}
+      </span>
+
+      <span
+        className={`min-w-0 flex-1 truncate pt-[2px] text-[15px] font-semibold leading-6 transition-colors duration-300 ${
+          isActive ? "text-[#FFD62D]" : "text-white/90 group-hover:text-white"
+        }`}
+      >
+        {isAr ? item.ar : item.en}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className={`relative h-2 w-2 shrink-0 rounded-full border transition-[border-color,background-color,box-shadow,transform] duration-300 ${
+          isActive
+            ? "scale-100 border-[#FFD62D] bg-[#FFD62D] shadow-[0_0_9px_rgba(255,214,45,0.65)]"
+            : "scale-75 border-white/20 bg-transparent group-hover:scale-100 group-hover:border-[#FFD62D]/50"
+        }`}
+      />
+
+      <span
+        aria-hidden="true"
+        className={`absolute bottom-0 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-[#FFD62D] shadow-[0_0_8px_rgba(255,214,45,0.6)] transition-[width,opacity] duration-300 ${
+          isActive ? "w-12 opacity-100" : "w-0 opacity-0"
+        }`}
+      />
+    </Link>
+  );
+});
+
+function MobileNav({ open, onClose, isAr, currentPath }) {
+  return (
+    <Transition show={open} as={Fragment}>
+      <Dialog
+        as="div"
+        dir={isAr ? "rtl" : "ltr"}
+        className="relative z-[2147483647] md:hidden"
+        onClose={onClose}
+      >
+        <Transition.Child
+          as={Fragment}
+          enter="transition-opacity duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-[#1D0004]/70 backdrop-blur-[5px]" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 overflow-hidden">
+          <Transition.Child
+            as={Fragment}
+            enter="transform transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            enterFrom={isAr ? "translate-x-full" : "-translate-x-full"}
+            enterTo="translate-x-0"
+            leave="transform transition duration-300 ease-[cubic-bezier(0.4,0,1,1)]"
+            leaveFrom="translate-x-0"
+            leaveTo={isAr ? "translate-x-full" : "-translate-x-full"}
+          >
+            <Dialog.Panel
+              id="mobile-navigation-dialog"
+              style={{
+                insetInlineStart: 0,
+                fontFamily: "var(--font-el-messiri)",
+              }}
+              className="absolute top-0 flex h-full w-[86%] max-w-[360px] flex-col overflow-hidden border-e border-[#FFD62D]/20 bg-[#65000C] shadow-[0_0_75px_rgba(0,0,0,0.5)]"
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+              >
+                <div className="absolute inset-0 opacity-[0.04] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_23px,#ffffff_24px,transparent_25px)]" />
+              </div>
+
+              <div className="relative z-10 px-4 pb-3 pt-4">
+                <div className="flex items-start justify-between gap-4">
+                  <Link
+                    href="/"
+                    onClick={onClose}
+                    aria-label={
+                      isAr ? "ط§ظ„ط§ظ†طھظ‚ط§ظ„ ط¥ظ„ظ‰ ط§ظ„طµظپط­ط© ط§ظ„ط±ط¦ظٹط³ظٹط©" : "Go to home page"
+                    }
+                    className="group relative block h-[70px] w-[126px]"
+                  >
+                    <span className="absolute inset-0 overflow-hidden rounded-b-[30px] rounded-t-xl border border-[#FFD62D]/35 bg-[linear-gradient(180deg,#880014_0%,#510007_100%)] shadow-[0_12px_28px_rgba(30,0,4,0.28)]">
+                      <span className="absolute inset-[5px] rounded-[inherit] border border-white/[0.07]" />
+                    </span>
+
+                    <Image
+                      alt={isAr ? "ط´ط¹ط§ط± ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…" : "Sedi Hisham logo"}
+                      src={logo}
+                      fill
+                      sizes="126px"
+                      className="relative z-10 object-contain p-2.5 drop-shadow-[0_5px_9px_rgba(0,0,0,0.27)] transition-transform duration-300 group-hover:scale-[1.025]"
+                      draggable={false}
+                    />
+
+                    <span className="absolute -bottom-[1px] left-1/2 z-20 h-[2px] w-10 -translate-x-1/2 rounded-full bg-[#FFD62D] shadow-[0_0_8px_rgba(255,214,45,0.6)]" />
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    aria-label={isAr ? "ط¥ط؛ظ„ط§ظ‚ ط§ظ„ظ‚ط§ط¦ظ…ط©" : "Close menu"}
+                    className="group flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white/80 transition-[border-color,background-color,color,transform] duration-300 active:scale-95 hover:rotate-90 hover:border-[#FFD62D]/45 hover:bg-white/10 hover:text-[#FFD62D]"
+                  >
+                    <X className="h-5 w-5" strokeWidth={2} />
+                  </button>
+                </div>
+
+                <div className="mt-5 flex items-end justify-between gap-3">
+                  <div className="text-start">
+                    <Dialog.Title className="text-[18px] font-bold leading-7 text-white">
+                      {isAr ? "ط§ط³طھظƒط´ظپ ط§ظ„ظ…ظˆظ‚ط¹" : "Explore"}
+                    </Dialog.Title>
+
+                    <p className="mt-0.5 text-[11px] leading-5 text-white/45">
+                      {isAr
+                        ? "ط§ظ†طھظ‚ظ„ ط¥ظ„ظ‰ ط§ظ„ظ‚ط³ظ… ط§ظ„ط°ظٹ طھط±ظٹط¯ظ‡"
+                        : "Choose where you want to go"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative z-10 mx-4 h-px bg-gradient-to-r from-transparent via-white/15 to-white/25" />
+
+              <nav className="mobile-sidebar-scroll relative z-10 flex-1 overflow-y-auto overscroll-contain px-3 py-3">
+                <div className="flex flex-col gap-1">
+                  {NAV_ITEMS.map((item, index) => (
+                    <MobileMenuItem
+                      key={item.href}
+                      item={item}
+                      isAr={isAr}
+                      index={index}
+                      isActive={isPathActive(currentPath, item.href)}
+                      onNavigate={onClose}
+                    />
+                  ))}
+                </div>
+              </nav>
+
+              <div className="relative z-10 px-4 pb-5 pt-3">
+                <div className="h-px bg-gradient-to-r from-transparent via-white/25 to-white/25" />
+
+                <div className="mt-4 flex items-center gap-3">
+                  {/* <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#FFD62D]/30 bg-[#FFD62D]/[0.07]">
+                    <span className="h-[7px] w-[7px] rotate-45 rounded-[1px] bg-[#FFD62D] shadow-[0_0_8px_rgba(255,214,45,0.6)]" />
+                  </span> */}
+
+                  <p className="text-start text-[11px] leading-5 text-white/45">
+                    {isAr
+                      ? "ط¬ظˆط¯ط© ط«ط§ط¨طھط© ظˆط·ط¹ظ… ظٹط¹طھظ…ط¯ ط¹ظ„ظٹظ‡."
+                      : "Consistent quality and taste."}
+                  </p>
+                </div>
+              </div>
+            </Dialog.Panel>
+          </Transition.Child>
+        </div>
+      </Dialog>
+    </Transition>
+  );
+}
+
+function MobileBrand({ isAr, variant, priorityLogo }) {
+  const isStatic = variant === "static";
+
+  return (
+    <Link
+      href="/"
+      aria-label={isAr ? "ط§ظ„ط±ط¦ظٹط³ظٹط©" : "Home"}
+      className={`group relative mx-1 block shrink-0 transition-[width,height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isStatic ? "h-[54px] w-[92px]" : "h-[46px] w-[74px]"
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className={`absolute left-1/2 top-1/2 border border-[#FFD62D]/40 bg-[linear-gradient(180deg,#8F0016_0%,#510007_100%)] shadow-[0_9px_22px_rgba(30,0,4,0.3)] ${
+          isStatic
+            ? "h-[58px] w-[98px] -translate-x-1/2 -translate-y-1/2 rounded-b-[27px] rounded-t-xl"
+            : "h-[48px] w-[78px] -translate-x-1/2 -translate-y-1/2 rounded-b-[22px] rounded-t-xl"
+        }`}
+      />
+
+      <Image
+        alt={isAr ? "ط´ط¹ط§ط± ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…" : "Sedi Hisham logo"}
+        src={logo}
+        fill
+        priority={priorityLogo}
+        sizes={isStatic ? "92px" : "74px"}
+        className="z-10 object-contain p-1.5 drop-shadow-[0_4px_7px_rgba(0,0,0,0.28)] transition-transform duration-300 group-hover:scale-[1.03]"
+        draggable={false}
+      />
+
+      <span
+        aria-hidden="true"
+        className="absolute -bottom-[1px] left-1/2 z-20 h-[2px] w-8 -translate-x-1/2 rounded-full bg-[#FFD62D] shadow-[0_0_8px_rgba(255,214,45,0.65)]"
+      />
+    </Link>
+  );
+}
+
+function MobileHeaderBar({
+  isAr,
+  open,
+  setOpen,
+  variant = "static",
+  priorityLogo = false,
+}) {
+  const isStatic = variant === "static";
+
+  return (
+    <div
+      dir="ltr"
+      style={{
+        fontFamily: "var(--font-el-messiri)",
+      }}
+      className={`pointer-events-auto relative mx-auto grid transform-gpu grid-cols-[1fr_auto_1fr] items-center border border-[#FFD62D]/25 transition-[height,width,margin-top,border-radius,padding,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isStatic
+          ? "h-[68px] w-full rounded-none border-x-0 border-t-0 px-2.5 shadow-[0_10px_28px_rgba(35,0,5,0.27)]"
+          : "mt-2 h-[57px] w-[calc(100%_-_14px)] rounded-[18px] px-2 shadow-[0_14px_34px_rgba(35,0,5,0.34)]"
+      }`}
+    >
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 overflow-hidden ${
+          isStatic ? "rounded-none" : "rounded-[17px]"
+        }`}
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(112deg,#520007_0%,#7C1422_48%,#520007_100%)]" />
+
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,214,45,0.15),transparent_48%)]" />
+
+        <div className="absolute inset-0 opacity-[0.04] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_19px,#ffffff_20px,transparent_21px)]" />
+
+        <div className="absolute inset-x-[8%] bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent opacity-75" />
+      </div>
+
+      <div className="relative z-20 flex min-w-0 items-center justify-start gap-0.5">
+        <MenuIconDropDown />
+
+        <UserIconDropDown />
+      </div>
+
+      <MobileBrand isAr={isAr} variant={variant} priorityLogo={priorityLogo} />
+
+      <div className="relative z-20 flex min-w-0 items-center justify-end gap-0.5">
+        <SearchIconDropDown />
+
+        {/* <CartDropDown /> */}
+
+        <button
+          type="button"
+          aria-label={
+            open
+              ? isAr
+                ? "ط¥ط؛ظ„ط§ظ‚ ط§ظ„ظ‚ط§ط¦ظ…ط©"
+                : "Close menu"
+              : isAr
+                ? "ظپطھط­ ط§ظ„ظ‚ط§ط¦ظ…ط©"
+                : "Open menu"
+          }
+          aria-expanded={open}
+          aria-controls="mobile-navigation-dialog"
+          onClick={() => setOpen(true)}
+          className={`group relative flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#FFD62D]/35 bg-[#FFD62D]/[0.06] text-white shadow-[0_7px_18px_rgba(0,0,0,0.18)] transition-[width,height,border-color,background-color,color,transform] duration-300 active:scale-95 hover:border-[#FFD62D]/65 hover:bg-[#FFD62D]/10 hover:text-[#FFD62D] ${
+            isStatic ? "h-10 w-10" : "h-9 w-9"
+          }`}
+        >
+          <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,214,45,0.13),transparent_65%)]" />
+
+          <Menu
+            className={`relative z-10 ${
+              isStatic ? "h-5 w-5" : "h-[18px] w-[18px]"
+            }`}
+            strokeWidth={2}
+          />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function NavbarM() {
+  const router = useRouter();
+
+  const { local } = useSelector((state) => state.language);
+
+  const [open, setOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  const scrolled = useHeaderScrolled();
+
+  const isAr = local === "ar";
+
+  const currentPath = normalizePath(router.asPath);
+
+  const closeNavigation = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [router.asPath]);
+
+  return (
+    <>
+      <div className="relative z-[110] h-[68px] w-full md:hidden">
+        <MobileNav
+          open={open}
+          onClose={closeNavigation}
+          isAr={isAr}
+          currentPath={currentPath}
+        />
+
+        <MobileHeaderBar
+          isAr={isAr}
+          open={open}
+          setOpen={setOpen}
+          variant="static"
+          priorityLogo
+        />
+      </div>
+
+      {hydrated && (
+        <nav
+          aria-hidden={!scrolled}
+          className={`fixed inset-x-0 top-0 z-[120] transform-gpu transition-[transform,opacity,visibility,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+            scrolled
+              ? "visible translate-y-0 scale-100 opacity-100 blur-0"
+              : "invisible -translate-y-[125%] scale-[0.97] opacity-0 blur-sm"
+          } ${scrolled ? "pointer-events-auto" : "pointer-events-none"}`}
+        >
+          <MobileHeaderBar
+            isAr={isAr}
+            open={open}
+            setOpen={setOpen}
+            variant="fixed"
+            priorityLogo={false}
+          />
+        </nav>
+      )}
+
+      <style jsx global>{`
+        @keyframes mobileSidebarItemEnter {
+          from {
+            opacity: 0;
+            transform: translate3d(var(--mobile-item-enter-x), 8px, 0);
+          }
+
+          to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+
+        .mobile-sidebar-item {
+          opacity: 0;
+          animation: mobileSidebarItemEnter 460ms cubic-bezier(0.22, 1, 0.36, 1)
+            both;
+        }
+
+        .mobile-sidebar-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 214, 45, 0.4) transparent;
+        }
+
+        .mobile-sidebar-scroll::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        .mobile-sidebar-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .mobile-sidebar-scroll::-webkit-scrollbar-thumb {
+          border-radius: 999px;
+          background: rgba(255, 214, 45, 0.4);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .mobile-sidebar-item {
+            animation: none !important;
+            opacity: 1 !important;
+          }
+        }
+      `}</style>
+    </>
+  );
+}
+
+
+
+============================================================
+FILE: .\components\footer\Footer.js
+============================================================
+
+import OptimizedImage from "@/components/common/OptimizedImage";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import facebook from "../../public/images/facebook.svg";
+import instagram from "../../public/images/instagram.svg";
+import Slogan from "../../public/images/slogenG.png";
+import twitter from "../../public/images/twitter.svg";
+import whatsapp from "../../public/images/whatsapp.svg";
+import youtube from "../../public/images/youtube.svg";
+import SocialMediaIcon from "./SocialMediaIcon";
+
+export default function Footer() {
+  const { cart } = useSelector((state) => state.cart);
+  const { local } = useSelector((state) => state.language);
+  const router = useRouter();
+
+  const isRTL = local === "ar";
+  const year = new Date().getFullYear();
+
+  return (
+    <footer
+      className="mt-40 w-full border-t-2 border-primary bg-[#fafafa] pb-8 pt-12"
+      dir={isRTL ? "rtl" : "ltr"}
+    >
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        {/* ط§ظ„ط¬ط²ط، ط§ظ„ط¹ظ„ظˆظٹ: ط§ظ„ظ„ظˆط¬ظˆ ظˆط§ظ„ط³ظˆط´ظٹط§ظ„ */}
+        <div className="flex flex-col items-center justify-center space-y-8">
+          <div className="flex justify-center">
+            <OptimizedImage
+              alt="ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…"
+              src={Slogan}
+              height={80}
+              width={300}
+              className="w-[240px] mx-auto max-w-full object-contain md:w-[280px]"
+            />
+          </div>
+
+          <div className="flex items-center justify-center gap-3 md:gap-4">
+            <SocialMediaIcon
+              src={twitter}
+              href="https://twitter.com/Sedihisham1"
+            />
+            <SocialMediaIcon
+              src={whatsapp}
+              href="https://api.whatsapp.com/send?phone=%2B963942000971&app=facebook&entry_point=page_cta&fbclid=IwAR23B41qgd7-Z89fxmv0wHhvHxM7dCCrp3qBZgzqyCPNUUaWq0zMHSC_kAQ"
+            />
+            <SocialMediaIcon
+              src={instagram}
+              href="https://www.instagram.com/sedi_hisham/?hl=en"
+            />
+            <SocialMediaIcon
+              src={facebook}
+              href="https://www.facebook.com/sedihishamm"
+            />
+            <SocialMediaIcon
+              src={youtube}
+              href="https://www.youtube.com/channel/UCvkV77H68Fv28xn6jsYFjBw?app=desktop"
+            />
+          </div>
+        </div>
+
+        {/* ط®ط· ظپط§طµظ„ طµط±ظٹط­ ظˆظˆط§ظ‚ط¹ظٹ */}
+        <div className="my-8 h-[1px] w-full bg-gray-200" />
+
+        {/* ط§ظ„ط¬ط²ط، ط§ظ„ط³ظپظ„ظٹ: ط§ظ„ط­ظ‚ظˆظ‚طŒ ط§ظ„ط±ظˆط§ط¨ط·طŒ ظˆط§ظ„ظ…ط·ظˆط± */}
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          {/* ط§ظ„ط­ظ‚ظˆظ‚ */}
+          <div className="order-2 flex-1 text-center md:order-1 md:text-start">
+            <p className="font-arabicLight text-[13px] text-gray-500">
+              {isRTL
+                ? `ط¬ظ…ظٹط¹ ط§ظ„ط­ظ‚ظˆظ‚ ظ…ط­ظپظˆط¸ط© ظ„ط´ط±ظƒط© ط§ظ„ط¹ظ‚ط§ط¯ - ط³ظٹط¯ظٹ ظ‡ط´ط§ظ… ${year}`
+                : `All rights reserved - Al Akkad company - Sedi Hisham ${year}`}
+            </p>
+          </div>
+
+          {/* ط³ظٹط§ط³ط© ط§ظ„ط®طµظˆطµظٹط© */}
+          <div className="order-1 flex flex-1 justify-center md:order-2">
+            <button
+              onClick={() => router.push("/privacy-policy")}
+              className="group relative font-arabicMedium text-sm text-gray-700 transition-colors hover:text-primary"
+            >
+              {isRTL ? "ط³ظٹط§ط³ط© ط§ظ„ط®طµظˆطµظٹط©" : "Privacy Policy"}
+              {/* ط®ط· ط°ظ‡ط¨ظٹ ط¨ظٹط¸ظ‡ط± ط¹ظ„ظ‰ ط§ظ„ظ€ Hover ظƒظ€ Accent */}
+              <span className="absolute -bottom-1.5 left-0 h-[2px] w-0 bg-gold transition-all duration-300 group-hover:w-full" />
+            </button>
+          </div>
+
+          {/* ط§ظ„ط´ط±ظƒط© ط§ظ„ظ…ط·ظˆط±ط© */}
+          <div className="order-3 flex flex-1 justify-center md:justify-end">
+            <a
+              href="https://www.its.ae/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3  transition-all duration-300 "
+            >
+              {/* <span className="font-arabicLight text-[11px] text-gray-400">
+                {isRTL ? "طھطµظ…ظٹظ… ظˆطھط·ظˆظٹط±" : "Powered by"}
+              </span> */}
+              <img
+                src="https://www.its.ae/wp-content/uploads/2020/05/bigbang-logo.svg"
+                alt="BigBang"
+                height={20}
+                width={80}
+                className="h-[20px] w-auto object-contain  transition-opacity"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+
+
+============================================================
+FILE: .\components\common\ClearStorage.js
+============================================================
+
+import { useEffect } from 'react';
+
+export default function ClearStorage() {
+  useEffect(() => {
+    // Check for corrupted language state in localStorage
+    if (typeof window !== 'undefined') {
+      try {
+        const persistedState = localStorage.getItem('persist:root');
+        if (persistedState) {
+          const parsedState = JSON.parse(persistedState);
+          if (parsedState.language && typeof parsedState.language === 'string') {
+            try {
+              JSON.parse(parsedState.language);
+            } catch (error) {
+              console.warn('Corrupted language state detected, clearing localStorage...');
+              localStorage.removeItem('persist:root');
+              window.location.reload();
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error checking localStorage:', error);
+      }
+    }
+  }, []);
+
+  return null; // This component doesn't render anything
+}
+
+
+
+============================================================
+FILE: .\components\common\LazyComponent.js
+============================================================
+
+import React, { Suspense, lazy } from 'react';
+
+// Loading fallback component
+const LoadingFallback = ({ children, className = '' }) => (
+  <div className={`animate-pulse ${className}`}>
+    <div className="bg-gray-200 rounded-lg h-32 flex items-center justify-center">
+      <div className="text-gray-500">ط¬ط§ط±ظٹ ط§ظ„طھط­ظ…ظٹظ„...</div>
+    </div>
+    {children}
+  </div>
+);
+
+// Lazy component wrapper
+export default function LazyComponent({ 
+  component: Component, 
+  fallback = null,
+  className = '',
+  ...props 
+}) {
+  const LazyComponent = lazy(() => 
+    Component().then(module => ({ default: module.default || module }))
+  );
+
+  return (
+    <Suspense fallback={fallback || <LoadingFallback className={className} />}>
+      <LazyComponent {...props} />
+    </Suspense>
+  );
+}
+
+// Predefined lazy components for common use cases
+export const LazySlider = lazy(() => import('../home/Slider'));
+export const LazyNewsCarousel = lazy(() => import('../news/NewsCarousel'));
+export const LazyVideoImagesSlider = lazy(() => import('../home/VideoImagesSlider'));
+export const LazySponsorSlider = lazy(() => import('../home/SponsorSlider'));
+export const LazyElasticCarousel = lazy(() => import('../home/section4/ElasticCarousel'));
+
+// Lazy loading hook for images
+export const useLazyLoading = () => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [isInView, setIsInView] = React.useState(false);
+  const ref = React.useRef();
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isLoaded, isInView, setIsLoaded };
+};
+
+
+
+============================================================
+FILE: .\components\common\ErrorBoundary.js
+============================================================
+
+import React from 'react';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ 
+          padding: '20px', 
+          textAlign: 'center', 
+          fontFamily: 'Arial, sans-serif' 
+        }}>
+          <h2>Something went wrong.</h2>
+          <p>Please refresh the page or try again later.</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#007bff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}
+          >
+            Refresh Page
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+export default ErrorBoundary;
+
+
+
+============================================================
+FILE: .\components\common\PerformanceMonitor.js
+============================================================
+
+import { useEffect } from 'react';
+
+export default function PerformanceMonitor() {
+  useEffect(() => {
+    // Only run in browser
+    if (typeof window === 'undefined') return;
+
+    // Monitor Core Web Vitals
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        // Log performance metrics
+        console.log(`${entry.name}: ${entry.value}`);
+        
+        // Send to analytics (replace with your analytics service)
+        if (entry.name === 'LCP') {
+          // Largest Contentful Paint
+          console.log('LCP:', entry.value);
+        } else if (entry.name === 'FID') {
+          // First Input Delay
+          console.log('FID:', entry.value);
+        } else if (entry.name === 'CLS') {
+          // Cumulative Layout Shift
+          console.log('CLS:', entry.value);
+        }
+      }
+    });
+
+    // Observe Core Web Vitals
+    observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+
+    // Monitor page load performance
+    window.addEventListener('load', () => {
+      const navigation = performance.getEntriesByType('navigation')[0];
+      if (navigation) {
+        console.log('Page Load Time:', navigation.loadEventEnd - navigation.loadEventStart);
+        console.log('DOM Content Loaded:', navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart);
+      }
+    });
+
+    // Monitor resource loading
+    const resourceObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.initiatorType === 'img' && entry.duration > 1000) {
+          console.warn('Slow image load:', entry.name, entry.duration);
+        }
+      }
+    });
+
+    resourceObserver.observe({ entryTypes: ['resource'] });
+
+    return () => {
+      observer.disconnect();
+      resourceObserver.disconnect();
+    };
+  }, []);
+
+  return null; // This component doesn't render anything
+}
+
+// Hook for measuring component performance
+export const usePerformanceMeasure = (componentName) => {
+  useEffect(() => {
+    const startTime = performance.now();
+    
+    return () => {
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      
+      if (duration > 16) { // Longer than one frame (16ms)
+        console.warn(`${componentName} took ${duration.toFixed(2)}ms to render`);
+      }
+    };
+  });
+};
+
+// Hook for measuring API call performance
+export const useAPIPerformance = () => {
+  const measureAPI = async (apiCall, name = 'API Call') => {
+    const startTime = performance.now();
+    
+    try {
+      const result = await apiCall();
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      
+      console.log(`${name} took ${duration.toFixed(2)}ms`);
+      
+      if (duration > 1000) {
+        console.warn(`Slow API call: ${name} took ${duration.toFixed(2)}ms`);
+      }
+      
+      return result;
+    } catch (error) {
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      console.error(`${name} failed after ${duration.toFixed(2)}ms:`, error);
+      throw error;
+    }
+  };
+
+  return { measureAPI };
+};
+
+
+
+============================================================
+FILE: .\components\common\OptimizedImage.js
+============================================================
+
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+
+export default function OptimizedImage({
+  src,
+  alt = "",
+  width,
+  height,
+  className = "",
+  wrapperClassName = "",
+  loader,
+  priority = false,
+  placeholder = "blur",
+  blurDataURL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==",
+  sizes = "100vw",
+  quality = 75,
+  fill = false,
+  objectFit = "contain",
+  objectPosition = "center",
+  showSkeleton = true,
+  skeletonClassName = "",
+  style = {},
+  onLoad,
+  onError,
+  ...props
+}) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  const sourceValue = useMemo(() => {
+    if (typeof src === "string") return src;
+    return src?.src || "";
+  }, [src]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setHasError(false);
+  }, [sourceValue]);
+
+  const altText = useMemo(() => {
+    if (alt?.trim()) return alt;
+
+    if (!sourceValue) {
+      return "طµظˆط±ط© ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…";
+    }
+
+    const filename =
+      sourceValue.split("/").pop()?.split(".")[0]?.toLowerCase() || "";
+
+    if (filename.includes("logo") || filename.includes("brand")) {
+      return "ط´ط¹ط§ط± ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…";
+    }
+
+    if (filename.includes("product") || filename.includes("item")) {
+      return "ظ…ظ†طھط¬ ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…";
+    }
+
+    if (filename.includes("news")) {
+      return "طµظˆط±ط© ط£ط®ط¨ط§ط± ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…";
+    }
+
+    if (filename.includes("icon")) {
+      return "ط£ظٹظ‚ظˆظ†ط© ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…";
+    }
+
+    return "طµظˆط±ط© ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…";
+  }, [alt, sourceValue]);
+
+  if (!src) return null;
+
+  const staticWidth =
+    typeof src === "object" && src?.width ? src.width : undefined;
+
+  const staticHeight =
+    typeof src === "object" && src?.height ? src.height : undefined;
+
+  const resolvedWidth = width || staticWidth;
+  const resolvedHeight = height || staticHeight;
+
+  const shouldFill = fill || !resolvedWidth || !resolvedHeight;
+  const isSvg = sourceValue.toLowerCase().endsWith(".svg");
+
+  const handleLoad = (event) => {
+    setIsLoading(false);
+    onLoad?.(event);
+  };
+
+  const handleError = (event) => {
+    setHasError(true);
+    setIsLoading(false);
+    onError?.(event);
+  };
+
+  return (
+    <div
+      className={`relative overflow-hidden ${
+        shouldFill ? "h-full w-full" : ""
+      } ${wrapperClassName}`}
+      style={
+        shouldFill
+          ? style
+          : {
+              width: resolvedWidth,
+              height: resolvedHeight,
+              ...style,
+            }
+      }
+    >
+      {!hasError && (
+        <Image
+          src={src}
+          alt={altText}
+          width={shouldFill ? undefined : resolvedWidth}
+          height={shouldFill ? undefined : resolvedHeight}
+          fill={shouldFill}
+          loader={loader}
+          priority={priority}
+          placeholder={isSvg ? "empty" : placeholder}
+          blurDataURL={isSvg ? undefined : blurDataURL}
+          sizes={sizes}
+          quality={quality}
+          onLoad={handleLoad}
+          onError={handleError}
+          className={`transition-opacity duration-300 ${className} ${
+            isLoading ? "opacity-0" : "opacity-100"
+          }`}
+          style={{
+            objectFit,
+            objectPosition,
+          }}
+          {...props}
+        />
+      )}
+
+      {showSkeleton && isLoading && !hasError && (
+        <div
+          className={`absolute inset-0 animate-pulse bg-white/10 ${skeletonClassName}`}
+        />
+      )}
+    </div>
+  );
+}
+
+
+
+============================================================
+FILE: .\components\home\Slider.jsx
+============================================================
+
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import logo from "../../public/images/logo.png";
+
+const API_BASE_URL = "https://api.sedihisham.com/";
+const DEFAULT_HERO_IMAGE = "/images/videoframe_0.webp";
+const DEMO_HERO_VIDEO = "/videos/sedi-hisham-factory-demo.mp4";
+
+function getApiImageUrl(path) {
+  if (!path || typeof path !== "string") return "";
+  const normalizedPath = path.trim();
+  if (!normalizedPath) return "";
+  if (
+    normalizedPath.startsWith("http://") ||
+    normalizedPath.startsWith("https://")
+  ) {
+    return normalizedPath;
+  }
+  return `${API_BASE_URL}${normalizedPath.replace(/^\/+/, "")}`;
+}
+
+export default function Slider({
+  sliderImages = [],
+  videoSrc = DEMO_HERO_VIDEO,
+}) {
+  const { local } = useSelector((state) => state.language);
+  const isAr = local === "ar";
+
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  const ArrowIcon = isAr ? ArrowLeft : ArrowRight;
+
+  const posterImage = useMemo(() => {
+    return DEFAULT_HERO_IMAGE;
+  }, []);
+
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 50);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    setVideoReady(false);
+    setVideoFailed(false);
+  }, [videoSrc]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduceMotion(mq.matches);
+    update();
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", update);
+    } else {
+      mq.addListener(update);
+    }
+    return () => {
+      if (typeof mq.removeEventListener === "function") {
+        mq.removeEventListener("change", update);
+      } else {
+        mq.removeListener(update);
+      }
+    };
+  }, []);
+
+  return (
+    <section
+      dir={isAr ? "rtl" : "ltr"}
+      className={`hero-section relative isolate w-full overflow-hidden bg-black ${
+        mounted ? "hero-go" : ""
+      }`}
+      aria-label={
+        isAr ? "ط§ظ„ظ‚ط³ظ… ط§ظ„ط±ط¦ظٹط³ظٹ ظ„ط´ط±ظƒط© ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…" : "Sedi Hisham hero section"
+      }
+    >
+      {/* Poster */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={posterImage}
+          alt={
+            isAr ? "ظ…ظ†طھط¬ط§طھ ظˆظ…طµظ†ط¹ ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…" : "Sedi Hisham products and factory"
+          }
+          fill
+          priority
+          quality={78}
+          sizes="100vw"
+          draggable={false}
+          className="object-cover object-center"
+        />
+      </div>
+
+      {/* Video */}
+      {!reduceMotion && !videoFailed ? (
+        <video
+          key={videoSrc}
+          className={`hero-video absolute inset-0 z-[1] h-full w-full object-cover ${
+            videoReady ? "hero-video-on" : ""
+          }`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={posterImage}
+          disablePictureInPicture
+          disableRemotePlayback
+          controls={false}
+          aria-hidden="true"
+          tabIndex={-1}
+          onCanPlay={() => setVideoReady(true)}
+          onPlaying={() => setVideoReady(true)}
+          onError={() => {
+            setVideoFailed(true);
+            setVideoReady(false);
+          }}
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      ) : null}
+
+      {/* Overlay */}
+      <div
+        aria-hidden="true"
+        className={`hero-overlay pointer-events-none absolute inset-0 z-[2] ${
+          isAr ? "hero-overlay-rtl" : "hero-overlay-ltr"
+        }`}
+      />
+
+      {/* Content */}
+      <div className="hero-container relative z-10 mx-auto flex w-full flex-col justify-center">
+        <div
+          className={`hero-content flex w-full flex-col items-start justify-center text-start ${
+            isAr ? "hero-content-rtl ml-auto" : "hero-content-ltr mr-auto"
+          }`}
+        >
+          {/* 1 â€” Logo */}
+          <div
+            className="hero-item hero-logo relative"
+            style={{ "--d": "0ms" }}
+          >
+            <Image
+              src={logo}
+              alt={isAr ? "ط´ط¹ط§ط± ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…" : "Sedi Hisham logo"}
+              fill
+              priority
+              sizes="180px"
+              draggable={false}
+              className={`object-contain ${
+                isAr ? "object-right" : "object-left"
+              }`}
+            />
+          </div>
+
+          {/* 2 â€” Eyebrow badge */}
+          <div
+            className="hero-item hero-eyebrow inline-flex items-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md"
+            style={{ "--d": "80ms" }}
+          >
+            <span className="hero-dot shrink-0 rounded-full bg-[#FFD62D]" />
+            <span className="font-arabicMedium text-white">
+              {isAr ? "ظ…ظ† ط§ظ„ظ…طµظ†ط¹ ط¥ظ„ظ‰ ظ…ط§ط¦ط¯طھظƒ" : "From our factory to your table"}
+            </span>
+          </div>
+
+          {/* 3 â€” Brand name */}
+          <p
+            className="hero-item hero-brand font-arabicMedium text-[#FFD62D]"
+            style={{ "--d": "160ms" }}
+          >
+            {isAr ? "ط³ظٹط¯ظٹ ظ‡ط´ط§ظ…" : "Sedi Hisham"}
+          </p>
+
+          {/* 4 â€” Heading */}
+          <h2
+            className="hero-item hero-heading font-arabicBold text-white"
+            style={{ "--d": "240ms" }}
+          >
+            {isAr
+              ? "ط´ط±ظƒط© ط§ظ„ط¹ظ‚ط§ط¯ ظ„ظ„طµظ†ط§ط¹ط© ظˆط§ظ„طھط¬ط§ط±ط©"
+              : "Al Akkad Industry and Trading Company"}
+          </h2>
+
+          {/* 5 â€” Divider */}
+          <div
+            className={`hero-line hero-divider rounded-full bg-[#FFD62D] ${
+              isAr ? "origin-right" : "origin-left"
+            }`}
+            style={{ "--d": "340ms" }}
+            aria-hidden="true"
+          />
+
+          {/* 6 â€” Description */}
+          <p
+            className="hero-item hero-desc font-arabicLight text-white/90"
+            style={{ "--d": "420ms" }}
+          >
+            {isAr
+              ? "ظ†طµظ†ط¹ ظ…ظ†طھط¬ط§طھ ط؛ط°ط§ط¦ظٹط© ظ…ظˆط«ظˆظ‚ط© ط¨ط¬ظˆط¯ط© ط«ط§ط¨طھط©طŒ ظ…ظ† ظ…ط±ط§ط­ظ„ ط§ظ„ط¥ظ†طھط§ط¬ ظˆط§ظ„طھط¹ط¨ط¦ط© ظˆط­طھظ‰ طھطµظ„ ظ…ظ†طھط¬ط§طھظ†ط§ ط¥ظ„ظ‰ ظƒظ„ ط¨ظٹطھ."
+              : "We produce trusted food products with consistent quality, from production and packaging until they reach every home."}
+          </p>
+
+          {/* 7 â€” Tags */}
+          <div
+            className="hero-item hero-tags flex flex-wrap items-center"
+            style={{ "--d": "520ms" }}
+          >
+            {(isAr
+              ? ["ط§ظ„ط¥ظ†طھط§ط¬", "ط§ظ„طھط¹ط¨ط¦ط©", "ط§ظ„ط¬ظˆط¯ط©"]
+              : ["Production", "Packaging", "Quality"]
+            ).map((tag) => (
+              <span
+                key={tag}
+                className="hero-tag rounded-full border border-white/15 bg-black/20 font-arabicLight text-white/85 backdrop-blur-sm"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* 8 â€” CTAs */}
+          <div
+            className="hero-item hero-ctas flex w-full flex-row flex-wrap items-center"
+            style={{ "--d": "620ms" }}
+          >
+            <Link
+              href="/categories"
+              className="hero-btn hero-btn-primary group relative flex items-center justify-center overflow-hidden rounded-full bg-[#FFD62D] font-arabicMedium text-[#7C1422]"
+            >
+              <span className="relative z-10">
+                {isAr ? "طھط¹ط±ظپ ط¹ظ„ظ‰ ظ…ظ†طھط¬ط§طھظ†ط§" : "Explore our products"}
+              </span>
+              <ArrowIcon
+                aria-hidden="true"
+                className={`hero-btn-icon relative z-10 transition-transform duration-300 ${
+                  isAr
+                    ? "group-hover:-translate-x-1"
+                    : "group-hover:translate-x-1"
+                }`}
+              />
+            </Link>
+
+            <Link
+              href="/whoweare"
+              className="hero-btn hero-btn-ghost group relative flex items-center justify-center overflow-hidden rounded-full border border-white/30 bg-white/10 font-arabicMedium text-white backdrop-blur-md"
+            >
+              <span className="relative z-10">
+                {isAr ? "طھط¹ط±ظپ ط¹ظ„ظ‰ ط§ظ„ط´ط±ظƒط©" : "About the company"}
+              </span>
+              <ArrowIcon
+                aria-hidden="true"
+                className={`hero-btn-icon relative z-10 transition-transform duration-300 ${
+                  isAr
+                    ? "group-hover:-translate-x-1"
+                    : "group-hover:translate-x-1"
+                }`}
+              />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           SECTION HEIGHT â€” Proportional Responsive
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-section {
+          min-height: 62.5vw;
+          max-height: calc(100vh - 78px);
+          max-height: calc(100svh - 78px);
+          contain: layout paint;
+        }
+
+        /* ظ…ظˆط¨ط§ظٹظ„ طµط؛ظٹط± ط¬ط¯ظ‹ط§ */
+        @media (max-width: 374px) {
+          .hero-section {
+            min-height: 440px;
+            max-height: none;
+          }
+        }
+        /* ظ…ظˆط¨ط§ظٹظ„ ط¹ط§ط¯ظٹ */
+        @media (min-width: 375px) and (max-width: 479px) {
+          .hero-section {
+            min-height: 480px;
+            max-height: none;
+          }
+        }
+        /* ظ…ظˆط¨ط§ظٹظ„ ظƒط¨ظٹط± */
+        @media (min-width: 480px) and (max-width: 639px) {
+          .hero-section {
+            min-height: 500px;
+            max-height: none;
+          }
+        }
+        /* طھط§ط¨ظ„طھ طµط؛ظٹط± */
+        @media (min-width: 640px) and (max-width: 767px) {
+          .hero-section {
+            min-height: 64vw;
+            max-height: none;
+          }
+        }
+        /* طھط§ط¨ظ„طھ / ظ„ط§ط¨طھظˆط¨ */
+        @media (min-width: 768px) {
+          .hero-section {
+            min-height: min(62.5vw, calc(100vh - 94px));
+            min-height: min(62.5vw, calc(100svh - 94px));
+            max-height: calc(100vh - 94px);
+            max-height: calc(100svh - 94px);
+          }
+        }
+        /* ط¯ظٹط³ظƒطھظˆط¨ */
+        @media (min-width: 1280px) {
+          .hero-section {
+            min-height: min(56.25vw, calc(100vh - 94px));
+            min-height: min(56.25vw, calc(100svh - 94px));
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           CONTAINER â€” ظٹط±ط« min-height ظ…ظ† ط§ظ„ظ€ section
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-container {
+          min-height: inherit;
+          padding-inline: 18px;
+          padding-block: 32px;
+          max-width: 1380px;
+        }
+        @media (min-width: 375px) {
+          .hero-container {
+            padding-block: 36px;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-container {
+            padding-inline: 22px;
+            padding-block: 40px;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-container {
+            padding-inline: 30px;
+            padding-block: 44px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-container {
+            padding-inline: 44px;
+            padding-block: 40px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-container {
+            padding-inline: 60px;
+          }
+        }
+
+        .hero-content {
+          max-width: 100%;
+        }
+        @media (min-width: 640px) {
+          .hero-content {
+            max-width: 560px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-content {
+            max-width: 620px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-content {
+            max-width: 690px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           LOGO
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-logo {
+          width: 96px;
+          height: 48px;
+          margin-bottom: 12px;
+        }
+        @media (min-width: 375px) {
+          .hero-logo {
+            width: 108px;
+            height: 54px;
+            margin-bottom: 14px;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-logo {
+            width: 120px;
+            height: 60px;
+            margin-bottom: 16px;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-logo {
+            width: 132px;
+            height: 66px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-logo {
+            width: 148px;
+            height: 74px;
+            margin-bottom: 18px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-logo {
+            width: 168px;
+            height: 84px;
+            margin-bottom: 20px;
+          }
+        }
+        @media (min-width: 1280px) {
+          .hero-logo {
+            width: 180px;
+            height: 92px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           EYEBROW BADGE
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-eyebrow {
+          padding: 5px 10px;
+          gap: 6px;
+          margin-bottom: 10px;
+        }
+        .hero-eyebrow span:last-child {
+          font-size: 10px;
+        }
+        .hero-dot {
+          width: 6px;
+          height: 6px;
+        }
+        @media (min-width: 375px) {
+          .hero-eyebrow {
+            padding: 5px 11px;
+            margin-bottom: 11px;
+          }
+          .hero-eyebrow span:last-child {
+            font-size: 10.5px;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-eyebrow {
+            padding: 6px 12px;
+            margin-bottom: 12px;
+          }
+          .hero-eyebrow span:last-child {
+            font-size: 11px;
+          }
+          .hero-dot {
+            width: 7px;
+            height: 7px;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-eyebrow {
+            padding: 6px 13px;
+            margin-bottom: 13px;
+          }
+          .hero-eyebrow span:last-child {
+            font-size: 11.5px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-eyebrow {
+            padding: 7px 14px;
+            gap: 8px;
+            margin-bottom: 15px;
+          }
+          .hero-eyebrow span:last-child {
+            font-size: 12px;
+          }
+          .hero-dot {
+            width: 8px;
+            height: 8px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           BRAND NAME
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-brand {
+          font-size: 12px;
+          margin-bottom: 3px;
+        }
+        @media (min-width: 375px) {
+          .hero-brand {
+            font-size: 13px;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-brand {
+            font-size: 14px;
+            margin-bottom: 4px;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-brand {
+            font-size: 15px;
+            margin-bottom: 5px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-brand {
+            font-size: 17px;
+            margin-bottom: 6px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-brand {
+            font-size: 19px;
+            margin-bottom: 8px;
+          }
+        }
+        @media (min-width: 1280px) {
+          .hero-brand {
+            font-size: 20px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           HEADING (Main Title)
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-heading {
+          font-size: 20px;
+          line-height: 1.22;
+          max-width: 100%;
+        }
+        @media (min-width: 375px) {
+          .hero-heading {
+            font-size: 22px;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-heading {
+            font-size: 26px;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-heading {
+            font-size: 30px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-heading {
+            font-size: 38px;
+            max-width: 620px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-heading {
+            font-size: 46px;
+            max-width: 650px;
+          }
+        }
+        @media (min-width: 1280px) {
+          .hero-heading {
+            font-size: 54px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           DIVIDER
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-divider {
+          height: 2px;
+          width: 52px;
+          margin: 10px 0;
+        }
+        @media (min-width: 375px) {
+          .hero-divider {
+            width: 58px;
+            margin: 11px 0;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-divider {
+            width: 64px;
+            margin: 12px 0;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-divider {
+            width: 72px;
+            margin: 13px 0;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-divider {
+            height: 3px;
+            width: 82px;
+            margin: 16px 0;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-divider {
+            width: 96px;
+            margin: 18px 0;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           DESCRIPTION
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-desc {
+          font-size: 12px;
+          line-height: 1.6;
+          max-width: 100%;
+        }
+        @media (min-width: 375px) {
+          .hero-desc {
+            font-size: 12.5px;
+            line-height: 1.65;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-desc {
+            font-size: 13px;
+            line-height: 1.7;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-desc {
+            font-size: 14px;
+            line-height: 1.72;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-desc {
+            font-size: 15px;
+            line-height: 1.75;
+            max-width: 560px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-desc {
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 590px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           TAGS
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-tags {
+          gap: 6px;
+          margin-top: 12px;
+        }
+        .hero-tag {
+          padding: 4px 10px;
+          font-size: 10px;
+        }
+        @media (min-width: 375px) {
+          .hero-tags {
+            gap: 7px;
+            margin-top: 13px;
+          }
+          .hero-tag {
+            padding: 4px 10px;
+            font-size: 10.5px;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-tags {
+            gap: 8px;
+            margin-top: 14px;
+          }
+          .hero-tag {
+            padding: 5px 11px;
+            font-size: 11px;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-tags {
+            gap: 9px;
+            margin-top: 15px;
+          }
+          .hero-tag {
+            padding: 5px 12px;
+            font-size: 11.5px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-tags {
+            gap: 10px;
+            margin-top: 18px;
+          }
+          .hero-tag {
+            padding: 6px 12px;
+            font-size: 12px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           CTAs
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-ctas {
+          gap: 8px;
+          margin-top: 16px;
+        }
+        .hero-btn {
+          padding: 9px 15px;
+          min-height: 38px;
+          font-size: 11.5px;
+          gap: 7px;
+        }
+        .hero-btn-icon {
+          width: 13px;
+          height: 13px;
+        }
+        @media (min-width: 375px) {
+          .hero-ctas {
+            gap: 9px;
+            margin-top: 17px;
+          }
+          .hero-btn {
+            padding: 10px 16px;
+            min-height: 40px;
+            font-size: 12px;
+          }
+          .hero-btn-icon {
+            width: 14px;
+            height: 14px;
+          }
+        }
+        @media (min-width: 480px) {
+          .hero-ctas {
+            gap: 10px;
+            margin-top: 18px;
+          }
+          .hero-btn {
+            padding: 10px 17px;
+            min-height: 42px;
+            font-size: 12.5px;
+            gap: 8px;
+          }
+        }
+        @media (min-width: 640px) {
+          .hero-ctas {
+            gap: 11px;
+            margin-top: 20px;
+          }
+          .hero-btn {
+            padding: 11px 19px;
+            min-height: 44px;
+            font-size: 13px;
+          }
+          .hero-btn-icon {
+            width: 15px;
+            height: 15px;
+          }
+        }
+        @media (min-width: 768px) {
+          .hero-ctas {
+            gap: 12px;
+            margin-top: 26px;
+          }
+          .hero-btn {
+            padding: 12px 22px;
+            min-height: 46px;
+            font-size: 14px;
+            gap: 10px;
+          }
+          .hero-btn-icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .hero-btn {
+            padding: 14px 28px;
+            min-height: 50px;
+            font-size: 15px;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           OVERLAY â€” static, no animation
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-overlay {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+          animation: none !important;
+        }
+        .hero-overlay-rtl {
+          background:
+            linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.02) 0%,
+              rgba(0, 0, 0, 0.12) 35%,
+              rgba(0, 0, 0, 0.82) 100%
+            ),
+            linear-gradient(
+              0deg,
+              rgba(0, 0, 0, 0.6) 0%,
+              rgba(0, 0, 0, 0.06) 30%,
+              transparent 55%
+            ),
+            rgba(0, 0, 0, 0.24);
+        }
+        .hero-overlay-ltr {
+          background:
+            linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0.82) 0%,
+              rgba(0, 0, 0, 0.12) 65%,
+              rgba(0, 0, 0, 0.02) 100%
+            ),
+            linear-gradient(
+              0deg,
+              rgba(0, 0, 0, 0.6) 0%,
+              rgba(0, 0, 0, 0.06) 30%,
+              transparent 55%
+            ),
+            rgba(0, 0, 0, 0.24);
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           VIDEO
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-video {
+          opacity: 0;
+          transition: opacity 1s ease;
+        }
+        .hero-video-on {
+          opacity: 1;
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           REVEAL ANIMATION
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-item {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        .hero-line {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+        .hero-go .hero-item {
+          animation: heroFadeUp 700ms cubic-bezier(0.25, 1, 0.5, 1)
+            var(--d, 0ms) forwards;
+        }
+        .hero-go .hero-line {
+          animation: heroLineGrow 600ms cubic-bezier(0.25, 1, 0.5, 1)
+            var(--d, 0ms) forwards;
+        }
+        @keyframes heroFadeUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes heroLineGrow {
+          to {
+            opacity: 1;
+            transform: scaleX(1);
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           DOT PULSE
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-dot {
+          box-shadow:
+            0 0 0 3px rgba(255, 214, 45, 0.12),
+            0 0 10px rgba(255, 214, 45, 0.4);
+          animation: dotPulse 2.8s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+          0%,
+          100% {
+            box-shadow:
+              0 0 0 3px rgba(255, 214, 45, 0.12),
+              0 0 10px rgba(255, 214, 45, 0.4);
+          }
+          50% {
+            box-shadow:
+              0 0 0 6px rgba(255, 214, 45, 0.06),
+              0 0 18px rgba(255, 214, 45, 0.55);
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           BUTTONS
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-btn {
+          transition:
+            transform 300ms ease,
+            box-shadow 300ms ease,
+            background-color 300ms ease,
+            border-color 300ms ease,
+            color 300ms ease;
+        }
+        .hero-btn:hover {
+          transform: translateY(-2px);
+        }
+        .hero-btn:active {
+          transform: translateY(0);
+        }
+        .hero-btn-primary {
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        }
+        .hero-btn-primary:hover {
+          background-color: #ffe052;
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+        }
+        .hero-btn-ghost:hover {
+          background-color: white;
+          border-color: rgba(255, 255, 255, 0.8);
+          color: #7c1422;
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           TAGS HOVER
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        .hero-tag {
+          transition:
+            transform 300ms ease,
+            border-color 300ms ease,
+            background-color 300ms ease;
+        }
+        .hero-tag:hover {
+          transform: translateY(-2px);
+          border-color: rgba(255, 255, 255, 0.3);
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           TOUCH DEVICES
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        @media (hover: none) {
+          .hero-btn:hover,
+          .hero-tag:hover {
+            transform: none;
+          }
+        }
+
+        /* â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+           REDUCED MOTION
+        â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ */
+        @media (prefers-reduced-motion: reduce) {
+          .hero-item,
+          .hero-line {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+          }
+          .hero-video {
+            display: none !important;
+          }
+          .hero-dot {
+            animation: none !important;
+          }
+          .hero-btn,
+          .hero-tag {
+            transition: none !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+
+
+============================================================
+FILE: .\next.config.js
+============================================================
+
+/** @type {import('next').NextConfig} */
+
+const path = require("path");
+
+const isProduction = process.env.NODE_ENV === "production";
+
+const nextConfig = {
+  reactStrictMode: true,
+
+  // output: isProduction ? "export" : undefined,
+
+  trailingSlash: true,
+
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
+  images: {
+    unoptimized: true,
+    formats: ["image/webp", "image/avif"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+
+  experimental: {
+    optimizePackageImports: ["@heroicons/react", "react-icons"],
+  },
+
+  compiler: {
+    removeConsole: isProduction,
+  },
+
+  webpack(config, { dev, isServer }) {
+    if (!dev && !isServer) {
+      config.optimization.splitChunks = {
+        chunks: "all",
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+          },
+          common: {
+            name: "common",
+            minChunks: 2,
+            chunks: "all",
+            enforce: true,
+          },
+        },
+      };
+    }
+
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+    };
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.resolve(__dirname, "./"),
+      "@components": path.resolve(__dirname, "./components"),
+      "@pages": path.resolve(__dirname, "./pages"),
+      "@public": path.resolve(__dirname, "./public"),
+      "@styles": path.resolve(__dirname, "./styles"),
+      "@utils": path.resolve(__dirname, "./utils"),
+      "@redux": path.resolve(__dirname, "./redux"),
+      "@services": path.resolve(__dirname, "./services"),
+    };
+
+    return config;
+  },
+};
+
+module.exports = nextConfig;
+
+
+
+============================================================
+FILE: .\package.json
+============================================================
+
+{
+  "name": "sedi-hishem",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3333",
+    "build": "next build",
+    "start": "next start -p 3200",
+    "lint": "next lint",
+    "seo-scan": "node scripts/seo-optimizer.js",
+    "seo-check": "npm run seo-scan",
+    "seo-bulk-optimize": "node scripts/seo-bulk-optimizer.js",
+    "analyze": "ANALYZE=true npm run build",
+    "performance-test": "npm run build",
+    "ps": "npx lighthouse https://sedihisham.com --output=json --output-path=./lighthouse-report.json",
+    "update-browserslist": "npx browserslist@latest --update-db"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-react": "^7.24.1",
+    "@babel/runtime": "^7.24.5",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^1.0.6",
+    "@inovua/reactdatagrid-community": "^5.10.2",
+    "@material-tailwind/react": "^2.1.8",
+    "@reduxjs/toolkit": "^2.0.1",
+    "antd": "^5.27.1",
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.6.3",
+    "date-fns": "^3.0.6",
+    "framer-motion": "^10.18.0",
+    "fs": "^0.0.1-security",
+    "glob": "^10.4.5",
+    "google-map-react": "^2.2.1",
+    "google-maps": "^4.3.3",
+    "gsap": "^3.12.4",
+    "heroicons": "^2.1.1",
+    "html-react-parser": "^5.0.11",
+    "i": "^0.3.7",
+    "i18n": "^0.15.1",
+    "i18next": "^23.7.15",
+    "jquery": "^3.7.1",
+    "lucide-react": "^1.25.0",
+    "next": "^14.0.4",
+    "next-fonts": "^1.5.1",
+    "next-i18next": "^15.1.2",
+    "next-translate": "^2.6.2",
+    "npm": "^10.2.5",
+    "postcss": "^8.4.32",
+    "rc-util": "^5.40.1",
+    "react": "^18.2.0",
+    "react-datepicker": "^4.25.0",
+    "react-dom": "18.2.0",
+    "react-elastic-carousel": "^0.11.5",
+    "react-google-map-picker": "^1.2.3",
+    "react-i18next": "^14.0.0",
+    "react-icons": "^4.12.0",
+    "react-image-gallery": "^1.3.0",
+    "react-phone-input-2": "^2.15.1",
+    "react-player": "^2.14.1",
+    "react-redux": "^9.0.4",
+    "redux-persist": "^6.0.0",
+    "sharp": "^0.33.2",
+    "styled-components": "^6.1.6",
+    "swiper": "^11.2.10",
+    "tailwind-scrollbar": "^3.0.5",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.24.5",
+    "@types/jquery": "^3.5.29",
+    "@types/react": "^18.2.46",
+    "dotenv": "^16.3.1",
+    "eslint": "8.56.0",
+    "eslint-config-next": "14.0.4",
+    "sass": "^1.69.7"
+  }
+}
+
+
+
+============================================================
+FILE: .\jsconfig.json
+============================================================
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
+      "@pages/*": ["./pages/*"],
+      "@public/*": ["./public/*"],
+      "@styles/*": ["./styles/*"],
+      "@utils/*": ["./utils/*"],
+      "@redux/*": ["./redux/*"],
+      "@services/*": ["./services/*"]
+    }
+  },
+  "include": [
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "build"
+  ]
+}
+
+
+
+============================================================
+FILE: .\tailwind.config.js
+============================================================
+
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      screens: {
+        xs: "420px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      },
+      fontFamily: {
+        arabicMedium: "arabicMedium, Segoe UI, sans-serif",
+        arabicLight: "arabicLight, Segoe UI, sans-serif",
+        arabicLightItalic: "arabicLightItalic, Segoe UI, sans-serif",
+        arabicBold: "arabicBold, Segoe UI, sans-serif",
+        arabicUltraLight: "arabicUltraLight, Segoe UI, sans-serif",
+      },
+      colors: {
+        primary: "#d40017",
+        gold: "#FFD62D",
+      },
+    },
+  },
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
+};
+
+
+
+============================================================
+FILE: .\postcss.config.js
+============================================================
+
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+
+
+============================================================
+SEARCH RESULTS FOR POSSIBLE DOUBLE RENDER CAUSES
+============================================================
+
+
+---------------- SEARCH: PersistGate ----------------
+
+.\pages\_app.js : Line 6
+import { PersistGate } from "redux-persist/integration/react";
+
+.\pages\_app.js : Line 52
+<PersistGate loading={null} persistor={persistor}>
+
+.\pages\_app.js : Line 58
+</PersistGate>
+
+
+---------------- SEARCH: persistStore ----------------
+
+.\redux\store.js : Line 9
+persistStore,
+
+.\redux\store.js : Line 118
+persistor = persistStore(store);
+
+
+---------------- SEARCH: persistReducer ----------------
+
+.\redux\store.js : Line 10
+persistReducer,
+
+.\redux\store.js : Line 103
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+
+---------------- SEARCH: localStorage ----------------
+
+.\components\common\ClearStorage.js : Line 5
+// Check for corrupted language state in localStorage
+
+.\components\common\ClearStorage.js : Line 8
+const persistedState = localStorage.getItem('persist:root');
+
+.\components\common\ClearStorage.js : Line 15
+console.warn('Corrupted language state detected, clearing localStorage...');
+
+.\components\common\ClearStorage.js : Line 16
+localStorage.removeItem('persist:root');
+
+.\components\common\ClearStorage.js : Line 22
+console.error('Error checking localStorage:', error);
+
+.\redux\auth.js : Line 48
+localStorage?.clear();
+
+.\redux\store.js : Line 34
+// Client-side: use localStorage
+
+.\redux\store.js : Line 38
+const item = localStorage.getItem(key);
+
+.\redux\store.js : Line 41
+console.warn('localStorage.getItem failed:', error);
+
+.\redux\store.js : Line 47
+localStorage.setItem(key, value);
+
+.\redux\store.js : Line 50
+console.warn('localStorage.setItem failed:', error);
+
+.\redux\store.js : Line 56
+localStorage.removeItem(key);
+
+.\redux\store.js : Line 59
+console.warn('localStorage.removeItem failed:', error);
+
+
+---------------- SEARCH: sessionStorage ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: window.location ----------------
+
+.\components\common\ClearStorage.js : Line 17
+window.location.reload();
+
+.\components\common\ErrorBoundary.js : Line 28
+onClick={() => window.location.reload()}
+
+.\components\dropdowns\menu\MenuIconDropDown.js : Line 161
+window.location.href = "/privacy-policy";
+
+.\components\dropdowns\user_icon\UserIconDropDown.js : Line 30
+window.location.href = "/";
+
+.\components\signup\SignUp.js : Line 72
+window.location.href = "/login";
+
+
+---------------- SEARCH: location.reload ----------------
+
+.\components\common\ClearStorage.js : Line 17
+window.location.reload();
+
+.\components\common\ErrorBoundary.js : Line 28
+onClick={() => window.location.reload()}
+
+
+---------------- SEARCH: router.reload ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: router.replace ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: router.push ----------------
+
+.\pages\categories\index.js : Line 268
+router.push(
+
+.\pages\categories\index.js : Line 337
+router.push(
+
+ : Line 371
+router.push(
+
+.\pages\contactus\index.js : Line 352
+onClick={() => router.push("/contact")}
+
+.\pages\ketchen\index.js : Line 172
+onClick={() => router.push("/ketchen/recipes")}
+
+.\pages\ketchen\index.js : Line 282
+router.push(`/ketchen/recipes/${category.id}`)
+
+.\pages\ketchen\index.js : Line 337
+router.push(`/ketchen/recipes/${category.id}`)
+
+.\pages\payment\checkout.js : Line 131
+router.push('/payment/orderSent/' + response.data?.id)
+
+.\components\alert\JobApplicationSent.js : Line 21
+onClick={() => router.push("/")}
+
+.\components\alert\OrderSent.js : Line 28
+onClick={() => router.push("/")}
+
+.\components\alert\OrderSent.js : Line 35
+onClick={() => router.push("/orders")}
+
+.\components\cart\Product.js : Line 83
+router.push(`/categories/product-content/product-details/${id}`)
+
+.\components\cart\TotalPriceCard.js : Line 41
+onClick={() => router.push("/categories")}
+
+.\components\cart\TotalPriceCard.js : Line 71
+? router.push("/payment")
+
+.\components\cart\TotalPriceCard.js : Line 72
+: router.push("/payment/shiping-address")
+
+.\components\footer\Footer.js : Line 79
+onClick={() => router.push("/privacy-policy")}
+
+.\components\forgotPassword\index.js : Line 115
+router.push("/login");
+
+.\components\home\section3\ProductCard.js : Line 25
+router.push(`/categories/product-content/product-details/${product_id}`);
+
+.\components\home\section3\ProductCardCate.js : Line 146
+router.push(
+
+.\components\home\section3\ProductCardFavori.js : Line 184
+router.push(
+
+.\components\job-application\FormOne.js : Line 216
+router.push("/job-application/addInfo");
+
+.\components\job-application\FormTwo.js : Line 82
+router.push("/job-application/addCertificate");
+
+.\components\job-application\StepsProgress.js : Line 27
+router.push(step.route);
+
+.\components\job-application\formThree\FormThree.js : Line 236
+router.push("/job-application/jobSubmited");
+
+.\components\job-application\formThree\FormThree.js : Line 463
+// onClick={() => router.push("/job-application/jobSubmited")}
+
+.\components\login\index.js : Line 45
+router.push("/");
+
+.\components\orders\BreadCrumb.js : Line 11
+onClick={() => router.push("/orders")}
+
+.\components\payment\AddLocation.js : Line 99
+router.push("/payment/shiping-address");
+
+.\components\payment\AddLocation.js : Line 256
+onClick={() => router.push("/payment/shiping-address")}
+
+.\components\payment\leftside\Product.js : Line 31
+router.push(`/categories/product-content/product-details/${id}`)
+
+.\components\payment\leftside\Product.js : Line 49
+router.push(`/categories/product-content/product-details/${id}`)
+
+.\components\payment\leftside\Product.js : Line 75
+router.push(`/categories/product-content/product-details/${id}`)
+
+.\components\payment\shipping-address\index.js : Line 95
+router.push("/payment/checkout");
+
+.\components\signup\Otp.js : Line 42
+router.push("/");
+
+.\components\signup\SignUp.js : Line 114
+//           router.push("/payment/otp");
+
+
+---------------- SEARCH: isClient ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: isMounted ----------------
+
+.\pages\_app.js : Line 28
+const [isMounted, setIsMounted] = useState(false);
+
+.\pages\_app.js : Line 31
+setIsMounted(true);
+
+.\pages\_app.js : Line 49
+{!isMounted ? (
+
+.\components\home\SponsorSlider.js : Line 26
+let isMounted = true;
+
+.\components\home\SponsorSlider.js : Line 36
+if (!isMounted) {
+
+.\components\home\SponsorSlider.js : Line 51
+if (isMounted) {
+
+.\components\home\SponsorSlider.js : Line 55
+if (isMounted) {
+
+.\components\home\SponsorSlider.js : Line 64
+isMounted = false;
+
+.\components\sideNav\index.js : Line 159
+let isMounted = true;
+
+.\components\sideNav\index.js : Line 165
+if (!isMounted) {
+
+.\components\sideNav\index.js : Line 171
+if (isMounted) {
+
+.\components\sideNav\index.js : Line 180
+isMounted = false;
+
+
+---------------- SEARCH: mounted ----------------
+
+.\pages\_app.js : Line 28
+const [isMounted, setIsMounted] = useState(false);
+
+.\pages\_app.js : Line 31
+setIsMounted(true);
+
+.\pages\_app.js : Line 49
+{!isMounted ? (
+
+.\components\dropdowns\menu\MenuIconDropDown.js : Line 40
+let mounted = true;
+
+.\components\dropdowns\menu\MenuIconDropDown.js : Line 54
+if (mounted) {
+
+.\components\dropdowns\menu\MenuIconDropDown.js : Line 65
+mounted = false;
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 67
+let mounted = true;
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 78
+if (!mounted) return;
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 84
+if (mounted) {
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 89
+if (mounted) {
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 98
+mounted = false;
+
+.\components\home\Slider.jsx : Line 35
+const [mounted, setMounted] = useState(false);
+
+.\components\home\Slider.jsx : Line 44
+const t = setTimeout(() => setMounted(true), 50);
+
+.\components\home\Slider.jsx : Line 76
+mounted ? "hero-go" : ""
+
+.\components\home\SponsorSlider.js : Line 26
+let isMounted = true;
+
+.\components\home\SponsorSlider.js : Line 36
+if (!isMounted) {
+
+.\components\home\SponsorSlider.js : Line 51
+if (isMounted) {
+
+.\components\home\SponsorSlider.js : Line 55
+if (isMounted) {
+
+.\components\home\SponsorSlider.js : Line 64
+isMounted = false;
+
+.\components\home\VideoImagesSlider.js : Line 21
+const [isPortalMounted, setIsPortalMounted] = useState(false);
+
+.\components\home\VideoImagesSlider.js : Line 29
+setIsPortalMounted(true);
+
+.\components\home\VideoImagesSlider.js : Line 33
+let mounted = true;
+
+.\components\home\VideoImagesSlider.js : Line 41
+if (mounted) {
+
+.\components\home\VideoImagesSlider.js : Line 45
+if (mounted) {
+
+.\components\home\VideoImagesSlider.js : Line 49
+if (mounted) {
+
+.\components\home\VideoImagesSlider.js : Line 58
+mounted = false;
+
+.\components\home\VideoImagesSlider.js : Line 200
+isPortalMounted && activeImage
+
+.\components\navbar\HeaderButton.js : Line 14
+const [mounted, setMounted] = useState(false);
+
+.\components\navbar\HeaderButton.js : Line 17
+setMounted(true);
+
+.\components\navbar\HeaderButton.js : Line 27
+const showBadge = mounted && count > 0;
+
+.\components\sideNav\index.js : Line 159
+let isMounted = true;
+
+.\components\sideNav\index.js : Line 165
+if (!isMounted) {
+
+.\components\sideNav\index.js : Line 171
+if (isMounted) {
+
+.\components\sideNav\index.js : Line 180
+isMounted = false;
+
+
+---------------- SEARCH: hydrated ----------------
+
+.\components\mobileNav\index.js : Line 418
+const [hydrated, setHydrated] = useState(false);
+
+.\components\mobileNav\index.js : Line 431
+setHydrated(true);
+
+.\components\mobileNav\index.js : Line 457
+{hydrated && (
+
+.\components\navbar\NavBar.js : Line 551
+const [hydrated, setHydrated] = useState(false);
+
+.\components\navbar\NavBar.js : Line 558
+setHydrated(true);
+
+.\components\navbar\NavBar.js : Line 573
+{hydrated && (
+
+.\components\sideNav\index.js : Line 145
+const [hydrated, setHydrated] = useState(false);
+
+.\components\sideNav\index.js : Line 155
+setHydrated(true);
+
+.\components\sideNav\index.js : Line 263
+const visibleCartCount = hydrated ? cartCount : 0;
+
+.\components\sideNav\index.js : Line 265
+const visibleFavoritesCount = hydrated ? favoritesCount : 0;
+
+
+---------------- SEARCH: rehydrated ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: useLayoutEffect ----------------
+
+.\components\home\section3\index.js : Line 5
+useLayoutEffect,
+
+.\components\home\section3\index.js : Line 108
+useLayoutEffect(() => {
+
+
+---------------- SEARCH: StrictMode ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: reactStrictMode ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: dynamic( ----------------
+
+.\pages\index.js : Line 11
+const Tabss = dynamic(() => import("../components/home/section3"), {
+
+.\pages\index.js : Line 16
+const ElasticCarousel = dynamic(
+
+.\pages\index.js : Line 24
+const NewsCarousel = dynamic(() => import("../components/news/NewsCarousel"), {
+
+.\pages\index.js : Line 29
+const VideoImagesSlider = dynamic(
+
+.\pages\index.js : Line 37
+const SponsorSlider = dynamic(
+
+
+---------------- SEARCH: ssr: false ----------------
+
+.\pages\index.js : Line 12
+ssr: false,
+
+.\pages\index.js : Line 19
+ssr: false,
+
+.\pages\index.js : Line 25
+ssr: false,
+
+.\pages\index.js : Line 32
+ssr: false,
+
+.\pages\index.js : Line 40
+ssr: false,
+
+
+---------------- SEARCH: setTimeout ----------------
+
+.\pages\index.js : Line 188
+timeoutId = window.setTimeout(() => {
+
+.\pages\categories\index.js : Line 396
+timeout = setTimeout(later, wait);
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 108
+const timeout = setTimeout(() => {
+
+.\components\home\Slider.jsx : Line 44
+const t = setTimeout(() => setMounted(true), 50);
+
+.\components\home\SponsorSlider.js : Line 105
+const revealTimer = setTimeout(() => {
+
+.\components\home\section4\ElasticCarousel.js : Line 279
+closeTimerRef.current = window.setTimeout(() => {
+
+.\components\navbar\NavBar.js : Line 191
+settleTimer = window.setTimeout(measureIndicator, isFixed ? 560 : 120);
+
+
+---------------- SEARCH: clearStorage ----------------
+
+.\pages\_app.js : Line 10
+import ClearStorage from "../components/common/ClearStorage";
+
+.\pages\_app.js : Line 53
+<ClearStorage />
+
+.\components\common\ClearStorage.js : Line 3
+export default function ClearStorage() {
+
+
+---------------- SEARCH: removeItem ----------------
+
+ : Line 20
+removeItem,
+
+ : Line 483
+? dispatch(removeItem(productInfo.id))
+
+.\components\cart\Product.js : Line 9
+removeItem,
+
+.\components\cart\Product.js : Line 36
+onClick={() => dispatch(removeItem(id))}
+
+.\components\common\ClearStorage.js : Line 16
+localStorage.removeItem('persist:root');
+
+.\components\home\section3\ProductCardCate.js : Line 16
+removeItem,
+
+.\components\home\section3\ProductCardCate.js : Line 209
+isAdded ? dispatch(removeItem(product_id)) : addItemToCart();
+
+.\components\home\section3\ProductCardFavori.js : Line 16
+removeItem,
+
+.\components\home\section3\ProductCardFavori.js : Line 101
+dispatch(removeItem(product_id));
+
+.\redux\cartSlice.js : Line 78
+removeItem: (state, action) => {
+
+.\redux\cartSlice.js : Line 122
+removeItem,
+
+.\redux\favoritesSlice.js : Line 22
+//   const removeItem = state.favorites.filter(
+
+.\redux\favoritesSlice.js : Line 25
+//   state.favorites = removeItem;
+
+.\redux\store.js : Line 30
+removeItem: () => Promise.resolve(),
+
+.\redux\store.js : Line 54
+removeItem: (key) => {
+
+.\redux\store.js : Line 56
+localStorage.removeItem(key);
+
+.\redux\store.js : Line 59
+console.warn('localStorage.removeItem failed:', error);
+
+
+---------------- SEARCH: document.documentElement ----------------
+
+[NO MATCHES]
+
+
+---------------- SEARCH: document.body ----------------
+
+.\components\home\VideoImagesSlider.js : Line 156
+const previousBodyOverflow = document.body.style.overflow;
+
+.\components\home\VideoImagesSlider.js : Line 157
+document.body.style.overflow = "hidden";
+
+.\components\home\VideoImagesSlider.js : Line 176
+document.body.style.overflow = previousBodyOverflow;
+
+.\components\home\VideoImagesSlider.js : Line 335
+document.body,
+
+.\components\home\section4\ElasticCarousel.js : Line 179
+document.body,
+
+.\components\home\section4\ElasticCarousel.js : Line 311
+const previousOverflow = document.body.style.overflow;
+
+.\components\home\section4\ElasticCarousel.js : Line 313
+document.body.style.overflow = "hidden";
+
+.\components\home\section4\ElasticCarousel.js : Line 353
+document.body.style.overflow = previousOverflow;
+
+.\components\layouts\index.js : Line 21
+document.body.classList.toggle("arVersion", isAr);
+
+.\components\layouts\index.js : Line 24
+document.body.classList.remove("arVersion");
+
+
+---------------- SEARCH: visibility ----------------
+
+.\components\mobileNav\index.js : Line 460
+className={`fixed inset-x-0 top-0 z-[120] transform-gpu transition-[transform,opacity,visibility,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+
+.\components\navbar\NavBar.js : Line 576
+className={`navbar fixed inset-x-0 top-0 z-[120] hidden transform-gpu transition-[transform,opacity,visibility,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:block ${
+
+
+---------------- SEARCH: loading ----------------
+
+.\pages\index.js : Line 13
+loading: () => <div className="h-[430px] w-full bg-white" />,
+
+.\pages\index.js : Line 20
+loading: () => <div className="h-[420px] w-full bg-white" />,
+
+.\pages\index.js : Line 26
+loading: () => <div className="h-[420px] w-full bg-white" />,
+
+.\pages\index.js : Line 33
+loading: () => <div className="h-[360px] w-full bg-white" />,
+
+.\pages\index.js : Line 41
+loading: () => <div className="h-40 w-full bg-white" />,
+
+.\pages\_app.js : Line 52
+<PersistGate loading={null} persistor={persistor}>
+
+.\pages\contactus\index.js : Line 66
+const [branchesLoading, setBranchesLoading] = useState(true);
+
+.\pages\contactus\index.js : Line 68
+const [branchLoading, setBranchLoading] = useState(false);
+
+.\pages\contactus\index.js : Line 78
+setBranchesLoading(true);
+
+.\pages\contactus\index.js : Line 118
+setBranchesLoading(false);
+
+.\pages\contactus\index.js : Line 138
+setBranchLoading(true);
+
+.\pages\contactus\index.js : Line 161
+setBranchLoading(false);
+
+.\pages\contactus\index.js : Line 291
+loading={branchLoading}
+
+.\pages\contactus\index.js : Line 311
+{branchLoading ? (
+
+.\pages\contactus\index.js : Line 335
+loading={branchLoading}
+
+.\pages\contactus\index.js : Line 348
+loading={branchesLoading}
+
+.\pages\whoweare\index.js : Line 118
+loading,
+
+.\pages\whoweare\index.js : Line 125
+if (loading) {
+
+.\pages\whoweare\index.js : Line 194
+function ContentCard({ number, title, Icon, content, loading, isRTL }) {
+
+.\pages\whoweare\index.js : Line 218
+loading={loading}
+
+.\pages\whoweare\index.js : Line 238
+const [loading, setLoading] = useState(true);
+
+.\pages\whoweare\index.js : Line 245
+setLoading(true);
+
+.\pages\whoweare\index.js : Line 269
+setLoading(false);
+
+.\pages\whoweare\index.js : Line 455
+loading={loading}
+
+.\pages\whoweare\index.js : Line 471
+loading={loading}
+
+.\pages\whoweare\index.js : Line 480
+loading={loading}
+
+.\pages\whoweare\index.js : Line 532
+{loading ? (
+
+.\pages\whoweare\index.js : Line 537
+loading={false}
+
+.\pages\whoweare\index.js : Line 596
+loading={loading}
+
+.\components\common\LazyComponent.js : Line 3
+// Loading fallback component
+
+.\components\common\LazyComponent.js : Line 4
+const LoadingFallback = ({ children, className = '' }) => (
+
+.\components\common\LazyComponent.js : Line 25
+<Suspense fallback={fallback || <LoadingFallback className={className} />}>
+
+.\components\common\LazyComponent.js : Line 38
+// Lazy loading hook for images
+
+.\components\common\LazyComponent.js : Line 39
+export const useLazyLoading = () => {
+
+.\components\common\OptimizedImage.js : Line 27
+const [isLoading, setIsLoading] = useState(true);
+
+.\components\common\OptimizedImage.js : Line 36
+setIsLoading(true);
+
+.\components\common\OptimizedImage.js : Line 84
+setIsLoading(false);
+
+.\components\common\OptimizedImage.js : Line 90
+setIsLoading(false);
+
+.\components\common\OptimizedImage.js : Line 125
+isLoading ? "opacity-0" : "opacity-100"
+
+.\components\common\OptimizedImage.js : Line 135
+{showSkeleton && isLoading && !hasError && (
+
+.\components\common\PerformanceMonitor.js : Line 40
+// Monitor resource loading
+
+.\components\contactus\leftside\Locations.js : Line 9
+loading = false,
+
+.\components\contactus\leftside\Locations.js : Line 45
+{loading
+
+.\components\contactus\leftside\Locations.js : Line 97
+{!loading && locations?.length === 0 && (
+
+.\components\contactus\rightside\InfoCard.js : Line 5
+loading = false,
+
+.\components\contactus\rightside\InfoCard.js : Line 19
+{loading ? (
+
+.\components\contactus\rightside\MapPicker.js : Line 34
+loading = false,
+
+.\components\contactus\rightside\MapPicker.js : Line 37
+if (loading) {
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 61
+const [isLoading, setIsLoading] = useState(true);
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 71
+setIsLoading(true);
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 90
+setIsLoading(false);
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 231
+{isLoading ? (
+
+.\components\dropdowns\search\SearchIconDropDown.js : Line 238
+: "Loading products..."}
+
+.\components\forgotPassword\index.js : Line 16
+const [loading, setLoading] = useState(false);
+
+.\components\home\SponsorSlider.js : Line 21
+const [isLoading, setIsLoading] = useState(true);
+
+.\components\home\SponsorSlider.js : Line 30
+setIsLoading(true);
+
+.\components\home\SponsorSlider.js : Line 56
+setIsLoading(false);
+
+.\components\home\SponsorSlider.js : Line 174
+{isLoading ? (
+
+.\components\home\VideoImagesSlider.js : Line 19
+const [isLoading, setIsLoading] = useState(true);
+
+.\components\home\VideoImagesSlider.js : Line 50
+setIsLoading(false);
+
+.\components\home\VideoImagesSlider.js : Line 181
+if (isLoading) {
+
+.\components\job-application\Button.js : Line 6
+loading = false,
+
+.\components\job-application\Button.js : Line 13
+disabled={disabled || loading}
+
+.\components\job-application\Button.js : Line 16
+{loading ? (
+
+.\components\job-application\FormOne.js : Line 129
+const [loadingSpecialties, setLoadingSpecialties] = useState(true);
+
+.\components\job-application\FormOne.js : Line 137
+setLoadingSpecialties(true);
+
+.\components\job-application\FormOne.js : Line 153
+setLoadingSpecialties(false);
+
+.\components\job-application\FormOne.js : Line 324
+disabled={loadingSpecialties}
+
+.\components\job-application\FormOne.js : Line 327
+loadingSpecialties
+
+.\components\job-application\FormOne.js : Line 330
+: "Loading specialties..."
+
+.\components\job-application\FormTwo.js : Line 56
+// const [isUploading,setIsUploading] = useState(false)
+
+.\components\job-application\FormTwo.js : Line 62
+const [isLoading, setIsLoading] = useState(false);
+
+.\components\job-application\FormTwo.js : Line 67
+file.isUploading = true;
+
+.\components\login\index.js : Line 16
+const [loading, setLoading] = useState(false);
+
+.\components\news\Tabs.js : Line 47
+function LoadingGrid() {
+
+.\components\news\Tabs.js : Line 81
+const [isLoading, setIsLoading] = useState(true);
+
+.\components\news\Tabs.js : Line 93
+setIsLoading(true);
+
+.\components\news\Tabs.js : Line 117
+setIsLoading(false);
+
+.\components\news\Tabs.js : Line 126
+setIsLoading(true);
+
+.\components\news\Tabs.js : Line 156
+setIsLoading(false);
+
+.\components\news\Tabs.js : Line 274
+if (isLoading) {
+
+.\components\news\Tabs.js : Line 275
+return <LoadingGrid />;
+
+.\components\signup\SignUp.js : Line 48
+const [isLoading, setIsLoading] = useState(false);
+
+.\components\signup\SignUp.js : Line 57
+setIsLoading(true);
+
+.\components\signup\SignUp.js : Line 67
+setIsLoading(false);
+
+.\components\signup\SignUp.js : Line 75
+setIsLoading(false);
+
+.\components\signup\SignUp.js : Line 224
+disabled={isLoading}
+
+.\components\whoweare\CertificatesSlider.js : Line 50
+export default function CertificatesGallery({ data, loading = false }) {
+
+.\components\whoweare\CertificatesSlider.js : Line 130
+}, [certificates.length, loading, updateNavigation]);
+
+.\components\whoweare\CertificatesSlider.js : Line 170
+if (loading) {
+
+
+---------------- SEARCH: return null ----------------
+
+.\components\common\ClearStorage.js : Line 27
+return null; // This component doesn't render anything
+
+.\components\common\OptimizedImage.js : Line 69
+if (!src) return null;
+
+.\components\common\PerformanceMonitor.js : Line 57
+return null; // This component doesn't render anything
+
+.\components\home\VideoImagesSlider.js : Line 134
+return null;
+
+.\components\home\VideoImagesSlider.js : Line 144
+return null;
+
+.\components\home\section4\ElasticCarousel.js : Line 64
+return null;
+
+.\components\home\section4\ElasticCarousel.js : Line 370
+return null;
+
+
+---------------- SEARCH: typeof window ----------------
+
+.\components\common\ClearStorage.js : Line 6
+if (typeof window !== 'undefined') {
+
+.\components\common\PerformanceMonitor.js : Line 6
+if (typeof window === 'undefined') return;
+
+.\components\home\Slider.jsx : Line 54
+if (typeof window === "undefined") return;
+
+.\components\news\Tabs.js : Line 192
+if (typeof window === "undefined") {
+
+.\redux\store.js : Line 23
+const isServer = typeof window === 'undefined';
+
+.\redux\store.js : Line 117
+if (typeof window !== 'undefined') {
+
+.\hooks\useHeaderScrolled.js : Line 12
+if (typeof window === "undefined") {
+
+.\hooks\useHeaderScrolled.js : Line 45
+if (typeof window === "undefined" || isListening) {
+
+.\hooks\useHeaderScrolled.js : Line 59
+if (typeof window === "undefined" || !isListening || subscribers.size > 0) {
+
+
+
+============================================================
+END OF DEBUG BUNDLE
+============================================================
+
+Total included source files: 17
+Completed: 2026-07-28 11:18:08

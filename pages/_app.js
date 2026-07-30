@@ -32,13 +32,11 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   const content = (
-    <>
-      <div className={elMessiri.variable}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </div>
-    </>
+    <div className={elMessiri.variable}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </div>
   );
 
   return (
@@ -46,17 +44,15 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <SEO />
 
-        {!isMounted ? (
-          content
-        ) : (
+        {isMounted && persistor ? (
           <PersistGate loading={null} persistor={persistor}>
             <ClearStorage />
 
             <PerformanceMonitor />
-
-            {content}
           </PersistGate>
-        )}
+        ) : null}
+
+        {content}
       </Provider>
     </ErrorBoundary>
   );

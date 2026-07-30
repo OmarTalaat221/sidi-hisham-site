@@ -80,7 +80,6 @@ function getElementOffsetLeft(element, parent) {
   }
 
   const parentRect = parent.getBoundingClientRect();
-
   const elementRect = element.getBoundingClientRect();
 
   return elementRect.left - parentRect.left;
@@ -116,7 +115,6 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
 
   const measureIndicator = useCallback(() => {
     const navigation = navigationRef.current;
-
     const activeLink = activeHref ? linkRefs.current.get(activeHref) : null;
 
     if (!navigation || !activeLink) {
@@ -220,7 +218,6 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
       cancelled = true;
 
       resizeObserver?.disconnect();
-
       window.removeEventListener("resize", scheduleMeasure);
 
       if (settleTimer !== null) {
@@ -243,8 +240,8 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
       dir="ltr"
       className={`relative grid h-full min-w-0 items-center transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isFixed
-          ? "grid-cols-[minmax(0,1fr)_120px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_136px_minmax(0,1fr)]"
-          : "grid-cols-[minmax(0,1fr)_138px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_158px_minmax(0,1fr)]"
+          ? "grid-cols-[minmax(0,1fr)_150px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_170px_minmax(0,1fr)]"
+          : "grid-cols-[minmax(0,1fr)_220px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_245px_minmax(0,1fr)] xl:grid-cols-[minmax(0,1fr)_270px_minmax(0,1fr)]"
       }`}
     >
       <nav
@@ -315,7 +312,7 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
   );
 }
 
-function BrandCrest({ isAr, isHome, variant, priorityLogo = false }) {
+function BrandLogo({ isAr, isHome, variant, priorityLogo = false }) {
   const isFixed = variant === "fixed";
 
   return (
@@ -325,119 +322,43 @@ function BrandCrest({ isAr, isHome, variant, priorityLogo = false }) {
       aria-current={isHome ? "page" : undefined}
       className={`group pointer-events-auto absolute left-1/2 z-40 -translate-x-1/2 transform-gpu ${
         isFixed
-          ? "top-[calc(50%+8px)] h-[92px] w-[108px] -translate-y-1/2"
-          : "top-0 h-[118px] w-[138px] lg:w-[146px]"
+          ? "top-1/2 h-[50px] w-[150px] -translate-y-1/2 lg:w-[170px]"
+          : "top-[calc(50%+10px)] h-[84px] w-[228px] -translate-y-1/2 lg:h-[92px] lg:w-[262px] xl:w-[282px]"
       }`}
     >
-      <span
-        className={`absolute inset-0 overflow-hidden border-[#FFD62D] bg-[linear-gradient(180deg,#8E0013_0%,#65000C_48%,#410006_100%)] transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-0.5 ${
+      <Image
+        alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham logo"}
+        src={logo}
+        fill
+        priority={priorityLogo}
+        sizes={
           isFixed
-            ? "rounded-b-[46px] rounded-t-[14px] border shadow-[0_15px_32px_rgba(30,0,4,0.42),0_0_20px_rgba(255,214,45,0.22)]"
-            : "rounded-b-[59px] border-x border-b shadow-[0_19px_38px_rgba(30,0,4,0.36)]"
-        } ${
-          isHome
-            ? "shadow-[0_18px_38px_rgba(30,0,4,0.4),0_0_21px_rgba(255,214,45,0.25)]"
-            : ""
+            ? "(min-width: 1024px) 170px, 150px"
+            : "(min-width: 1280px) 282px, (min-width: 1024px) 262px, 228px"
+        }
+        className={`object-contain drop-shadow-[0_8px_13px_rgba(28,0,5,0.42)] transition-transform duration-300 ease-out group-hover:-translate-y-0.5 ${
+          isFixed ? "scale-[1.02]" : "scale-[1.07]"
         }`}
-      >
-        <span className="absolute inset-[6px] rounded-[inherit] border border-white/10" />
-
-        <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_5%,rgba(255,255,255,0.18),transparent_44%)]" />
-
-        <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D]/80 to-transparent" />
-      </span>
-
-      <span
-        className={`absolute left-1/2 z-10 -translate-x-1/2 ${
-          isFixed
-            ? "top-[10px] h-[65px] w-[94px]"
-            : "top-[12px] h-[80px] w-[120px] lg:w-[128px]"
-        }`}
-      >
-        <Image
-          alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham logo"}
-          src={logo}
-          fill
-          priority={priorityLogo}
-          sizes={isFixed ? "94px" : "(min-width: 1024px) 128px, 120px"}
-          className="object-contain drop-shadow-[0_6px_10px_rgba(0,0,0,0.3)]"
-          draggable={false}
-        />
-      </span>
+        draggable={false}
+      />
     </Link>
   );
 }
 
-function DecorativeWave() {
+function RightHeaderOrnament() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[34px] translate-y-full overflow-hidden"
+      className="sedi-header-ornament-shell pointer-events-none absolute right-0 top-[72px] z-[7] hidden w-[46%] max-w-[650px] overflow-visible lg:block xl:max-w-[700px]"
     >
-      <svg
-        viewBox="0 0 1440 34"
-        preserveAspectRatio="none"
-        className="h-full w-full"
-      >
-        <defs>
-          <linearGradient id="staticHeaderWaveFill" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#560007" />
+      <div className="absolute right-0 top-5 h-[72%] w-[85%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(82,0,12,0.26)_0%,rgba(60,0,9,0.12)_44%,transparent_75%)] blur-2xl" />
 
-            <stop offset="50%" stopColor="#7C1422" />
-
-            <stop offset="100%" stopColor="#560007" />
-          </linearGradient>
-
-          <linearGradient id="staticHeaderWaveLine" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#FFD62D" stopOpacity="0" />
-
-            <stop offset="18%" stopColor="#FFD62D" stopOpacity="0.7" />
-
-            <stop offset="50%" stopColor="#FFD62D" />
-
-            <stop offset="82%" stopColor="#FFD62D" stopOpacity="0.7" />
-
-            <stop offset="100%" stopColor="#FFD62D" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        <path
-          d="
-            M0 0
-            H390
-            C425 0 433 10 468 10
-            H610
-            C660 10 671 32 720 32
-            C769 32 780 10 830 10
-            H972
-            C1007 10 1015 0 1050 0
-            H1440
-            V0
-            H0
-            Z
-          "
-          fill="url(#staticHeaderWaveFill)"
-        />
-
-        <path
-          d="
-            M0 0
-            H390
-            C425 0 433 10 468 10
-            H610
-            C660 10 671 32 720 32
-            C769 32 780 10 830 10
-            H972
-            C1007 10 1015 0 1050 0
-            H1440
-          "
-          fill="none"
-          stroke="url(#staticHeaderWaveLine)"
-          strokeWidth="1.4"
-          vectorEffect="non-scaling-stroke"
-          className="sedi-static-wave-line"
-        />
-      </svg>
+      <img
+        src="/images/header-gold-ornament-clean.svg"
+        alt=""
+        draggable={false}
+        className="sedi-header-gold-ornament relative block h-auto w-full object-contain object-right-top drop-shadow-[0_10px_16px_rgba(24,0,4,0.28)]"
+      />
     </div>
   );
 }
@@ -458,10 +379,10 @@ function DesktopHeaderBar({
       style={{
         fontFamily: "var(--font-el-messiri)",
       }}
-      className={`pointer-events-auto relative isolate transform-gpu overflow-visible border-[#FFD62D]/40 ${
+      className={`pointer-events-auto relative isolate transform-gpu overflow-visible ${
         isFixed
-          ? "mx-auto mt-2 h-[64px] w-[calc(100%_-_20px)] max-w-[1380px] rounded-[19px] border px-3 shadow-[0_18px_45px_rgba(34,0,5,0.34)] lg:px-5"
-          : "h-[82px] w-full rounded-none border-x-0 border-t-0 border-b px-5 shadow-[0_12px_30px_rgba(34,0,5,0.24)] lg:px-8 xl:px-12"
+          ? "mx-auto mt-2 h-[64px] w-[calc(100%_-_20px)] max-w-[1380px] rounded-[19px] border border-[#FFD62D]/40 shadow-[0_18px_45px_rgba(34,0,5,0.34)]"
+          : "h-[82px] w-full shadow-[0_12px_30px_rgba(34,0,5,0.24)]"
       }`}
     >
       <div
@@ -484,59 +405,54 @@ function DesktopHeaderBar({
 
         <div
           className={`absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent ${
-            isFixed ? "opacity-90" : "opacity-0"
+            isFixed ? "opacity-90" : "opacity-55"
           }`}
         />
       </div>
 
-      {!isFixed && <DecorativeWave />}
-
-      <div className="relative z-10 grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center">
-        <div
-          aria-label={isAr ? "القائمة والحساب" : "Menu and account"}
-          className={`relative z-30 flex shrink-0 items-center justify-start ${
-            isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
-          }`}
-        >
-          <MenuIconDropDown />
-
-          <UserIconDropDown />
-        </div>
-
-        <DesktopNavigation
-          isAr={isAr}
-          currentPath={currentPath}
-          variant={variant}
-          visible={visible}
-        />
-
-        <div
-          aria-label={isAr ? "البحث وسلة التسوق" : "Search and cart"}
-          className={`relative z-30 flex shrink-0 items-center justify-end ${
-            isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
-          }`}
-        >
-          <SearchIconDropDown />
-
-          {/* <CartDropDown /> */}
-        </div>
-      </div>
-
-      <BrandCrest
-        isAr={isAr}
-        isHome={isHome}
-        variant={variant}
-        priorityLogo={priorityLogo}
-      />
-
-      <span
-        aria-hidden="true"
-        className={`pointer-events-none absolute left-1/2 z-30 -translate-x-1/2 rounded-full bg-[#FFD62D] blur-[11px] ${
-          isFixed
-            ? "-bottom-[21px] h-2 w-16 opacity-35"
-            : "-bottom-[33px] h-2 w-20 opacity-50"
+      <div
+        className={`relative mx-auto h-full w-full max-w-[1380px] ${
+          isFixed ? "px-3 lg:px-5" : "px-5 lg:px-8 xl:px-10"
         }`}
-      />
+      >
+        {!isFixed && isHome && <RightHeaderOrnament />}
+
+        <div className="relative z-10 grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center">
+          <div
+            aria-label={isAr ? "القائمة والحساب" : "Menu and account"}
+            className={`relative z-30 flex shrink-0 items-center justify-start ${
+              isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
+            }`}
+          >
+            <MenuIconDropDown />
+
+            <UserIconDropDown />
+          </div>
+
+          <DesktopNavigation
+            isAr={isAr}
+            currentPath={currentPath}
+            variant={variant}
+            visible={visible}
+          />
+
+          <div
+            aria-label={isAr ? "البحث وسلة التسوق" : "Search and cart"}
+            className={`relative z-30 flex shrink-0 items-center justify-end ${
+              isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
+            }`}
+          >
+            <SearchIconDropDown />
+          </div>
+        </div>
+
+        <BrandLogo
+          isAr={isAr}
+          isHome={isHome}
+          variant={variant}
+          priorityLogo={priorityLogo}
+        />
+      </div>
     </div>
   );
 }
@@ -619,15 +535,26 @@ export default function NavBar() {
           }
         }
 
-        @keyframes sediStaticWaveDraw {
+        @keyframes sediHeaderOrnamentEnter {
           from {
-            stroke-dasharray: 2200;
-            stroke-dashoffset: 2200;
+            opacity: 0;
+            transform: translate3d(36px, -10px, 0) scale(0.96);
           }
 
           to {
-            stroke-dasharray: 2200;
-            stroke-dashoffset: 0;
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+          }
+        }
+
+        @keyframes sediHeaderOrnamentFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+
+          50% {
+            transform: translate3d(0, 4px, 0);
           }
         }
 
@@ -641,15 +568,21 @@ export default function NavBar() {
             cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
-        .sedi-static-wave-line {
-          animation: sediStaticWaveDraw 1250ms 170ms
+        .sedi-header-ornament-shell {
+          transform-origin: right top;
+          animation: sediHeaderOrnamentEnter 980ms 180ms
             cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .sedi-header-gold-ornament {
+          animation: sediHeaderOrnamentFloat 8s 1.2s ease-in-out infinite;
         }
 
         @media (prefers-reduced-motion: reduce) {
           .sedi-static-header-enter,
           .sedi-static-header-sheen,
-          .sedi-static-wave-line {
+          .sedi-header-ornament-shell,
+          .sedi-header-gold-ornament {
             animation: none !important;
             opacity: 1 !important;
           }
