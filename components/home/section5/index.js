@@ -2,7 +2,7 @@ export default function SponsorSection({ title, desc }) {
   return (
     <div>
       <div className="flex flex-col  items-center justify-center">
-        <h1 className="font-arabicBold tracking-wide text-sm md:text-2xl opacity-75 my-1">
+        <h1 className="font-arabicBold text-2xl leading-tight text-gray-900 sm:text-3xl">
           {title}
         </h1>
         <span className="mt-3 h-[3px] w-14 rounded-full bg-[#D40017]" />

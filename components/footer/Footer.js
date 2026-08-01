@@ -105,7 +105,7 @@ export default function Footer() {
 
         <WheatDecoration className="pointer-events-none absolute -bottom-20 -left-10 h-64 w-56 -scale-x-100 text-[#FFD62D]/10" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pb-8 pt-10 md:px-12 md:pb-9 md:pt-12">
+        <div className="relative z-10 mx-auto max-w-[1380px] px-6 pb-8 pt-10 md:px-12 md:pb-9 md:pt-12">
           <div className="grid items-center gap-8 md:grid-cols-[1.15fr_0.85fr] md:gap-12">
             <div className="flex flex-col items-center gap-5 text-center md:items-start md:text-start">
               <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white px-5 py-3 shadow-[0_12px_30px_rgba(55,0,12,0.16)]">

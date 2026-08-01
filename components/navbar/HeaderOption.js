@@ -81,17 +81,15 @@ const DesktopHeaderOption = memo(
         href={href}
         dir={isAr ? "rtl" : "ltr"}
         aria-current={isActive ? "page" : undefined}
-        className={`group relative z-10 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-md border border-transparent pt-[2px] text-center font-semibold leading-none transition-[height,padding,color,background-color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.97] ${
+        className={`group relative z-10 inline-flex shrink-0 items-center justify-center whitespace-nowrap text-center font-semibold leading-none transition-[height,padding,color,opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.97] ${
           scrolled
-            ? "h-9 px-2 text-[11px] lg:px-3 lg:text-[12px] xl:px-4 xl:text-[13px]"
-            : "h-10 px-1.5 text-[12px] lg:px-3 lg:text-[14px] xl:px-4 xl:text-[15px]"
+            ? "h-10 px-2 text-[11px] lg:px-3 lg:text-[12px] xl:px-4 xl:text-[13px]"
+            : "h-12 px-1.5 text-[12px] lg:px-3 lg:text-[14px] xl:px-5 xl:text-[15px]"
         } ${isAr ? "tracking-normal" : "tracking-[0.015em]"} ${
-          isActive
-            ? "text-[#FFD62D]"
-            : "text-white/95 hover:bg-white/[0.055] hover:text-[#FFD62D]"
+          isActive ? "text-[#FFD62D]" : "text-white/95 hover:text-[#FFD62D]"
         }`}
       >
-        <span className="relative transform-gpu drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] transition-transform duration-300 group-hover:-translate-y-[1px]">
+        <span className="relative transform-gpu drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:-translate-y-[1px]">
           {text}
         </span>
       </Link>

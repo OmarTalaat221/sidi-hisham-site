@@ -78,7 +78,7 @@ const NewsCarousel = ({
             {sectionTitle || defaultTitle}
           </h2>
 
-          <div className="mt-3 h-[3px] w-14 rounded-full bg-[#7C1422] mx-auto" />
+          <div className="mt-3 h-[3px] w-14 rounded-full bg-primary mx-auto" />
 
           <p className="mt-4 font-arabicLight text-sm leading-7 text-gray-500 sm:text-base">
             {sectionDescription || defaultDescription}

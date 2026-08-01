@@ -3,11 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import logo from "../../public/images/logo.png";
 
 const API_BASE_URL = "https://api.sedihisham.com/";
 const DEFAULT_HERO_IMAGE = "/images/videoframe_0.webp";
-const DEMO_HERO_VIDEO = "/videos/sedi-hisham-factory-demo.mp4";
+const DEMO_HERO_VIDEO = "/videos/sidi-hisham-banner-optimized.mp4";
 
 function getApiImageUrl(path) {
   if (!path || typeof path !== "string") return "";
@@ -139,24 +138,6 @@ export default function Slider({
             isAr ? "hero-content-rtl ml-auto" : "hero-content-ltr mr-auto"
           }`}
         >
-          {/* 1 — Logo */}
-          <div
-            className="hero-item hero-logo relative"
-            style={{ "--d": "0ms" }}
-          >
-            <Image
-              src={logo}
-              alt={isAr ? "شعار سيدي هشام" : "Sedi Hisham logo"}
-              fill
-              priority
-              sizes="180px"
-              draggable={false}
-              className={`object-contain ${
-                isAr ? "object-right" : "object-left"
-              }`}
-            />
-          </div>
-
           {/* 2 — Eyebrow badge */}
           <div
             className="hero-item hero-eyebrow inline-flex items-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md"

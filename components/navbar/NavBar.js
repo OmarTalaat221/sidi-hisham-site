@@ -1,3 +1,4 @@
+import { shouldUseTransparentHeader } from "@/components/common/headerMode";
 import useHeaderScrolled from "@/hooks/useHeaderScrolled";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,7 +107,6 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
   const setLinkRef = useCallback((href, node) => {
     if (node) {
       linkRefs.current.set(href, node);
-
       return;
     }
 
@@ -351,7 +351,7 @@ function RightHeaderOrnament() {
       aria-hidden="true"
       className="sedi-header-ornament-shell pointer-events-none absolute right-0 top-[72px] z-[7] hidden w-[46%] max-w-[650px] overflow-visible lg:block xl:max-w-[700px]"
     >
-      <div className="absolute right-0 top-5 h-[72%] w-[85%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(82,0,12,0.26)_0%,rgba(60,0,9,0.12)_44%,transparent_75%)] blur-2xl" />
+      <div className="absolute right-0 top-5 h-[72%] w-[85%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(82,0,12,0.2)_0%,rgba(60,0,9,0.08)_44%,transparent_75%)] blur-2xl" />
 
       <img
         src="/images/header-gold-ornament-clean.svg"
@@ -367,11 +367,13 @@ function DesktopHeaderBar({
   isAr,
   currentPath,
   variant,
+  transparentHeader = false,
   visible = true,
   priorityLogo = false,
 }) {
   const isFixed = variant === "fixed";
   const isHome = currentPath === "/";
+  const isTransparent = transparentHeader && !isFixed;
 
   return (
     <div
@@ -382,40 +384,54 @@ function DesktopHeaderBar({
       className={`pointer-events-auto relative isolate transform-gpu overflow-visible ${
         isFixed
           ? "mx-auto mt-2 h-[64px] w-[calc(100%_-_20px)] max-w-[1380px] rounded-[19px] border border-[#FFD62D]/40 shadow-[0_18px_45px_rgba(34,0,5,0.34)]"
-          : "h-[82px] w-full shadow-[0_12px_30px_rgba(34,0,5,0.24)]"
+          : isTransparent
+            ? "h-[112px] w-full"
+            : "h-[82px] w-full border-b border-[#FFD62D]/40 shadow-[0_12px_30px_rgba(34,0,5,0.24)]"
       }`}
     >
       <div
         aria-hidden="true"
         className={`absolute inset-0 overflow-hidden ${
-          isFixed ? "rounded-[18px]" : "rounded-none"
+          isFixed ? "rounded-[18px]" : ""
         }`}
       >
-        <div className="absolute inset-0 bg-[linear-gradient(112deg,#4A0006_0%,#72000D_22%,#980019_50%,#72000D_78%,#4A0006_100%)]" />
+        <div
+          className={`absolute inset-0 ${
+            isTransparent
+              ? "bg-[linear-gradient(180deg,rgba(55,0,8,0.96)_0%,rgba(77,0,12,0.82)_38%,rgba(77,0,12,0.52)_64%,rgba(77,0,12,0.16)_86%,rgba(77,0,12,0)_100%)]"
+              : "bg-[linear-gradient(112deg,#4A0006_0%,#72000D_22%,#980019_50%,#72000D_78%,#4A0006_100%)]"
+          }`}
+        />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(255,214,45,0.19),transparent_44%)]" />
+        {!isTransparent && (
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(255,214,45,0.19),transparent_44%)]" />
 
-        <div className="absolute inset-0 opacity-[0.052] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_24px,#ffffff_25px,transparent_26px)]" />
+            <div className="absolute inset-0 opacity-[0.052] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_24px,#ffffff_25px,transparent_26px)]" />
 
-        {!isFixed && (
+            <div className="absolute left-1/2 top-0 h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+          </>
+        )}
+
+        {!isFixed && !isTransparent && (
           <div className="sedi-static-header-sheen absolute inset-y-0 -left-[35%] w-[24%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/12 to-transparent" />
         )}
 
-        <div className="absolute left-1/2 top-0 h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-
-        <div
-          className={`absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent ${
-            isFixed ? "opacity-90" : "opacity-55"
-          }`}
-        />
+        {isFixed && (
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent opacity-90" />
+        )}
       </div>
 
       <div
         className={`relative mx-auto h-full w-full max-w-[1380px] ${
-          isFixed ? "px-3 lg:px-5" : "px-5 lg:px-8 xl:px-10"
+          isFixed
+            ? "px-3 lg:px-5"
+            : isTransparent
+              ? "px-5 pb-[30px] lg:px-8 xl:px-10"
+              : "px-5 lg:px-8 xl:px-10"
         }`}
       >
-        {!isFixed && isHome && <RightHeaderOrnament />}
+        {isTransparent && <RightHeaderOrnament />}
 
         <div className="relative z-10 grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center">
           <div
@@ -470,17 +486,24 @@ export default function NavBar() {
 
   const currentPath = normalizePath(router.asPath);
 
+  const transparentHeader = shouldUseTransparentHeader(router.pathname);
+
   useEffect(() => {
     setHydrated(true);
   }, []);
 
   return (
     <>
-      <header className="navbar sedi-static-header-enter relative z-[110] hidden w-full md:block">
+      <header
+        className={`navbar sedi-static-header-enter z-[110] hidden w-full md:block ${
+          transparentHeader ? "absolute inset-x-0 top-0" : "relative"
+        }`}
+      >
         <DesktopHeaderBar
           isAr={isAr}
           currentPath={currentPath}
           variant="static"
+          transparentHeader={transparentHeader}
           visible
           priorityLogo
         />
@@ -499,6 +522,7 @@ export default function NavBar() {
             isAr={isAr}
             currentPath={currentPath}
             variant="fixed"
+            transparentHeader={false}
             visible={scrolled}
             priorityLogo={false}
           />
