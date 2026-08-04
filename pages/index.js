@@ -227,7 +227,7 @@ export default function Home({ initialSliderImages = [] }) {
 
       <Slider sliderImages={sliderImages} />
 
-      <section className="faviconhomecarousal pattern-section pattern-section-wheat relative z-[60] mt-8 w-full md:mt-12">
+      <section className="faviconhomecarousal relative z-[60] mt-8 w-full md:mt-12">
         <div className="home-content-shell">
           <DeferredSection minHeight="430px" rootMargin="350px 0px">
             <Tabss />

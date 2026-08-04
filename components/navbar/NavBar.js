@@ -115,6 +115,7 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
 
   const measureIndicator = useCallback(() => {
     const navigation = navigationRef.current;
+
     const activeLink = activeHref ? linkRefs.current.get(activeHref) : null;
 
     if (!navigation || !activeLink) {
@@ -150,16 +151,10 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
 
   useEffect(() => {
     if (!visible) {
-      setIndicator((current) => {
-        if (!current.visible) {
-          return current;
-        }
-
-        return {
-          ...current,
-          visible: false,
-        };
-      });
+      setIndicator((current) => ({
+        ...current,
+        visible: false,
+      }));
 
       return undefined;
     }
@@ -218,6 +213,7 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
       cancelled = true;
 
       resizeObserver?.disconnect();
+
       window.removeEventListener("resize", scheduleMeasure);
 
       if (settleTimer !== null) {
@@ -241,15 +237,13 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
       className={`relative grid h-full min-w-0 items-center transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isFixed
           ? "grid-cols-[minmax(0,1fr)_150px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_170px_minmax(0,1fr)]"
-          : "grid-cols-[minmax(0,1fr)_220px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_245px_minmax(0,1fr)] xl:grid-cols-[minmax(0,1fr)_270px_minmax(0,1fr)]"
+          : "grid-cols-[minmax(0,1fr)_195px_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_220px_minmax(0,1fr)] xl:grid-cols-[minmax(0,1fr)_238px_minmax(0,1fr)]"
       }`}
     >
       <nav
         dir={isAr ? "rtl" : "ltr"}
         aria-label={isAr ? "روابط معلومات الشركة" : "Company information"}
-        className={`flex min-w-0 items-center justify-center ${
-          isFixed ? "gap-0.5 lg:gap-2 xl:gap-4" : "gap-1 lg:gap-4 xl:gap-7"
-        }`}
+        className="grid h-full min-w-0 grid-cols-3 items-center justify-items-center gap-0"
       >
         {LEFT_NAV_ITEMS.map((item) => {
           const isActive = isPathActive(currentPath, item.href);
@@ -273,9 +267,7 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
       <nav
         dir={isAr ? "rtl" : "ltr"}
         aria-label={isAr ? "روابط أقسام الموقع" : "Website sections"}
-        className={`flex min-w-0 items-center justify-center ${
-          isFixed ? "gap-0.5 lg:gap-2 xl:gap-4" : "gap-1 lg:gap-4 xl:gap-7"
-        }`}
+        className="grid h-full min-w-0 grid-cols-3 items-center justify-items-center gap-0"
       >
         {RIGHT_NAV_ITEMS.map((item) => {
           const isActive = isPathActive(currentPath, item.href);
@@ -304,9 +296,9 @@ function DesktopNavigation({ isAr, currentPath, variant, visible = true }) {
           isFixed ? "bottom-[5px]" : "bottom-[7px]"
         } ${indicator.visible ? "opacity-100" : "opacity-0"}`}
       >
-        <span className="absolute bottom-0 left-[14%] right-[14%] h-[2px] rounded-full bg-[#FFD62D] shadow-[0_0_10px_rgba(255,214,45,0.75)]" />
+        <span className="absolute bottom-0 left-[14%] right-[14%] h-[2px] rounded-full bg-[#FFD62D] shadow-[0_0_10px_rgba(255,214,45,0.72)]" />
 
-        <span className="absolute bottom-[-2px] left-1/2 h-[6px] w-[6px] -translate-x-1/2 rotate-45 rounded-[1px] bg-[#FFD62D] shadow-[0_0_12px_rgba(255,214,45,0.95)]" />
+        <span className="absolute bottom-[-2px] left-1/2 h-[6px] w-[6px] -translate-x-1/2 rotate-45 rounded-[1px] bg-[#FFD62D] shadow-[0_0_12px_rgba(255,214,45,0.88)]" />
       </span>
     </div>
   );
@@ -320,10 +312,10 @@ function BrandLogo({ isAr, isHome, variant, priorityLogo = false }) {
       href="/"
       aria-label={isAr ? "الرئيسية" : "Home"}
       aria-current={isHome ? "page" : undefined}
-      className={`group pointer-events-auto absolute left-1/2 z-40 -translate-x-1/2 transform-gpu ${
+      className={`group pointer-events-auto absolute left-1/2 top-1/2 z-40 -translate-x-1/2 -translate-y-1/2 transform-gpu ${
         isFixed
-          ? "top-1/2 h-[50px] w-[150px] -translate-y-1/2 lg:w-[170px]"
-          : "top-[calc(50%+10px)] h-[84px] w-[228px] -translate-y-1/2 lg:h-[92px] lg:w-[262px] xl:w-[282px]"
+          ? "h-[46px] w-[145px] lg:w-[160px]"
+          : "h-[72px] w-[195px] lg:h-[78px] lg:w-[220px] xl:h-[82px] xl:w-[238px]"
       }`}
     >
       <Image
@@ -333,11 +325,13 @@ function BrandLogo({ isAr, isHome, variant, priorityLogo = false }) {
         priority={priorityLogo}
         sizes={
           isFixed
-            ? "(min-width: 1024px) 170px, 150px"
-            : "(min-width: 1280px) 282px, (min-width: 1024px) 262px, 228px"
+            ? "(min-width: 1024px) 160px, 145px"
+            : "(min-width: 1280px) 238px, (min-width: 1024px) 220px, 195px"
         }
-        className={`object-contain drop-shadow-[0_8px_13px_rgba(28,0,5,0.42)] transition-transform duration-300 ease-out group-hover:-translate-y-0.5 ${
-          isFixed ? "scale-[1.02]" : "scale-[1.07]"
+        className={`object-contain transition-transform duration-300 ease-out group-hover:-translate-y-0.5 ${
+          isFixed
+            ? "drop-shadow-[0_5px_10px_rgba(30,0,5,0.35)]"
+            : "scale-[1.02] drop-shadow-[0_7px_12px_rgba(28,0,5,0.38)]"
         }`}
         draggable={false}
       />
@@ -381,51 +375,57 @@ function DesktopHeaderBar({
       style={{
         fontFamily: "var(--font-el-messiri)",
       }}
-      className={`pointer-events-auto relative isolate transform-gpu overflow-visible ${
+      className={`pointer-events-auto relative isolate transform-gpu ${
         isFixed
-          ? "mx-auto mt-2 h-[64px] w-[calc(100%_-_20px)] max-w-[1380px] rounded-[19px] border border-[#FFD62D]/40 shadow-[0_18px_45px_rgba(34,0,5,0.34)]"
+          ? "mx-auto mt-2 h-[64px] w-[93%] max-w-[1380px] rounded-[20px] border border-white/25 bg-[#7C1422]/70 shadow-[0_16px_42px_rgba(44,0,7,0.28)] backdrop-blur-xl [-webkit-backdrop-filter:blur(24px)]"
           : isTransparent
-            ? "h-[112px] w-full"
-            : "h-[82px] w-full border-b border-[#FFD62D]/40 shadow-[0_12px_30px_rgba(34,0,5,0.24)]"
+            ? "h-[112px] w-full overflow-visible"
+            : "h-[82px] w-full overflow-visible border-b border-[#FFD62D]/40 shadow-[0_12px_30px_rgba(34,0,5,0.24)]"
       }`}
     >
-      <div
-        aria-hidden="true"
-        className={`absolute inset-0 overflow-hidden ${
-          isFixed ? "rounded-[18px]" : ""
-        }`}
-      >
+      {!isFixed && (
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <div
+            className={`absolute inset-0 ${
+              isTransparent
+                ? "bg-[linear-gradient(180deg,rgba(55,0,8,0.96)_0%,rgba(77,0,12,0.82)_38%,rgba(77,0,12,0.52)_64%,rgba(77,0,12,0.16)_86%,rgba(77,0,12,0)_100%)]"
+                : "bg-[linear-gradient(112deg,#4A0006_0%,#72000D_22%,#980019_50%,#72000D_78%,#4A0006_100%)]"
+            }`}
+          />
+
+          {!isTransparent && (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(255,214,45,0.19),transparent_44%)]" />
+
+              <div className="absolute inset-0 opacity-[0.052] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_24px,#ffffff_25px,transparent_26px)]" />
+
+              <div className="absolute left-1/2 top-0 h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+
+              <div className="sedi-static-header-sheen absolute inset-y-0 -left-[35%] w-[24%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+            </>
+          )}
+        </div>
+      )}
+
+      {isFixed && (
         <div
-          className={`absolute inset-0 ${
-            isTransparent
-              ? "bg-[linear-gradient(180deg,rgba(55,0,8,0.96)_0%,rgba(77,0,12,0.82)_38%,rgba(77,0,12,0.52)_64%,rgba(77,0,12,0.16)_86%,rgba(77,0,12,0)_100%)]"
-              : "bg-[linear-gradient(112deg,#4A0006_0%,#72000D_22%,#980019_50%,#72000D_78%,#4A0006_100%)]"
-          }`}
-        />
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 overflow-hidden rounded-[19px]"
+        >
+          <div className="absolute inset-0 bg-white/[0.045]" />
 
-        {!isTransparent && (
-          <>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(255,214,45,0.19),transparent_44%)]" />
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
 
-            <div className="absolute inset-0 opacity-[0.052] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_24px,#ffffff_25px,transparent_26px)]" />
+          <div className="absolute -left-16 -top-24 h-48 w-48 rounded-full bg-white/[0.08] blur-3xl" />
 
-            <div className="absolute left-1/2 top-0 h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-          </>
-        )}
-
-        {!isFixed && !isTransparent && (
-          <div className="sedi-static-header-sheen absolute inset-y-0 -left-[35%] w-[24%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        )}
-
-        {isFixed && (
-          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent opacity-90" />
-        )}
-      </div>
+          <div className="absolute -bottom-28 right-[8%] h-52 w-52 rounded-full bg-[#D40017]/10 blur-3xl" />
+        </div>
+      )}
 
       <div
         className={`relative mx-auto h-full w-full max-w-[1380px] ${
           isFixed
-            ? "px-3 lg:px-5"
+            ? "px-3 lg:px-4 xl:px-5"
             : isTransparent
               ? "px-5 pb-[30px] lg:px-8 xl:px-10"
               : "px-5 lg:px-8 xl:px-10"
@@ -433,29 +433,37 @@ function DesktopHeaderBar({
       >
         {isTransparent && <RightHeaderOrnament />}
 
-        <div className="relative z-10 grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center">
+        <div
+          className={`relative z-10 grid h-full items-center ${
+            isFixed
+              ? "grid-cols-[92px_minmax(0,1fr)_92px] lg:grid-cols-[100px_minmax(0,1fr)_100px]"
+              : "grid-cols-[104px_minmax(0,1fr)_104px] lg:grid-cols-[116px_minmax(0,1fr)_116px] xl:grid-cols-[124px_minmax(0,1fr)_124px]"
+          }`}
+        >
           <div
             aria-label={isAr ? "القائمة والحساب" : "Menu and account"}
             className={`relative z-30 flex shrink-0 items-center justify-start ${
-              isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
+              isFixed
+                ? "sedi-fixed-header-actions gap-0.5 lg:gap-1"
+                : "gap-1 lg:gap-1.5"
             }`}
           >
             <MenuIconDropDown />
 
             <UserIconDropDown />
           </div>
-
           <DesktopNavigation
             isAr={isAr}
             currentPath={currentPath}
             variant={variant}
             visible={visible}
           />
-
           <div
             aria-label={isAr ? "البحث وسلة التسوق" : "Search and cart"}
             className={`relative z-30 flex shrink-0 items-center justify-end ${
-              isFixed ? "gap-0.5 lg:gap-1" : "gap-1 lg:gap-1.5"
+              isFixed
+                ? "sedi-fixed-header-actions gap-0.5 lg:gap-1"
+                : "gap-1 lg:gap-1.5"
             }`}
           >
             <SearchIconDropDown />
@@ -600,6 +608,34 @@ export default function NavBar() {
 
         .sedi-header-gold-ornament {
           animation: sediHeaderOrnamentFloat 8s 1.2s ease-in-out infinite;
+        }
+
+        .sedi-fixed-header-actions > button,
+        .sedi-fixed-header-actions > a,
+        .sedi-fixed-header-actions > div > button,
+        .sedi-fixed-header-actions > div > a {
+          width: 38px !important;
+          height: 38px !important;
+          border-color: rgba(255, 255, 255, 0.2) !important;
+          background: rgba(255, 255, 255, 0.1) !important;
+          color: rgba(255, 255, 255, 0.94) !important;
+          box-shadow: 0 5px 14px rgba(36, 0, 5, 0.14) !important;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        .sedi-fixed-header-actions > button:hover,
+        .sedi-fixed-header-actions > a:hover,
+        .sedi-fixed-header-actions > div > button:hover,
+        .sedi-fixed-header-actions > div > a:hover {
+          border-color: rgba(255, 214, 45, 0.42) !important;
+          background: rgba(255, 255, 255, 0.16) !important;
+          color: #ffd62d !important;
+        }
+
+        .sedi-fixed-header-actions svg {
+          color: currentColor !important;
+          stroke: currentColor !important;
         }
 
         @media (prefers-reduced-motion: reduce) {

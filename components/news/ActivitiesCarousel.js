@@ -81,7 +81,7 @@ const ActivitiesCarousel = ({
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 items-stretch gap-6 min-[560px]:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid grid-cols-1 items-stretch gap-2 min-[560px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {activities.map((activity) => {
             const translation = getTranslation(activity?.activity_translations);
 

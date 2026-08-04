@@ -1,383 +1,2342 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable jsx-a11y/alt-text */
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import SEO from '@/components/SEO';
-import React, { useEffect, useState } from "react";
-
+import SEO from "@/components/SEO";
 import axios from "axios";
-import parse from "html-react-parser";
-import { useRouter } from "next/router";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChefHat,
+  ChevronDown,
+  ChevronUp,
+  Sparkles,
+  UtensilsCrossed,
+} from "lucide-react";
+import Link from "next/link";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useSelector } from "react-redux";
-import styles from "../../styles/pages/Products.module.css";
-import { useWidth } from "../../util/useWidth";
+import { A11y, EffectFade, Keyboard } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function Index() {
-  const router = useRouter();
+const API_BASE_URL = "https://api.sedihisham.com/";
+const CATEGORIES_URL = `${API_BASE_URL}cooks-categories/findall`;
+const FALLBACK_IMAGE = "/images/eim.png";
 
-  const [cooksCategories, setCooksCategories] = useState([]);
+const PRELOADER_MIN_TIME = 700;
+const FIRST_IMAGE_TIMEOUT = 1800;
+const SLIDE_SPEED = 760;
+const WHEEL_THRESHOLD = 48;
 
-  const getCategoriesData = async (e) => {
-    await axios
-      .get("https://api.sedihisham.com/cooks-categories/findall")
-      .then((response) => {
-        setCooksCategories(response.data);
-        // console.log("cooks :" + JSON.stringify(response.data));
+const useSafeLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+function normalizeLocale(value) {
+  return String(value || "ar")
+    .trim()
+    .toLowerCase();
+}
+
+function getTranslation(translations, locale) {
+  if (!Array.isArray(translations) || translations.length === 0) {
+    return null;
+  }
+
+  const normalizedLocale = normalizeLocale(locale);
+
+  return (
+    translations.find(
+      (item) => normalizeLocale(item?.locale) === normalizedLocale,
+    ) ||
+    translations.find((item) => normalizeLocale(item?.locale) === "ar") ||
+    translations.find((item) => normalizeLocale(item?.locale) === "en") ||
+    translations[0] ||
+    null
+  );
+}
+
+function stripHtml(value = "") {
+  return String(value)
+    .replace(/<br\s*\/?\s*>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getImageUrl(path) {
+  if (!path || typeof path !== "string") {
+    return FALLBACK_IMAGE;
+  }
+
+  const normalizedPath = path.trim();
+
+  if (!normalizedPath) {
+    return FALLBACK_IMAGE;
+  }
+
+  if (
+    normalizedPath.startsWith("http://") ||
+    normalizedPath.startsWith("https://") ||
+    normalizedPath.startsWith("/images/")
+  ) {
+    return normalizedPath;
+  }
+
+  return `${API_BASE_URL}${normalizedPath.replace(/^\/+/, "")}`;
+}
+
+const KitchenArtwork = memo(function KitchenArtwork({
+  src,
+  alt,
+  priority = false,
+}) {
+  return (
+    <img
+      src={src || FALLBACK_IMAGE}
+      alt={alt}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+      decoding="async"
+      draggable={false}
+      className="kitchen-category-image"
+      onError={(event) => {
+        event.currentTarget.onerror = null;
+        event.currentTarget.src = FALLBACK_IMAGE;
+      }}
+    />
+  );
+});
+
+const KitchenPreloader = memo(function KitchenPreloader({ isAr, leaving }) {
+  return (
+    <div
+      className={`kitchen-preloader ${leaving ? "is-leaving" : ""}`}
+      role="status"
+      aria-live="polite"
+      aria-label={isAr ? "جاري تجهيز المطبخ" : "Preparing the kitchen"}
+    >
+      <div className="kitchen-preloader-pattern" aria-hidden="true" />
+      <div className="kitchen-preloader-glow" aria-hidden="true" />
+
+      <div className="kitchen-preloader-inner">
+        <div className="kitchen-preloader-mark" aria-hidden="true">
+          <span className="kitchen-preloader-ring kitchen-preloader-ring-one" />
+          <span className="kitchen-preloader-ring kitchen-preloader-ring-two" />
+
+          <div className="kitchen-preloader-logo-shell">
+            <img
+              src="/images/logo.png"
+              alt=""
+              draggable={false}
+              className="kitchen-preloader-logo"
+            />
+          </div>
+
+          <span className="kitchen-steam kitchen-steam-one" />
+          <span className="kitchen-steam kitchen-steam-two" />
+          <span className="kitchen-steam kitchen-steam-three" />
+        </div>
+
+        <p>{isAr ? "جاري تجهيز المطبخ" : "Preparing the kitchen"}</p>
+
+        <div className="kitchen-preloader-dots" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+      </div>
+    </div>
+  );
+});
+
+const KitchenSlide = memo(function KitchenSlide({
+  category,
+  index,
+  isAr,
+  playAnimation,
+}) {
+  const ArrowIcon = isAr ? ArrowLeft : ArrowRight;
+  const href = `/ketchen/recipes/${category.id}`;
+
+  return (
+    <section
+      dir={isAr ? "rtl" : "ltr"}
+      className={`kitchen-slide ${isAr ? "is-rtl" : "is-ltr"} ${
+        playAnimation ? "is-animated" : ""
+      }`}
+      aria-label={category.title}
+    >
+      <div className="kitchen-slide-surface" aria-hidden="true" />
+      <div
+        className="kitchen-slide-light kitchen-slide-light-one"
+        aria-hidden="true"
+      />
+      <div
+        className="kitchen-slide-light kitchen-slide-light-two"
+        aria-hidden="true"
+      />
+      <div
+        className="kitchen-decoration kitchen-decoration-one"
+        aria-hidden="true"
+      />
+      <div
+        className="kitchen-decoration kitchen-decoration-two"
+        aria-hidden="true"
+      />
+      <div
+        className="kitchen-decoration kitchen-decoration-three"
+        aria-hidden="true"
+      />
+
+      <div className="kitchen-slide-shell">
+        <div className="kitchen-slide-visual">
+          <div className="kitchen-plate-shadow" aria-hidden="true" />
+
+          <Link
+            href={href}
+            prefetch={false}
+            className="kitchen-plate"
+            aria-label={
+              isAr
+                ? `فتح وصفات ${category.title}`
+                : `Open ${category.title} recipes`
+            }
+          >
+            <span
+              className="kitchen-plate-ring kitchen-plate-ring-one"
+              aria-hidden="true"
+            />
+
+            <span
+              className="kitchen-plate-ring kitchen-plate-ring-two"
+              aria-hidden="true"
+            />
+
+            <KitchenArtwork
+              src={category.image}
+              alt={category.title}
+              priority={index === 0}
+            />
+          </Link>
+        </div>
+
+        <div className="kitchen-slide-content" dir={isAr ? "rtl" : "ltr"}>
+          <div className="kitchen-kicker kitchen-animate-text">
+            <ChefHat aria-hidden="true" />
+            <span>{isAr ? "مطبخ سيدي هشام" : "Sedi Hisham Kitchen"}</span>
+          </div>
+
+          <p className="kitchen-overline kitchen-animate-text">
+            {isAr ? "اكتشف نكهة جديدة" : "Discover a new flavour"}
+          </p>
+
+          <h2 className="kitchen-category-title kitchen-animate-text">
+            {category.title}
+          </h2>
+
+          <span
+            className="kitchen-title-line kitchen-animate-text"
+            aria-hidden="true"
+          />
+
+          <p className="kitchen-category-description kitchen-animate-text">
+            {category.description ||
+              (isAr
+                ? "اكتشف وصفات شهية محضّرة بمكونات سيدي هشام وخطوات واضحة وسهلة."
+                : "Discover delicious recipes made with Sedi Hisham ingredients and simple, clear steps.")}
+          </p>
+
+          <div className="kitchen-tags kitchen-animate-text">
+            <span>
+              <UtensilsCrossed aria-hidden="true" />
+              {isAr ? "وصفات متنوعة" : "Varied recipes"}
+            </span>
+
+            <span>
+              <Sparkles aria-hidden="true" />
+              {isAr ? "تحضير سهل" : "Easy preparation"}
+            </span>
+          </div>
+
+          <Link
+            href={href}
+            prefetch={false}
+            className="kitchen-category-cta kitchen-animate-text group"
+            aria-label={
+              isAr
+                ? `استكشف وصفات ${category.title}`
+                : `Explore ${category.title} recipes`
+            }
+          >
+            <span>{isAr ? "استكشف الوصفات" : "Explore recipes"}</span>
+            <ArrowIcon aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+});
+
+function KitchenError({ isAr, onRetry }) {
+  return (
+    <main dir={isAr ? "rtl" : "ltr"} className="kitchen-state">
+      <div className="kitchen-error-card">
+        <ChefHat aria-hidden="true" />
+
+        <h1>
+          {isAr
+            ? "تعذر تحميل أقسام المطبخ"
+            : "Could not load kitchen categories"}
+        </h1>
+
+        <p>
+          {isAr
+            ? "حدثت مشكلة أثناء الاتصال بالخادم. حاول مرة أخرى."
+            : "There was a problem connecting to the server. Please try again."}
+        </p>
+
+        <button type="button" onClick={onRetry}>
+          {isAr ? "إعادة المحاولة" : "Try again"}
+        </button>
+      </div>
+    </main>
+  );
+}
+
+function KitchenStyles() {
+  return (
+    <style jsx global>{`
+      body:has(.kitchen-runtime-root) footer,
+      body:has(.kitchen-runtime-root) #footer,
+      body:has(.kitchen-runtime-root) .footer,
+      body:has(.kitchen-runtime-root) .site-footer,
+      body:has(.kitchen-runtime-root) [data-footer],
+      body.kitchen-immersive-page footer,
+      body.kitchen-immersive-page #footer,
+      body.kitchen-immersive-page .footer,
+      body.kitchen-immersive-page .site-footer,
+      body.kitchen-immersive-page [data-footer] {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+
+      html:has(.kitchen-runtime-root),
+      body:has(.kitchen-runtime-root),
+      body.kitchen-immersive-page {
+        overflow: hidden !important;
+        overscroll-behavior: none !important;
+      }
+
+      .kitchen-runtime-root {
+        display: contents;
+      }
+
+      .kitchen-page,
+      .kitchen-state,
+      .kitchen-preloader {
+        --kitchen-red: #d7192d;
+        --kitchen-red-dark: #b80f23;
+        --kitchen-wine: #8a1826;
+        --kitchen-wine-light: #a62435;
+        --kitchen-dark: #5a0912;
+        --kitchen-deep: #3f060c;
+        --kitchen-gold: #ffd62d;
+        --kitchen-gold-light: #ffe36c;
+        --kitchen-cream: #fff7e8;
+
+        position: fixed;
+        inset: 0;
+
+        width: 100%;
+        height: 100vh;
+        height: 100svh;
+
+        overflow: hidden;
+
+        font-family: var(--font-el-messiri);
+      }
+
+      @supports (height: 100dvh) {
+        .kitchen-page,
+        .kitchen-state,
+        .kitchen-preloader {
+          height: 100dvh;
+        }
+      }
+
+      .kitchen-page {
+        z-index: 60;
+        overscroll-behavior: none;
+        background: var(--kitchen-deep);
+      }
+
+      .kitchen-state {
+        z-index: 61;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        color: white;
+        background:
+          radial-gradient(
+            circle at 50% 30%,
+            rgba(255, 214, 45, 0.13),
+            transparent 35%
+          ),
+          radial-gradient(
+            circle at 15% 75%,
+            rgba(215, 25, 45, 0.19),
+            transparent 32%
+          ),
+          linear-gradient(145deg, #8b1725 0%, #68101b 48%, #44070e 100%);
+      }
+
+      .kitchen-error-card {
+        width: min(100%, 470px);
+        padding: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.1);
+        text-align: center;
+        box-shadow: 0 24px 70px rgba(55, 3, 10, 0.24);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      .kitchen-error-card > svg {
+        width: 48px;
+        height: 48px;
+        margin-inline: auto;
+        color: var(--kitchen-gold);
+      }
+
+      .kitchen-error-card h1 {
+        margin-top: 18px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .kitchen-error-card p {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.9;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .kitchen-error-card button {
+        min-width: 150px;
+        min-height: 44px;
+        margin-top: 22px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--kitchen-gold);
+        color: var(--kitchen-wine);
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform 240ms ease,
+          background-color 240ms ease;
+      }
+
+      .kitchen-error-card button:hover {
+        transform: translateY(-2px);
+        background: var(--kitchen-gold-light);
+      }
+
+      .kitchen-preloader {
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        isolation: isolate;
+        color: white;
+        background:
+          radial-gradient(
+            circle at 50% 42%,
+            rgba(255, 214, 45, 0.16),
+            transparent 34%
+          ),
+          radial-gradient(
+            circle at 16% 20%,
+            rgba(255, 255, 255, 0.09),
+            transparent 25%
+          ),
+          radial-gradient(
+            circle at 84% 78%,
+            rgba(215, 25, 45, 0.22),
+            transparent 34%
+          ),
+          linear-gradient(145deg, #8b1725 0%, #68101b 48%, #44070e 100%);
+        opacity: 1;
+        transition:
+          opacity 420ms ease,
+          visibility 420ms ease;
+      }
+
+      .kitchen-preloader.is-leaving {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .kitchen-preloader-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.2;
+        background-image:
+          radial-gradient(
+            circle at 10% 20%,
+            rgba(255, 255, 255, 0.42) 0 1px,
+            transparent 1.6px
+          ),
+          radial-gradient(
+            circle at 76% 22%,
+            rgba(255, 214, 45, 0.52) 0 1px,
+            transparent 1.7px
+          ),
+          radial-gradient(
+            circle at 40% 78%,
+            rgba(255, 255, 255, 0.28) 0 1px,
+            transparent 1.6px
+          );
+        background-size:
+          100px 100px,
+          145px 145px,
+          175px 175px;
+      }
+
+      .kitchen-preloader-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(78vw, 700px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 214, 45, 0.13),
+          transparent 66%
+        );
+        filter: blur(18px);
+        transform: translate(-50%, -50%);
+      }
+
+      .kitchen-preloader-inner {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .kitchen-preloader-mark {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(160px, 18vw, 230px);
+        aspect-ratio: 1;
+      }
+
+      .kitchen-preloader-ring {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .kitchen-preloader-ring-one {
+        inset: 0;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-top-color: var(--kitchen-gold);
+        border-right-color: rgba(255, 214, 45, 0.64);
+        animation: kitchenPreloaderSpin 2.1s linear infinite;
+      }
+
+      .kitchen-preloader-ring-two {
+        inset: 12%;
+        border: 1px dashed rgba(255, 255, 255, 0.27);
+        animation: kitchenPreloaderSpinReverse 3.8s linear infinite;
+      }
+
+      .kitchen-preloader-logo-shell {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 68%;
+        height: 68%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.11);
+        box-shadow:
+          inset 0 0 0 8px rgba(255, 255, 255, 0.04),
+          0 24px 54px rgba(55, 3, 10, 0.24);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .kitchen-preloader-logo {
+        display: block;
+        width: 86%;
+        height: 70%;
+        object-fit: contain;
+        filter: drop-shadow(0 7px 11px rgba(55, 3, 10, 0.3));
+        animation: kitchenLogoBreath 1.9s ease-in-out infinite;
+      }
+
+      .kitchen-steam {
+        position: absolute;
+        top: 6%;
+        width: 2px;
+        height: 24px;
+        border-radius: 999px;
+        background: linear-gradient(
+          to top,
+          transparent,
+          rgba(255, 255, 255, 0.68)
+        );
+        opacity: 0;
+        animation: kitchenSteam 1.8s ease-in-out infinite;
+      }
+
+      .kitchen-steam-one {
+        left: 43%;
+      }
+
+      .kitchen-steam-two {
+        left: 50%;
+        animation-delay: 300ms;
+      }
+
+      .kitchen-steam-three {
+        left: 57%;
+        animation-delay: 600ms;
+      }
+
+      .kitchen-preloader-inner > p {
+        margin-top: 20px;
+        font-size: clamp(14px, 1.3vw, 17px);
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .kitchen-preloader-dots {
+        display: flex;
+        gap: 7px;
+        margin-top: 12px;
+      }
+
+      .kitchen-preloader-dots span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--kitchen-gold);
+        animation: kitchenDot 1.2s ease-in-out infinite;
+      }
+
+      .kitchen-preloader-dots span:nth-child(2) {
+        animation-delay: 150ms;
+      }
+
+      .kitchen-preloader-dots span:nth-child(3) {
+        animation-delay: 300ms;
+      }
+
+      @keyframes kitchenPreloaderSpin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes kitchenPreloaderSpinReverse {
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+
+      @keyframes kitchenLogoBreath {
+        0%,
+        100% {
+          transform: scale(0.96);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+      }
+
+      @keyframes kitchenSteam {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, 9px, 0) scaleY(0.7);
+        }
+        35% {
+          opacity: 0.75;
+        }
+        100% {
+          opacity: 0;
+          transform: translate3d(0, -15px, 0) scaleY(1.15);
+        }
+      }
+
+      @keyframes kitchenDot {
+        0%,
+        100% {
+          opacity: 0.32;
+          transform: translateY(0);
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(-4px);
+        }
+      }
+
+      .kitchen-swiper.swiper {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        touch-action: none;
+        overscroll-behavior: none;
+      }
+
+      .kitchen-swiper .swiper-wrapper {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        box-sizing: content-box;
+        transition-property: transform;
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+      }
+
+      .kitchen-swiper.swiper-vertical .swiper-wrapper {
+        flex-direction: column;
+      }
+
+      .kitchen-swiper.swiper-fade .swiper-slide {
+        pointer-events: none;
+        transition-property: opacity !important;
+        transition-timing-function: ease !important;
+      }
+
+      .kitchen-swiper.swiper-fade .swiper-slide-active {
+        pointer-events: auto;
+      }
+
+      .kitchen-swiper .swiper-slide {
+        position: relative;
+        display: block;
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        backface-visibility: hidden;
+      }
+
+      .kitchen-slide {
+        position: relative;
+        isolation: isolate;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: white;
+        background:
+          radial-gradient(
+            circle at 15% 24%,
+            rgba(255, 214, 45, 0.17),
+            transparent 29%
+          ),
+          radial-gradient(
+            circle at 78% 72%,
+            rgba(215, 25, 45, 0.22),
+            transparent 38%
+          ),
+          radial-gradient(
+            circle at 52% 0%,
+            rgba(255, 255, 255, 0.075),
+            transparent 32%
+          ),
+          linear-gradient(118deg, #59101a 0%, #861524 48%, #4b0811 100%);
+      }
+
+      .kitchen-slide-surface {
+        position: absolute;
+        inset: 0;
+        z-index: -5;
+        opacity: 0.34;
+        background-image:
+          radial-gradient(
+            circle at 10% 18%,
+            rgba(255, 255, 255, 0.45) 0 1px,
+            transparent 1.6px
+          ),
+          radial-gradient(
+            circle at 82% 26%,
+            rgba(255, 214, 45, 0.56) 0 1.2px,
+            transparent 1.8px
+          ),
+          radial-gradient(
+            circle at 34% 82%,
+            rgba(255, 255, 255, 0.32) 0 1px,
+            transparent 1.7px
+          );
+        background-size:
+          88px 88px,
+          124px 124px,
+          154px 154px;
+      }
+
+      .kitchen-slide::after {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        content: "";
+        background:
+          linear-gradient(
+            90deg,
+            rgba(55, 3, 10, 0.08),
+            transparent 42%,
+            rgba(55, 3, 10, 0.13)
+          ),
+          radial-gradient(
+            ellipse at center,
+            transparent 42%,
+            rgba(45, 2, 8, 0.2) 100%
+          );
+        pointer-events: none;
+      }
+
+      .kitchen-slide-light {
+        position: absolute;
+        z-index: -4;
+        border-radius: 50%;
+        filter: blur(25px);
+        pointer-events: none;
+      }
+
+      .kitchen-slide-light-one {
+        top: 8%;
+        left: 3%;
+        width: 26vw;
+        height: 26vw;
+        background: rgba(255, 214, 45, 0.075);
+      }
+
+      .kitchen-slide-light-two {
+        right: 5%;
+        bottom: 4%;
+        width: 31vw;
+        height: 31vw;
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .kitchen-decoration {
+        position: absolute;
+        z-index: -2;
+        border: 1px solid rgba(255, 214, 45, 0.16);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .kitchen-decoration-one {
+        top: -31vw;
+        left: -22vw;
+        width: 72vw;
+        height: 72vw;
+      }
+
+      .kitchen-decoration-two {
+        right: -20vw;
+        bottom: -34vw;
+        width: 58vw;
+        height: 58vw;
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .kitchen-decoration-three {
+        top: 12%;
+        right: 8%;
+        width: 140px;
+        height: 140px;
+        border-style: dashed;
+        border-color: rgba(255, 214, 45, 0.13);
+      }
+
+      .kitchen-slide-shell {
+        position: relative;
+        z-index: 4;
+        direction: ltr;
+        display: grid;
+        grid-template-columns: minmax(320px, 0.88fr) minmax(0, 1.12fr);
+        grid-template-areas: "visual content";
+        align-items: center;
+        width: min(100%, 1500px);
+        height: 100%;
+        margin-inline: auto;
+        gap: clamp(28px, 4.8vw, 78px);
+        padding: calc(clamp(104px, 11vh, 138px) + env(safe-area-inset-top))
+          clamp(74px, 7vw, 120px)
+          calc(clamp(66px, 7vh, 94px) + env(safe-area-inset-bottom));
+      }
+
+      .kitchen-slide-content {
+        grid-area: content;
+        align-self: center;
+        width: 100%;
+        max-width: 640px;
+        min-width: 0;
+        text-align: start;
+      }
+
+      .kitchen-slide-visual {
+        position: relative;
+        grid-area: visual;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        height: min(60vh, 560px);
+        opacity: 0;
+        transform: translate3d(-70px, -10px, 0) scale(0.86) rotate(-3deg);
+        filter: blur(7px);
+        transition:
+          opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+          filter 720ms cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: 0ms;
+        will-change: transform, opacity, filter;
+      }
+
+      .kitchen-animate-text {
+        opacity: 0;
+        transform: translate3d(54px, 18px, 0);
+        transition:
+          opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: 0ms;
+        will-change: transform, opacity;
+      }
+
+      .kitchen-slide.is-animated .kitchen-animate-text {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-content > :nth-child(1) {
+        transition-delay: 80ms;
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-content > :nth-child(2) {
+        transition-delay: 150ms;
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-content > :nth-child(3) {
+        transition-delay: 230ms;
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-content > :nth-child(4) {
+        transition-delay: 320ms;
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-content > :nth-child(5) {
+        transition-delay: 400ms;
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-content > :nth-child(6) {
+        transition-delay: 490ms;
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-content > :nth-child(7) {
+        transition-delay: 570ms;
+      }
+
+      .kitchen-slide.is-animated .kitchen-slide-visual {
+        opacity: 1;
+        transform: translate3d(-8px, -8px, 0) scale(1) rotate(0deg);
+        filter: blur(0);
+        transition-delay: 1220ms;
+      }
+
+      .kitchen-kicker {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        gap: 9px;
+        padding: 8px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.94);
+        font-size: 12px;
+        font-weight: 600;
+        box-shadow: 0 8px 20px rgba(55, 3, 10, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .kitchen-kicker svg {
+        width: 17px;
+        height: 17px;
+        color: var(--kitchen-gold);
+      }
+
+      .kitchen-overline {
+        margin-top: 25px;
+        color: var(--kitchen-gold-light);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .kitchen-category-title {
+        margin-top: 9px;
+        color: white;
+        font-size: clamp(48px, 5.3vw, 82px);
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+        text-shadow: 0 8px 26px rgba(55, 3, 10, 0.2);
+        text-wrap: balance;
+      }
+
+      .kitchen-title-line {
+        display: block;
+        width: 92px;
+        height: 3px;
+        margin-top: 22px;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          var(--kitchen-gold),
+          rgba(255, 227, 108, 0.24)
+        );
+        box-shadow: 0 0 14px rgba(255, 214, 45, 0.24);
+        transform-origin: right center;
+      }
+
+      .kitchen-category-description {
+        display: -webkit-box;
+        max-width: 560px;
+        margin-top: 21px;
+        overflow: hidden;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: clamp(15px, 1.3vw, 18px);
+        line-height: 1.95;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+      }
+
+      .kitchen-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .kitchen-tags span {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 11px;
+        box-shadow: 0 8px 18px rgba(55, 3, 10, 0.08);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .kitchen-tags svg {
+        width: 15px;
+        height: 15px;
+        color: var(--kitchen-gold);
+      }
+
+      .kitchen-category-cta {
+        position: relative;
+        isolation: isolate;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        min-width: 190px;
+        min-height: 52px;
+        gap: 11px;
+        margin-top: 30px;
+        padding: 12px 25px;
+        overflow: hidden;
+        border: 1px solid #ffdf49;
+        border-radius: 13px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.45) 0%,
+            rgba(255, 255, 255, 0.05) 24%,
+            rgba(123, 66, 0, 0.16) 100%
+          ),
+          linear-gradient(
+            90deg,
+            #9a5500 0%,
+            #c98508 10%,
+            #f0b91d 24%,
+            #fff078 43%,
+            #ffd62d 50%,
+            #fff18a 57%,
+            #f0b91d 76%,
+            #c98508 90%,
+            #925000 100%
+          );
+        color: #5a0712;
+        font-size: 14px;
+        font-weight: 800;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+        box-shadow:
+          0 14px 30px rgba(59, 4, 12, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.72),
+          inset 0 -2px 0 rgba(120, 65, 0, 0.3),
+          inset 1px 0 0 rgba(255, 235, 115, 0.4),
+          inset -1px 0 0 rgba(113, 58, 0, 0.25);
+        transform: translateZ(0);
+        transition:
+          transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+          filter 280ms cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+      }
+
+      .kitchen-category-cta::after {
+        position: absolute;
+        top: 1px;
+        bottom: 1px;
+        left: 50%;
+        z-index: -1;
+        width: 42%;
+        border-radius: inherit;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(255, 255, 214, 0.48) 0%,
+          rgba(255, 238, 108, 0.22) 45%,
+          transparent 78%
+        );
+        content: "";
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      .kitchen-category-cta::before {
+        position: absolute;
+        top: 0;
+        left: -55%;
+        z-index: 2;
+        width: 34%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.55),
+          transparent
+        );
+        content: "";
+        transform: skewX(-22deg);
+        transition: left 650ms cubic-bezier(0.22, 1, 0.36, 1);
+        pointer-events: none;
+      }
+
+      .kitchen-category-cta > span,
+      .kitchen-category-cta > svg {
+        position: relative;
+        z-index: 3;
+      }
+
+      .kitchen-category-cta svg {
+        width: 19px;
+        height: 19px;
+        color: #6b0712;
+        stroke-width: 2.2;
+        filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.25));
+        transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .kitchen-category-cta:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.06) saturate(1.06);
+        box-shadow:
+          0 19px 40px rgba(59, 4, 12, 0.34),
+          0 0 20px rgba(255, 214, 45, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.82),
+          inset 0 -2px 0 rgba(120, 65, 0, 0.32);
+      }
+
+      .kitchen-category-cta:hover::before {
+        left: 125%;
+      }
+
+      .kitchen-category-cta:active {
+        transform: translateY(-1px) scale(0.985);
+        box-shadow:
+          0 8px 20px rgba(59, 4, 12, 0.25),
+          inset 0 2px 4px rgba(118, 62, 0, 0.22);
+      }
+
+      .kitchen-category-cta:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(255, 214, 45, 0.35),
+          0 0 0 6px rgba(122, 8, 24, 0.35),
+          0 16px 36px rgba(59, 4, 12, 0.3);
+      }
+
+      .kitchen-slide.is-rtl .kitchen-category-cta:hover svg {
+        transform: translateX(-4px);
+      }
+
+      .kitchen-slide.is-ltr .kitchen-category-cta:hover svg {
+        transform: translateX(4px);
+      }
+
+      .kitchen-plate {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: min(41vw, 600px);
+        aspect-ratio: 1;
+
+        border: 1px solid rgba(255, 214, 45, 0.55);
+        border-radius: 50%;
+
+        background: radial-gradient(
+          circle at 42% 35%,
+          #ffffff 0%,
+          #fffaf0 45%,
+          #f3d99f 70%,
+          #a62a36 73%,
+          #5a0912 78%
+        );
+
+        box-shadow:
+          inset 0 0 0 12px rgba(255, 255, 255, 0.23),
+          0 36px 76px rgba(49, 3, 9, 0.3);
+
+        transform: translateZ(0);
+
+        transition:
+          transform 440ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 440ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .kitchen-plate:hover {
+        transform: translateY(-6px) rotate(1.2deg);
+
+        box-shadow:
+          inset 0 0 0 12px rgba(255, 255, 255, 0.28),
+          0 50px 96px rgba(49, 3, 9, 0.4);
+      }
+
+      .kitchen-plate-ring {
+        position: absolute;
+
+        border-radius: 50%;
+
+        pointer-events: none;
+      }
+
+      .kitchen-plate-ring-one {
+        inset: 7.5%;
+
+        border: 1px solid rgba(124, 20, 34, 0.26);
+      }
+
+      .kitchen-plate-ring-two {
+        inset: 14%;
+
+        border: 1px dashed rgba(124, 20, 34, 0.21);
+      }
+
+      .kitchen-category-image {
+        position: relative;
+        z-index: 3;
+
+        display: block;
+
+        width: 78%;
+        height: 78%;
+
+        object-fit: contain;
+        object-position: center;
+
+        filter: drop-shadow(0 22px 24px rgba(63, 12, 7, 0.22));
+
+        transform: translateZ(0) scale(0.94);
+
+        transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+
+        user-select: none;
+      }
+
+      .kitchen-plate:hover .kitchen-category-image {
+        transform: translateZ(0) scale(1.01) rotate(-1deg);
+      }
+
+      .kitchen-plate-shadow {
+        position: absolute;
+
+        bottom: 3%;
+        left: 50%;
+
+        width: 62%;
+        height: 13%;
+
+        border-radius: 50%;
+
+        background: rgba(55, 3, 10, 0.32);
+
+        filter: blur(28px);
+
+        transform: translateX(-50%);
+      }
+
+      .kitchen-pagination {
+        position: absolute;
+        top: 50%;
+        left: clamp(22px, 2.8vw, 46px);
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 9px;
+        transform: translateY(-50%);
+      }
+
+      .kitchen-pagination button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .kitchen-pagination button > span {
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.5);
+        transition:
+          width 300ms ease,
+          height 300ms ease,
+          background-color 300ms ease,
+          box-shadow 300ms ease;
+      }
+
+      .kitchen-pagination button.is-active > span {
+        width: 7px;
+        height: 30px;
+        background: var(--kitchen-gold);
+        box-shadow: 0 0 16px rgba(255, 214, 45, 0.58);
+      }
+
+      .kitchen-slider-controls {
+        position: absolute;
+        left: clamp(22px, 2.8vw, 46px);
+        bottom: calc(28px + env(safe-area-inset-bottom));
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .kitchen-slider-controls > button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 8px 22px rgba(50, 3, 9, 0.16);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition:
+          transform 240ms ease,
+          border-color 240ms ease,
+          background-color 240ms ease,
+          color 240ms ease;
+      }
+
+      .kitchen-slider-controls > button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        border-color: rgba(255, 214, 45, 0.68);
+        background: rgba(255, 214, 45, 0.2);
+        color: var(--kitchen-gold);
+      }
+
+      .kitchen-slider-controls > button:disabled {
+        opacity: 0.32;
+        cursor: not-allowed;
+      }
+
+      .kitchen-slider-controls svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .kitchen-wheel-hint {
+        position: absolute;
+        left: 50%;
+        bottom: calc(30px + env(safe-area-inset-bottom));
+        z-index: 24;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.66);
+        pointer-events: none;
+      }
+
+      .kitchen-wheel-hint > span {
+        position: relative;
+        width: 20px;
+        height: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        border-radius: 999px;
+      }
+
+      .kitchen-wheel-hint > span::after {
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        width: 3px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--kitchen-gold);
+        content: "";
+        transform: translateX(-50%);
+        animation: kitchenWheel 1.8s ease-in-out infinite;
+      }
+
+      .kitchen-wheel-hint p {
+        font-size: 10px;
+      }
+
+      @keyframes kitchenWheel {
+        0% {
+          opacity: 0;
+          transform: translate3d(-50%, 0, 0);
+        }
+        35% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translate3d(-50%, 10px, 0);
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .kitchen-slide-shell {
+          grid-template-columns: minmax(300px, 0.88fr) minmax(0, 1.12fr);
+          gap: 30px;
+          padding-inline: 58px;
+        }
+
+        .kitchen-plate {
+          width: min(39vw, 460px);
+        }
+
+        .kitchen-category-title {
+          font-size: clamp(42px, 5vw, 64px);
+        }
+      }
+
+      @media (max-width: 767px) {
+        .kitchen-slide {
+          background:
+            radial-gradient(
+              circle at 50% 18%,
+              rgba(255, 214, 45, 0.16),
+              transparent 31%
+            ),
+            radial-gradient(
+              circle at 82% 76%,
+              rgba(215, 25, 45, 0.2),
+              transparent 38%
+            ),
+            linear-gradient(165deg, #8a1826 0%, #68101b 54%, #490810 100%);
+        }
+
+        .kitchen-slide-shell {
+          grid-template-columns: minmax(0, 1fr);
+
+          grid-template-rows:
+            minmax(0, 1.08fr)
+            auto;
+
+          grid-template-areas:
+            "visual"
+            "content";
+
+          gap: 0;
+
+          padding: calc(76px + env(safe-area-inset-top)) 18px
+            calc(82px + env(safe-area-inset-bottom));
+        }
+
+        .kitchen-slide-visual {
+          align-self: stretch;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          height: auto;
+          min-height: 0;
+
+          transform: translate3d(-28px, 0, 0) scale(0.86);
+        }
+
+        .kitchen-slide.is-animated .kitchen-slide-visual {
+          transform: translate3d(0, 0, 0) scale(1);
+
+          transition-delay: 1050ms;
+        }
+
+        /* نفس الطبق القديم، لكن أكبر على الموبايل */
+        .kitchen-plate {
+          width: min(74vw, 370px);
+          max-height: 40vh;
+        }
+
+        /* تكبير المنتج داخل الطبق قليلًا */
+        .kitchen-category-image {
+          width: 82%;
+          height: 82%;
+
+          transform: translateZ(0) scale(0.96);
+        }
+
+        .kitchen-plate:hover .kitchen-category-image {
+          transform: translateZ(0) scale(1.01);
+        }
+
+        .kitchen-plate-shadow {
+          bottom: 2%;
+
+          width: 64%;
+          height: 12%;
+
+          background: rgba(55, 3, 10, 0.25);
+
+          filter: blur(25px);
+        }
+        .kitchen-slide-content {
+          align-self: end;
+          width: 100%;
+          max-width: 560px;
+          margin-inline: auto;
+          text-align: center;
+        }
+
+        .kitchen-kicker,
+        .kitchen-category-cta {
+          margin-inline: auto;
+        }
+
+        .kitchen-overline {
+          margin-top: 12px;
+          font-size: 11px;
+        }
+
+        .kitchen-kicker {
+          padding: 6px 10px;
+          font-size: 10px;
+        }
+
+        .kitchen-category-title {
+          margin-top: 6px;
+          font-size: clamp(31px, 9vw, 45px);
+          line-height: 1.12;
+        }
+
+        .kitchen-title-line {
+          width: 64px;
+          height: 2px;
+          margin: 10px auto 0;
+        }
+
+        .kitchen-category-description {
+          max-width: 470px;
+          margin: 12px auto 0;
+          font-size: 13px;
+          line-height: 1.7;
+          -webkit-line-clamp: 2;
+        }
+
+        .kitchen-tags {
+          justify-content: center;
+          margin-top: 12px;
+        }
+
+        .kitchen-tags span {
+          padding: 6px 9px;
+          font-size: 9.5px;
+        }
+
+        .kitchen-category-cta {
+          min-width: 182px;
+          min-height: 48px;
+          margin-top: 14px;
+          padding: 10px 20px;
+          border-radius: 11px;
+          font-size: 12px;
+          box-shadow:
+            0 10px 23px rgba(59, 4, 12, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.68),
+            inset 0 -2px 0 rgba(120, 65, 0, 0.25);
+        }
+
+        .kitchen-category-cta svg {
+          width: 17px;
+          height: 17px;
+        }
+
+        .kitchen-pagination {
+          top: auto;
+          right: auto;
+          bottom: calc(17px + env(safe-area-inset-bottom));
+          left: 50%;
+          flex-direction: row;
+          gap: 6px;
+          transform: translateX(-50%);
+        }
+
+        .kitchen-pagination button.is-active > span {
+          width: 26px;
+          height: 6px;
+        }
+
+        .kitchen-slider-controls {
+          right: 13px;
+          bottom: calc(12px + env(safe-area-inset-bottom));
+          left: auto;
+          gap: 6px;
+        }
+
+        .kitchen-slider-controls > button {
+          width: 38px;
+          height: 38px;
+        }
+
+        .kitchen-slider-controls svg {
+          width: 17px;
+          height: 17px;
+        }
+
+        .kitchen-wheel-hint {
+          display: none;
+        }
+      }
+
+      @media (max-width: 767px) and (max-height: 700px) {
+        .kitchen-slide-shell {
+          grid-template-rows: minmax(0, 0.9fr) auto;
+          padding-top: calc(70px + env(safe-area-inset-top));
+          padding-bottom: calc(68px + env(safe-area-inset-bottom));
+        }
+
+        .kitchen-plate {
+          width: min(62vw, 285px);
+          max-height: 32vh;
+        }
+
+        .kitchen-category-image {
+          width: 80%;
+          height: 80%;
+        }
+
+        .kitchen-kicker {
+          display: none;
+        }
+
+        .kitchen-overline {
+          margin-top: 0;
+        }
+
+        .kitchen-category-title {
+          font-size: clamp(27px, 8vw, 36px);
+        }
+
+        .kitchen-tags {
+          display: none;
+        }
+
+        .kitchen-category-cta {
+          margin-top: 10px;
+        }
+      }
+
+      @media (min-width: 768px) and (max-height: 700px) {
+        .kitchen-slide-shell {
+          padding-top: calc(91px + env(safe-area-inset-top));
+          padding-bottom: calc(50px + env(safe-area-inset-bottom));
+        }
+
+        .kitchen-slide-visual {
+          height: min(57vh, 480px);
+        }
+
+        .kitchen-plate {
+          width: min(34vw, 430px);
+        }
+
+        .kitchen-category-title {
+          font-size: clamp(38px, 4.6vw, 58px);
+        }
+
+        .kitchen-overline {
+          margin-top: 17px;
+        }
+
+        .kitchen-title-line {
+          margin-top: 15px;
+        }
+
+        .kitchen-category-description {
+          margin-top: 14px;
+          font-size: 14px;
+          -webkit-line-clamp: 2;
+        }
+
+        .kitchen-tags {
+          margin-top: 15px;
+        }
+
+        .kitchen-category-cta {
+          min-height: 44px;
+          margin-top: 18px;
+        }
+      }
+
+      @media (max-width: 950px) and (orientation: landscape) and (max-height: 600px) {
+        .kitchen-slide-shell {
+          grid-template-columns: minmax(0, 0.9fr) minmax(270px, 1.1fr);
+          grid-template-rows: 1fr;
+          grid-template-areas: "visual content";
+          gap: 24px;
+          padding: calc(67px + env(safe-area-inset-top)) 58px
+            calc(40px + env(safe-area-inset-bottom));
+        }
+
+        .kitchen-slide-content {
+          align-self: center;
+          text-align: start;
+        }
+
+        .kitchen-kicker,
+        .kitchen-category-cta {
+          margin-inline: 0;
+        }
+
+        .kitchen-plate {
+          width: min(36vw, 230px);
+          max-height: 62vh;
+        }
+
+        .kitchen-category-title {
+          font-size: clamp(28px, 5vw, 42px);
+        }
+
+        .kitchen-overline {
+          margin-top: 9px;
+        }
+
+        .kitchen-title-line {
+          margin-top: 9px;
+        }
+
+        .kitchen-category-description {
+          margin-inline: 0;
+          font-size: 11px;
+        }
+
+        .kitchen-tags {
+          display: none;
+        }
+
+        .kitchen-category-cta {
+          margin-top: 10px;
+        }
+      }
+
+      @media (hover: none) {
+        .kitchen-category-cta:hover,
+        .kitchen-plate:hover {
+          transform: none;
+        }
+
+        .kitchen-category-cta:hover::before {
+          left: -55%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .kitchen-preloader-ring,
+        .kitchen-preloader-logo,
+        .kitchen-steam,
+        .kitchen-preloader-dots span,
+        .kitchen-slide-visual,
+        .kitchen-animate-text,
+        .kitchen-category-cta,
+        .kitchen-category-cta::before,
+        .kitchen-category-cta svg,
+        .kitchen-plate,
+        .kitchen-category-image,
+        .kitchen-pagination button > span,
+        .kitchen-slider-controls > button {
+          transition: none !important;
+          animation: none !important;
+        }
+
+        .kitchen-slide.is-animated .kitchen-slide-visual,
+        .kitchen-slide.is-animated .kitchen-animate-text {
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+
+        .kitchen-wheel-hint {
+          display: none;
+        }
+      }
+    `}</style>
+  );
+}
+
+export default function KitchenPage() {
+  const { local = "ar" } = useSelector((state) => state.language);
+
+  const isAr = normalizeLocale(local) === "ar";
+
+  const pageRef = useRef(null);
+  const swiperRef = useRef(null);
+  const wheelAccumulatorRef = useRef(0);
+  const wheelLockRef = useRef(false);
+  const wheelUnlockTimerRef = useRef(null);
+  const wheelResetTimerRef = useRef(null);
+
+  const [rawCategories, setRawCategories] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [pageReady, setPageReady] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
+  const [error, setError] = useState(false);
+  const [retryKey, setRetryKey] = useState(0);
+
+  const categories = useMemo(() => {
+    const usedIds = new Set();
+
+    return rawCategories
+      .map((category) => {
+        if (!category?.id || usedIds.has(category.id)) {
+          return null;
+        }
+
+        const translation = getTranslation(
+          category?.cooks_category_translations,
+          local,
+        );
+
+        if (!translation) {
+          return null;
+        }
+
+        const title = stripHtml(translation?.title);
+
+        if (!title) {
+          return null;
+        }
+
+        usedIds.add(category.id);
+
+        return {
+          id: category.id,
+          title,
+          description: stripHtml(translation?.description),
+          image: getImageUrl(category?.image_url),
+        };
+      })
+      .filter(Boolean);
+  }, [local, rawCategories]);
+
+  useSafeLayoutEffect(() => {
+    if (typeof document === "undefined") {
+      return undefined;
+    }
+
+    const html = document.documentElement;
+    const body = document.body;
+
+    const previousHtmlStyle = html.style.cssText;
+    const previousBodyStyle = body.style.cssText;
+
+    const footerSelectors = [
+      "footer",
+      "#footer",
+      ".footer",
+      ".site-footer",
+      "[data-footer]",
+    ];
+
+    const footerElements = Array.from(
+      new Set(
+        footerSelectors.flatMap((selector) =>
+          Array.from(document.querySelectorAll(selector)),
+        ),
+      ),
+    );
+
+    const footerStyles = footerElements.map((element) => ({
+      element,
+      style: element.style.cssText,
+    }));
+
+    body.classList.add("kitchen-immersive-page");
+
+    html.style.setProperty("overflow", "hidden", "important");
+    body.style.setProperty("overflow", "hidden", "important");
+    html.style.setProperty("overscroll-behavior", "none", "important");
+    body.style.setProperty("overscroll-behavior", "none", "important");
+
+    footerElements.forEach((element) => {
+      element.style.setProperty("display", "none", "important");
+      element.style.setProperty("visibility", "hidden", "important");
+      element.style.setProperty("pointer-events", "none", "important");
+    });
+
+    return () => {
+      body.classList.remove("kitchen-immersive-page");
+
+      html.style.cssText = previousHtmlStyle;
+      body.style.cssText = previousBodyStyle;
+
+      footerStyles.forEach(({ element, style }) => {
+        element.style.cssText = style;
       });
-  };
-
-  useEffect(() => {
-    getCategoriesData();
+    };
   }, []);
 
   useEffect(() => {
-    ScrollTrigger.refresh();
-  }, [cooksCategories]);
+    let mounted = true;
+
+    async function loadCategories() {
+      setDataLoading(true);
+      setPageReady(false);
+      setShowPreloader(true);
+      setError(false);
+
+      try {
+        const response = await axios.get(CATEGORIES_URL);
+
+        if (!mounted) {
+          return;
+        }
+
+        setRawCategories(Array.isArray(response?.data) ? response.data : []);
+      } catch {
+        if (!mounted) {
+          return;
+        }
+
+        setRawCategories([]);
+        setError(true);
+      } finally {
+        if (mounted) {
+          setDataLoading(false);
+        }
+      }
+    }
+
+    loadCategories();
+
+    return () => {
+      mounted = false;
+    };
+  }, [retryKey]);
 
   useEffect(() => {
-    if (cooksCategories.length > 0) {
-      const categorydiv = document.querySelectorAll(".categorydiv");
-
-      categorydiv.forEach((div) => {
-        gsap.to(div.getElementsByClassName("grots")[0], {
-          scale: 0.9,
-          rotation: 0,
-          duration: 1,
-          x: 0,
-          y: 0,
-          scrollTrigger: {
-            trigger: div,
-            // markers: true,
-            scrub: 3,
-            start: "top bottom",
-            end: "20% center",
-          },
-        });
-        gsap.to(div.getElementsByClassName("imgRight")[0], {
-          scale: 0.9,
-          rotation: 0,
-          duration: 1,
-          x: 0,
-          y: 0,
-          scrollTrigger: {
-            trigger: div,
-            // markers:true,
-            scrub: 3,
-            start: "top bottom",
-            end: "20% center",
-          },
-        });
-        gsap.to(div.getElementsByClassName("productsIntro")[0], {
-          scale: 1,
-          duration: 1,
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: div,
-            // markers:true,
-            scrub: 3,
-            start: "top bottom",
-            end: "20% center",
-          },
-        });
-      });
-      gsap.to(".pathforProducts", {
-        duration: 1,
-        // strokeDasharray: 2000,
-        strokeDashoffset: 400,
-        // top:-350,
-        scrollTrigger: {
-          trigger: ".products",
-          // markers: true,
-          scrub: 3,
-          start: "10% bottom",
-          end: "bottom center",
-        },
-      });
+    if (dataLoading || typeof window === "undefined") {
+      setPageReady(false);
+      return undefined;
     }
-  }, [cooksCategories]);
 
-  function GraphCMSImageLoader({ src }) {
-    // If src start with uploads/images..
-    if (src.startsWith("uploads/")) {
-      return `https://api.sedihisham.com/${src}`;
-    } else {
-      return "/images/eim.png";
+    let cancelled = false;
+    let completed = false;
+    let revealTimer = null;
+    let timeoutTimer = null;
+
+    const startedAt = performance.now();
+
+    const finish = () => {
+      if (cancelled || completed) {
+        return;
+      }
+
+      completed = true;
+
+      const remaining = Math.max(
+        0,
+        PRELOADER_MIN_TIME - (performance.now() - startedAt),
+      );
+
+      revealTimer = window.setTimeout(() => {
+        if (!cancelled) {
+          setPageReady(true);
+        }
+      }, remaining);
+    };
+
+    if (error || categories.length === 0) {
+      finish();
+
+      return () => {
+        cancelled = true;
+
+        if (revealTimer !== null) {
+          window.clearTimeout(revealTimer);
+        }
+      };
     }
-  }
 
-  const { local } = useSelector((state) => state.language);
-  const { isMobile } = useWidth();
+    const image = new window.Image();
+
+    image.decoding = "async";
+    image.onload = finish;
+    image.onerror = finish;
+    image.src = categories[0].image;
+
+    if (image.complete) {
+      finish();
+    }
+
+    timeoutTimer = window.setTimeout(finish, FIRST_IMAGE_TIMEOUT);
+
+    return () => {
+      cancelled = true;
+
+      image.onload = null;
+      image.onerror = null;
+
+      if (revealTimer !== null) {
+        window.clearTimeout(revealTimer);
+      }
+
+      if (timeoutTimer !== null) {
+        window.clearTimeout(timeoutTimer);
+      }
+    };
+  }, [categories, dataLoading, error]);
+
+  useEffect(() => {
+    if (!pageReady) {
+      setShowPreloader(true);
+      return undefined;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setShowPreloader(false);
+    }, 430);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [pageReady]);
+
+  useEffect(() => {
+    setActiveIndex(0);
+    swiperRef.current?.slideTo(0, 0);
+  }, [local]);
+
+  useEffect(() => {
+    const node = pageRef.current;
+
+    if (!node || categories.length === 0) {
+      return undefined;
+    }
+
+    const handleWheel = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const swiper = swiperRef.current;
+
+      if (!swiper || wheelLockRef.current || Math.abs(event.deltaY) < 1) {
+        return;
+      }
+
+      if (
+        wheelAccumulatorRef.current !== 0 &&
+        Math.sign(wheelAccumulatorRef.current) !== Math.sign(event.deltaY)
+      ) {
+        wheelAccumulatorRef.current = 0;
+      }
+
+      wheelAccumulatorRef.current += event.deltaY;
+
+      if (wheelResetTimerRef.current !== null) {
+        window.clearTimeout(wheelResetTimerRef.current);
+      }
+
+      wheelResetTimerRef.current = window.setTimeout(() => {
+        wheelAccumulatorRef.current = 0;
+      }, 180);
+
+      if (Math.abs(wheelAccumulatorRef.current) < WHEEL_THRESHOLD) {
+        return;
+      }
+
+      const shouldMoveNext = wheelAccumulatorRef.current > 0;
+
+      wheelAccumulatorRef.current = 0;
+
+      if (
+        (shouldMoveNext && swiper.isEnd) ||
+        (!shouldMoveNext && swiper.isBeginning)
+      ) {
+        return;
+      }
+
+      wheelLockRef.current = true;
+
+      if (shouldMoveNext) {
+        swiper.slideNext();
+      } else {
+        swiper.slidePrev();
+      }
+
+      wheelUnlockTimerRef.current = window.setTimeout(() => {
+        wheelLockRef.current = false;
+      }, SLIDE_SPEED + 180);
+    };
+
+    node.addEventListener("wheel", handleWheel, {
+      passive: false,
+    });
+
+    return () => {
+      node.removeEventListener("wheel", handleWheel);
+
+      if (wheelUnlockTimerRef.current !== null) {
+        window.clearTimeout(wheelUnlockTimerRef.current);
+      }
+
+      if (wheelResetTimerRef.current !== null) {
+        window.clearTimeout(wheelResetTimerRef.current);
+      }
+    };
+  }, [categories.length]);
+
+  const handleSlideChange = useCallback((swiper) => {
+    setActiveIndex(swiper.activeIndex);
+  }, []);
+
+  const goToSlide = useCallback((index) => {
+    if (index === swiperRef.current?.activeIndex) {
+      return;
+    }
+
+    swiperRef.current?.slideTo(index);
+  }, []);
+
+  const goPrevious = useCallback(() => {
+    swiperRef.current?.slidePrev();
+  }, []);
+
+  const goNext = useCallback(() => {
+    swiperRef.current?.slideNext();
+  }, []);
+
+  const animationReady = pageReady && !showPreloader;
+  const hasContent = !error && categories.length > 0;
+
   return (
-    <div>
-      <div className={` ${isMobile?"products w-[95%]" : "products w-[80%]"} mt-20 mx-[10%]`}>
-        <SEO 
-        title="سيدي هشام - شركة العقاد للصناعة والتجارة"
-        description="شركة العقاد للصناعة والتجارة هي شركة رائدة في مجال صناعة الغذائيات حيث توفر علاماتنا التجارية سيدي هشام منتجات موثوقة"
-        keywords="سيدي هشام, شركة العقاد, صناعة غذائيات, منتجات موثوقة"
+    <div className="kitchen-runtime-root">
+      <SEO
+        title={
+          isAr
+            ? "مطبخ سيدي هشام - وصفات وأفكار شهية"
+            : "Sedi Hisham Kitchen - Delicious Recipes and Ideas"
+        }
+        description={
+          isAr
+            ? "اكتشف أقسام مطبخ سيدي هشام وأشهى الوصفات المحضرة بمكونات ومنتجات موثوقة."
+            : "Explore Sedi Hisham kitchen categories and delicious recipes made with trusted ingredients and products."
+        }
+        keywords={
+          isAr
+            ? "مطبخ سيدي هشام, وصفات, معكرونة, أرز, معجنات, طبخ"
+            : "Sedi Hisham kitchen, recipes, pasta, rice, pastries, cooking"
+        }
         type="website"
         image="https://www.sedihisham.com/images/logo.png"
       />
-        {/* <div className={` productsIntro`}> */}
-        {/* <img src="/images/productImg.png" alt="" /> */}
-        {/* 
-        <div className="categorydiv flex md:flex-div flex-div mt-10 md:-mt-[10vh] justify-between">
-          <div
-            className="flex items-center justify-center"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            order={1}
-            span={24}
-            lg={{ span: 10, order: 2 }}
-          >
-            <div
-              style={{
-                objectPosition: "center center",
-              }}
-              className="w-[30vw] z-40  "
-            >
-              {" "}
-              <OptimizedImage src={grots} alt="" className={`grots`} />
-            </div>
-          </div>{" "}
-          <div
-            className="flex  items-center justify-center"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            lg={{ span: 10, order: 1 }}
-            span={24}
-            order={2}
-          >
-            <div className={`${styles.productIntro} productIntro z-30`}>
-              <div className={`${styles.categoryInfo} categoryInfo`}>
-                <div className="pr-2 space-y-2">
-                  <p className="font-arabicBold text-3xl pb-2 ">
-                    {" "}
-                    مطبخ سيدي هشام
-                  </p>
-                  <p className="  font-arabicLight py-2">
-                    نقدم لكم طرق و وصفات اشهى الوجبات مع جميع الاحتياجات
-                    والمقادير
-                  </p>
-                  <p className="font-arabicMedium text-xl pb-4 ">
-                    وصفة الكبة المقلية من برغل سيدي هشام
-                  </p>{" "}
-                  <button
-                    onClick={() => router.push("/ketchen/recipes")}
-                    className="bg-[#D40017] font-arabicMedium text-center  rounded-full w-40 py-2 text-white"
-                  >
-                    عرض المزيد
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        {/* </div> */}
-        <div justify="center">
-          <div lg={20} span={22}>
-            <div className={`${styles.productsCon} productsCon`}>
-              <svg
-                className={`${styles.productsPath} productsPath  pathforProducts`}
-                id="Layer_1"
-                data-name="Layer 1"
-                xmlns="http://www.w3.org/2000/svg"
-                width="455.1"
-                height="4819.5"
-                viewBox="0 0 455.1 4819.5"
-              >
-                <path
-                  id="Path_56557"
-                  data-name="Path 56557"
-                  d="M62,0S-26.59,60.18,31.65,157.08c5.15,6.95,10.73,11.73,16.94,14.78,54.92,26.89,166.86-53.23,288.33-37.87,45.87,5.78,111.52,28.46,118.41,66.23C462.8,241,401.57,297.7,335.81,318.58,201.93,361.19,75.73,247.09,20,300.43c-3.47,3.32-11.2,11.26-10.36,20.26,2.84,29.14,89.8,44.71,166.6,45.55,93.06,1.05,276,29.72,272.5,121.21s-126-8.68-231.1-25.62S3.24,458.46,12,529.58s340.89,74.28,383.81,102.53,45.82,75.81-25.19,92.12-98.17,9.57-258.88-26.94S-23.85,830.12,150,860.53c142.93,25,218.42-38.67,260.71-15.78,17.68,9.57,23.15,28.82,23.15,28.82,6.79,15.42,10.15,38.88,3,51.77C409,975.52,234.39,913,113.71,945.49A142.43,142.43,0,0,0,62,970.84c-9,7-43.72,34.2-49.55,81.12-1.53,12.42-3.9,48.87,19.2,76a87.6,87.6,0,0,0,16.94,14.79c71,45.45,162-55.56,288.33-37.88,42.29,5.89,108.37,27.93,116.84,69.07,9.78,47.45-58.71,112.79-117.95,115.52-27.3,1.27-67.07-10-67-10.31.79.12,1,.12,1,.09.18-.86-187.67-70.42-249.79-7.93-4.35,4.38-11.52,11.78-10.36,20.26,3.52,25.88,80.33,29.4,166.6,45.55,46.56,8.68,266.55,49.82,272.5,121.21.89,10.94-3.11,24-12.05,31.88-34.88,30.77-111.84-45.61-219-57.55C108,1420.41,8.76,1480.44,12,1500.37c5.16,32.15,286.23,18,383.81,102.53,9.11,7.89,34.3,29.67,29.94,51.5-4.68,23.52-41.35,35.93-55.13,40.61a154.45,154.45,0,0,1-54.24,8.16c-83.91-3-128.62-32-204.64-35.09-33-1.31-90.37-3.63-101,20.83C-3.7,1721.84,63,1811.12,150,1831.37c101.89,23.78,215.26-50.87,260.71-15.78a82.65,82.65,0,0,1,23.15,28.83c6.78,15.46,10.1,38.92,3,51.76-25.89,46.56-205.64-18.94-323.16,20.15A158.06,158.06,0,0,0,62,1944.79c-11.79,9.78-43.88,36.51-49.56,81.12-1.31,10.15-4.63,48,19.2,76a87.72,87.72,0,0,0,16.94,14.78c70.44,45.14,160-54.66,288.34-37.88,6,.79,104,14.58,116,64.87,11.16,46.34-53.34,111.89-117.15,119.73-18.83,2.31-28.93-1.47-62.81-9.73-108.42-26.41-211.9-50.61-253-8.42-4.42,4.52-11.52,11.84-10.37,20.25,3.53,25.89,80.33,29.41,166.61,45.56,46.55,8.68,266.55,49.82,272.5,121.2.89,10.95-3.11,24-12,31.88-34.88,30.78-111.84-45.61-219-57.55-109.68-12.2-208.9,47.82-205.69,67.76,5.15,32.14,286.23,18,383.81,102.53,9.1,7.89,34.3,29.67,29.93,51.5-4.68,23.51-41.34,35.93-55.13,40.61a154.55,154.55,0,0,1-54.23,8.15c-83.91-2.94-128.62-32-204.64-35.08-33-1.32-90.38-3.63-101.06,20.83-14.36,32.93,52.29,122.2,139.3,142.45,98.9,23.1,216.58-48.5,260.72-15.78A79.57,79.57,0,0,1,430,2811.1c10.21,17.83,14.57,45,6.73,59-25.67,46-203.21-12.1-323.15,20.14a142.77,142.77,0,0,0-51.72,25.36c-9,7-43.71,34.19-49.55,81.12-1.53,12.41-3.89,48.87,19.2,76a87.72,87.72,0,0,0,16.94,14.78c70.44,45.09,160.4-53.71,288.33-37.87,39.72,4.89,108.74,24.09,118.42,65.28,10.89,46.24-54.82,111.68-119.52,119.31-18.41,2.16-27.88-1.42-62.81-9.73-113.47-27-212.85-49.66-253-8.42-4.42,4.53-11.53,11.84-10.37,20.25,3.53,25.89,80.33,29.41,166.6,45.56,46.56,8.68,266.56,49.82,272.5,121.21.9,10.94-3.1,24-12,31.87-34.88,30.78-111.84-45.6-219-57.55-109.69-12.2-208.9,47.82-205.69,67.76,5.15,32.14,286.23,18,383.81,102.53,9.1,7.89,34.3,29.67,29.93,51.5-4.68,23.51-41.35,35.93-55.13,40.61a153,153,0,0,1-52,8.21c-81.8-1.84-129.56-32-206.84-35.14-32.93-1.32-90.38-3.68-101.06,20.83-14.36,32.93,52.34,122.52,139.3,142.46,102,23.41,215.27-50.87,260.72-15.79a82.78,82.78,0,0,1,23.14,28.83c6.79,15.42,10.05,38.83,3,51.77-25,45.76-202.74-12.21-323.16,20.14a142.82,142.82,0,0,0-51.71,25.36c-9.05,7.05-43.71,34.19-49.55,81.12-1.53,12.41-3.9,48.87,19.2,76a87.36,87.36,0,0,0,16.94,14.78c70.49,45.14,160-54.71,288.33-37.87,5.84.73,104,14.62,116.05,65,11.1,46.34-53.4,111.78-117.15,119.62-18.89,2.32-29-1.47-62.82-9.73-108.36-26.41-211.89-50.61-253-8.42-4.42,4.53-11.52,11.84-10.36,20.26,3.52,25.88,80.33,29.4,166.6,45.55,46.56,8.68,266.56,49.82,272.5,121.21.9,10.94-3.1,24-12.05,31.88-34.87,30.77-111.84-45.61-219-57.55C107.82,4336,8.61,4396.06,11.81,4416,17,4448.14,298,4434,395.63,4518.53c9.1,7.89,34.3,29.67,29.93,51.5-4.68,23.52-41.35,35.93-55.13,40.61a154.33,154.33,0,0,1-54.24,8.16c-107.38-4.11-164.56-42.6-211.69-18.3-44.67,23-64.06,94.09-45,118,15.73,19.74,55,4,118,30,10,4.12,23.67,10.57,33,25,10.5,16.25,10,34.11,9,43"
-                  transform="translate(-2.82 1.5)"
-                  stroke="#ddb659"
-                  strokeLinecap="round"
-                  strokeWidth="1.3px"
-                  strokeDasharray="8"
-                  fill="transparent"
-                />
-              </svg>
 
-              {cooksCategories?.map((category, index) =>
-                index % 2 == 0 ? (
-                  <div
-                    key={index}
-                    className="categorydiv flex md:flex-div flex-div justify-between"
+      {showPreloader && <KitchenPreloader isAr={isAr} leaving={pageReady} />}
+
+      {!dataLoading && !hasContent ? (
+        <KitchenError
+          isAr={isAr}
+          onRetry={() => setRetryKey((current) => current + 1)}
+        />
+      ) : (
+        <main
+          ref={pageRef}
+          dir={isAr ? "rtl" : "ltr"}
+          className={`kitchen-page ${isAr ? "is-rtl" : "is-ltr"}`}
+          aria-busy={!animationReady}
+        >
+          <h1 className="sr-only">
+            {isAr ? "أقسام مطبخ سيدي هشام" : "Sedi Hisham Kitchen Categories"}
+          </h1>
+
+          {categories.length > 0 && (
+            <Swiper
+              modules={[EffectFade, Keyboard, A11y]}
+              effect="fade"
+              fadeEffect={{
+                crossFade: true,
+              }}
+              direction="vertical"
+              slidesPerView={1}
+              speed={SLIDE_SPEED}
+              threshold={12}
+              resistanceRatio={0}
+              followFinger={false}
+              simulateTouch
+              allowTouchMove
+              preventInteractionOnTransition
+              watchSlidesProgress
+              observer
+              observeParents
+              keyboard={{
+                enabled: true,
+                onlyInViewport: false,
+                pageUpDown: true,
+              }}
+              a11y={{
+                enabled: true,
+                prevSlideMessage: isAr ? "القسم السابق" : "Previous category",
+                nextSlideMessage: isAr ? "القسم التالي" : "Next category",
+                firstSlideMessage: isAr ? "أول قسم" : "First category",
+                lastSlideMessage: isAr ? "آخر قسم" : "Last category",
+              }}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+                setActiveIndex(swiper.activeIndex);
+              }}
+              onSlideChange={handleSlideChange}
+              onSlideChangeTransitionStart={handleSlideChange}
+              onSlideChangeTransitionEnd={() => {
+                wheelLockRef.current = false;
+              }}
+              className="kitchen-swiper"
+            >
+              {categories.map((category, index) => (
+                <SwiperSlide key={category.id}>
+                  <KitchenSlide
+                    category={category}
+                    index={index}
+                    isAr={isAr}
+                    playAnimation={animationReady && activeIndex === index}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+
+          {categories.length > 1 && (
+            <>
+              <nav
+                className="kitchen-pagination"
+                aria-label={
+                  isAr
+                    ? "التنقل بين أقسام المطبخ"
+                    : "Kitchen category navigation"
+                }
+              >
+                {categories.map((category, index) => (
+                  <button
+                    key={category.id}
+                    type="button"
+                    onClick={() => goToSlide(index)}
+                    aria-label={
+                      isAr
+                        ? `الانتقال إلى قسم ${category.title}`
+                        : `Go to ${category.title}`
+                    }
+                    aria-current={activeIndex === index ? "true" : undefined}
+                    className={activeIndex === index ? "is-active" : ""}
                   >
-                    <div
-                      className="flex items-center justify-center"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                      order={1}
-                      span={24}
-                      lg={{ span: 10, order: 2 }}
-                    >
-                      <div
-                        style={{
-                          objectPosition: "center center",
-                        }}
-                        className="w-[30vw] z-40  "
-                      >
-                        {" "}
-                        <img
-                          src={
-                            "https://api.sedihisham.com/" + category.image_url
-                          }
-                          width={400}
-                          height={400}
-                          alt=""
-                          className={`grots`}
-                        />
-                      </div>
-                    </div>
-                    <div
-                      className="flex  items-center justify-center"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                      lg={{ span: 10, order: 1 }}
-                      span={24}
-                      order={2}
-                    >
-                      <div
-                        className={`${styles.productIntro} productIntro z-30`}
-                      >
-                        <div className={`${styles.categoryInfo} categoryInfo`}>
-                          <div className="pr-2 space-y-2">
-                            <p className="font-arabicBold text-3xl pb-2 ">
-                                {parse(
-                                  String(
-                                    category?.cooks_category_translations?.find(
-                                      (item) => item.locale === local
-                                    )?.title || ""
-                                  )
-                                )}
-                            </p>
-                            <p className="  font-arabicLight py-2">
-                              {parse(
-                                String(
-                                  category?.cooks_category_translations?.find(
-                                    (item) => item.locale === local
-                                  )?.description || ""
-                                )
-                              )}
-                            </p>
-                            <p className="font-arabicMedium text-xl pb-4 ">
-                              {category.subSubTitle}
-                            </p>
-                            <button
-                              onClick={() =>
-                                router.push(`/ketchen/recipes/${category.id}`)
-                              }
-                              className="bg-[#D40017] font-arabicMedium text-center  rounded-full w-40 py-2 text-white"
-                            >
-                              {local === "ar" ? " عرض المزيد" : "Show more"}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className="categorydiv flex md:flex-div flex-div div-reverse justify-between"
-                    style={{ flexDirection: "div-reverse" }}
-                  >
-                    <div
-                      className="flex  items-center justify-center"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                      lg={{ span: 10, order: 1 }}
-                      span={24}
-                      order={2}
-                    >
-                      <div
-                        className={`${styles.productIntro} productIntro z-30`}
-                      >
-                        <div className={`${styles.categoryInfo} categoryInfo`}>
-                          <div className="pr-2 space-y-2">
-                            <p className="font-arabicBold text-3xl pb-2 ">
-                                {parse(
-                                  String(
-                                    category?.cooks_category_translations?.find(
-                                      (item) => item.locale === local
-                                    )?.title || ""
-                                  )
-                                )}
-                            </p>
-                            <p className="  font-arabicLight py-2">
-                              {parse(
-                                String(
-                                  category?.cooks_category_translations?.find(
-                                    (item) => item.locale === local
-                                  )?.description || ""
-                                )
-                              )}
-                            </p>
-                            {/* <p className="font-arabicMedium text-xl pb-4 ">
-                              {category.subSubTitle}
-                            </p>{" "} */}
-                            <button
-                              onClick={() =>
-                                router.push(`/ketchen/recipes/${category.id}`)
-                              }
-                              className="bg-[#D40017] font-arabicMedium text-center  rounded-full w-40 py-2 text-white"
-                            >
-                              {local === "ar" ? " عرض المزيد" : "Show more"}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="flex items-center justify-center"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                      order={1}
-                      span={24}
-                      lg={{ span: 10, order: 2 }}
-                    >
-                      <div
-                        style={{
-                          objectPosition: "center center",
-                        }}
-                        className="w-[30vw] z-40  "
-                      >
-                        {" "}
-                        <img
-                          src={`https://api.sedihisham.com/${category.image_url}`}
-                          alt=""
-                          width={400}
-                          height={400}
-                          className={`grots`}
-                        />
-                      </div>
-                    </div>{" "}
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+                    <span />
+                  </button>
+                ))}
+              </nav>
+
+              <div className="kitchen-slider-controls">
+                <button
+                  type="button"
+                  onClick={goPrevious}
+                  disabled={activeIndex === 0}
+                  aria-label={isAr ? "القسم السابق" : "Previous category"}
+                >
+                  <ChevronUp aria-hidden="true" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={goNext}
+                  disabled={activeIndex === categories.length - 1}
+                  aria-label={isAr ? "القسم التالي" : "Next category"}
+                >
+                  <ChevronDown aria-hidden="true" />
+                </button>
+              </div>
+
+              <div className="kitchen-wheel-hint" aria-hidden="true">
+                <span />
+                <p>{isAr ? "مرر لاكتشاف المزيد" : "Scroll to explore"}</p>
+              </div>
+            </>
+          )}
+        </main>
+      )}
+
+      <KitchenStyles />
     </div>
   );
 }

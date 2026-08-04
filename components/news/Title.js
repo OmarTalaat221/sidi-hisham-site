@@ -14,7 +14,7 @@ export default function Title({ text, size = "[18px]", local }) {
       className="flex w-full min-w-0 justify-start"
     >
       <div
-        className={`news-card-title-text ${sizeClass} w-full min-w-0 text-start font-arabicMedium leading-7 tracking-tight text-[#007530] transition-colors duration-300 group-hover:text-[#D40017]`}
+        className={`news-card-title-text ${sizeClass} min-h-[56px] w-full min-w-0 text-start font-arabicMedium leading-7 tracking-tight text-[#007530] transition-colors duration-300 group-hover:text-[#D40017]`}
       >
         {text}
       </div>

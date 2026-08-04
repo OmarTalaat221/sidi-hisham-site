@@ -75,21 +75,27 @@ const DesktopHeaderOption = memo(
     { text, href, scrolled = false, isActive = false, isAr = false },
     ref,
   ) {
+    const stateClasses = scrolled
+      ? isActive
+        ? "bg-white/15 text-[#FFD62D] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
+        : "text-white/90 hover:bg-white/10 hover:text-white"
+      : isActive
+        ? "text-[#FFD62D]"
+        : "text-white/95 hover:text-[#FFD62D]";
+
     return (
       <Link
         ref={ref}
         href={href}
         dir={isAr ? "rtl" : "ltr"}
         aria-current={isActive ? "page" : undefined}
-        className={`group relative z-10 inline-flex shrink-0 items-center justify-center whitespace-nowrap text-center font-semibold leading-none transition-[height,padding,color,opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.97] ${
+        className={`group relative z-10 inline-flex shrink-0 items-center justify-center whitespace-nowrap text-center font-semibold leading-none transition-[height,padding,color,background-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.97] ${
           scrolled
-            ? "h-10 px-2 text-[11px] lg:px-3 lg:text-[12px] xl:px-4 xl:text-[13px]"
-            : "h-12 px-1.5 text-[12px] lg:px-3 lg:text-[14px] xl:px-5 xl:text-[15px]"
-        } ${isAr ? "tracking-normal" : "tracking-[0.015em]"} ${
-          isActive ? "text-[#FFD62D]" : "text-white/95 hover:text-[#FFD62D]"
-        }`}
+            ? "h-9 rounded-full px-2 text-[11px] lg:px-3 lg:text-[12px] xl:px-4 xl:text-[13px]"
+            : "h-12 px-1.5 text-[11px] lg:px-3 lg:text-[14px] xl:px-5 xl:text-[15px]"
+        } ${isAr ? "tracking-normal" : "tracking-[0.015em]"} ${stateClasses}`}
       >
-        <span className="relative transform-gpu drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:-translate-y-[1px]">
+        <span className="relative transform-gpu drop-shadow-[0_2px_5px_rgba(0,0,0,0.38)] transition-transform duration-300 group-hover:-translate-y-[1px]">
           {text}
         </span>
       </Link>

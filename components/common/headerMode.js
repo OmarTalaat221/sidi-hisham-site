@@ -2,6 +2,7 @@ const TRANSPARENT_HEADER_ROUTES = new Set([
   "/",
   "/job-application",
   "/contactus",
+  "/ketchen",
   "/whoweare",
   "/news",
 ]);

@@ -147,7 +147,7 @@ function MobileNav({ open, onClose, isAr, currentPath }) {
       <Dialog
         as="div"
         dir={isAr ? "rtl" : "ltr"}
-        className="relative z-[2147483647] md:hidden"
+        className="relative z-[2147483647] lg:hidden"
         onClose={onClose}
       >
         <Transition.Child
@@ -275,8 +275,8 @@ function MobileBrand({ isAr, variant, priorityLogo }) {
     <Link
       href="/"
       aria-label={isAr ? "الرئيسية" : "Home"}
-      className={`group relative mx-1 block shrink-0 transition-[width,height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        isStatic ? "h-[62px] w-[120px]" : "h-[47px] w-[92px]"
+      className={`group relative mx-1 block shrink-0 transform-gpu transition-[width,height,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isStatic ? "h-[62px] w-[120px]" : "h-[40px] w-[84px]"
       }`}
     >
       <Image
@@ -284,8 +284,12 @@ function MobileBrand({ isAr, variant, priorityLogo }) {
         src={logo}
         fill
         priority={priorityLogo}
-        sizes={isStatic ? "120px" : "92px"}
-        className="object-contain drop-shadow-[0_5px_9px_rgba(0,0,0,0.32)] transition-transform duration-300 group-hover:scale-[1.025]"
+        sizes={isStatic ? "120px" : "84px"}
+        className={`object-contain transition-transform duration-300 group-hover:scale-[1.025] ${
+          isStatic
+            ? "drop-shadow-[0_5px_9px_rgba(0,0,0,0.32)]"
+            : "drop-shadow-[0_4px_8px_rgba(30,0,5,0.34)]"
+        }`}
         draggable={false}
       />
     </Link>
@@ -327,6 +331,7 @@ function MobileHeaderBar({
   priorityLogo = false,
 }) {
   const isStatic = variant === "static";
+  const isFixed = variant === "fixed";
   const isTransparent = isStatic && transparentHeader;
 
   return (
@@ -340,35 +345,49 @@ function MobileHeaderBar({
           ? isTransparent
             ? "h-[82px] w-full px-2.5 pb-3"
             : "h-[68px] w-full border-b border-[#FFD62D]/25 px-2.5 shadow-[0_10px_28px_rgba(35,0,5,0.27)]"
-          : "mt-2 h-[57px] w-[calc(100%_-_14px)] rounded-[18px] px-2 shadow-[0_14px_34px_rgba(35,0,5,0.34)]"
+          : "mt-2 h-[58px] w-[93%] max-w-[640px] rounded-[20px] border border-white/25 bg-[#7C1422]/70 px-2 shadow-[0_14px_36px_rgba(44,0,7,0.28)] backdrop-blur-xl [-webkit-backdrop-filter:blur(24px)]"
       }`}
     >
+      {!isFixed && (
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <div
+            className={`absolute inset-0 ${
+              isTransparent
+                ? "bg-[linear-gradient(180deg,rgba(55,0,8,0.96)_0%,rgba(77,0,12,0.78)_42%,rgba(77,0,12,0.38)_70%,rgba(77,0,12,0)_100%)]"
+                : "bg-[linear-gradient(112deg,#520007_0%,#7C1422_48%,#520007_100%)]"
+            }`}
+          />
+
+          {!isTransparent && (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,214,45,0.15),transparent_48%)]" />
+
+              <div className="absolute inset-0 opacity-[0.04] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_19px,#ffffff_20px,transparent_21px)]" />
+
+              <div className="absolute inset-x-[8%] bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent opacity-75" />
+            </>
+          )}
+        </div>
+      )}
+
+      {isFixed && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 overflow-hidden rounded-[19px]"
+        >
+          <div className="absolute inset-0 bg-white/[0.045]" />
+
+          <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+
+          <div className="absolute -left-12 -top-20 h-40 w-40 rounded-full bg-white/[0.08] blur-3xl" />
+        </div>
+      )}
+
       <div
-        aria-hidden="true"
-        className={`absolute inset-0 overflow-hidden ${
-          isStatic ? "" : "rounded-[17px]"
+        className={`relative z-20 flex min-w-0 items-center justify-start ${
+          isFixed ? "sedi-mobile-fixed-actions gap-0.5" : "gap-0.5"
         }`}
       >
-        <div
-          className={`absolute inset-0 ${
-            isTransparent
-              ? "bg-[linear-gradient(180deg,rgba(55,0,8,0.96)_0%,rgba(77,0,12,0.78)_42%,rgba(77,0,12,0.38)_70%,rgba(77,0,12,0)_100%)]"
-              : "bg-[linear-gradient(112deg,#520007_0%,#7C1422_48%,#520007_100%)]"
-          }`}
-        />
-
-        {!isTransparent && (
-          <>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,214,45,0.15),transparent_48%)]" />
-
-            <div className="absolute inset-0 opacity-[0.04] [background-image:repeating-linear-gradient(135deg,transparent_0,transparent_19px,#ffffff_20px,transparent_21px)]" />
-
-            <div className="absolute inset-x-[8%] bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFD62D] to-transparent opacity-75" />
-          </>
-        )}
-      </div>
-
-      <div className="relative z-20 flex min-w-0 items-center justify-start gap-0.5">
         <MenuIconDropDown />
 
         <UserIconDropDown />
@@ -376,7 +395,11 @@ function MobileHeaderBar({
 
       <MobileBrand isAr={isAr} variant={variant} priorityLogo={priorityLogo} />
 
-      <div className="relative z-20 flex min-w-0 items-center justify-end gap-0.5">
+      <div
+        className={`relative z-20 flex min-w-0 items-center justify-end ${
+          isFixed ? "sedi-mobile-fixed-actions gap-0.5" : "gap-0.5"
+        }`}
+      >
         <SearchIconDropDown />
 
         <button
@@ -393,17 +416,15 @@ function MobileHeaderBar({
           aria-expanded={open}
           aria-controls="mobile-navigation-dialog"
           onClick={() => setOpen(true)}
-          className={`group relative flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#FFD62D]/35 bg-[#FFD62D]/[0.06] text-white shadow-[0_7px_18px_rgba(0,0,0,0.18)] transition-[width,height,border-color,background-color,color,transform] duration-300 active:scale-95 hover:border-[#FFD62D]/65 hover:bg-[#FFD62D]/10 hover:text-[#FFD62D] ${
-            isStatic ? "h-10 w-10" : "h-9 w-9"
+          className={`group relative flex shrink-0 items-center justify-center overflow-hidden rounded-full transition-[width,height,border-color,background-color,color,transform] duration-300 active:scale-95 ${
+            isFixed
+              ? "h-[34px] w-[34px] border border-white/20 bg-white/10 text-white shadow-sm hover:border-[#FFD62D]/45 hover:bg-white/15 hover:text-[#FFD62D]"
+              : "h-10 w-10 border border-[#FFD62D]/35 bg-[#FFD62D]/[0.06] text-white shadow-[0_7px_18px_rgba(0,0,0,0.18)] hover:border-[#FFD62D]/65 hover:bg-[#FFD62D]/10 hover:text-[#FFD62D]"
           }`}
         >
-          <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,214,45,0.13),transparent_65%)]" />
-
           <Menu
-            className={`relative z-10 ${
-              isStatic ? "h-5 w-5" : "h-[18px] w-[18px]"
-            }`}
-            strokeWidth={2}
+            className={isFixed ? "h-[18px] w-[18px]" : "h-5 w-5"}
+            strokeWidth={2.2}
           />
         </button>
       </div>
@@ -518,6 +539,48 @@ export default function NavbarM() {
         .mobile-sidebar-scroll::-webkit-scrollbar-thumb {
           border-radius: 999px;
           background: rgba(255, 214, 45, 0.4);
+        }
+
+        .sedi-mobile-fixed-actions > button,
+        .sedi-mobile-fixed-actions > a,
+        .sedi-mobile-fixed-actions > div > button,
+        .sedi-mobile-fixed-actions > div > a {
+          width: 34px !important;
+          height: 34px !important;
+          min-width: 34px !important;
+          border-color: rgba(255, 255, 255, 0.2) !important;
+          background: rgba(255, 255, 255, 0.1) !important;
+          color: rgba(255, 255, 255, 0.94) !important;
+          box-shadow: 0 4px 12px rgba(36, 0, 5, 0.12) !important;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+        }
+
+        .sedi-mobile-fixed-actions > button:hover,
+        .sedi-mobile-fixed-actions > a:hover,
+        .sedi-mobile-fixed-actions > div > button:hover,
+        .sedi-mobile-fixed-actions > div > a:hover {
+          border-color: rgba(255, 214, 45, 0.42) !important;
+          background: rgba(255, 255, 255, 0.15) !important;
+          color: #ffd62d !important;
+        }
+
+        .sedi-mobile-fixed-actions svg {
+          width: 18px !important;
+          height: 18px !important;
+          color: currentColor !important;
+          stroke: currentColor !important;
+        }
+
+        @media (max-width: 359px) {
+          .sedi-mobile-fixed-actions > button,
+          .sedi-mobile-fixed-actions > a,
+          .sedi-mobile-fixed-actions > div > button,
+          .sedi-mobile-fixed-actions > div > a {
+            width: 31px !important;
+            height: 31px !important;
+            min-width: 31px !important;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {

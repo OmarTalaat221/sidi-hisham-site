@@ -422,7 +422,7 @@ export default function Tabs() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-[28px] p-4 sm:mt-8 sm:p-5 lg:p-6">
+        <div className="mt-6 rounded-[28px] py-4 sm:mt-8 sm:py-5 lg:py-6">
           <div
             key={activeConfig.key}
             id={`news-panel-${activeConfig.key}`}

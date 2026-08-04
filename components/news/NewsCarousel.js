@@ -96,7 +96,7 @@ const NewsCarousel = ({
         <>
           {type === "homepage" ? (
             <>
-              <div className="grid w-full grid-cols-1 items-stretch gap-6 min-[560px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid w-full grid-cols-1 items-stretch gap-2 min-[560px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {visibleNews.map((item) => {
                   const translation = getTranslation(item?.new_translations);
 

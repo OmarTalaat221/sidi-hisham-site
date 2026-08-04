@@ -1,3 +1,4 @@
+import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import SEOImage from "../common/SEOImage";
 import Title from "./Title";
@@ -11,6 +12,8 @@ export default function NewsCard({
   local,
 }) {
   const isRTL = local === "ar";
+
+  const ArrowIcon = isRTL ? ArrowUpLeft : ArrowUpRight;
 
   function GraphCMSImageLoader({ src }) {
     if (!src || typeof src !== "string") {
@@ -31,157 +34,194 @@ export default function NewsCard({
   return (
     <article
       dir={isRTL ? "rtl" : "ltr"}
-      className="news-card group relative isolate flex h-full min-h-[490px] w-full min-w-0 flex-col overflow-hidden rounded-[22px] border border-gray-100 bg-white"
+      className="news-editorial-card group relative flex h-full min-w-0 flex-col pb-8 md:px-5 md:pb-0"
     >
-      <span
-        aria-hidden="true"
-        className="news-card-gold-border pointer-events-none absolute inset-0 z-20 rounded-[22px] border-2 border-[#FFD62D] opacity-0"
-      />
-
-      <div className="news-card-media relative h-[220px] w-full shrink-0 overflow-hidden rounded-t-[22px] bg-gray-100">
+      <Link
+        href={`/news/newsDetails/${id}`}
+        aria-label={isRTL ? "عرض تفاصيل الخبر" : "View news details"}
+        className="news-editorial-media relative block aspect-[16/11] w-full shrink-0 overflow-hidden rounded-tl-[18px] rounded-tr-[18px] bg-[#F2F2F2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D40017] focus-visible:ring-offset-4"
+      >
         <SEOImage
           fill
-          sizes="(max-width: 560px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          priority={false}
+          sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 33vw"
           loader={GraphCMSImageLoader}
           src={image || "/images/eim.png"}
-          alt={isRTL ? "صورة خبر سيدي هشام" : "Sidi Hisham news image"}
-          className="news-card-image"
+          alt={
+            title || (isRTL ? "صورة خبر سيدي هشام" : "Sidi Hisham news image")
+          }
+          className="news-editorial-image"
           objectFit="cover"
           objectPosition="center"
         />
-      </div>
+      </Link>
 
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col p-4 sm:p-5">
-        <div className="flex min-h-0 flex-1 flex-col">
-          <div className="news-card-title-wrapper">
-            <Title local={local} text={title} size="[18px]" />
-          </div>
+      <div className="flex min-h-0 flex-1 flex-col pt-5 bg-white">
+        <Link
+          href={`/news/newsDetails/${id}`}
+          className="news-editorial-title block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D40017] focus-visible:ring-offset-4"
+        >
+          <Title local={local} text={title} size="[20px]" />
+        </Link>
 
-          {subTitle && (
-            <div className="mt-3 text-start font-arabicMedium text-sm leading-6 text-primary">
-              {subTitle}
-            </div>
-          )}
-
-          <p
-            className="news-card-description mt-3 text-start font-arabicLight text-sm leading-7 text-gray-600"
-            title={description || ""}
-          >
-            {description || ""}
+        {subTitle && (
+          <p className="news-editorial-subtitle mt-2 text-start font-arabicMedium text-sm leading-6 text-[#7C1422]">
+            {subTitle}
           </p>
-        </div>
+        )}
+
+        {description && (
+          <p
+            className="news-editorial-description mt-3 text-start font-arabicLight text-[14px] leading-7 text-[#666666]"
+            title={description}
+          >
+            {description}
+          </p>
+        )}
 
         <Link
           href={`/news/newsDetails/${id}`}
-          className="news-card-cta mt-5 inline-flex min-h-[44px] w-full shrink-0 items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-center font-arabicMedium text-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           aria-label={isRTL ? "عرض تفاصيل الخبر" : "View news details"}
+          className="news-editorial-button !mt-6 inline-flex min-h-[46px] w-fit min-w-[138px] items-center justify-center gap-2 rounded-[5px] bg-[#D40017] px-6 py-2.5 font-arabicMedium text-sm text-white transition-[background-color,transform,box-shadow] duration-300 hover:bg-[#B50015] hover:shadow-[0_8px_18px_rgba(212,0,23,0.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D40017] focus-visible:ring-offset-4 active:scale-[0.98]"
         >
-          {isRTL ? "التفاصيل" : "Details"}
+          <span>{isRTL ? "التفاصيل" : "Details"}</span>
+
+          <ArrowIcon
+            aria-hidden="true"
+            className="news-editorial-arrow h-4 w-4 text-white"
+            strokeWidth={2.4}
+          />
         </Link>
       </div>
 
       <style jsx global>{`
-        .news-card {
-          box-shadow:
-            0 10px 25px rgba(0, 0, 0, 0.08),
-            0 4px 10px rgba(0, 0, 0, 0.05);
+        .news-editorial-media {
+          isolation: isolate;
+        }
+
+        .news-editorial-image {
           transition:
-            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-            box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+            filter 350ms cubic-bezier(0.22, 1, 0.36, 1) !important;
         }
 
-        .news-card-gold-border {
-          transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .news-card-image {
-          transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
-        }
-
-        .news-card-cta {
-          transition:
-            background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .news-card-title-wrapper {
+        .news-editorial-title {
           min-width: 0;
-          min-height: 3.5rem;
-          max-height: 3.5rem;
+          min-height: 3.65rem;
+          max-height: 3.65rem;
           overflow: hidden;
         }
 
-        .news-card-title-wrapper > * {
+        .news-editorial-title > * {
           display: -webkit-box !important;
+          margin: 0 !important;
           overflow: hidden !important;
+          color: #202020;
+          text-align: start !important;
+          font-weight: 700;
+          line-height: 1.45 !important;
+          overflow-wrap: anywhere;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
-          margin: 0 !important;
-          text-align: start !important;
-          overflow-wrap: anywhere;
+          transition: color 300ms ease;
         }
 
-        .news-card-description {
+        .news-editorial-subtitle {
+          display: -webkit-box;
+          max-height: 3rem;
+          overflow: hidden;
+          overflow-wrap: anywhere;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+
+        .news-editorial-description {
           display: -webkit-box;
           width: 100%;
-          height: 5.25rem;
-          min-height: 5.25rem;
-          max-height: 5.25rem;
+          height: 6.95rem;
+          min-height: 6.95rem;
+          max-height: 6.95rem;
           overflow: hidden;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 3;
           white-space: normal;
-          word-break: normal;
           overflow-wrap: anywhere;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+
+        .news-editorial-button {
+          margin-top: auto;
+        }
+
+        .news-editorial-arrow {
+          transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .news-editorial-separator {
+          inset-inline-end: 0;
+          top: 10px;
+          bottom: 10px;
+          width: 1px;
         }
 
         @media (hover: hover) and (pointer: fine) {
-          .news-card:hover {
-            transform: translate3d(0, -4px, 0);
-            box-shadow:
-              0 20px 40px rgba(0, 0, 0, 0.14),
-              0 8px 16px rgba(0, 0, 0, 0.07);
+          .news-editorial-card:hover .news-editorial-image {
+            transform: scale(1.035);
+            filter: saturate(1.04);
           }
 
-          .news-card:hover .news-card-gold-border {
-            opacity: 1;
+          .news-editorial-card:hover .news-editorial-title > * {
+            color: #d40017;
           }
 
-          .news-card:hover .news-card-image {
-            transform: scale(1.045);
+          [dir="rtl"] .news-editorial-button:hover .news-editorial-arrow {
+            transform: translate3d(-2px, -2px, 0);
           }
 
-          .news-card:hover .news-card-cta {
-            background-color: #b80014 !important;
+          [dir="ltr"] .news-editorial-button:hover .news-editorial-arrow {
+            transform: translate3d(2px, -2px, 0);
           }
         }
 
-        @media (hover: none) {
-          .news-card:hover {
-            transform: none;
-          }
-        }
-
-        @media (max-width: 559px) {
-          .news-card {
-            min-height: 470px;
+        @media (max-width: 767px) {
+          .news-editorial-card {
+            min-height: 0;
           }
 
-          .news-card-media {
-            height: 210px;
+          .news-editorial-title {
+            min-height: auto;
+            max-height: none;
+          }
+
+          .news-editorial-description {
+            height: auto;
+            min-height: 0;
+            max-height: 6.95rem;
+          }
+
+          .news-editorial-separator {
+            inset-inline-start: 0;
+            inset-inline-end: 0;
+            top: auto;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+          }
+
+          .news-editorial-button {
+            margin-top: 1.5rem;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .news-card,
-          .news-card-image,
-          .news-card-cta,
-          .news-card-gold-border {
+          .news-editorial-image,
+          .news-editorial-title > *,
+          .news-editorial-arrow,
+          .news-editorial-button {
             transition: none !important;
           }
 
-          .news-card:hover,
-          .news-card:hover .news-card-image {
+          .news-editorial-card:hover .news-editorial-image,
+          .news-editorial-button:hover .news-editorial-arrow {
             transform: none !important;
           }
         }

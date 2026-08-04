@@ -87,7 +87,7 @@ export default function Index() {
           background-repeat: repeat;
           background-position: center top;
           background-size: 560px 560px;
-          opacity: 0.1;
+          opacity: 0.07;
           pointer-events: none;
           content: "";
         }
